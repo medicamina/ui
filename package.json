@@ -1,0 +1,13 @@
+{
+  "name": "medicamina",
+  "description": "Open Source",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jake Walklate [svnty]",
+  "license": "LICENSE.md",
+  "dependencies": {
+    "create-react-app": "^5.0.0"
+  }
+}

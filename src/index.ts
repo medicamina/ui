@@ -5,6 +5,7 @@ import { static as expressStatic } from 'express';
 import { createServer } from 'http';
 
 app.use(expressStatic(join(__dirname + '/public'), { index: 'index.html' } ));
+console.log(join(__dirname + '/public'))
 
 const server: CoreableServer = createServer(app) as CoreableServer;
 

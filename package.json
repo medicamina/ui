@@ -1,10 +1,10 @@
 {
   "name": "medicamina",
   "description": "Open Source",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build && tsc"
+    "build": "rm -rf dist && react-app-rewired build && tsc"
   },
   "author": "Jake Walklate [svnty]",
   "license": "LICENSE.md",
@@ -18,12 +18,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
     ]
   },
   "dependencies": {

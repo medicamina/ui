@@ -8,7 +8,7 @@ import express, {
 } from 'express';
 import { Server } from 'http';
 import cors from 'cors';
-import { CONFIG } from '../secure/config';
+// import { CONFIG } from '../secure/config';
 import { decodeJWT } from './auth/jwt';
 // import { join } from 'path';
 // import { graphqlHTTP } from 'express-graphql';
@@ -24,20 +24,20 @@ app.use(cors());
 const _sequelize = Object.assign(Sequelize);
 _sequelize.prototype.constructor = Sequelize;
 
-const sequelize = new _sequelize({
-	username: CONFIG.mysql.username,
-	password: CONFIG.mysql.password,
-	database: CONFIG.mysql.db,
-	dialect: 'mysql',
-	host: CONFIG.mysql.host,
-	port: CONFIG.mysql.port,
-	logging: CONFIG.env === "dev" ? console.log : null,
-	dialectOptions: {
-		socketPath: CONFIG.mysql.socket,
-		supportBigNumbers: true,
-		decimalNumbers: true
-	}
-});
+// const sequelize = new _sequelize({
+// 	username: CONFIG.mysql.username,
+// 	password: CONFIG.mysql.password,
+// 	database: CONFIG.mysql.db,
+// 	dialect: 'mysql',
+// 	host: CONFIG.mysql.host,
+// 	port: CONFIG.mysql.port,
+// 	logging: CONFIG.env === "dev" ? console.log : null,
+// 	dialectOptions: {
+// 		socketPath: CONFIG.mysql.socket,
+// 		supportBigNumbers: true,
+// 		decimalNumbers: true
+// 	}
+// });
 
 declare global {
 	namespace Express {
@@ -70,21 +70,21 @@ app.use(async (req: Request, res: Response, next: NextFunction) => {
 // 	graphiql: CONFIG.env === 'dev'
 // }));
 
-(async () => {
-	switch (CONFIG.env) {
-		case "pipeline":
-		case "test":
-			await sequelize.sync({ force: true });
-			// await generator();
-			break;
-		case "dev":
-			await sequelize.sync({ force: false });
-			break;
-		case "prod":
-		default:
-			await sequelize.authenticate();
-			break;
-	}
-})();
+// (async () => {
+// 	switch (CONFIG.env) {
+// 		case "pipeline":
+// 		case "test":
+// 			await sequelize.sync({ force: true });
+// 			// await generator();
+// 			break;
+// 		case "dev":
+// 			await sequelize.sync({ force: false });
+// 			break;
+// 		case "prod":
+// 		default:
+// 			await sequelize.authenticate();
+// 			break;
+// 	}
+// })();
 
 export { app };

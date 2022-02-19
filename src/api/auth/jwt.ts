@@ -1,5 +1,5 @@
 import { Secret, verify, sign } from 'jsonwebtoken';
-import { CONFIG } from '../../secure/config';
+import { CONFIG } from '../secure/config';
 
 export const JWT_SECRET: Secret = CONFIG.jwt_secret as string;
 

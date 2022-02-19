@@ -7,6 +7,7 @@ const {
 
 module.exports = {
 	paths: function (config, env) {
+		config.dotenv = resolve(__dirname, '.env');
 		config.appPath = resolve(__dirname, 'web');
 		config.appBuild = resolve(__dirname, '../dist/public');
 		config.appPublic = resolve(__dirname, 'web/public');
@@ -19,14 +20,14 @@ module.exports = {
 		config.yarnLockFile = resolve(__dirname, 'yarn.lock')
 		config.testsSetup = resolve(__dirname, 'web/src/setupTests.ts');
 		config.proxySetup = resolve(__dirname, 'web/src/setupProxy.ts');
-		// config.appNodeModules = resolve(__dirname, 'web/node_modules');
-		// config.appWebpackCache = resolve(__dirname, 'web/node_modules/.cache');
-		// config.appTsBuildInfoFile = resolve(__dirname, 'web/node_modules/.cache/tsconfig.tsbuildinfo');
+		config.appNodeModules = resolve(__dirname, '../node_modules');
+		config.appWebpackCache = resolve(__dirname, '../node_modules/.cache');
+		config.appTsBuildInfoFile = resolve(__dirname, '../node_modules/.cache/tsconfig.tsbuildinfo');
 		config.swSrc = resolve(__dirname, 'web/src/service-worker.ts');
-		// config.ownPath = resolve(__dirname, 'web/node_modules/react-scripts');
-		// config.ownNodeModules = resolve(__dirname, 'web/node_modules/react-scripts/node_modules');
+		config.ownPath = resolve(__dirname, '../node_modules/react-scripts');
+		config.ownNodeModules = resolve(__dirname, '../node_modules/react-scripts/node_modules');
 		config.appTypeDeclarations = resolve(__dirname, 'web/src/react-app-env.d.ts');
-		// config.ownTypeDeclarations = resolve(__dirname, 'web/node_modules/react-scripts/lib/react-app.d.ts');
+		config.ownTypeDeclarations = resolve(__dirname, '../node_modules/react-scripts/lib/react-app.d.ts');
 		return config;
 	},
 	webpack: override(

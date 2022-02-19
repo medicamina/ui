@@ -7,7 +7,7 @@
 			"dom.iterable",
 			"esnext"
 		],
-		"allowJs": true,
+		"allowJs": false,
 		"rootDir": "src",
 		"outDir": "dist",
 		"skipLibCheck": true,
@@ -24,14 +24,15 @@
 		"jsx": "react"
 	},
 	"include": [
-		"src"
+		"src/api",
+		"src/index.ts"
 	],
 	"exclude": [
 		"node_modules",
 		"tests",
+		"web",
 		"*.test.ts",
 		"*.test.tsx",
-		"src/web",
 		"*.example.ts"
 	]
 }

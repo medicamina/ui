@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { app } from './api';
-import { CONFIG } from './secure/config';
+import { CONFIG } from './api/secure/config';
 import { static as expressStatic } from 'express';
 import { createServer } from 'http';
 

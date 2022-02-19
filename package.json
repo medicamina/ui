@@ -10,7 +10,7 @@
   },
   "author": "Jake Walklate [svnty]",
   "license": "LICENSE.md",
-  "config-overrides-path": "src/config-overrides.js",
+  "config-overrides-path": "./src/config-overrides.js",
   "browserslist": {
     "production": [
       ">0.2%",

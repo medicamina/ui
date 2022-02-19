@@ -7,20 +7,41 @@
 			"esnext"
 		],
 		"allowJs": true,
+		"rootDir": "src",
+		"outDir": "dist",
 		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,
+		"noUnusedLocals": true, 
 		"noFallthroughCasesInSwitch": true,
 		"module": "esnext",
 		"moduleResolution": "node",
-		"resolveJsonModule": true,
+		"resolveJsonModule": false,
 		"isolatedModules": true,
-		"noEmit": true,
-		"jsx": "react-jsx",
+		"noEmit": false,
+		"jsx": "react"
 	},
 	"include": [
 		"src"
-	]
+	],
+	"exclude": [
+		"node_modules",
+		"tests",
+		"*.test.ts",
+		"*.test.tsx",
+		"src/web"
+	],
+	"babel": {
+    "presets": [
+      "react-app"
+    ]
+  },
+	"eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  }
 }

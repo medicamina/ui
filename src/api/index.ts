@@ -4,18 +4,14 @@ import express, {
 	Response,
 	NextFunction,
 	urlencoded,
-	json,
-	static as expressStatic,
+	json
 } from 'express';
-import {
-	Server,
-	createServer
-} from 'http';
+import { Server } from 'http';
 import cors from 'cors';
 import { CONFIG } from '../secure/config';
 import { decodeJWT } from './auth/jwt';
-import { join } from 'path';
-import { graphqlHTTP } from 'express-graphql';
+// import { join } from 'path';
+// import { graphqlHTTP } from 'express-graphql';
 import { Sequelize } from 'sequelize';
 
 const app: Application = express();
@@ -68,11 +64,11 @@ app.use(async (req: Request, res: Response, next: NextFunction) => {
 	next();
 });
 
-app.use('/graphql', graphqlHTTP({
-	schema: Schema,
-	pretty: CONFIG.env === 'dev',
-	graphiql: CONFIG.env === 'dev'
-}));
+// app.use('/graphql', graphqlHTTP({
+// 	schema: Schema,
+// 	pretty: CONFIG.env === 'dev',
+// 	graphiql: CONFIG.env === 'dev'
+// }));
 
 (async () => {
 	switch (CONFIG.env) {

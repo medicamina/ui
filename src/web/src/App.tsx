@@ -5,7 +5,10 @@ import './App.css';
 
 function App() {
 	return (
-		<Button title="Click Me" onPress={() => alert("🎉🎉🎉")} />
+		<div>
+			<img src={logo} className="App-logo" alt="logo" />
+			<Button title="Click Me" onPress={() => alert("🎉🎉🎉")} />
+		</div>
 	);
 }
 

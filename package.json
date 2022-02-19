@@ -3,7 +3,8 @@
   "description": "Open Source",
   "main": "index.ts",
   "scripts": {
-    "start": "react-app-rewired start"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build && tsc"
   },
   "author": "Jake Walklate [svnty]",
   "license": "LICENSE.md",

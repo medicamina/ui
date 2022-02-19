@@ -6,7 +6,6 @@ const {
 	tap
 } = require('customize-cra');
 
-
 module.exports = {
 	paths: function (config, env) {
 		config.appPath = resolve(__dirname, 'src/web');

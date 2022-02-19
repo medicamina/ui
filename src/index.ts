@@ -4,7 +4,7 @@ import { CONFIG } from './secure/config';
 import { static as expressStatic } from 'express';
 import { createServer } from 'http';
 
-app.use(expressStatic(join(__dirname + '../public/')));
+app.use(expressStatic(join(__dirname + 'public')));
 
 const server: CoreableServer = createServer(app) as CoreableServer;
 

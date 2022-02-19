@@ -20,4 +20,3 @@ yarn-error.log*
 
 # Secrets
 /src/secure/config.ts
-config.ts

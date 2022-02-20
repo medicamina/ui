@@ -2,7 +2,8 @@
 const { resolve } = require("path");
 const {
 	override,
-	addExternalBabelPlugins
+	addExternalBabelPlugins,
+	addWebpackAlias
 } = require('customize-cra');
 
 module.exports = {
@@ -38,6 +39,7 @@ module.exports = {
 			'@babel/plugin-transform-react-jsx-self',
 			'@babel/plugin-transform-react-jsx-source'
 		),
+		addWebpackAlias({'react-native$': require.resolve('react-native-web')})
 	),
 	jest: function (config) {
 		return config;

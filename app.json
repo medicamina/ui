@@ -1,0 +1,7 @@
+{
+  "expo": {
+    "name": "medicamina",
+    "slug": "medicamina",
+    "entryPoint": "/src/web/expo.tsx"
+  }
+}

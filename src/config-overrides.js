@@ -3,7 +3,8 @@ const { resolve } = require("path");
 const {
 	override,
 	addExternalBabelPlugins,
-	addWebpackAlias
+	addWebpackAlias,
+	addBabelPreset
 } = require('customize-cra');
 
 module.exports = {
@@ -13,21 +14,21 @@ module.exports = {
 		config.appBuild = resolve(__dirname, '../dist/public');
 		config.appPublic = resolve(__dirname, 'web/public');
 		config.appHtml = resolve(__dirname, 'web/public/index.html');
-		config.appIndexJs = resolve(__dirname, 'web/src/index.tsx');
+		config.appIndexJs = resolve(__dirname, 'web/rewired.tsx');
 		config.appPackageJson = resolve(__dirname, '../package.json');
-		config.appSrc = resolve(__dirname, 'web/src');
+		config.appSrc = resolve(__dirname, 'web');
 		config.appTsConfig = resolve(__dirname, '../tsconfig.json');
 		config.appJsConfig = resolve(__dirname, '../jsconfig.json');
 		config.yarnLockFile = resolve(__dirname, 'yarn.lock')
-		config.testsSetup = resolve(__dirname, 'web/src/setupTests.ts');
-		config.proxySetup = resolve(__dirname, 'web/src/setupProxy.ts');
+		config.testsSetup = resolve(__dirname, 'web/__tests__/setupTests.ts');
+		config.proxySetup = resolve(__dirname, 'web/setupProxy.ts');
 		config.appNodeModules = resolve(__dirname, '../node_modules');
 		config.appWebpackCache = resolve(__dirname, '../node_modules/.cache');
 		config.appTsBuildInfoFile = resolve(__dirname, '../node_modules/.cache/tsconfig.tsbuildinfo');
 		config.swSrc = resolve(__dirname, 'web/src/service-worker.ts');
 		config.ownPath = resolve(__dirname, '../node_modules/react-scripts');
 		config.ownNodeModules = resolve(__dirname, '../node_modules/react-scripts/node_modules');
-		config.appTypeDeclarations = resolve(__dirname, 'web/src/react-app-env.d.ts');
+		config.appTypeDeclarations = resolve(__dirname, 'web/react-app-env.d.ts');
 		config.ownTypeDeclarations = resolve(__dirname, '../node_modules/react-scripts/lib/react-app.d.ts');
 		return config;
 	},
@@ -39,9 +40,11 @@ module.exports = {
 			'@babel/plugin-transform-react-jsx-self',
 			'@babel/plugin-transform-react-jsx-source'
 		),
-		addWebpackAlias({'react-native$': require.resolve('react-native-web')})
+		addWebpackAlias({'react-native$': require.resolve('react-native-web')}),
+		// addBabelPreset('babel-preset-expo')
 	),
 	jest: function (config) {
+		console.log(config);
 		return config;
 	},
 	devServer: function (configFunction) {

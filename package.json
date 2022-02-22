@@ -11,6 +11,10 @@
   },
   "author": "Jake Walklate [svnty]",
   "license": "LICENSE.md",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/"
+  },
   "config-overrides-path": "./src/config-overrides.js",
   "browserslist": {
     "production": [

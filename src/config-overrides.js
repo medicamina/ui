@@ -3,7 +3,9 @@ const { resolve } = require("path");
 const {
 	override,
 	addExternalBabelPlugins,
-	addWebpackAlias
+	addWebpackAlias,
+	addWebpackModuleRule,
+	tap
 } = require('customize-cra');
 
 module.exports = {
@@ -40,6 +42,13 @@ module.exports = {
 			'@babel/plugin-transform-react-jsx-source'
 		),
 		addWebpackAlias({'react-native$': require.resolve('react-native-web')}),
+		addWebpackModuleRule({
+			test: /\.ttf$/,
+			use: {
+				loader: resolve(__dirname, '../node_modules/raw-loader')
+			},
+			include: resolve(__dirname, '../node_modules/react-native-vector-icons'),
+		})
 		// addBabelPreset('babel-preset-expo')
 	),
 	jest: function (config) {

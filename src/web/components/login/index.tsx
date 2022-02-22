@@ -1,8 +1,14 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  useWindowDimensions,
+} from 'react-native';
 import {
   Button,
-  Surface, TextInput,
+  Surface,
+  TextInput,
+  Headline
 } from 'react-native-paper';
 import {
   Tabs,
@@ -10,25 +16,30 @@ import {
 } from 'react-native-paper-tabs';
 
 const Login = (props) => {
+  const { height, width } = useWindowDimensions();
+
   const styles = StyleSheet.create({
-    webpage: {
-      flex: 1,
+    container: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex: 1
     },
     surface: {
-      width: '600px',
-      height: '800px',
-      maxWidth: '100vw',
-      maxHeight: '80vh',
+      width: width >= 1023 ? (width / 2.5) : width,
+      height: width >= 1023 ? (height / 2) : '100%',
+      maxWidth: width,
+      maxHeight: height,
       elevation: 12,
-      padding: '15px'
-    },
-    padding: {
-      marginTop: '10px',
-      marginBottom: '10px'
+      padding: 15
     },
     inputs: {
-      height: '100%',
-      justifyContent: 'space-evenly'
+      marginTop: 10,
+      marginBottom: 10,
+      marginLeft: 10,
+      marginRight: 10
+    },
+    headline: {
+      textAlign: 'center'
     }
   });
 
@@ -50,6 +61,10 @@ const Login = (props) => {
     return '';
   }
 
+  const _onSignUpPressed = () => {
+    return;
+  }
+
   const _onLoginPressed = () => {
     const email_error = _emailValidator(email.value);
     const password_error = _passwordValidator(password.value);
@@ -67,39 +82,79 @@ const Login = (props) => {
   }
 
   return (
-    <View style={styles.webpage}>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Surface style={styles.surface} theme={props.theme}>
-          <Tabs theme={props.theme}>
-            <TabScreen label="Log In" icon="account-key">
-              <View style={styles.inputs}>
-                <TextInput
-                  label="E-mail"
-                  value={email.value}
-                  onChangeText={text => setEmail({ ...email, value: text })}
-                  autoCapitalize="none"
-                  textContentType="emailAddress"
-                  keyboardType="email-address"
-                  error={!!email.error}
-                />
-                <TextInput
-                  label="Password"
-                  value={password.value}
-                  onChangeText={text => setPassword({ ...password, value: text })}
-                  secureTextEntry={true}
-                  autoCapitalize="none"
-                  error={!!password.error}
-                />
+    <View style={styles.container}>
+      <Surface style={styles.surface} theme={props.theme}>
+        <Tabs theme={props.theme}>
+          <TabScreen label="Log In" icon="account-key">
+            <View>
+              <Headline
+                style={{ ...styles.inputs, ...styles.headline, color: props.theme.colors.text }}
+              >
+                Welcome back
+              </Headline>
+              <TextInput
+                label="E-mail"
+                value={email.value}
+                onChangeText={text => setEmail({ ...email, value: text })}
+                autoCapitalize="none"
+                textContentType="emailAddress"
+                keyboardType="email-address"
+                error={!!email.error}
+                style={styles.inputs}
+              />
+              <TextInput
+                label="Password"
+                value={password.value}
+                onChangeText={text => setPassword({ ...password, value: text })}
+                secureTextEntry={true}
+                autoCapitalize="none"
+                error={!!password.error}
+                style={styles.inputs}
+              />
 
-                <Button mode="contained" onPress={_onLoginPressed}>Login</Button>
-              </View>
-            </TabScreen>
-            <TabScreen label="Sign Up" icon="clipboard-account-outline">
-              <View style={{ backgroundColor: 'green', flex: 1 }} />
-            </TabScreen>
-          </Tabs>
-        </Surface>
-      </View>
+              <Button
+                mode="contained"
+                onPress={_onLoginPressed}
+                style={styles.inputs}
+              >Login</Button>
+            </View>
+          </TabScreen>
+          <TabScreen label="Sign Up" icon="clipboard-account-outline">
+          <View>
+              <Headline
+                style={{ ...styles.inputs, ...styles.headline, color: props.theme.colors.text }}
+              >
+                Create an account
+              </Headline>
+              <TextInput
+                label="E-mail"
+                value={email.value}
+                onChangeText={text => setEmail({ ...email, value: text })}
+                autoCapitalize="none"
+                textContentType="emailAddress"
+                keyboardType="email-address"
+                error={!!email.error}
+                style={styles.inputs}
+              />
+              <TextInput
+                label="Password"
+                value={password.value}
+                onChangeText={text => setPassword({ ...password, value: text })}
+                secureTextEntry={true}
+                autoCapitalize="none"
+                error={!!password.error}
+                style={styles.inputs}
+              />
+
+              <Button
+                mode="contained"
+                onPress={_onSignUpPressed}
+                style={styles.inputs}
+              >Login</Button>
+            </View>
+          </TabScreen>
+        </Tabs>
+      </Surface>
     </View>
   );
 }

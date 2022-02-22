@@ -3,8 +3,7 @@ const { resolve } = require("path");
 const {
 	override,
 	addExternalBabelPlugins,
-	addWebpackAlias,
-	addBabelPreset
+	addWebpackAlias
 } = require('customize-cra');
 
 module.exports = {

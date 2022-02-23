@@ -1,9 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Index from './components';
+import { AppRegistry } from 'react-native';
 import { View } from 'react-native';
 
+import Index from './components';
 import mat from '@expo/vector-icons/MaterialCommunityIcons';
+
 const iconFontStyles = `@font-face {
   src: url(${mat.font['material-community']});
   font-family: MaterialCommunityIcons;
@@ -20,7 +21,7 @@ const App = () => {
   );
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+AppRegistry.registerComponent('App', () => App);
+AppRegistry.runApplication('App', {
+  rootTag: document.getElementById('root')
+});

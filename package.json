@@ -9,7 +9,13 @@
     "build": "rm -rf dist && react-app-rewired build && tsc",
     "start": "echo 'no start script'"
   },
-  "author": "Jake Walklate [svnty]",
+  "contributors": [
+    {
+      "name": "Jake S. Walklate",
+      "url": "https://github.com/svnty",
+      "githubUsername": "svnty"
+    }
+  ],
   "license": "LICENSE.md",
   "funding": {
     "type": "opencollective",
@@ -65,8 +71,9 @@
     "react-app-rewire-babel-loader": "^0.1.1",
     "react-app-rewired": "^2.1.12",
     "react-art": "^17.0.2",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^17.0.2",
-    "react-native": "0.64.3",
+    "react-native": "^0.64.3",
     "react-native-device-info": "^8.4.9",
     "react-native-pager-view": "^5.4.11",
     "react-native-paper": "^4.11.2",
@@ -75,6 +82,9 @@
     "react-native-svg": "^12.1.1",
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "^0.17.6",
+    "react-router": "^6.2.1",
+    "react-router-dom": "^6.2.1",
+    "react-router-native": "^6.2.1",
     "react-script": "^2.0.5",
     "react-scripts": "^5.0.0",
     "sequelize": "^6.16.2",

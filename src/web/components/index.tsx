@@ -9,16 +9,22 @@ import {
 	SafeAreaView,
 	StatusBar,
 	View,
-	useWindowDimensions
+	useWindowDimensions,
 } from 'react-native';
-
-import Login from './login';
-import AppBar from './app-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-// import reportWebVitals from './reportWebVitals';
+import {
+	NativeRouter
+} from 'react-router-native';
+
+// App components
+import AppBar from './app-bar';
+import Login from './login';
+import Landing from './landing';
+import AppRoutes from './routes';
 
 const Index = () => {
-	const dark = true;
+	const dark = false;
+	const logged_in = false;
 	const theme = dark ? DarkTheme : DefaultTheme;
 	const { height, width } = useWindowDimensions();
 
@@ -29,6 +35,8 @@ const Index = () => {
 		view: {
 			minHeight: height,
 			minWidth: width,
+			width: width,
+			maxWidth: width,
 			backgroundColor: theme.colors.background
 		},
 		safe: {
@@ -41,17 +49,19 @@ const Index = () => {
 			{dark ? (<StatusBar barStyle='light-content' />) : null}
 			<SafeAreaProvider>
 				<SafeAreaView style={styles.safe}>
-					{/* <React.StrictMode> */}
+					<React.StrictMode>
 						<React.Fragment>
 							<View style={styles.view}>
-								<AppBar theme={theme} />
-								<Login theme={theme} />
+								<NativeRouter>
+									<AppBar theme={theme} />
+									<AppRoutes theme={theme} logged_in={logged_in} />
+								</NativeRouter>
 							</View>
 						</React.Fragment>
-					{/* </React.StrictMode> */}
+					</React.StrictMode>
 				</SafeAreaView>
 			</SafeAreaProvider>
-		</PaperProvider>
+		</PaperProvider >
 	);
 }
 

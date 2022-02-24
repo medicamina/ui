@@ -11,7 +11,9 @@ import {
 	View,
 	useWindowDimensions,
 } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { 
+	SafeAreaProvider
+} from 'react-native-safe-area-context';
 import {
 	NativeRouter
 } from 'react-router-native';
@@ -23,7 +25,7 @@ import Landing from './landing';
 import AppRoutes from './routes';
 
 const Index = () => {
-	const dark = false;
+	const dark = true;
 	const logged_in = false;
 	const theme = dark ? DarkTheme : DefaultTheme;
 	const { height, width } = useWindowDimensions();
@@ -34,8 +36,6 @@ const Index = () => {
 	const styles = StyleSheet.create({
 		view: {
 			minHeight: height,
-			minWidth: width,
-			width: width,
 			maxWidth: width,
 			backgroundColor: theme.colors.background
 		},
@@ -47,9 +47,9 @@ const Index = () => {
 	return (
 		<PaperProvider>
 			{dark ? (<StatusBar barStyle='light-content' />) : null}
-			<SafeAreaProvider>
+			<SafeAreaProvider style={styles.view}>
 				<SafeAreaView style={styles.safe}>
-					<React.StrictMode>
+					{/* <React.StrictMode> */}
 						<React.Fragment>
 							<View style={styles.view}>
 								<NativeRouter>
@@ -58,7 +58,7 @@ const Index = () => {
 								</NativeRouter>
 							</View>
 						</React.Fragment>
-					</React.StrictMode>
+					{/* </React.StrictMode> */}
 				</SafeAreaView>
 			</SafeAreaProvider>
 		</PaperProvider >

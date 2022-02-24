@@ -15,9 +15,11 @@ import {
   Tabs,
   TabScreen
 } from 'react-native-paper-tabs';
+import { useLocation } from 'react-router-native';
 
 const Login = (props) => {
   const { height, width } = useWindowDimensions();
+  const url = useLocation();
 
   const styles = StyleSheet.create({
     container: {
@@ -139,7 +141,7 @@ const Login = (props) => {
   return (
     <View style={styles.container}>
       <Surface style={styles.surface} theme={props.theme}>
-        <Tabs theme={props.theme}>
+        <Tabs theme={props.theme} defaultIndex={url.hash.indexOf('#sign-up') > -1 ? 1 : 0}>
           <TabScreen label="Log In" icon="account-key" onPress={_resetErrors}>
             <View>
               <Headline style={styles.headline}>
@@ -175,7 +177,7 @@ const Login = (props) => {
               >Login</Button>
             </View>
           </TabScreen>
-          <TabScreen label="Sign Up" icon="clipboard-account-outline" onPress={_resetErrors}>
+          <TabScreen label="Sign Up" icon="clipboard-account-outline" onPress={_resetErrors} >
             <View>
               <Headline style={styles.headline}>
                 Create an account

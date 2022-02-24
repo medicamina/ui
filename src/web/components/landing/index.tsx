@@ -1,5 +1,9 @@
 import React from 'react';
-import { Button, Text, Title, Subheading } from 'react-native-paper'
+import { 
+  Button, 
+  Text, 
+  Title, 
+} from 'react-native-paper'
 import {
   View,
   StyleSheet,
@@ -63,6 +67,7 @@ const Home = (props) => {
     headline: {
       flex: 1,
       paddingTop: Platform.OS == 'web' ? 50 : 25,
+      paddingBottom: Platform.OS == 'web' ? 50 : 0,
       justifyContent: 'center',
       alignItems: 'center',
       textAlign: 'center'

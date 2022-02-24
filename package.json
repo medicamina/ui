@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "concurrently \"react-app-rewired start\" \"ts-node-dev src\"",
     "expo": "expo start",
+    "electron": "concurrently \"node ./dist\" \"electron electron.js\"",
     "web": "react-app-rewired start",
     "build": "rm -rf dist && react-app-rewired build && tsc",
     "start": "echo 'no start script'"
@@ -59,6 +60,8 @@
     "cors": "^2.8.5",
     "create-react-app": "^5.0.0",
     "customize-cra": "^1.0.0",
+    "electron": "^17.1.0",
+    "electron-is-dev": "^2.0.0",
     "expo": "^44.0.0",
     "expo-cli": "^4.0.13",
     "expo-splash-screen": "~0.14.1",

@@ -187,7 +187,7 @@ const Login = (props) => {
                 value={first_name.value}
                 onChangeText={text => setFirstName({ ...first_name, value: text })}
                 autoCapitalize="words"
-                textContentType="name"
+                textContentType="givenName"
                 keyboardType="default"
                 error={!!first_name.error}
                 style={styles.inputs}
@@ -199,7 +199,7 @@ const Login = (props) => {
                 value={last_name.value}
                 onChangeText={text => setLastName({ ...last_name, value: text })}
                 autoCapitalize="words"
-                textContentType="name"
+                textContentType="familyName"
                 keyboardType="default"
                 error={!!last_name.error}
                 style={styles.inputs}

@@ -1,6 +1,6 @@
 import { registerRootComponent } from 'expo';
 import { View } from 'react-native';
-import Index from './components';
+import Index from './app';
 
 const App = () => {
   return (

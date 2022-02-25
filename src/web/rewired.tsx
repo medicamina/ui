@@ -2,7 +2,7 @@ import React from 'react';
 import { AppRegistry } from 'react-native';
 import { View } from 'react-native';
 
-import Index from './components';
+import Index from './app';
 import mat from '@expo/vector-icons/MaterialCommunityIcons';
 
 const iconFontStyles = `@font-face {

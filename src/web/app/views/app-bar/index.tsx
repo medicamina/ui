@@ -1,32 +1,10 @@
-import React, { useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { Appbar, IconButton, Badge } from 'react-native-paper';
 import { Platform, StyleSheet, View } from 'react-native';
 import { useNavigate, useLocation } from 'react-router-native';
 import { useDispatch, useStore } from 'react-redux';
 
-const AppBar = (props) => {
-  // State
-  const [state, setState] = useState(() => {
-    const initialState = {
-      store: useStore(),
-      dispatch: useDispatch(),
-      notifications: []
-    };
-    initialState.dispatch({ type: 'notifications/set_notifications'});
-    initialState.notifications = initialState.store.getState().notifications.data;
-    return initialState;
-  });
-
-  function getNotificationNumber() {
-    let result = [];
-    for (const notification of state.notifications) {
-      if (!notification.read) {
-        result.push(notification);
-      }
-    }
-    return result.length;
-  }
-
+const AppBar = ({ theme, logged_in }) => {
   const styles = StyleSheet.create({
     hide_button: {
       opacity: 0
@@ -48,18 +26,42 @@ const AppBar = (props) => {
     },
   });
 
+  const ref = useRef({
+    dispatch: useDispatch(),
+    store: useStore()
+  });
+
+  const [state, setState] = useState(() => {
+    ref.current.dispatch({ type: 'notifications/set_notifications' });
+    let data = ref.current.store.getState();
+    return {
+      ...data['notifications']
+    }
+  });
+
   const nav = useNavigate();
   const loc = useLocation();
-  const is_landing = (loc.pathname == '/landing');
+  const is_landing = (loc.pathname.indexOf('/landing') >= 0);
   const is_login = (loc.pathname.indexOf('/login') >= 0);
-  const is_home = (loc.pathname == '/home');
+  const is_home = (loc.pathname.indexOf('/home') >= 0);
+
+  function toggleNotifications() {
+    ref.current.dispatch({ type: 'notifications/toggle_notifications' });
+  }
+
+  ref.current.store.subscribe(() => {
+    const data = ref.current.store.getState().notifications;
+    setState({
+      ...data
+    });
+  });
 
   return (
-    <Appbar style={styles.appBar} theme={props.theme}>
+    <Appbar style={styles.appBar} theme={theme}>
       <View pointerEvents={is_landing || is_home ? 'none' : null}>
         <IconButton
           icon='arrow-left'
-          theme={props.theme}
+          theme={theme}
           size={24}
           onPress={() => nav('/landing')}
           style={is_landing || is_home ? styles.hide_button : styles.show_button}
@@ -72,7 +74,7 @@ const AppBar = (props) => {
             <View>
               <IconButton
                 icon='login'
-                theme={props.theme}
+                theme={theme}
                 size={24}
                 onPress={() => nav('/login')}
                 style={is_landing ? styles.show_button : styles.hide_button}
@@ -84,16 +86,18 @@ const AppBar = (props) => {
               <View>
                 <IconButton
                   icon='bell'
-                  theme={props.theme}
+                  theme={theme}
                   size={24}
-                  onPress={() => null}
+                  onPress={() => toggleNotifications()}
                   style={is_landing || is_login ? styles.hide_button : styles.show_button}
                 />
-                <Badge
-                  visible={(!is_login && !is_landing)}
-                  style={styles.badge}>
-                  {getNotificationNumber()}
-                </Badge>
+                {state.unread > 0 && (
+                  <Badge
+                    visible={(!is_login && !is_landing)}
+                    style={styles.badge}>
+                    {state.unread}
+                  </Badge>
+                )}
               </View>
             </View>
           )}

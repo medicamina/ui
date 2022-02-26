@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import notifications from './app-bar';
+import notifications from './notifications';
 
 export const store = configureStore({
   reducer: {

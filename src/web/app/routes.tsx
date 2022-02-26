@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import {
   Text
 } from 'react-native-paper';
@@ -12,6 +12,10 @@ import {
 import Login from './views/login';
 import Landing from './views/landing';
 import Home from './views/home';
+
+const UserContext = createContext({
+  
+});
 
 const AppRoutes = ({ theme, logged_in }) => {
     return (

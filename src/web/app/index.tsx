@@ -13,7 +13,11 @@ import {
 import {
 	NativeRouter
 } from 'react-router-native';
-import { SafeAreaProvider, initialWindowMetrics, SafeAreaView } from 'react-native-safe-area-context';
+import { 
+	SafeAreaProvider, 
+	initialWindowMetrics, 
+	SafeAreaView 
+} from 'react-native-safe-area-context';
 import { Provider } from 'react-redux'
 import redux from './redux';
 
@@ -23,7 +27,7 @@ import AppRoutes from './routes';
 
 const Index = () => {
 	const dark = true;
-	const logged_in = false;
+	const logged_in = true;
 	const theme = dark ? DarkTheme : DefaultTheme;
 	const { height, width } = useWindowDimensions();
 
@@ -51,7 +55,7 @@ const Index = () => {
 					<Provider store={redux}>
 						<View style={styles.view}>
 							<NativeRouter>
-								<AppBar theme={theme} />
+								<AppBar theme={theme} logged_in={logged_in} />
 								<AppRoutes theme={theme} logged_in={logged_in} />
 							</NativeRouter>
 						</View>

@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Appbar, IconButton, Badge } from 'react-native-paper';
 import { Platform, StyleSheet, View } from 'react-native';
 import { useNavigate, useLocation } from 'react-router-native';
+import { useDispatch, useStore } from 'react-redux';
 
 const AppBar = (props) => {
+  // State
+  const [state, setState] = useState(() => {
+    const initialState = {
+      store: useStore(),
+      dispatch: useDispatch(),
+      notifications: []
+    };
+    initialState.dispatch({ type: 'notifications/set_notifications'});
+    initialState.notifications = initialState.store.getState().notifications.data;
+    return initialState;
+  });
+
+  function getNotificationNumber() {
+    let result = [];
+    for (const notification of state.notifications) {
+      if (!notification.read) {
+        result.push(notification);
+      }
+    }
+    return result.length;
+  }
+
   const styles = StyleSheet.create({
     hide_button: {
       opacity: 0
@@ -69,7 +92,7 @@ const AppBar = (props) => {
                 <Badge
                   visible={(!is_login && !is_landing)}
                   style={styles.badge}>
-                  12
+                  {getNotificationNumber()}
                 </Badge>
               </View>
             </View>

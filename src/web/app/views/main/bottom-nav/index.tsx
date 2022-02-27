@@ -3,11 +3,11 @@ import { Platform } from 'react-native';
 import { BottomNavigation, Text } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const HomeRoute = () => <Text>Music</Text>;;
+import Home from './home'
 const FamilyRoute = () => <Text>Albums</Text>;
 const AccountRoute = () => <Text>Recents</Text>;
 
-const MyComponent = (props) => {
+const MyComponent = ({ theme }) => {
   const insets = useSafeAreaInsets();
 
   const [index, setIndex] = React.useState(0);
@@ -20,7 +20,7 @@ const MyComponent = (props) => {
   ]); 
 
   const renderScene = BottomNavigation.SceneMap({
-    home: HomeRoute,
+    home: () => <Home theme={theme} />,
     family: FamilyRoute,
     account: AccountRoute,
     scripts: AccountRoute,
@@ -29,7 +29,7 @@ const MyComponent = (props) => {
 
   return (
     <BottomNavigation
-      theme={props.theme}
+      theme={theme}
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}

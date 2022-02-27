@@ -11,11 +11,7 @@ import {
 // App components
 import Login from './views/login';
 import Landing from './views/landing';
-import Home from './views/home';
-
-const UserContext = createContext({
-  
-});
+import Main from './views/main';
 
 const AppRoutes = ({ theme, logged_in }) => {
     return (
@@ -23,7 +19,7 @@ const AppRoutes = ({ theme, logged_in }) => {
         <Route path='/' element={logged_in ? <Navigate to='/home'/> : <Navigate to='/landing' />} />
         <Route path='/landing' element={<Landing theme={theme} logged_in={logged_in} />} />
         <Route path='/login' element={<Login theme={theme} logged_in={logged_in} />} />
-        <Route path='/home' element={<Home theme={theme} logged_in={logged_in} />} />
+        <Route path='/home' element={<Main theme={theme} logged_in={logged_in} />} />
         <Route element={<Text theme={theme}>There's nothing here!</Text>} />
       </Routes>
     );

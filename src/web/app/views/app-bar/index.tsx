@@ -74,7 +74,8 @@ const AppBar = ({ theme, logged_in }) => {
             <View>
               <IconButton
                 icon='login'
-                theme={theme}
+                // theme={theme}
+                color='rgb(255, 255, 255)'
                 size={24}
                 onPress={() => nav('/login')}
                 style={is_landing ? styles.show_button : styles.hide_button}
@@ -86,7 +87,8 @@ const AppBar = ({ theme, logged_in }) => {
               <View>
                 <IconButton
                   icon='bell'
-                  theme={theme}
+                  // theme={theme}
+                  color='rgb(255, 255, 255)'
                   size={24}
                   onPress={() => toggleNotifications()}
                   style={is_landing || is_login ? styles.hide_button : styles.show_button}

@@ -17,7 +17,7 @@ import {
 } from 'react-native-paper-tabs';
 import { useLocation, useNavigate } from 'react-router-native';
 
-const Login = (props) => {
+const Login = ({ theme }) => {
   const { height, width } = useWindowDimensions();
   const nav = useNavigate();
   const url = useLocation();
@@ -48,11 +48,11 @@ const Login = (props) => {
     headline: {
       marginTop: 20,
       marginBottom: 10,
-      color: props.theme.colors.text,
+      color: theme.colors.text,
       textAlign: 'center'
     },
     error: {
-      color: 'red',
+      color: theme.colors.error,
       textAlign: 'center'
     }
   });
@@ -142,8 +142,8 @@ const Login = (props) => {
 
   return (
     <View style={styles.container}>
-      <Surface style={styles.surface} theme={props.theme}>
-        <Tabs theme={props.theme} defaultIndex={url.hash.indexOf('#sign-up') > -1 ? 1 : 0}>
+      <Surface style={styles.surface} theme={theme}>
+        <Tabs theme={theme} defaultIndex={url.hash.indexOf('#sign-up') > -1 ? 1 : 0}>
           <TabScreen label="Log In" icon="account-key" onPress={_resetErrors}>
             <View>
               <Headline style={styles.headline}>

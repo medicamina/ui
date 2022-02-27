@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Button, Dialog, List, Portal } from 'react-native-paper';
+import { Button, Dialog, List, Modal, Paragraph, Portal } from 'react-native-paper';
 import { useDispatch, useStore } from 'react-redux';
 import BottomNav from './bottom-nav';
 
@@ -58,14 +58,16 @@ const Home = ({ theme, logged_in }) => {
     ref.current.dispatch({ type: 'notifications/set_notifications', payload: result });
   }
 
+  const [visible, setVisible] = React.useState(false);
+
   return (
     <View style={styles.container}>
       <Portal>
-        <Dialog visible={is_open} onDismiss={_hideDialog} theme={theme} style={{ maxHeight: '80%'}}>
+        <Dialog visible={is_open} onDismiss={_hideDialog} theme={theme}>
           <Dialog.Title theme={theme}>Notifications</Dialog.Title>
-          <Dialog.Content style={{ maxHeight: '83%'}}>
-            <Dialog.ScrollArea style={{paddingHorizontal: 0, maxHeight: '100%' }}>
-              <ScrollView contentContainerStyle={{ maxHeight: '80%'}}>
+          <Dialog.Content>
+            <Dialog.ScrollArea style={{ paddingHorizontal: 0}}>
+              <ScrollView>
                 {state.notifications.map((notification) => {
                   return (
                     <List.Item
@@ -90,8 +92,9 @@ const Home = ({ theme, logged_in }) => {
         </Dialog>
       </Portal>
       <BottomNav theme={theme} />
-    </View>
+    </View >
   );
 }
 
 export default Home;
+

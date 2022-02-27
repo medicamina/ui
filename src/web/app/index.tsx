@@ -26,7 +26,7 @@ import AppBar from './views/app-bar';
 import AppRoutes from './routes';
 
 const Index = () => {
-	const dark = true;
+	const dark = false;
 	const logged_in = true;
 	const theme = dark ? DarkTheme : DefaultTheme;
 	const { height, width } = useWindowDimensions();

@@ -1,8 +1,12 @@
 {
   "name": "medicamina",
-  "description": "Open Source",
+  "description": "Open source precision medicine",
   "main": "index.js",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/medicamina/medicamina"
+  },
   "scripts": {
     "dev": "concurrently \"react-app-rewired start\" \"ts-node-dev src\"",
     "expo": "expo start",
@@ -74,7 +78,7 @@
     "express-graphql": "^0.12.0",
     "graphql": "^16.3.0",
     "jsonwebtoken": "^8.5.1",
-    "react": "17.0.1",
+    "react": "^17.0.1",
     "react-app-rewire-babel-loader": "^0.1.1",
     "react-app-rewired": "^2.1.12",
     "react-art": "^17.0.2",

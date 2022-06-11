@@ -4,6 +4,7 @@ coverage
 dist
 build
 .expo
+._*
 
 # Things
 package-lock.json

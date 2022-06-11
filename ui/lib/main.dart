@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:url_strategy/url_strategy.dart';
 // import 'package:flutter/foundation.dart';
 
 void main() {
+  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -30,8 +32,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-TextStyle? nigger(context) {
-  debugPrint(MediaQuery.of(context).size.width.toString());
+TextStyle? set_image_size(context) {
+  // debugPrint(MediaQuery.of(context).size.width.toString());
   if (MediaQuery.of(context).size.width  >= 700) {
     return Theme.of(context).textTheme.headline1?.apply(
       color: Colors.black,
@@ -65,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     'MEDICAMINA',
                     // style: Theme.of(context).textTheme.headline1,
-                    style: nigger(context),
+                    style: set_image_size(context),
                     textAlign: TextAlign.center,
                   ),
                 )
@@ -92,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Center(
                             child: Container(
                               margin: const EdgeInsets.only(right: 5, left: 5),
-                              child: Text(
+                              child: SelectableText(
                                 'Precision medicine is a tailored approach to disease prevention and treatment that takes into account differences in people\'s genes, environments, and lifestyles.',
                                 style: Theme.of(context).textTheme.headline6,
                                 textAlign: TextAlign.center,
@@ -110,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Center(
                             child: Container(
                               margin: const EdgeInsets.only(right: 5, left: 5),
-                              child: Text(
+                              child: SelectableText(
                                 'Precision medicine is underpinned by genetic and genomic testing (sequencing), the results of which enable better prediction, prevention and treatment of disease as well as more accurate medication diagnosis.',
                                 style: Theme.of(context).textTheme.headline6,
                                 textAlign: TextAlign.center,
@@ -152,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Center(
                             child: Container(
                               margin: const EdgeInsets.only(right: 5, left: 5),
-                              child: Text(
+                              child: SelectableText(
                                 'Share accurate information of your families health history with your physician, surgeon or consultant and keep your data with you.',
                                 style: Theme.of(context).textTheme.headline6,
                                 textAlign: TextAlign.center,
@@ -187,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Center(
                             child: Container(
                               margin: const EdgeInsets.only(right: 5, left: 5),
-                              child: Text(
+                              child: SelectableText(
                                 'Ut ostenderet mundi amorem, quem ostendit nobis.',
                                 style: Theme.of(context).textTheme.headline6,
                                 textAlign: TextAlign.center,

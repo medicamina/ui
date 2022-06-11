@@ -1,5 +1,5 @@
 name: medicamina_flutter
-description: A new Flutter project.
+description: Open source precision.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -35,6 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   community_material_icon: ^5.9.55
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_test:

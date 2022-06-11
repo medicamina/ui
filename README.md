@@ -1,3 +1,0 @@
-# medicamina
-
-Precision medicine

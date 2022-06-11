@@ -38,6 +38,10 @@ flutter_lints
 2.12
 file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4/
 file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4/lib/
+js
+2.12
+file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/
+file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/lib/
 lints
 2.12
 file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1/
@@ -86,6 +90,10 @@ typed_data
 2.12
 file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.0/
 file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.0/lib/
+url_strategy
+2.12
+file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/url_strategy-0.2.0/
+file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/url_strategy-0.2.0/lib/
 vector_math
 2.14
 file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.1/
@@ -102,8 +110,12 @@ flutter_test
 2.12
 file:///Users/admin/Development/flutter/packages/flutter_test/
 file:///Users/admin/Development/flutter/packages/flutter_test/lib/
+flutter_web_plugins
+2.12
+file:///Users/admin/Development/flutter/packages/flutter_web_plugins/
+file:///Users/admin/Development/flutter/packages/flutter_web_plugins/lib/
 medicamina_flutter
 2.16
-file:///Users/admin/Documents/KEEP/Projects/medicamina_flutter/
-file:///Users/admin/Documents/KEEP/Projects/medicamina_flutter/lib/
+file:///Volumes/USB/Projects/medicamina/ui/
+file:///Volumes/USB/Projects/medicamina/ui/lib/
 2

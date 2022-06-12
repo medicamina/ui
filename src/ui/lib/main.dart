@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'landing.dart';
+import 'package:navigation_history_observer/navigation_history_observer.dart';
+import 'default.dart';
 import 'login.dart';
+import 'dash.dart';
 
 void main() {
   setPathUrlStrategy();
@@ -21,10 +23,12 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const LandingPage(title: 'medicamina'),
-        '/login': (context) => const LoginPage(),
-        '/register': (context) => const LoginPage()
+        '/': (BuildContext context) => const LandingPage(title: 'medicamina'),
+        '/login': (BuildContext context) => const LoginPage(),
+        '/register': (BuildContext context) => const LoginPage(),
+        '/dashboard': (BuildContext context) => const DashboardPage()
       },
+      navigatorObservers: [NavigationHistoryObserver()]
     );
   }
 }

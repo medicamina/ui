@@ -6,6 +6,10 @@ boolean_selector
 2.12
 file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0/
 file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.1.0/lib/
+built_collection
+2.12
+file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/built_collection-5.1.1/
+file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/built_collection-5.1.1/lib/
 characters
 2.12
 file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.2.0/
@@ -58,6 +62,10 @@ meta
 2.12
 file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0/
 file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0/lib/
+navigation_history_observer
+2.12
+file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/navigation_history_observer-1.1.0/
+file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/navigation_history_observer-1.1.0/lib/
 path
 2.12
 file:///Users/admin/Development/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0/
@@ -116,6 +124,6 @@ file:///Users/admin/Development/flutter/packages/flutter_web_plugins/
 file:///Users/admin/Development/flutter/packages/flutter_web_plugins/lib/
 medicamina_flutter
 2.16
-file:///Volumes/USB/Projects/medicamina/ui/
-file:///Volumes/USB/Projects/medicamina/ui/lib/
+file:///Volumes/USB/Projects/medicamina/src/ui/
+file:///Volumes/USB/Projects/medicamina/src/ui/lib/
 2

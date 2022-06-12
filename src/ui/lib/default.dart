@@ -29,8 +29,8 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: 
-      Scaffold(
+    // return SafeArea(child: 
+      return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
           actions: <Widget>[
@@ -210,7 +210,7 @@ class _LandingPageState extends State<LandingPage> {
             ],
           )
         )
-      )
-    );
+      );
+    // );
   }
 }

@@ -1,150 +1,121 @@
-import 'package:flutter/material.dart'; 
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:flutter/material.dart';
+import 'package:beamer/beamer.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}): super(key: key);
+class BottomNavigationBarWidget extends StatefulWidget {
+  const BottomNavigationBarWidget({Key? key, required this.beamerKey}) : super(key: key);
+
+  final GlobalKey<BeamerState> beamerKey;
 
   @override
-  State<DashboardPage> createState() => _DashBoardPageState();
+  _BottomNavigationBarWidgetState createState() => _BottomNavigationBarWidgetState();
 }
 
-class _DashBoardPageState extends State<DashboardPage> {
-  int _selectedIndex = 0;
+class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
+  var pages = ['/dashboard', '/dashboard/history', '/dashboard/family', '/dashboard/account'];
+  late BeamerDelegate _beamerDelegate;
+  int _currentIndex = 0;
 
-  void _onItemTapped(int index) {
+  void _updateCurrentIndex(index) {
     setState(() {
-      _selectedIndex = index;
+      _currentIndex = index;
     });
   }
+
+  void _setStateListener() => setState(() {});
+
+  @override
+  void initState() {
+    super.initState();
+    _beamerDelegate = widget.beamerKey.currentState!.routerDelegate;
+    _beamerDelegate.addListener(_setStateListener);
+    final beamState = _beamerDelegate.currentBeamLocation.state as BeamState;
+    final path = beamState.pathPatternSegments[beamState.pathPatternSegments.length - 1];
+    switch (path) {
+      case 'dashboard':
+        return _updateCurrentIndex(0);
+      case 'history':
+        return _updateCurrentIndex(1);
+      case 'family':
+        return _updateCurrentIndex(2);
+      case 'account':
+        return _updateCurrentIndex(3);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      currentIndex: _currentIndex,
+      items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.prescription), label: 'History'),
+        BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.file_tree), label: 'Family'),
+        BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.account), label: 'Account'),
+      ],
+      onTap: (index) {
+        _beamerDelegate.update(configuration: RouteInformation(location: pages[index]));
+        _updateCurrentIndex(index);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _beamerDelegate.removeListener(_setStateListener);
+    super.dispose();
+  }
+}
+
+class MedicaminaDashboardPage extends StatefulWidget {
+  const MedicaminaDashboardPage({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _MedicaminaDashboardPageState();
+}
+
+class _MedicaminaDashboardPageState extends State<MedicaminaDashboardPage> {
+  final _beamerKey = GlobalKey<BeamerState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        title: const Text('app_title dashboard'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            // TODO: Add beam to history
+            _beamerKey.currentState!.routerDelegate.beamBack();
+          },
+        ),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.notifications),
             tooltip: 'Notifications',
             onPressed: () {
-              // Navigator.pushNamedAndRemoveUntil(context, "/", (r) => false);
+              // TODO: popup for notifications
             },
           ),
         ],
-        title: const Text("medicamina"),
       ),
-      body: Navigator(
-        initialRoute: 'dashboard/home',
-        onGenerateRoute: (RouteSettings settings) {
-          WidgetBuilder builder;
-          switch (settings.name) {
-            case 'dashboard/home': {
-              _selectedIndex = 0;
-              builder = (BuildContext context) => const Home();
-              break;
-            }
-            case 'dashboard/history': {
-              _selectedIndex = 1;
-              builder = (BuildContext _) => const History();
-              break;
-            }
-            case 'dashboard/family': {
-              _selectedIndex = 2;
-              builder = (BuildContext _) => const History();
-              break;
-            }
-            case 'dashboard/account': {
-              _selectedIndex = 3;
-              builder = (BuildContext _) => const History();
-              break;
-            }
-            default:
-              throw Exception('Invalid route: ${settings.name}');
-          }
-          return MaterialPageRoute<void>(builder: builder, settings: settings);
-        }
+      body: Beamer(
+        key: _beamerKey,
+        routerDelegate: BeamerDelegate(
+          locationBuilder: RoutesLocationBuilder(
+            routes: {
+              '/dashboard': (p0, p1, p2) => const Text("Home"),
+              '/dashboard/history': (p0, p1, p2) => const Text("History"),
+              '/dashboard/family': (p0, p1, p2) => const Text("Family"),
+              '/dashboard/account': (p0, p1, p2) => const Text("Account"),
+            },
+          ),
+        ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CommunityMaterialIcons.prescription),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CommunityMaterialIcons.file_tree),
-            label: 'Family',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CommunityMaterialIcons.account),
-            label: 'Account',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+      bottomNavigationBar: BottomNavigationBarWidget(
+        beamerKey: _beamerKey,
       ),
     );
   }
 }
-
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: SafeArea(
-        child: Text("Home")
-      )
-    );
-  }
-}
-
-class History extends StatelessWidget {
-  const History({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: SafeArea(
-        child: Text("History")
-      )
-    );
-  }
-}
-
-  Widget history() {
-    return const SingleChildScrollView(
-      child: SafeArea(
-        child: Text("History")
-      )
-    );
-  }
-
-  Widget tree() {
-    return const SingleChildScrollView(
-      child: SafeArea(
-        child: Text("Tree")
-      )
-    );
-  }
-
-  Widget account() {
-    return const SingleChildScrollView(
-      child: SafeArea(
-        child: Text("Account")
-      )
-    );
-  }
-
-  Widget error() {
-    return const SingleChildScrollView(
-      child: SafeArea(
-        child: Text("Error")
-      )
-    );
-  }

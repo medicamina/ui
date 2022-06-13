@@ -1,36 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'package:navigation_history_observer/navigation_history_observer.dart';
+import 'package:beamer/beamer.dart';
 import 'default.dart';
 import 'login.dart';
 import 'dash.dart';
+// import 'not_found.dart';
 
 void main() {
   setPathUrlStrategy();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  final _routerDelegate = BeamerDelegate(
+    initialPath: '/',
+    locationBuilder: RoutesLocationBuilder(
+      routes: {
+        '/': (context, state, data) => const MedicaminaDefaultPage(title: 'medicamina'),
+        '/login': (context, state, data) => const MedicaminaLoginPage(),
+        '/register': (context, state, data) => const MedicaminaLoginPage(),
+        '/dashboard': (context, state, data) => const MedicaminaDashboardPage(),
+        '/dashboard/*': (context, state, data) => const MedicaminaDashboardPage(),
+      },
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'medicamina',
-      theme: ThemeData(
-        // primarySwatch: Colors.deepPurple,
-      ),
-      initialRoute: '/',
-      routes: {
-        '/': (BuildContext context) => const LandingPage(title: 'medicamina'),
-        '/login': (BuildContext context) => const LoginPage(),
-        '/register': (BuildContext context) => const LoginPage(),
-        '/dashboard': (BuildContext context) => const DashboardPage()
-      },
-      navigatorObservers: [NavigationHistoryObserver()]
+      theme: ThemeData(),
+      routerDelegate: _routerDelegate,
+      routeInformationParser: BeamerParser(),
+      backButtonDispatcher: BeamerBackButtonDispatcher(delegate: _routerDelegate)
     );
   }
 }
-
-

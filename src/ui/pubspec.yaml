@@ -1,4 +1,4 @@
-name: medicamina_flutter
+name: medicamina
 description: Open source precision.
 
 # The following line prevents the package from being accidentally published to
@@ -37,6 +37,7 @@ dependencies:
   community_material_icon: ^5.9.55
   url_strategy: ^0.2.0
   navigation_history_observer: ^1.1.0
+  beamer: ^1.5.0
 
 dev_dependencies:
   flutter_test:

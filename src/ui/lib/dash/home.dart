@@ -86,13 +86,20 @@ class ResultsTable extends StatefulWidget {
 }
 
 class _ResultsTableState extends State<ResultsTable> {
-  var _searchTerm = '';
+  String _searchTerm = '';
+  int _rowsPerPage = 4;
 
   void updateSearch(val) {
     setState(() {
       _searchTerm = val;
     });
   }
+
+  // void updateRowsPerPage(val) {
+  //   setState(() {
+  //     _rowsPerPage = val;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +117,7 @@ class _ResultsTableState extends State<ResultsTable> {
                     border: OutlineInputBorder(),
                     hintText: 'Enter a search term',
                   ),
-                  onChanged: (val) => updateSearch(val),
+                  onChanged: updateSearch,
                 ),
               ),
             ),
@@ -137,20 +144,25 @@ class _ResultsTableState extends State<ResultsTable> {
                         label: Expanded(
                           flex: 1,
                           child: Center(
-                            child: Text(
-                              'Risk',
-                              style: Theme.of(context).textTheme.titleSmall?.apply(
-                                    fontWeightDelta: 1,
-                                    color: Colors.black54,
-                                  ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 5),
+                              child: Text(
+                                'Risk',
+                                style: Theme.of(context).textTheme.titleSmall?.apply(
+                                      fontWeightDelta: 1,
+                                      color: Colors.black54,
+                                    ),
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ],
-                    columnSpacing: constraints.maxWidth * 0.5,
+                    columnSpacing: constraints.maxWidth * 0.45,
                     horizontalMargin: 10,
-                    rowsPerPage: 4,
+                    rowsPerPage: _rowsPerPage,
+                    // availableRowsPerPage: const <int>[4, 8, 20, 40],
+                    // onRowsPerPageChanged: updateRowsPerPage,
                     showCheckboxColumn: false,
                   );
                 },
@@ -211,7 +223,10 @@ class ResultsData extends DataTableSource {
         ),
         DataCell(
           Center(
-            child: Text(_searchedData[index]['risk']),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 5),
+              child: Text(_searchedData[index]['risk']),
+            ),
           ),
         ),
       ],

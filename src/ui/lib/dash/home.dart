@@ -79,6 +79,8 @@ Widget _personalDetails(BuildContext context) {
 }
 
 class ResultsTable extends StatefulWidget {
+  const ResultsTable({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _ResultsTableState();
 }
@@ -102,7 +104,7 @@ class _ResultsTableState extends State<ResultsTable> {
             SizedBox(
               width: MediaQuery.of(context).size.width - 20,
               child: Padding(
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 child: TextField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -120,12 +122,23 @@ class _ResultsTableState extends State<ResultsTable> {
                     source: ResultsData(search: _searchTerm),
                     columns: [
                       DataColumn(
-                        label: SizedBox(
-                          width: constraints.maxWidth * 0.55 - 20,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
+                        label: Expanded(
+                          flex: 1,
+                          child: Text(
+                            'Condition',
+                            style: Theme.of(context).textTheme.titleSmall?.apply(
+                                  fontWeightDelta: 1,
+                                  color: Colors.black54,
+                                ),
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          flex: 1,
+                          child: Center(
                             child: Text(
-                              'Condition',
+                              'Risk',
                               style: Theme.of(context).textTheme.titleSmall?.apply(
                                     fontWeightDelta: 1,
                                     color: Colors.black54,
@@ -134,20 +147,8 @@ class _ResultsTableState extends State<ResultsTable> {
                           ),
                         ),
                       ),
-                      DataColumn(
-                        label: SizedBox(
-                          width: constraints.maxWidth * 0.15 - 20,
-                          child: Text(
-                            'Risk',
-                            style: Theme.of(context).textTheme.titleSmall?.apply(
-                                  fontWeightDelta: 1,
-                                  color: Colors.black54,
-                                ),
-                          ),
-                        ),
-                      ),
                     ],
-                    columnSpacing: 100,
+                    columnSpacing: constraints.maxWidth * 0.5,
                     horizontalMargin: 10,
                     rowsPerPage: 4,
                     showCheckboxColumn: false,
@@ -185,7 +186,7 @@ class ResultsData extends DataTableSource {
     }
 
     for (var i = 0; i < _data.length; i++) {
-      if (_data[i]['condition'].contains(search)) {
+      if (_data[i]['condition'].toLowerCase().contains(search!.toLowerCase())) {
         _searchedData.add(_data[i]);
       }
     }
@@ -205,8 +206,14 @@ class ResultsData extends DataTableSource {
   DataRow getRow(int index) {
     return DataRow(
       cells: [
-        DataCell(Padding(padding: const EdgeInsets.only(left: 10), child: Text(_searchedData[index]['condition'].toString()))),
-        DataCell(Text(_searchedData[index]['risk'])),
+        DataCell(
+          Text(_searchedData[index]['condition'].toString()),
+        ),
+        DataCell(
+          Center(
+            child: Text(_searchedData[index]['risk']),
+          ),
+        ),
       ],
     );
   }
@@ -223,7 +230,7 @@ Widget mobile(BuildContext context) {
           children: [_personalDetails(context)],
         ),
         Row(
-          children: [ResultsTable()],
+          children: const [ResultsTable()],
         ),
       ],
     ),
@@ -241,7 +248,7 @@ Widget desktop(BuildContext context) {
           ],
         ),
         Row(
-          children: [ResultsTable()],
+          children: const [ResultsTable()],
         ),
       ],
     ),

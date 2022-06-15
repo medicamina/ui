@@ -4,7 +4,6 @@ import 'package:beamer/beamer.dart';
 import 'default.dart';
 import 'login.dart';
 import 'dash.dart';
-// import 'not_found.dart';
 
 void main() {
   setPathUrlStrategy();
@@ -21,8 +20,8 @@ class MyApp extends StatelessWidget {
         '/': (context, state, data) => const MedicaminaDefaultPage(title: 'medicamina'),
         '/login': (context, state, data) => const MedicaminaLoginPage(),
         '/register': (context, state, data) => const MedicaminaLoginPage(),
-        '/dashboard': (context, state, data) => const MedicaminaDashboardPage(),
-        '/dashboard/*': (context, state, data) => const MedicaminaDashboardPage(),
+        '/dashboard': (context, state, data) => MedicaminaDashboardPage(),
+        '/dashboard/*': (context, state, data) => MedicaminaDashboardPage(),
       },
     ),
   );

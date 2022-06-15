@@ -47,7 +47,7 @@ Widget register(BuildContext context) {
   return Scaffold(
     backgroundColor: Colors.white,
     appBar: AppBar(
-      title: const Text("Create Account"),
+      title: const Text("create account"),
     ),
     body: LayoutBuilder(
       builder: (context, constraint) {
@@ -253,7 +253,7 @@ Widget login(BuildContext context) {
   return Scaffold(
     backgroundColor: Colors.white,
     appBar: AppBar(
-      title: const Text("Login Page"),
+      title: const Text("login"),
     ),
     body: LayoutBuilder(
       builder: (context, constraint) {

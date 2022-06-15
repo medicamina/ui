@@ -1,11 +1,14 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
+import 'package:event/event.dart';
+import 'dash/home.dart';
 
 class BottomNavigationBarWidget extends StatefulWidget {
-  const BottomNavigationBarWidget({Key? key, required this.beamerKey}) : super(key: key);
+  const BottomNavigationBarWidget({Key? key, required this.beamerKey, required this.eventBack}) : super(key: key);
 
   final GlobalKey<BeamerState> beamerKey;
+  final Event eventBack;
 
   @override
   _BottomNavigationBarWidgetState createState() => _BottomNavigationBarWidgetState();
@@ -24,11 +27,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
 
   void _setStateListener() => setState(() {});
 
-  @override
-  void initState() {
-    super.initState();
-    _beamerDelegate = widget.beamerKey.currentState!.routerDelegate;
-    _beamerDelegate.addListener(_setStateListener);
+  void updateIndex() {
     final beamState = _beamerDelegate.currentBeamLocation.state as BeamState;
     final path = beamState.pathPatternSegments[beamState.pathPatternSegments.length - 1];
     switch (path) {
@@ -44,6 +43,15 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    widget.eventBack.subscribe((args) => updateIndex());
+    _beamerDelegate = widget.beamerKey.currentState!.routerDelegate;
+    _beamerDelegate.addListener(_setStateListener);
+    updateIndex();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
@@ -55,7 +63,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
         BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.account), label: 'Account'),
       ],
       onTap: (index) {
-        _beamerDelegate.update(configuration: RouteInformation(location: pages[index]));
+        _beamerDelegate.beamToNamed(pages[index], replaceRouteInformation: true, beamBackOnPop: true);
         _updateCurrentIndex(index);
       },
     );
@@ -69,7 +77,9 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
 }
 
 class MedicaminaDashboardPage extends StatefulWidget {
-  const MedicaminaDashboardPage({Key? key}) : super(key: key);
+  MedicaminaDashboardPage({Key? key}) : super(key: key);
+
+  final _eventBack = Event();
 
   @override
   State<StatefulWidget> createState() => _MedicaminaDashboardPageState();
@@ -82,12 +92,21 @@ class _MedicaminaDashboardPageState extends State<MedicaminaDashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('app_title dashboard'),
+        title: const Text('medicamina'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            // TODO: Add beam to history
-            _beamerKey.currentState!.routerDelegate.beamBack();
+            var length = _beamerKey.currentState!.routerDelegate.beamingHistory[0].history.length;
+            var location = _beamerKey.currentState!.routerDelegate.beamingHistory[0].history[length - 1].routeInformation.location;
+            if (length > 1) {
+              _beamerKey.currentState!.routerDelegate.beamBack();
+            }
+            if (length == 1) {
+              if (location != '/dashboard') {
+                _beamerKey.currentState!.routerDelegate.beamToNamed('/dashboard');
+              }
+            }
+            widget._eventBack.broadcast();
           },
         ),
         actions: <Widget>[
@@ -105,7 +124,7 @@ class _MedicaminaDashboardPageState extends State<MedicaminaDashboardPage> {
         routerDelegate: BeamerDelegate(
           locationBuilder: RoutesLocationBuilder(
             routes: {
-              '/dashboard': (p0, p1, p2) => const Text("Home"),
+              '/dashboard': (p0, p1, p2) => Home(),
               '/dashboard/history': (p0, p1, p2) => const Text("History"),
               '/dashboard/family': (p0, p1, p2) => const Text("Family"),
               '/dashboard/account': (p0, p1, p2) => const Text("Account"),
@@ -113,9 +132,7 @@ class _MedicaminaDashboardPageState extends State<MedicaminaDashboardPage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBarWidget(
-        beamerKey: _beamerKey,
-      ),
+      bottomNavigationBar: BottomNavigationBarWidget(beamerKey: _beamerKey, eventBack: widget._eventBack),
     );
   }
 }

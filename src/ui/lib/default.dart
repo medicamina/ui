@@ -27,13 +27,41 @@ class _MedicaminaDefaultPageState extends State<MedicaminaDefaultPage> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.login),
-            tooltip: 'Login',
-            onPressed: () {
-              Beamer.of(context).beamToNamed('/login');
-            },
+          ElevatedButton.icon(
+            onPressed: () => Beamer.of(context).beamToNamed('/pricing'),
+            label: const Text("Pricing"),
+            icon: const Icon(Icons.attach_money),
+            style: ElevatedButton.styleFrom(
+              elevation: 0.0,
+              shadowColor: Colors.transparent,
+            ),
           ),
+          const Padding(padding: EdgeInsets.only(left: 5, right: 5)),
+          ElevatedButton.icon(
+            onPressed: () => Beamer.of(context).beamToNamed('/login'),
+            label: const Text("Login"),
+            icon: const Icon(Icons.login),
+            style: ElevatedButton.styleFrom(
+              elevation: 0.0,
+              shadowColor: Colors.transparent,
+            ),
+          ),
+          const Padding(padding: EdgeInsets.only(left: 5)),
+          // IconButton(
+          //   icon: const Icon(Icons.attach_money),
+          //   tooltip: 'Pricing',
+          //   onPressed: () {
+          //     Beamer.of(context).beamToNamed('/login');
+          //   },
+          // ),
+          // const Padding(padding: EdgeInsets.only(left: 10, right: 10)),
+          // IconButton(
+          //   icon: const Icon(Icons.login),
+          //   tooltip: 'Login',
+          //   onPressed: () {
+          //     Beamer.of(context).beamToNamed('/login');
+          //   },
+          // ),
         ],
       ),
       body: SingleChildScrollView(

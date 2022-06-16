@@ -1,4 +1,4 @@
-# medicamina_flutter
+# medicamina
 
 A new Flutter project.
 

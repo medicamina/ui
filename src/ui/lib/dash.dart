@@ -63,6 +63,13 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
         BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.account), label: 'Account'),
       ],
       onTap: (index) {
+        var length = _beamerDelegate.beamingHistory[0].history.length;
+        var currentLocation = _beamerDelegate.beamingHistory[0].history[length - 1].routeInformation.location;
+        var newLocation = pages[index];
+        if (currentLocation == newLocation) {
+          return;
+        }
+        
         _beamerDelegate.beamToNamed(pages[index], replaceRouteInformation: true, beamBackOnPop: true);
         _updateCurrentIndex(index);
       },
@@ -122,9 +129,11 @@ class _MedicaminaDashboardPageState extends State<MedicaminaDashboardPage> {
       body: Beamer(
         key: _beamerKey,
         routerDelegate: BeamerDelegate(
+          setBrowserTabTitle: false,
+          initialPath: '/dashboard',
           locationBuilder: RoutesLocationBuilder(
             routes: {
-              '/dashboard': (p0, p1, p2) => Home(),
+              '/dashboard': (p0, p1, p2) => const Home(),
               '/dashboard/history': (p0, p1, p2) => const Text("History"),
               '/dashboard/family': (p0, p1, p2) => const Text("Family"),
               '/dashboard/account': (p0, p1, p2) => const Text("Account"),

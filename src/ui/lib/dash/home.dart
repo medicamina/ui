@@ -1,3 +1,4 @@
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:medicamina/dash/map/choropleth_map.dart';
 
@@ -25,7 +26,9 @@ Widget _map(BuildContext context) {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
+          Padding(padding: EdgeInsets.only(top: 32)),
           ChoroplethMap(),
+          Padding(padding: EdgeInsets.only(bottom: 32)),
         ],
       ),
     ),
@@ -53,19 +56,24 @@ Widget _personalDetails(BuildContext context) {
             subtitle: Text("Jake Spencer Walklate"),
           ),
           const ListTile(
+            leading: Icon(CommunityMaterialIcons.gender_male_female),
+            title: Text('Gender'),
+            subtitle: Text('M'),
+          ),
+          const ListTile(
             leading: Icon(Icons.cake),
             title: Text('Birthdate'),
-            subtitle: Text("26 Jun 1997"),
+            subtitle: Text('26 Jun 1997'),
           ),
           const ListTile(
             leading: Icon(Icons.bloodtype),
             title: Text('Blood type'),
-            subtitle: Text("O+"),
+            subtitle: Text('O+'),
           ),
           const ListTile(
             leading: Icon(Icons.height),
             title: Text('Height'),
-            subtitle: Text("5\"5' [165cm]"),
+            subtitle: Text('5"5\' [165cm]'),
           ),
           const ListTile(
             leading: Icon(Icons.scale),

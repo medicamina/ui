@@ -281,9 +281,6 @@ class __ChoroplethMapState extends State<ChoroplethMap> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // const Padding(
-        //   padding: EdgeInsets.only(top: 10.0, bottom: 10),
-        // ),
         SfMaps(
           layers: [
             MapShapeLayer(

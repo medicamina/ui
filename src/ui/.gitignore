@@ -3,3 +3,8 @@ build
 ios
 windows
 .dart_tool
+linux
+macos
+.metadata
+.packages
+pubspec.lock

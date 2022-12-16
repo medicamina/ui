@@ -1,0 +1,1 @@
+(cd ./src/api/ && docker-compose rm)

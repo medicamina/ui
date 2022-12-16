@@ -1,6 +1,6 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:medicamina/dash/map/choropleth_map.dart';
+import 'package:medicamina/pages/dash/map/choropleth_map.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -39,43 +39,43 @@ Widget _personalDetails(BuildContext context) {
   return Expanded(
     child: Card(
       child: Column(
-        children: [
+        children: const [
           ListTile(
-            title: const Text(
-              'Personal data',
+            title:  Text(
+              'Personal details',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            trailing: IconButton(
-              icon: const Icon(Icons.more_vert),
-              onPressed: () {},
-            ),
+            // trailing: IconButton(
+            //   icon: const Icon(Icons.more_vert),
+            //   onPressed: () {},
+            // ),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.person_outline),
             title: Text('Name'),
             subtitle: Text("Jake Spencer Walklate"),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(CommunityMaterialIcons.gender_male_female),
             title: Text('Gender'),
             subtitle: Text('M'),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.cake),
             title: Text('Birthdate'),
             subtitle: Text('26 Jun 1997'),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.bloodtype),
             title: Text('Blood type'),
             subtitle: Text('O+'),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.height),
             title: Text('Height'),
             subtitle: Text('5"5\' [165cm]'),
           ),
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.scale),
             title: Text('Weight'),
             subtitle: Text("132lb [60kg]"),
@@ -253,7 +253,9 @@ Widget mobile(BuildContext context) {
           children: [_personalDetails(context)],
         ),
         Row(
-          children: const [ResultsTable()],
+          children: const [
+            ResultsTable(),
+          ],
         ),
       ],
     ),
@@ -271,7 +273,9 @@ Widget desktop(BuildContext context) {
           ],
         ),
         Row(
-          children: const [ResultsTable()],
+          children: const [
+            ResultsTable(),
+          ],
         ),
       ],
     ),

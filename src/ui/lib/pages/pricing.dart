@@ -2,7 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
 class MedicaminaPricingPage extends StatelessWidget {
-  const MedicaminaPricingPage({ Key? key }) : super(key: key);
+  const MedicaminaPricingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +111,13 @@ Widget doctor(BuildContext context, double width) {
                 style: Theme.of(context).textTheme.headline4?.apply(fontWeightDelta: 5),
               ),
             ),
-            subtitle: const Center(child: Text('per active client per month')),
+            subtitle: const Center(
+              child: Tooltip(
+                child: Text('Per active client per month'),
+                message: 'One visit per month',
+                verticalOffset: 10,
+              ),
+            ),
           ),
           const Padding(padding: EdgeInsets.only(top: 20)),
           const Text('Reduce misdiagnosis'),
@@ -126,7 +132,10 @@ Widget doctor(BuildContext context, double width) {
             children: <Widget>[
               ElevatedButton(
                 onPressed: () {},
-                child: const Text('UPGRADE'),
+                child: const Text(
+                  'UPGRADE',
+                  style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
+                ),
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(110, 45), //////// HERE
                 ),

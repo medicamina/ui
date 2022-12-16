@@ -5,8 +5,18 @@ dist
 build
 .expo
 ._*
+android
+build
+ios
+windows
+.dart_tool
+linux
+macos
 
 # Things
+.metadata
+.packages
+pubspec.lock
 package-lock.json
 ./package-lock.json
 *.pnp

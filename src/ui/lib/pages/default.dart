@@ -47,21 +47,6 @@ class _MedicaminaDefaultPageState extends State<MedicaminaDefaultPage> {
             ),
           ),
           const Padding(padding: EdgeInsets.only(left: 5)),
-          // IconButton(
-          //   icon: const Icon(Icons.attach_money),
-          //   tooltip: 'Pricing',
-          //   onPressed: () {
-          //     Beamer.of(context).beamToNamed('/login');
-          //   },
-          // ),
-          // const Padding(padding: EdgeInsets.only(left: 10, right: 10)),
-          // IconButton(
-          //   icon: const Icon(Icons.login),
-          //   tooltip: 'Login',
-          //   onPressed: () {
-          //     Beamer.of(context).beamToNamed('/login');
-          //   },
-          // ),
         ],
       ),
       body: SingleChildScrollView(

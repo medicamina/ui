@@ -5,10 +5,11 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 final supabase = Supabase.instance.client;
 
 class Register extends StatefulWidget {
-  const Register({Key? key, required this.loadingCallback, required this.snackBarError}) : super(key: key);
+  const Register({Key? key, required this.loadingCallback, required this.snackBarError, required this.snackBarNormal}) : super(key: key);
 
   final Function(bool? val) loadingCallback;
   final Function(AuthException err) snackBarError;
+  final Function(String message) snackBarNormal;
 
   @override
   State<Register> createState() => _Register();
@@ -158,26 +159,13 @@ class _Register extends State<Register> {
                                         try {
                                           final AuthResponse res = await supabase.auth.signUp(email: _email, password: _password);
 
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(
-                                              width: MediaQuery.of(context).size.width - 20,
-                                              behavior: SnackBarBehavior.floating,
-                                              elevation: 2,
-                                              content: const SizedBox(
-                                                height: 22,
-                                                child: Center(
-                                                  child: Text('Please check your e-mails for a verificaiton link'),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-
+                                          widget.snackBarNormal('Please check your e-mails for a verificaiton link');
                                           widget.loadingCallback(false);
                                           Beamer.of(context).beamToNamed('/login');
                                         } on AuthException catch (err, _) {
                                           widget.snackBarError(err);
+                                          widget.loadingCallback(false);
                                         }
-                                        widget.loadingCallback(false);
                                       }
                                     },
                               child: const Text(

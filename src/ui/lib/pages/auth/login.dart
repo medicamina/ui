@@ -16,7 +16,6 @@ class Login extends StatefulWidget {
 
 class _Login extends State<Login> {
   final _formKey = GlobalKey<FormState>();
-  final _snackbarErrorKey = GlobalKey<ScaffoldState>();
   String _email = "";
   String _password = "";
   late bool _loading;
@@ -133,8 +132,8 @@ class _Login extends State<Login> {
                                           }
                                         } on AuthException catch (err, _) {
                                           widget.snackBarError(err);
+                                          widget.loadingCallback(false);
                                         }
-                                        widget.loadingCallback(false);
                                       }
                                     },
                               child: const Text(

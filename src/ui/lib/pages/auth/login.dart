@@ -1,55 +1,80 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-// import 'package:medicamina/globals.dart';
 
 final supabase = Supabase.instance.client;
 
+class Login extends StatefulWidget {
+  const Login({Key? key, required this.loadingCallback, required this.snackBarError}) : super(key: key);
+  
+  final Function(bool? val) loadingCallback; 
+  final Function(AuthException err) snackBarError;
 
-Widget login(BuildContext context) {
+  @override
+  State<Login> createState() => _Login();
+}
+
+class _Login extends State<Login> {
   final _formKey = GlobalKey<FormState>();
+  final _snackbarErrorKey = GlobalKey<ScaffoldState>();
   String _email = "";
   String _password = "";
+  late bool _loading;
 
-  double height() {
-    var _keyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
-    if (_keyboardVisible) {
-      return 50;
-    }
-    return 150;
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _loading = widget.loadingCallback(null);
+    });
   }
 
-  return Scaffold(
-    backgroundColor: Colors.white,
-    appBar: AppBar(
-      title: const Text("login"),
-    ),
-    body: LayoutBuilder(
-      builder: (context, constraint) {
-        return SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: constraint.maxHeight),
-            child: IntrinsicHeight(
-              child: Column(
-                children: <Widget>[
+  @override
+  void dispose() {
+    super.dispose();
+    _loading = false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: LayoutBuilder(
+        builder: (context, constraint) {
+          return Column(
+            children: [
+              Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.2 : MediaQuery.of(context).size.width * 0.1, top: 24),
+                        child: Text("Welcome", style: Theme.of(context).textTheme.displayMedium?.merge(const TextStyle(color: Colors.black87))),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
+                        child: Text("Sign in to continue", style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: [
                   Expanded(
                     child: Form(
                       key: _formKey,
                       child: Column(
                         children: [
+                          const SizedBox(height: 24),
                           Padding(
-                            padding: const EdgeInsets.only(top: 0.0),
-                            child: Center(
-                              child: SizedBox(width: 200, height: height()),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                             child: TextFormField(
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                labelText: 'Email',
-                                hintText: 'Email',
+                                labelText: 'E-mail address',
+                                prefixIcon: Icon(Icons.email_outlined),
                               ),
                               onChanged: (text) {
                                 _email = text;
@@ -66,14 +91,15 @@ Widget login(BuildContext context) {
                               },
                             ),
                           ),
+                          const SizedBox(height: 12),
                           Padding(
-                            padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
+                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                             child: TextFormField(
                               obscureText: true,
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                                 labelText: 'Password',
-                                hintText: 'Password',
+                                prefixIcon: Icon(Icons.lock_outline),
                               ),
                               onChanged: (text) {
                                 _password = text;
@@ -83,63 +109,79 @@ Widget login(BuildContext context) {
                                   return 'Empty password';
                                 }
                                 if (_password.length < 6) {
-                                  'Password must be more than 6 characters';
+                                  return 'Invalid password';
                                 }
                                 return null;
                               },
                             ),
                           ),
-                          const SizedBox(height: 10),
-                          TextButton(
-                            onPressed: () {
-                              return;
-                            },
-                            child: const Text(
-                              'Forgot Password',
-                              style: TextStyle(color: Colors.blue, fontSize: 15),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          SizedBox(
-                            height: 50,
-                            width: 250,
-                            child: OutlinedButton(
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  final AuthResponse res = await supabase.auth.signInWithPassword(
-                                    email: _email,
-                                    password: _password
-                                  );
+                          const SizedBox(height: 18),
+                          Padding(
+                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(40)),
+                              onPressed: _loading
+                                  ? null
+                                  : () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        widget.loadingCallback(true);
+                                        try {
+                                          final AuthResponse res = await supabase.auth.signInWithPassword(email: _email, password: _password);
 
-                                  if (res.session != null) {
-                                    Beamer.of(context).beamToNamed('/dashboard');
-                                  }
-                                }
-                              },
-                              child: const Text('Login'),
+                                          if (res.session != null) {
+                                            Beamer.of(context).beamToNamed('/dashboard');
+                                          }
+                                        } on AuthException catch (err, _) {
+                                          widget.snackBarError(err);
+                                        }
+                                        widget.loadingCallback(false);
+                                      }
+                                    },
+                              child: const Text(
+                                'LOGIN',
+                                style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 0.75),
+                              ),
                             ),
                           ),
+                          const SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
+                                ),
+                                onPressed: () {
+                                  Beamer.of(context).beamToNamed('/register');
+                                },
+                                child: const Text(
+                                  'Create new account',
+                                ),
+                              ),
+                              SizedBox(width: MediaQuery.of(context).size.width * 0.2),
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
+                                ),
+                                onPressed: () {
+                                  Beamer.of(context).beamToNamed('/password');
+                                },
+                                child: const Text(
+                                  'Reset password',
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
                   ),
-                  Column(
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          Beamer.of(context).beamToNamed('/register');
-                        },
-                        child: const Text("New User? Create Account"),
-                      ),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
                 ],
               ),
-            ),
-          ),
-        );
-      },
-    ),
-  );
+            ],
+          );
+        },
+      ),
+    );
+  }
 }

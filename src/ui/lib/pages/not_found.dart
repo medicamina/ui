@@ -1,5 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MedicaminaNotFound extends StatelessWidget {
   const MedicaminaNotFound({Key? key}) : super(key: key);
@@ -15,7 +16,8 @@ class MedicaminaNotFound extends StatelessWidget {
             Beamer.of(context).beamBack();
           },
         ),
-        title: const Text('medicamina'),
+        title: Text('medicamina', style: GoogleFonts.balooTamma2()),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(

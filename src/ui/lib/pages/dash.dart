@@ -1,12 +1,14 @@
-import 'dart:developer';
-import 'dart:html';
-
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:beamer/beamer.dart';
 import 'package:event/event.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:medicamina/pages/dash/account.dart';
+import 'package:medicamina/pages/dash/redirect.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'dash/home.dart';
+
+final supabase = Supabase.instance.client;
 
 class BottomNavigationBarWidget extends StatefulWidget {
   const BottomNavigationBarWidget({Key? key, required this.beamerKey, required this.eventBack}) : super(key: key);
@@ -43,6 +45,12 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
         return _updateCurrentIndex(2);
       case 'account':
         return _updateCurrentIndex(3);
+      case 'security':
+        return _updateCurrentIndex(3);
+      case 'subscription':
+        return _updateCurrentIndex(3);
+      case 'profile':
+        return _updateCurrentIndex(3);
     }
   }
 
@@ -74,7 +82,13 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
           return;
         }
 
-        _beamerDelegate.beamToNamed(pages[index], replaceRouteInformation: true, beamBackOnPop: true);
+        _beamerDelegate.beamToNamed(
+          pages[index],
+          replaceRouteInformation: true,
+          beamBackOnPop: true,
+          // transitionDelegate: const DefaultTransitionDelegate(),
+          transitionDelegate: const NoAnimationTransitionDelegate(),
+        );
         _updateCurrentIndex(index);
       },
     );
@@ -98,13 +112,18 @@ class MedicaminaDashboardPage extends StatefulWidget {
 
 class _MedicaminaDashboardPageState extends State<MedicaminaDashboardPage> {
   final _beamerKey = GlobalKey<BeamerState>();
-  
+
   @override
   Widget build(BuildContext context) {
+    if (supabase.auth.currentSession == null) {
+      return const MedicaminaDashboardRedirect();
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('medicamina'),
+        title: Text('medicamina', style: GoogleFonts.balooTamma2()),
         automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
       body: Beamer(
         key: _beamerKey,
@@ -116,7 +135,11 @@ class _MedicaminaDashboardPageState extends State<MedicaminaDashboardPage> {
               '/dashboard': (p0, p1, p2) => const Home(),
               '/history': (p0, p1, p2) => const Text("History"),
               '/family': (p0, p1, p2) => const Text("Family"),
+              // Account
               '/account': (p0, p1, p2) => const Account(),
+              '/security': (p0, p1, p2) => const Account(),
+              '/subscription': (p0, p1, p2) => const Account(),
+              '/profile': (p0, p1, p2) => const Account(),
             },
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MedicaminaDefaultPage extends StatefulWidget {
   const MedicaminaDefaultPage({Key? key, required this.title}) : super(key: key);
@@ -13,19 +14,19 @@ class MedicaminaDefaultPage extends StatefulWidget {
 class _MedicaminaDefaultPageState extends State<MedicaminaDefaultPage> {
   TextStyle? setHeadlineSize(context) {
     if (MediaQuery.of(context).size.width >= 700) {
-      return Theme.of(context).textTheme.headline1?.apply(fontStyle: FontStyle.italic, color: Colors.black);
+      return Theme.of(context).textTheme.headline3?.apply(color: Colors.black);
     }
     if (MediaQuery.of(context).size.width >= 350) {
-      return Theme.of(context).textTheme.headline2?.apply(fontStyle: FontStyle.italic, color: Colors.black);
+      return Theme.of(context).textTheme.headline4?.apply(color: Colors.black);
     }
-    return Theme.of(context).textTheme.headline3?.apply(fontStyle: FontStyle.italic, color: Colors.black);
+    return Theme.of(context).textTheme.headline5?.apply(color: Colors.black);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title, style: GoogleFonts.balooTamma2()),
         actions: <Widget>[
           ElevatedButton.icon(
             onPressed: () => Beamer.of(context).beamToNamed('/pricing'),
@@ -56,12 +57,13 @@ class _MedicaminaDefaultPageState extends State<MedicaminaDefaultPage> {
               child: Container(
                 margin: const EdgeInsets.only(top: 25, bottom: 25),
                 child: Text(
-                  'MEDICAMINA',
+                  'Precision medicine for the mass market',
                   style: setHeadlineSize(context),
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
+            const Padding(padding: EdgeInsets.only(top: 24)),
             Center(
               child: Column(
                 children: [
@@ -204,6 +206,18 @@ class _MedicaminaDefaultPageState extends State<MedicaminaDefaultPage> {
                     ],
                   ),
                   const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 40,
+                          padding: EdgeInsets.all(12),
+                          child: Center(child: Text('Copyright 2022 Medicamina', style: TextStyle(fontStyle: FontStyle.italic))),
+                          decoration: BoxDecoration(color: Color.fromARGB(255, 247, 247, 247)),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),

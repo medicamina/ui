@@ -124,6 +124,7 @@ class _ResultsTableState extends State<ResultsTable> {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter a search term',
+                    suffixIcon: Icon(Icons.search),
                   ),
                   onChanged: updateSearch,
                 ),

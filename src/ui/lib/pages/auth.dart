@@ -46,6 +46,17 @@ class _MedicaminaAuthPageState extends State<MedicaminaAuthPage> {
     );
   }
 
+  void snackBarNormalFunc(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        width: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.8 : MediaQuery.of(context).size.width - 20,
+        behavior: SnackBarBehavior.floating,
+        elevation: 2,
+        content: Text(message),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final _beamerKey = GlobalKey<BeamerState>();
@@ -77,9 +88,9 @@ class _MedicaminaAuthPageState extends State<MedicaminaAuthPage> {
           setBrowserTabTitle: false,
           locationBuilder: RoutesLocationBuilder(
             routes: {
-              '/login': (p0, p1, p2) => Login(loadingCallback: loadingCallbackFunc, snackBarError: snackBarErrorFunc),
-              '/register': (p0, p1, p2) => Register(loadingCallback: loadingCallbackFunc, snackBarError: snackBarErrorFunc),
-              '/onboarding': (p0, p1, p2) => const Onboarding(),
+              '/login': (context, state, data) => Login(loadingCallback: loadingCallbackFunc, snackBarError: snackBarErrorFunc),
+              '/register': (context, state, data) => Register(loadingCallback: loadingCallbackFunc, snackBarError: snackBarErrorFunc, snackBarNormal: snackBarNormalFunc),
+              '/onboarding': (context, state, data) => const Onboarding(),
             },
           ),
         ),

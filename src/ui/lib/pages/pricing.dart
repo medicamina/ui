@@ -1,5 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MedicaminaPricingPage extends StatelessWidget {
   const MedicaminaPricingPage({Key? key}) : super(key: key);
@@ -8,7 +9,8 @@ class MedicaminaPricingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('medicamina'),
+        title: Text('medicamina', style: GoogleFonts.balooTamma2()),
+        centerTitle: true,
         actions: <Widget>[
           ElevatedButton.icon(
             onPressed: () => {},

@@ -1,101 +1,81 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:medicamina/globals.dart';
 
 final supabase = Supabase.instance.client;
 
-Widget register(BuildContext context) {
-  final _formKey = GlobalKey<FormState>();
-  String _fname = "";
-  String _lname = "";
-  String _email = "";
-  String _email_verify = "";
-  String _password = "";
-  String _password_verify = "";
-  ScrollController _scrollController = ScrollController();
+class Register extends StatefulWidget {
+  const Register({Key? key, required this.loadingCallback, required this.snackBarError}) : super(key: key);
 
-  double height() {
-    if (MediaQuery.of(context).size.height <= 700) {
-      return 0; 
-    }
-    var _keyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
-    if (_keyboardVisible) {
-      return 50;
-    }
-    return 100;
+  final Function(bool? val) loadingCallback;
+  final Function(AuthException err) snackBarError;
+
+  @override
+  State<Register> createState() => _Register();
+}
+
+class _Register extends State<Register> {
+  final _formKey = GlobalKey<FormState>();
+  String _email = "";
+  String _password = "";
+  String _passwordVerify = "";
+  late bool _loading;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _loading = widget.loadingCallback(null);
+    });
   }
 
-  return Scaffold(
-    backgroundColor: Colors.white,
-    appBar: AppBar(
-      title: const Text("create account"),
-    ),
-    body: LayoutBuilder(
-      builder: (context, constraint) {
-        return SingleChildScrollView(
-          controller: _scrollController,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: constraint.maxHeight),
-            child: IntrinsicHeight(
-              child: Column(
-                children: <Widget>[
+  @override
+  void dispose() {
+    super.dispose();
+    _loading = false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: LayoutBuilder(
+        builder: (context, constraint) {
+          return Column(
+            children: [
+              Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.2 : MediaQuery.of(context).size.width * 0.1, top: 24),
+                        child: Text("Let's get started", style: Theme.of(context).textTheme.displayMedium?.merge(const TextStyle(color: Colors.black87))),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
+                        child: Text("Fill out the form to create a new account", style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: [
                   Expanded(
                     child: Form(
                       key: _formKey,
                       child: Column(
                         children: [
+                          const SizedBox(height: 24),
                           Padding(
-                            padding: const EdgeInsets.only(top: 0.0),
-                            child: Center(
-                              child: SizedBox(width: 200, height: height()),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
+                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                             child: TextFormField(
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                labelText: 'First name',
-                                hintText: 'First name',
-                              ),
-                              onChanged: (text) {
-                                _fname = text;
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Empty first name';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
-                            child: TextFormField(
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Last name',
-                                hintText: 'Last name',
-                              ),
-                              onChanged: (text) {
-                                _lname = text;
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Empty last name';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
-                            child: TextFormField(
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Email',
-                                hintText: 'Email',
+                                labelText: 'E-mail address',
+                                // hintText: 'Email',
+                                prefixIcon: Icon(Icons.email_outlined),
                               ),
                               onChanged: (text) {
                                 _email = text;
@@ -112,40 +92,15 @@ Widget register(BuildContext context) {
                               },
                             ),
                           ),
+                          const SizedBox(height: 12),
                           Padding(
-                            padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
-                            child: TextFormField(
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: 'Verify Email',
-                                hintText: 'Verify Email',
-                              ),
-                              onChanged: (text) {
-                                _email_verify = text;
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Empty email';
-                                }
-                                bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value);
-                                if (!emailValid) {
-                                  return 'Invalid email';
-                                }
-                                if (_email != _email_verify) {
-                                  return 'Mismatched email';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
+                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                             child: TextFormField(
                               obscureText: true,
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                                 labelText: 'Password',
-                                hintText: 'Password',
+                                prefixIcon: Icon(Icons.lock_outline),
                               ),
                               onChanged: (text) {
                                 _password = text;
@@ -154,28 +109,32 @@ Widget register(BuildContext context) {
                                 if (value == null || value.isEmpty) {
                                   return 'Empty password';
                                 }
+                                if (_password.length < 6) {
+                                  return 'Invalid password';
+                                }
                                 return null;
                               },
                             ),
                           ),
+                          const SizedBox(height: 12),
                           Padding(
-                            padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
+                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                             child: TextFormField(
                               obscureText: true,
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                                 labelText: 'Verify password',
-                                hintText: 'Verify password',
+                                prefixIcon: Icon(Icons.done),
                               ),
                               onChanged: (text) {
-                                _password_verify = text;
+                                _passwordVerify = text;
                               },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Empty password';
                                 }
-                                if (_password != _password) {
-                                  return 'Mismatched passwords';
+                                if (_password != _passwordVerify) {
+                                  return 'Passwords do not match';
                                 }
                                 if (_password.length < 6) {
                                   return 'Password must be more than 6 characters';
@@ -184,45 +143,76 @@ Widget register(BuildContext context) {
                               },
                             ),
                           ),
-                          const SizedBox(height: 10),
-                          SizedBox(
-                            height: 50,
-                            width: 250,
-                            child: OutlinedButton(
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  final AuthResponse res = await supabase.auth.signUp(
-                                    email: _email,
-                                    password: _password
-                                  );
-                                  
-                                  Beamer.of(context).beamToNamed('/login');
-                                }
-                              },
-                              child: const Text('Register'),
+                          const SizedBox(height: 18),
+                          Padding(
+                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size.fromHeight(40),
+                              ),
+                              onPressed: _loading
+                                  ? null
+                                  : () async {
+                                      if (_formKey.currentState!.validate()) {
+                                        widget.loadingCallback(true);
+                                        try {
+                                          final AuthResponse res = await supabase.auth.signUp(email: _email, password: _password);
+
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              width: MediaQuery.of(context).size.width - 20,
+                                              behavior: SnackBarBehavior.floating,
+                                              elevation: 2,
+                                              content: const SizedBox(
+                                                height: 22,
+                                                child: Center(
+                                                  child: Text('Please check your e-mails for a verificaiton link'),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+
+                                          widget.loadingCallback(false);
+                                          Beamer.of(context).beamToNamed('/login');
+                                        } on AuthException catch (err, _) {
+                                          widget.snackBarError(err);
+                                        }
+                                        widget.loadingCallback(false);
+                                      }
+                                    },
+                              child: const Text(
+                                'REGISTER',
+                                style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 0.75),
+                              ),
                             ),
                           ),
+                          const SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
+                                ),
+                                onPressed: () {
+                                  Beamer.of(context).beamToNamed('/login');
+                                },
+                                child: const Text(
+                                  'Already registered?',
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
                   ),
-                  Column(
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          Beamer.of(context).beamToNamed('/login');
-                        },
-                        child: const Text("Already Registered? Login"),
-                      ),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
                 ],
               ),
-            ),
-          ),
-        );
-      },
-    ),
-  );
+            ],
+          );
+        },
+      ),
+    );
+  }
 }

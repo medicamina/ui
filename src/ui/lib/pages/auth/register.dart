@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:medicamina/globals.dart' as globals;
 
 final supabase = Supabase.instance.client;
 
@@ -46,7 +47,6 @@ class _Register extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraint) {
           return Column(
@@ -56,13 +56,26 @@ class _Register extends State<Register> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.2 : MediaQuery.of(context).size.width * 0.1, top: 24),
-                        child: Text("Let's get started", style: Theme.of(context).textTheme.displayMedium?.merge(const TextStyle(color: Colors.black87))),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.2 : MediaQuery.of(context).size.width * 0.1, top: 24),
+                          child: Text(
+                            "Let's get started",
+                            style: globals.darkMode
+                                ? Theme.of(context).textTheme.displayMedium
+                                : Theme.of(context).textTheme.displayMedium?.merge(
+                                      const TextStyle(color: Colors.black87),
+                                    ),
+                          ),
+                        ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
-                        child: Text("Fill out the form to create a new account", style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child:Padding(
+                          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
+                          child: Text("Fill out the form to create a new account", style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
+                        ),
                       ),
                     ],
                   ),
@@ -164,7 +177,7 @@ class _Register extends State<Register> {
                                       if (_formKey.currentState!.validate()) {
                                         widget.loadingCallback(true);
                                         try {
-                                          final AuthResponse res = await supabase.auth.signUp(email: _email, password: _password);
+                                          await supabase.auth.signUp(email: _email, password: _password);
 
                                           widget.snackBarNormal('Please check your e-mails for a verificaiton link');
                                           widget.loadingCallback(false);

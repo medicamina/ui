@@ -59,7 +59,7 @@ Widget user(BuildContext context, double width) {
             title: Center(
               child: Text(
                 'FREE',
-                style: Theme.of(context).textTheme.headline4?.apply(fontWeightDelta: 5),
+                style: Theme.of(context).textTheme.headline4?.apply(fontWeightDelta: 5, color: Theme.of(context).textTheme.headline5?.color),
               ),
             ),
             subtitle: const Center(child: Text('Forever')),

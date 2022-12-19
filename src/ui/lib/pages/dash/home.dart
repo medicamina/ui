@@ -1,7 +1,7 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:medicamina/pages/dash/map/choropleth_map.dart';
-import 'package:medicamina/globals.dart' as globals;
+// import 'package:medicamina/globals.dart' as globals;
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -96,7 +96,7 @@ class ResultsTable extends StatefulWidget {
 
 class _ResultsTableState extends State<ResultsTable> {
   String _searchTerm = '';
-  int _defaultRowsPerPage = 4;
+  final int _defaultRowsPerPage = 4;
   late int _rowsPerPage;
 
   @override

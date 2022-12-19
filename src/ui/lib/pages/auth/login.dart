@@ -5,10 +5,18 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 final supabase = Supabase.instance.client;
 
 class Login extends StatefulWidget {
-  const Login({Key? key, required this.loadingCallback, required this.snackBarError}) : super(key: key);
-  
-  final Function(bool? val) loadingCallback; 
+  const Login({
+    Key? key,
+    required this.loadingCallback,
+    required this.snackBarError,
+    required this.snackBarNormal,
+    required this.beamerKey,
+  }) : super(key: key);
+
+  final Function(bool? val) loadingCallback;
   final Function(AuthException err) snackBarError;
+  final Function(String message) snackBarNormal;
+  final GlobalKey<BeamerState> beamerKey;
 
   @override
   State<Login> createState() => _Login();
@@ -127,12 +135,15 @@ class _Login extends State<Login> {
                                         try {
                                           final AuthResponse res = await supabase.auth.signInWithPassword(email: _email, password: _password);
 
+                                          widget.loadingCallback(false);
                                           if (res.session != null) {
-                                            Beamer.of(context).beamToNamed('/dashboard');
+                                            widget.beamerKey.currentState!.routerDelegate.beamToNamed('/dashboard');
+                                          } else {
+                                            widget.snackBarNormal('login.dart error');
                                           }
                                         } on AuthException catch (err, _) {
-                                          widget.snackBarError(err);
                                           widget.loadingCallback(false);
+                                          widget.snackBarError(err);
                                         }
                                       }
                                     },

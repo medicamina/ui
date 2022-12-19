@@ -88,8 +88,18 @@ class _MedicaminaAuthPageState extends State<MedicaminaAuthPage> {
           setBrowserTabTitle: false,
           locationBuilder: RoutesLocationBuilder(
             routes: {
-              '/login': (context, state, data) => Login(loadingCallback: loadingCallbackFunc, snackBarError: snackBarErrorFunc),
-              '/register': (context, state, data) => Register(loadingCallback: loadingCallbackFunc, snackBarError: snackBarErrorFunc, snackBarNormal: snackBarNormalFunc),
+              '/login': (context, state, data) => Login(
+                    loadingCallback: loadingCallbackFunc,
+                    snackBarError: snackBarErrorFunc,
+                    snackBarNormal: snackBarNormalFunc,
+                    beamerKey: _beamerKey,
+                  ),
+              '/register': (context, state, data) => Register(
+                    loadingCallback: loadingCallbackFunc,
+                    snackBarError: snackBarErrorFunc,
+                    snackBarNormal: snackBarNormalFunc,
+                    beamerKey: _beamerKey,
+                  ),
               '/onboarding': (context, state, data) => const Onboarding(),
             },
           ),

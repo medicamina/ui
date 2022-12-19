@@ -16,7 +16,7 @@ class Account extends StatelessWidget {
       widget = desktop(context);
     }
 
-    return Scaffold(backgroundColor: Colors.white, body: widget);
+    return Scaffold(body: widget);
   }
 }
 
@@ -32,7 +32,7 @@ Widget desktop(BuildContext context) {
 
   return SingleChildScrollView(
     child: Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
+      padding: const EdgeInsets.only(top: 6, bottom: 6, left: 6, right: 6),
       child: Card(
         child: IntrinsicHeight(
           child: Row(
@@ -67,7 +67,8 @@ Widget desktop(BuildContext context) {
                           side: const BorderSide(
                             color: Colors.transparent,
                           ),
-                          backgroundColor: Beamer.of(context).currentBeamLocation.history.last.routeInformation.location == '/account' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Colors.white,
+                          backgroundColor:
+                              Beamer.of(context).currentBeamLocation.history.last.routeInformation.location == '/account' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Theme.of(context).buttonTheme.colorScheme?.surface,
                         ),
                         onPressed: () {
                           Beamer.of(context).beamToNamed(
@@ -90,7 +91,8 @@ Widget desktop(BuildContext context) {
                           side: const BorderSide(
                             color: Colors.transparent,
                           ),
-                          backgroundColor: Beamer.of(context).currentBeamLocation.history.last.routeInformation.location == '/security' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Colors.white,
+                          backgroundColor:
+                              Beamer.of(context).currentBeamLocation.history.last.routeInformation.location == '/security' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Theme.of(context).buttonTheme.colorScheme?.surface,
                         ),
                         onPressed: () {
                           Beamer.of(context).beamToNamed(
@@ -113,7 +115,8 @@ Widget desktop(BuildContext context) {
                           side: const BorderSide(
                             color: Colors.transparent,
                           ),
-                          backgroundColor: Beamer.of(context).currentBeamLocation.history.last.routeInformation.location == '/subscription' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Colors.white,
+                          backgroundColor:
+                              Beamer.of(context).currentBeamLocation.history.last.routeInformation.location == '/subscription' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Theme.of(context).buttonTheme.colorScheme?.surface,
                         ),
                         onPressed: () {
                           Beamer.of(context).beamToNamed(
@@ -136,7 +139,8 @@ Widget desktop(BuildContext context) {
                           side: const BorderSide(
                             color: Colors.transparent,
                           ),
-                          backgroundColor: Beamer.of(context).currentBeamLocation.history.last.routeInformation.location == '/profile' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Colors.white,
+                          backgroundColor:
+                              Beamer.of(context).currentBeamLocation.history.last.routeInformation.location == '/profile' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Theme.of(context).buttonTheme.colorScheme?.surface,
                         ),
                         onPressed: () {
                           Beamer.of(context).beamToNamed(
@@ -155,11 +159,12 @@ Widget desktop(BuildContext context) {
                       padding: const EdgeInsets.only(left: 6),
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          minimumSize: const Size(1000, 62),
-                          side: const BorderSide(
-                            color: Colors.transparent,
-                          ),
-                        ),
+                            minimumSize: const Size(1000, 62),
+                            side: const BorderSide(
+                              color: Colors.transparent,
+                            ),
+                            // backgroundColor: Theme.of(context).buttonTheme.colorScheme?.error.withOpacity(0.05),
+                            primary: Colors.red),
                         onPressed: () async => showDialog<String>(
                           context: context,
                           builder: (BuildContext _context) => AlertDialog(
@@ -174,6 +179,7 @@ Widget desktop(BuildContext context) {
                                 child: const Text('BACK'),
                               ),
                               TextButton(
+                                style: TextButton.styleFrom(primary: Colors.red),
                                 onPressed: () async {
                                   Navigator.pop(_context, 'CONTINUE');
                                   await supabase.auth.signOut();
@@ -250,6 +256,7 @@ Widget desktop(BuildContext context) {
                                   child: const Text('BACK'),
                                 ),
                                 TextButton(
+                                  style: TextButton.styleFrom(primary: Theme.of(context).buttonTheme.colorScheme?.surface),
                                   onPressed: () {
                                     Navigator.pop(_context, 'CONTINUE');
                                     Beamer.of(context).beamToNamed(

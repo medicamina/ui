@@ -5,11 +5,18 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 final supabase = Supabase.instance.client;
 
 class Register extends StatefulWidget {
-  const Register({Key? key, required this.loadingCallback, required this.snackBarError, required this.snackBarNormal}) : super(key: key);
+  const Register({
+    Key? key,
+    required this.loadingCallback,
+    required this.snackBarError,
+    required this.snackBarNormal,
+    required this.beamerKey,
+  }) : super(key: key);
 
   final Function(bool? val) loadingCallback;
   final Function(AuthException err) snackBarError;
   final Function(String message) snackBarNormal;
+  final GlobalKey<BeamerState> beamerKey;
 
   @override
   State<Register> createState() => _Register();
@@ -161,7 +168,8 @@ class _Register extends State<Register> {
 
                                           widget.snackBarNormal('Please check your e-mails for a verificaiton link');
                                           widget.loadingCallback(false);
-                                          Beamer.of(context).beamToNamed('/login');
+
+                                          widget.beamerKey.currentState!.routerDelegate.beamToNamed('/login');
                                         } on AuthException catch (err, _) {
                                           widget.snackBarError(err);
                                           widget.loadingCallback(false);

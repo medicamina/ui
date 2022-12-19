@@ -7,7 +7,7 @@ import 'package:medicamina/pages/default.dart';
 import 'package:medicamina/pages/auth.dart';
 import 'package:medicamina/pages/dash.dart';
 import 'package:medicamina/pages/pricing.dart';
-import 'package:medicamina/globals.dart';
+import 'package:medicamina/globals.dart' as globals;
 
 final supabase = Supabase.instance.client;
 
@@ -16,8 +16,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Supabase.initialize(
-    url: supabaseUrl,
-    anonKey: supabaseKey,
+    url: globals.supabaseUrl,
+    anonKey: globals.supabaseKey,
   );
 
   runApp(MyApp());
@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'medicamina',
-      theme: ThemeData(),
+      theme: globals.darkMode ? ThemeData.dark() : ThemeData.light(),
       routerDelegate: _routerDelegate,
       routeInformationParser: BeamerParser(),
       backButtonDispatcher: BeamerBackButtonDispatcher(delegate: _routerDelegate),

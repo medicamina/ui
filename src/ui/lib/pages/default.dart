@@ -2,6 +2,11 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'auth/redirect.dart';
+
+final supabase = Supabase.instance.client;
 
 class MedicaminaDefaultPage extends StatefulWidget {
   const MedicaminaDefaultPage({Key? key, required this.title}) : super(key: key);
@@ -14,48 +19,82 @@ class MedicaminaDefaultPage extends StatefulWidget {
 class _MedicaminaDefaultPageState extends State<MedicaminaDefaultPage> {
   TextStyle? setHeadlineSize(context) {
     if (MediaQuery.of(context).size.width >= 700) {
-      return Theme.of(context).textTheme.headline3?.apply(color: Colors.black);
+      return Theme.of(context).textTheme.headline3;
     }
     if (MediaQuery.of(context).size.width >= 350) {
-      return Theme.of(context).textTheme.headline4?.apply(color: Colors.black);
+      return Theme.of(context).textTheme.headline4;
     }
-    return Theme.of(context).textTheme.headline5?.apply(color: Colors.black);
+    return Theme.of(context).textTheme.headline5;
   }
 
   @override
   Widget build(BuildContext context) {
+    if (supabase.auth.currentSession != null) {
+      return const MedicaminaAuthRedirect();
+    }
+
     return Scaffold(
+      drawer: MediaQuery.of(context).size.width < 600 ? Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const SizedBox(height: 120),
+            ListTile(
+              title: const Text('Pricing'),
+              onTap: () {
+                Beamer.of(context).beamToNamed('/pricing');
+              },
+            ),
+            ListTile(
+              title: const Text('Login'),
+              onTap: () {
+                Beamer.of(context).beamToNamed('/login');
+              },
+            ),
+            ListTile(
+              title: const Text('Register'),
+              onTap: () {
+                Beamer.of(context).beamToNamed('/register');
+              },
+            ),
+          ],
+        ),
+      ) : null,
       appBar: AppBar(
         title: Text(widget.title, style: GoogleFonts.balooTamma2()),
-        actions: <Widget>[
-          ElevatedButton.icon(
-            onPressed: () => Beamer.of(context).beamToNamed('/pricing'),
-            label: const Text("Pricing"),
-            icon: const Icon(Icons.attach_money),
-            style: ElevatedButton.styleFrom(
-              elevation: 0.0,
-              shadowColor: Colors.transparent,
-            ),
-          ),
-          const Padding(padding: EdgeInsets.only(left: 5, right: 5)),
-          ElevatedButton.icon(
-            onPressed: () => Beamer.of(context).beamToNamed('/login'),
-            label: const Text("Login"),
-            icon: const Icon(Icons.login),
-            style: ElevatedButton.styleFrom(
-              elevation: 0.0,
-              shadowColor: Colors.transparent,
-            ),
-          ),
-          const Padding(padding: EdgeInsets.only(left: 5)),
-        ],
+        centerTitle: true,
+        actions: MediaQuery.of(context).size.width > 600
+            ? <Widget>[
+                ElevatedButton.icon(
+                  onPressed: () => Beamer.of(context).beamToNamed('/pricing'),
+                  label: const Text("Pricing"),
+                  icon: const Icon(Icons.attach_money),
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0.0,
+                    shadowColor: Colors.transparent,
+                  ),
+                ),
+                const Padding(padding: EdgeInsets.only(left: 5, right: 5)),
+                ElevatedButton.icon(
+                  onPressed: () => Beamer.of(context).beamToNamed('/login'),
+                  label: const Text("Login"),
+                  icon: const Icon(Icons.login),
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0.0,
+                    shadowColor: Colors.transparent,
+                  ),
+                ),
+                const Padding(padding: EdgeInsets.only(left: 5)),
+              ]
+            : [],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 24),
             Center(
               child: Container(
-                margin: const EdgeInsets.only(top: 25, bottom: 25),
+                margin: const EdgeInsets.all(22),
                 child: Text(
                   'Precision medicine for the mass market',
                   style: setHeadlineSize(context),
@@ -96,7 +135,7 @@ class _MedicaminaDefaultPageState extends State<MedicaminaDefaultPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   Row(
                     children: [
                       Expanded(
@@ -126,7 +165,7 @@ class _MedicaminaDefaultPageState extends State<MedicaminaDefaultPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   Row(
                     children: [
                       Expanded(
@@ -156,7 +195,7 @@ class _MedicaminaDefaultPageState extends State<MedicaminaDefaultPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   Row(
                     children: [
                       Expanded(
@@ -175,7 +214,7 @@ class _MedicaminaDefaultPageState extends State<MedicaminaDefaultPage> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   Row(
                     children: [
                       Expanded(
@@ -205,19 +244,20 @@ class _MedicaminaDefaultPageState extends State<MedicaminaDefaultPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   Row(
                     children: [
                       Expanded(
                         child: Container(
                           height: 40,
-                          padding: EdgeInsets.all(12),
-                          child: Center(child: Text('Copyright 2022 Medicamina', style: TextStyle(fontStyle: FontStyle.italic))),
-                          decoration: BoxDecoration(color: Color.fromARGB(255, 247, 247, 247)),
+                          padding: const EdgeInsets.all(12),
+                          child: const Center(child: Text('Copyright 2022 Medicamina', style: TextStyle(fontStyle: FontStyle.italic, fontSize: 12))),
+                          decoration: BoxDecoration(color: Theme.of(context).appBarTheme.backgroundColor),
                         ),
                       )
                     ],
                   ),
+                  const SizedBox(height: 24),
                 ],
               ),
             ),

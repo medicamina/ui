@@ -13,6 +13,6 @@ class Onboarding extends StatefulWidget {
 class _Onboarding extends State<Onboarding> {
   @override
   Widget build(BuildContext context) {
-    return Text('onboarding');
+    return const Text('onboarding');
   }
 }

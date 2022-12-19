@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:medicamina/globals.dart' as globals;
 
 final supabase = Supabase.instance.client;
 
@@ -45,7 +46,6 @@ class _Login extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraint) {
           return Column(
@@ -57,7 +57,14 @@ class _Login extends State<Login> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.2 : MediaQuery.of(context).size.width * 0.1, top: 24),
-                        child: Text("Welcome", style: Theme.of(context).textTheme.displayMedium?.merge(const TextStyle(color: Colors.black87))),
+                        child: Text(
+                          "Welcome",
+                          style: globals.darkMode
+                              ? Theme.of(context).textTheme.displayMedium
+                              : Theme.of(context).textTheme.displayMedium?.merge(
+                                    const TextStyle(color: Colors.black87),
+                                  ),
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
@@ -154,34 +161,37 @@ class _Login extends State<Login> {
                             ),
                           ),
                           const SizedBox(height: 12),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextButton(
-                                style: TextButton.styleFrom(
-                                  padding: const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
+                                  ),
+                                  onPressed: () {
+                                    Beamer.of(context).beamToNamed('/register');
+                                  },
+                                  child: const Text(
+                                    'Create new account',
+                                  ),
                                 ),
-                                onPressed: () {
-                                  Beamer.of(context).beamToNamed('/register');
-                                },
-                                child: const Text(
-                                  'Create new account',
+                                SizedBox(width: MediaQuery.of(context).size.width > 600 ? MediaQuery.of(context).size.width * 0.2 : MediaQuery.of(context).size.width * 0.1),
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
+                                  ),
+                                  onPressed: () {
+                                    Beamer.of(context).beamToNamed('/password');
+                                  },
+                                  child: const Text(
+                                    'Reset password',
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: MediaQuery.of(context).size.width * 0.2),
-                              TextButton(
-                                style: TextButton.styleFrom(
-                                  padding: const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
-                                ),
-                                onPressed: () {
-                                  Beamer.of(context).beamToNamed('/password');
-                                },
-                                child: const Text(
-                                  'Reset password',
-                                ),
-                              ),
-                            ],
-                          )
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),

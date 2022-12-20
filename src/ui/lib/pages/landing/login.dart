@@ -140,7 +140,6 @@ class _MedicaminaLoginPage extends State<MedicaminaLoginPage> {
                                     : () async {
                                         if (_formKey.currentState!.validate()) {
                                           widget.loadingCallback(true);
-
                                           try {
                                             await supabase.auth.signInWithPassword(email: _email, password: _password);
                                           } on AuthException catch (err, _) {
@@ -164,7 +163,7 @@ class _MedicaminaLoginPage extends State<MedicaminaLoginPage> {
                                     padding: const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
                                   ),
                                   onPressed: () {
-                                    Beamer.of(widget.beamerKey.currentContext as BuildContext).beamToNamed('/password');
+                                    Beamer.of(context, root: true).beamToNamed('/password');
                                   },
                                   child: const Text(
                                     'Reset password',

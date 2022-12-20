@@ -54,19 +54,19 @@ Widget user(BuildContext context, double width) {
             subtitle: const Center(child: Text('Forever', textAlign: TextAlign.center)),
           ),
           const Padding(padding: EdgeInsets.only(top: 20)),
-          const Text('Build a family tree', textAlign: TextAlign.center),
+          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Build a family tree', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Text('Import genetic data', textAlign: TextAlign.center),
+          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Import genetic data', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Text('Discover diseases', textAlign: TextAlign.center),
+          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Discover diseases', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Text('Share information with your consultant', textAlign: TextAlign.center),
+          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Share information with your consultant', textAlign: TextAlign.center)),
           const Spacer(),
           Column(
             children: <Widget>[
               ElevatedButton(
                 onPressed: () {
-                  Beamer.of(context).beamToNamed('/register');
+                  Beamer.of(context, root: true).beamToNamed('/register');
                 },
                 child: const Text('REGISTER'),
               ),
@@ -82,10 +82,11 @@ Widget user(BuildContext context, double width) {
 Widget doctor(BuildContext context, double width) {
   return SizedBox(
     width: MediaQuery.of(context).size.width * width,
-    height: 350,
+    height: 370,
     child: Card(
       child: Column(
         children: <Widget>[
+          const Padding(padding: EdgeInsets.only(top: 6)),
           ListTile(
             title: Center(
               child: Text(
@@ -95,6 +96,7 @@ Widget doctor(BuildContext context, double width) {
             ),
             subtitle: const Center(child: Text('An account for consultancy')),
           ),
+          const Padding(padding: EdgeInsets.only(top: 4)),
           ListTile(
             title: Center(
               child: Text('\$1', style: Theme.of(context).textTheme.headline4?.apply(fontWeightDelta: 5, color: Theme.of(context).textTheme.headline5?.color), textAlign: TextAlign.center),
@@ -103,14 +105,14 @@ Widget doctor(BuildContext context, double width) {
               child: Tooltip(child: Text('Per active client per month'), message: 'One visit per month', verticalOffset: 10, textAlign: TextAlign.center),
             ),
           ),
-          const Padding(padding: EdgeInsets.only(top: 20)),
-          const Text('Reduce misdiagnosis', textAlign: TextAlign.center),
+          const Padding(padding: EdgeInsets.only(top: 24)),
+          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Reduce misdiagnosis', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Text('Avoid adverse drug reactions', textAlign: TextAlign.center),
+          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Avoid adverse drug reactions', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Text('Send prescription insstructions to clients', textAlign: TextAlign.center),
+          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Send prescription insstructions to clients', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Text('Discover drug allergies', textAlign: TextAlign.center),
+          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Discover drug allergies', textAlign: TextAlign.center)),
           const Spacer(),
           Column(
             children: <Widget>[
@@ -126,7 +128,8 @@ Widget doctor(BuildContext context, double width) {
               ),
               const Padding(padding: EdgeInsets.all(5)),
             ],
-          )
+          ),
+          const Padding(padding: EdgeInsets.only(top: 4)),
         ],
       ),
     ),
@@ -156,13 +159,13 @@ Widget geneticTest(BuildContext context, double width) {
             subtitle: const Center(child: Text('One time fee', textAlign: TextAlign.center)),
           ),
           const Padding(padding: EdgeInsets.only(top: 20)),
-          const Text('Order a genetic test by mail', textAlign: TextAlign.center),
+          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Order a genetic test by mail', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Text('Receive automatically imported data', textAlign: TextAlign.center),
+          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Receive automatically imported data', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Text('Build your genetic data in a family tree', textAlign: TextAlign.center),
+          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Build your genetic data in a family tree', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Text('Share allergies with practitioners', textAlign: TextAlign.center),
+          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Share allergies with practitioners', textAlign: TextAlign.center)),
           const Spacer(),
           Column(
             children: <Widget>[
@@ -566,7 +569,7 @@ Widget desktop(BuildContext context) {
               Expanded(
                 flex: 1,
                 child: Column(
-                  children: [Icon(CommunityMaterialIcons.tree_outline, size: MediaQuery.of(context).size.height * 0.6)],
+                  children: [Icon(CommunityMaterialIcons.tree_outline, size: MediaQuery.of(context).size.height * 0.5)],
                 ),
               ),
               const SizedBox(width: 22),

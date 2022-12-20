@@ -213,12 +213,12 @@ class _MedicaminaRegisterPage extends State<MedicaminaRegisterPage> {
                                     var history_2 = history_1[history_1.length - 1].history;
                                     if (history_2.length >= 2) {
                                       if (history_2[history_2.length - 2].routeInformation.location == '/login') {
-                                        Beamer.of(context).popToNamed('/login', stacked: false);
+                                        Beamer.of(context, root: true).popToNamed('/login', stacked: false);
                                         return;
                                       }
                                     }
 
-                                    Beamer.of(context).beamToNamed('/login', beamBackOnPop: true);
+                                    Beamer.of(context, root: true).beamToNamed('/login');
                                   },
                                   child: const Text(
                                     'Already registered?',

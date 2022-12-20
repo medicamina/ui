@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:medicamina/pages/not_found.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:beamer/beamer.dart';
-import 'package:medicamina/pages/default.dart';
-import 'package:medicamina/pages/auth.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+
+import 'package:medicamina/pages/landing.dart';
 import 'package:medicamina/pages/dash.dart';
-import 'package:medicamina/pages/pricing.dart';
 import 'package:medicamina/globals.dart' as globals;
 
 final supabase = Supabase.instance.client;
@@ -28,17 +27,32 @@ class MyApp extends StatelessWidget {
 
   final _routerDelegate = BeamerDelegate(
     setBrowserTabTitle: false,
-    initialPath: '/',
-    notFoundPage: const BeamPage(child: MedicaminaNotFound()),
+    guards: [
+      BeamGuard(
+        pathPatterns: ['/'],
+        check: (context, location) => kIsWeb,
+        replaceCurrentStack: true,
+      ),
+      BeamGuard(
+        pathPatterns: ['/dashboard', '/history', '/family', '/account', '/security', '/subscription', '/profile'],
+        check: (context, location) => supabase.auth.currentSession != null,
+        replaceCurrentStack: true,
+      ),
+      BeamGuard(
+        pathPatterns: ['/','/login', '/register'],
+        check: (context, location) => supabase.auth.currentSession == null,
+        replaceCurrentStack: true,
+      ),
+    ],
     locationBuilder: RoutesLocationBuilder(
       routes: {
         // Marketing
-        '/': (context, state, data) => const MedicaminaDefaultPage(title: 'medicamina'),
-        '/pricing': (context, state, data) => const MedicaminaPricingPage(),
+        '/': (context, state, data) => const MedicaminaLandingPage(),
         // Authentication
-        '/login': (context, state, data) => const MedicaminaAuthPage(),
-        '/register': (context, state, data) => const MedicaminaAuthPage(),
-        '/onboarding': (context, state, date) => const MedicaminaAuthPage(),
+        '/login': (context, state, data) => const MedicaminaLandingPage(),
+        '/register': (context, state, data) => const MedicaminaLandingPage(),
+        '/password': (context, state, data) => const MedicaminaLandingPage(),
+        '/onboarding': (context, state, date) => const MedicaminaLandingPage(),
         // Dashboard
         '/dashboard': (context, state, data) => MedicaminaDashboardPage(),
         '/family': (context, state, data) => MedicaminaDashboardPage(),
@@ -56,7 +70,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'medicamina',
-      theme: globals.darkMode ? ThemeData.dark() : ThemeData.light(),
+      theme: ThemeData.light(useMaterial3: false),
+      darkTheme: ThemeData.dark().copyWith(
+        useMaterial3: false,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor:  Color.fromARGB(255, 88, 88, 88),
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 88, 88, 88),
+        ),
+      ),
+      themeMode: globals.darkMode ? ThemeMode.dark : ThemeMode.light,
       routerDelegate: _routerDelegate,
       routeInformationParser: BeamerParser(),
       backButtonDispatcher: BeamerBackButtonDispatcher(delegate: _routerDelegate),

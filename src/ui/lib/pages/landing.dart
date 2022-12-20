@@ -7,7 +7,6 @@ import 'package:medicamina/pages/landing/password.dart';
 import 'package:medicamina/pages/landing/register.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:medicamina/pages/landing/marketing.dart';
-import 'package:medicamina/pages/landing/pricing.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 final supabase = Supabase.instance.client;
@@ -20,6 +19,7 @@ class MedicaminaLandingPage extends StatefulWidget {
 }
 
 class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
+  final _beamerKey = GlobalKey<BeamerState>();
   bool _loading = false;
 
   bool? loadingCallbackFunc(bool? val) {
@@ -61,7 +61,6 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _beamerKey = GlobalKey<BeamerState>();
     return Scaffold(
       appBar: AppBar(
         leading: Visibility(
@@ -99,8 +98,8 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                       Visibility(
                         visible: kIsWeb,
                         child: ListTile(
-                          leading: const Icon(Icons.home_outlined),
-                          title: const Text('medicamina'),
+                          leading: const Icon(Icons.info_outline),
+                          title: const Text('Information'),
                           onTap: () {
                             if (Beamer.of(context).currentBeamLocation.state.routeInformation.location == '/') {
                               return;
@@ -113,7 +112,7 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                                 return;
                               }
                             }
-                            Beamer.of(context).beamToNamed('/', beamBackOnPop: true);
+                            Beamer.of(context).beamToNamed('/');
                           },
                         ),
                       ),
@@ -134,7 +133,7 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                             }
                           }
 
-                          Beamer.of(context).beamToNamed('/login', beamBackOnPop: true);
+                          Beamer.of(context).beamToNamed('/login');
                         },
                       ),
                       ListTile(
@@ -154,7 +153,7 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                             }
                           }
 
-                          Beamer.of(context).beamToNamed('/register', beamBackOnPop: true);
+                          Beamer.of(context).beamToNamed('/register');
                         },
                       ),
                     ],

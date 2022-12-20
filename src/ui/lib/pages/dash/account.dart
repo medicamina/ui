@@ -11,7 +11,7 @@ class Account extends StatelessWidget {
   Widget build(BuildContext context) {
     late Widget? widget;
     if (900 > MediaQuery.of(context).size.width) {
-      widget = desktop(context);
+      widget = mobile(context);
     } else {
       widget = desktop(context);
     }
@@ -185,7 +185,7 @@ Widget desktop(BuildContext context) {
                                   style: TextButton.styleFrom(foregroundColor: Colors.red),
                                   onPressed: () async {
                                     Navigator.pop(_context, 'CONTINUE');
-                                    Beamer.of(context).beamingHistory.clear(); 
+                                    Beamer.of(context, root: true).beamingHistory.clear();
                                     await supabase.auth.signOut();
                                     Beamer.of(context, root: true).beamToNamed('/');
                                   },

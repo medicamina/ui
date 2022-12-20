@@ -1,0 +1,81 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter run -d chrome
+
+## exception
+
+ShaderCompilerException: ShaderCompilerException: Shader compilation of "/Users/admin/Development/flutter/packages/flutter/lib/src/material/shaders/ink_sparkle.frag" to "build/flutter_assets/shaders/ink_sparkle.frag" failed with exit code -6.
+
+
+
+```
+#0      ShaderCompiler.compileShader (package:flutter_tools/src/build_system/targets/shader_compiler.dart:77:7)
+<asynchronous suspension>
+#1      writeBundle.<anonymous closure> (package:flutter_tools/src/bundle_builder.dart:184:25)
+<asynchronous suspension>
+#2      Future.wait.<anonymous closure> (dart:async/future.dart:522:21)
+<asynchronous suspension>
+#3      writeBundle (package:flutter_tools/src/bundle_builder.dart:162:3)
+<asynchronous suspension>
+#4      WebDevFS.update (package:flutter_tools/src/isolated/devfs_web.dart:843:9)
+<asynchronous suspension>
+#5      ResidentWebRunner._updateDevFS (package:flutter_tools/src/isolated/resident_web_runner.dart:488:35)
+<asynchronous suspension>
+#6      ResidentWebRunner.run.<anonymous closure> (package:flutter_tools/src/isolated/resident_web_runner.dart:283:41)
+<asynchronous suspension>
+#7      asyncGuard.<anonymous closure> (package:flutter_tools/src/base/async_guard.dart:111:24)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, 3.3.10, on macOS 13.1 22C65 darwin-arm, locale en-AU)
+    • Flutter version 3.3.10 on channel stable at /Users/admin/Development/flutter
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision 135454af32 (5 days ago), 2022-12-15 07:36:55 -0800
+    • Engine revision 3316dd8728
+    • Dart version 2.18.6
+    • DevTools version 2.15.0
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 32.1.0-rc1)
+    • Android SDK at /Users/admin/Library/Android/sdk
+    • Platform android-32, build-tools 32.1.0-rc1
+    • Java binary at: /Applications/Android Studio.app/Contents/jre/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build 11.0.11+0-b60-7772763)
+    • All Android licenses accepted.
+
+[✓] Xcode - develop for iOS and macOS (Xcode 14.2)
+    • Xcode at /Applications/Xcode.app/Contents/Developer
+    • Build 14C18
+    • CocoaPods version 1.11.3
+
+[✓] Chrome - develop for the web
+    • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+
+[✓] Android Studio (version 2021.1)
+    • Android Studio at /Applications/Android Studio.app/Contents
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    • Java version OpenJDK Runtime Environment (build 11.0.11+0-b60-7772763)
+
+[✓] VS Code (version 1.74.1)
+    • VS Code at /Applications/Visual Studio Code.app/Contents
+    • Flutter extension version 3.42.0
+
+[✓] Connected device (3 available)
+    • Jake’s iPhone (mobile) • 00008101-000239622280001E • ios            • iOS 15.6 19G71
+    • macOS (desktop)        • macos                     • darwin-arm64   • macOS 13.1 22C65 darwin-arm
+    • Chrome (web)           • chrome                    • web-javascript • Google Chrome 108.0.5359.124
+    ! Error: Jake’s iPhone is busy: Fetching debug symbols for Jake’s iPhone. Xcode will continue when Jake’s iPhone is finished. (code -10)
+
+[✓] HTTP Host Availability
+    • All required HTTP hosts are available
+
+• No issues found!
+```

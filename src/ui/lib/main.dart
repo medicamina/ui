@@ -31,16 +31,29 @@ class MyApp extends StatelessWidget {
       BeamGuard(
         pathPatterns: ['/'],
         check: (context, location) => kIsWeb,
+        beamToNamed: (origin, target) => '/login',
         replaceCurrentStack: true,
       ),
       BeamGuard(
         pathPatterns: ['/dashboard', '/history', '/family', '/account', '/security', '/subscription', '/profile'],
-        check: (context, location) => supabase.auth.currentSession != null,
+        check: (context, location) {
+          if (supabase.auth.currentSession == null) {
+            return false;
+          }
+          return true;
+        },
+        beamToNamed: (origin, target) => '/login',
         replaceCurrentStack: true,
       ),
       BeamGuard(
         pathPatterns: ['/','/login', '/register'],
-        check: (context, location) => supabase.auth.currentSession == null,
+        check: (context, location) {
+          if (supabase.auth.currentSession == null) {
+            return true;
+          }
+          return false;
+        },
+        beamToNamed: (origin, target) => '/dashboard',
         replaceCurrentStack: true,
       ),
     ],

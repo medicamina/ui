@@ -85,7 +85,6 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
           pages[index],
           replaceRouteInformation: true,
           beamBackOnPop: true,
-          // transitionDelegate: const DefaultTransitionDelegate(),
           transitionDelegate: const NoAnimationTransitionDelegate(),
         );
         _updateCurrentIndex(index);
@@ -102,7 +101,6 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
 
 class MedicaminaDashboardPage extends StatefulWidget {
   MedicaminaDashboardPage({Key? key}) : super(key: key);
-
   final _eventBack = Event<Value<int>>();
 
   @override
@@ -111,6 +109,11 @@ class MedicaminaDashboardPage extends StatefulWidget {
 
 class _MedicaminaDashboardPageState extends State<MedicaminaDashboardPage> {
   final _beamerKey = GlobalKey<BeamerState>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +130,7 @@ class _MedicaminaDashboardPageState extends State<MedicaminaDashboardPage> {
           initialPath: '/dashboard',
           locationBuilder: RoutesLocationBuilder(
             routes: {
+              // Pages
               '/dashboard': (p0, p1, p2) => const Home(),
               '/history': (p0, p1, p2) => const Text("History"),
               '/family': (p0, p1, p2) => const Text("Family"),

@@ -182,6 +182,13 @@ class _ResultsTableState extends State<ResultsTable> {
                     ),
                     data: globals.darkMode
                         ? ThemeData.dark().copyWith(
+                            popupMenuTheme: PopupMenuThemeData(
+                              color: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                side: const BorderSide(color: Colors.red, width: 4),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
                             cardTheme: CardTheme(
                               elevation: 0,
                               shape: RoundedRectangleBorder(
@@ -287,7 +294,7 @@ class ResultsData extends DataTableSource {
           Text(
             _searchedData[index]['condition'].toString(),
             style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                  color: globals.darkMode ? Theme.of(context).textTheme.caption!.color: const Color.fromARGB(255, 120, 120, 120),
+                  color: globals.darkMode ? Theme.of(context).textTheme.caption!.color : const Color.fromARGB(255, 120, 120, 120),
                 ),
           ),
         ),
@@ -298,8 +305,8 @@ class ResultsData extends DataTableSource {
               child: Text(
                 _searchedData[index]['risk'],
                 style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                  color: globals.darkMode ? Theme.of(context).textTheme.caption!.color: const Color.fromARGB(255, 120, 120, 120),
-                ),
+                      color: globals.darkMode ? Theme.of(context).textTheme.caption!.color : const Color.fromARGB(255, 120, 120, 120),
+                    ),
               ),
             ),
           ),

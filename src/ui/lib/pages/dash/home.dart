@@ -1,7 +1,7 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:medicamina/pages/dash/map/choropleth_map.dart';
-// import 'package:medicamina/globals.dart' as globals;
+import 'package:medicamina/globals.dart' as globals;
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -24,7 +24,9 @@ Widget _map(BuildContext context) {
           ListTile(
             title: Text(
               'Your ancestry',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontWeight: globals.darkMode ? FontWeight.normal : FontWeight.bold,
+              ),
             ),
           ),
           Padding(padding: EdgeInsets.only(top: 32)),
@@ -44,7 +46,9 @@ Widget _personalDetails(BuildContext context) {
           ListTile(
             title: Text(
               'Personal details',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontWeight: globals.darkMode ? FontWeight.normal : FontWeight.bold,
+              ),
             ),
             // trailing: IconButton(
             //   icon: const Icon(Icons.more_vert),
@@ -138,14 +142,8 @@ class _ResultsTableState extends State<ResultsTable> {
               width: MediaQuery.of(context).size.width - 32,
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
-                  return Container(
-                    margin: EdgeInsets.zero,
-                    padding: EdgeInsets.zero,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                  return Theme(
                     child: PaginatedDataTable(
-                      sortColumnIndex: 1,
                       source: ResultsData(context: context, search: _searchTerm),
                       columns: [
                         DataColumn(
@@ -172,9 +170,9 @@ class _ResultsTableState extends State<ResultsTable> {
                           ),
                         ),
                       ],
-                      columnSpacing: constraints.maxWidth * 0.45,
+                      columnSpacing: MediaQuery.of(context).size.width < 600 ? constraints.maxWidth * 0.30 : constraints.maxWidth * 0.45,
                       rowsPerPage: _rowsPerPage,
-                      availableRowsPerPage: const <int>[4, 8, 12, 16],
+                      availableRowsPerPage: MediaQuery.of(context).size.width < 600 ? const <int>[4, 8] : const <int>[4, 8, 12, 16],
                       onRowsPerPageChanged: (rows) {
                         setState(() {
                           _rowsPerPage = rows!;
@@ -182,6 +180,25 @@ class _ResultsTableState extends State<ResultsTable> {
                       },
                       showCheckboxColumn: false,
                     ),
+                    data: globals.darkMode
+                        ? ThemeData.dark().copyWith(
+                            cardTheme: CardTheme(
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                side: const BorderSide(color: Colors.white12, width: 1),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                          )
+                        : ThemeData.light().copyWith(
+                            cardTheme: CardTheme(
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                side: const BorderSide(color: Colors.black12, width: 1),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                          ),
                   );
                 },
               ),
@@ -269,7 +286,9 @@ class ResultsData extends DataTableSource {
         DataCell(
           Text(
             _searchedData[index]['condition'].toString(),
-            style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Theme.of(context).textTheme.caption!.color),
+            style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                  color: globals.darkMode ? Theme.of(context).textTheme.caption!.color: const Color.fromARGB(255, 120, 120, 120),
+                ),
           ),
         ),
         DataCell(
@@ -278,7 +297,9 @@ class ResultsData extends DataTableSource {
               padding: const EdgeInsets.only(right: 5),
               child: Text(
                 _searchedData[index]['risk'],
-                style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Theme.of(context).textTheme.caption!.color),
+                style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                  color: globals.darkMode ? Theme.of(context).textTheme.caption!.color: const Color.fromARGB(255, 120, 120, 120),
+                ),
               ),
             ),
           ),

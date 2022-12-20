@@ -4,9 +4,8 @@ import 'package:beamer/beamer.dart';
 import 'package:event/event.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medicamina/pages/dash/account.dart';
-import 'package:medicamina/pages/dash/redirect.dart';
+import 'package:medicamina/pages/dash/home.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'dash/home.dart';
 
 final supabase = Supabase.instance.client;
 
@@ -115,10 +114,6 @@ class _MedicaminaDashboardPageState extends State<MedicaminaDashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (supabase.auth.currentSession == null) {
-      return const MedicaminaDashboardRedirect();
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text('medicamina', style: GoogleFonts.balooTamma2()),

@@ -1,41 +1,12 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MedicaminaPricingPage extends StatelessWidget {
   const MedicaminaPricingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('medicamina', style: GoogleFonts.balooTamma2()),
-        centerTitle: true,
-        actions: <Widget>[
-          ElevatedButton.icon(
-            onPressed: () => {},
-            label: const Text("Pricing"),
-            icon: const Icon(Icons.attach_money),
-            style: ElevatedButton.styleFrom(
-              elevation: 0.0,
-              shadowColor: Colors.transparent,
-            ),
-          ),
-          const Padding(padding: EdgeInsets.only(left: 5, right: 5)),
-          ElevatedButton.icon(
-            onPressed: () => Beamer.of(context).beamToNamed('/login'),
-            label: const Text("Login"),
-            icon: const Icon(Icons.login),
-            style: ElevatedButton.styleFrom(
-              elevation: 0.0,
-              shadowColor: Colors.transparent,
-            ),
-          ),
-          const Padding(padding: EdgeInsets.only(left: 5)),
-        ],
-      ),
-      body: 900 > MediaQuery.of(context).size.width ? mobile(context) : desktop(context),
-    );
+    return 900 > MediaQuery.of(context).size.width ? mobile(context) : desktop(context);
   }
 }
 
@@ -110,7 +81,7 @@ Widget doctor(BuildContext context, double width) {
             title: Center(
               child: Text(
                 '\$1',
-                style: Theme.of(context).textTheme.headline4?.apply(fontWeightDelta: 5),
+                style: Theme.of(context).textTheme.headline4?.apply(fontWeightDelta: 5, color: Theme.of(context).textTheme.headline5?.color),
               ),
             ),
             subtitle: const Center(
@@ -171,7 +142,7 @@ Widget geneticTest(BuildContext context, double width) {
             title: Center(
               child: Text(
                 '\$900',
-                style: Theme.of(context).textTheme.headline4?.apply(fontWeightDelta: 5),
+                style: Theme.of(context).textTheme.headline4?.apply(fontWeightDelta: 5, color: Theme.of(context).textTheme.headline5?.color),
               ),
             ),
             subtitle: const Center(child: Text('One time fee')),
@@ -198,16 +169,20 @@ Widget geneticTest(BuildContext context, double width) {
 }
 
 Widget mobile(BuildContext context) {
-  return SingleChildScrollView(
-    child: Padding(
-      padding: const EdgeInsets.all(20),
-      child: Center(
-        child: Column(
-          children: [
-            user(context, 0.8),
-            doctor(context, 0.8),
-            geneticTest(context, 0.8),
-          ],
+  return Scaffold(
+    body: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Center(
+          child: Column(
+            children: [
+              // const SizedBox(height: 12),
+              user(context, 0.8),
+              doctor(context, 0.8),
+              geneticTest(context, 0.8),
+              const SizedBox(height: 12),
+            ],
+          ),
         ),
       ),
     ),
@@ -215,17 +190,19 @@ Widget mobile(BuildContext context) {
 }
 
 Widget desktop(BuildContext context) {
-  return SingleChildScrollView(
-    child: Padding(
-      padding: const EdgeInsets.all(20),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            user(context, 0.3),
-            doctor(context, 0.3),
-            geneticTest(context, 0.3),
-          ],
+  return Scaffold(
+    body: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              user(context, 0.3),
+              doctor(context, 0.3),
+              geneticTest(context, 0.3),
+            ],
+          ),
         ),
       ),
     ),

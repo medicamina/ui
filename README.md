@@ -29,12 +29,12 @@
 
 # Project 
 
-<table border="0">
- <tr>
-    <td> ![built with flutter](https://storage.googleapis.com/cms-storage-bucket/4cdf1c5482cd30174cfe.png) </td>
-    <td><b style="font-size:30px">Title 2</b></td>
- </tr>
-</table>
+<p float="left">
+  <img src="/https://storage.googleapis.com/cms-storage-bucket/4cdf1c5482cd30174cfe.png" width="100" />
+  <img src="/img2.png" width="100" /> 
+  <img src="/img3.png" width="100" />
+</p>
+
 
 # Run
 

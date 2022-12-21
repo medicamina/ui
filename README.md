@@ -44,14 +44,15 @@
 
 ### Run (macOS)
 
-##### supabase
+##### supabase (docker)
 
 ```bash
-open -a Docker && cd ./src/api && docker compose up -d
+open -a Docker && ping -i 120 -c 2 google.com > /dev/null && cd ./src/api && docker compose up -d
 ```
+
 
 ##### flutter
 
 ```bash
 cd ./src/ui/ && flutter create . && flutter run
-```
+````

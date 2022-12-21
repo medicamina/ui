@@ -9,17 +9,17 @@ BY CONTINUING THE INSTALLATION OF THIS SOFTWARE, BY LOADING OR RUNNING THE SOFTW
 
 2. Prohibitions
 	- You, either directly or indirectly, shall not do any of the following acts:
-	1. rent the Software;
-	2. sell the Software;
-	3. lease or lend the Software;
-	4. distribute the Software (except as permitted by section 3. hereinbelow);
-	5. in any other manner and through any medium whatsoever commercially exploit the Software or use the Software for any commercial purpose;
-	6. disassemble, reverse engineer, decompile, modify or alter the Software including, without limitation, creating or developing extra or add-ons for the Software;
-	7. translate the Software;
-	8. reproduce or copy the Software (except as permitted by section 3. hereinbelow);
-	9. publicly display the Software;
-	10. prepare or develop derivative works based upon the Software; or
-	11. remove or alter any legal notices or other markings or legends, such as trademark and copyright notices, affixed on or within the Software.
+	  1. rent the Software;
+	  2. sell the Software;
+	  3. lease or lend the Software;
+	  4. distribute the Software (except as permitted by section 3. hereinbelow);
+	  5. in any other manner and through any medium whatsoever commercially exploit the Software or use the Software for any commercial purpose;
+	  6. disassemble, reverse engineer, decompile, modify or alter the Software including, without limitation, creating or developing extra or add-ons for the Software;
+	  7. translate the Software;
+	  8. reproduce or copy the Software (except as permitted by section 3. hereinbelow);
+	  9. publicly display the Software;
+	  10. prepare or develop derivative works based upon the Software; or
+	  11. remove or alter any legal notices or other markings or legends, such as trademark and copyright notices, affixed on or within the Software.
 
 3. Permitted Distribution and Copying
 	- So long as this Agreement accompanies each copy you make of the Software, and so long as you fully comply, at all times, with this Agreement, medicamina grants to you the non-exclusive and limited right to copy the Software and to distribute such copies of the Software free of charge for non-commercial purposes which shall include the free of charge distribution of copies of the Software provided, however, you shall not copy or distribute the Software in any infringing manner or in any manner which violates any law or third party right and you shall not distribute the Software together with any material which is infringing, libelous, defamatory, obscene, false, misleading, or otherwise illegal or unlawful. medicamina reserves all rights not granted in this Agreement. You shall not commercially distribute the Software unless you first enter into a separate contract with medicamina, a copy of which you may request, but which medicamina may decline to execute.

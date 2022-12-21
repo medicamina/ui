@@ -29,11 +29,12 @@
 
 # Project 
 
-<p float="center">
+<div align="center">
+
   <img src="https://storage.googleapis.com/cms-storage-bucket/4cdf1c5482cd30174cfe.png" width="200" />
   <img src="/img2.png" width="100" /> 
-  <img src="/img3.png" width="100" />
-</p>
+
+</div>
 
 
 # Run

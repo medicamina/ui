@@ -43,10 +43,12 @@
 
 ### Run
 
-docker [macOS]
+#### macOS
+
+##### supabase
 
 `open -a Docker && cd ./src/api && docker compose up -d`
 
-### Stop
+##### flutter
 
-`./stop.sh`
+`cd ./src/ui/ && flutter create . && flutter run`

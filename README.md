@@ -33,9 +33,9 @@
 
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/medicamina/medicamina/main/docs/flutter.png" width="200" />
+  <a href="flutter.dev"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/docs/flutter.png" width="200" /></a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/medicamina/medicamina/main/docs/supabase.png" width="250" />
+  <a href="supabase.com"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/docs/supabase.png" width="250" /></a>
 </div>
 
 

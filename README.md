@@ -36,7 +36,7 @@
 <div align="center">
   <a href="https://flutter.dev"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/docs/flutter.png" width="200" /></a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://supabase.com"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/docs/supabase.png" width="250" /></a>
+  <a href="https://supabase.com"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/docs/supabase.png" width="270" /></a>
 </div>
 
 
@@ -47,7 +47,7 @@
 ##### supabase (docker)
 
 ```bash
-open -a Docker && ping -i 120 -c 2 google.com > /dev/null && cd ./src/api && docker compose up -d
+open -a Docker && ping -i 120 -c 2 google.com > /dev/null && cd ./src/api && docker compose up -d && cd ../..
 ```
 
 

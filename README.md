@@ -46,8 +46,12 @@
 
 ##### supabase
 
-`open -a Docker && cd ./src/api && docker compose up -d`
+```bash
+open -a Docker && cd ./src/api && docker compose up -d
+```
 
 ##### flutter
 
-`cd ./src/ui/ && flutter create . && flutter run`
+```bash
+cd ./src/ui/ && flutter create . && flutter run
+```

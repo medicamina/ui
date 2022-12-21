@@ -47,7 +47,7 @@
 ##### supabase (docker)
 
 ```bash
-open -a Docker && ping -i 120 -c 2 google.com > /dev/null && cd ./src/api && docker compose up -d && cd ../..
+open -a Docker && ping -i 120 -c 2 google.com > /dev/null && cd ./src/api && docker-compose up -d && cd ../..
 ```
 
 

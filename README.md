@@ -34,7 +34,7 @@
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/medicamina/medicamina/main/docs/flutter.png" width="200" />
-  &nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/medicamina/medicamina/main/docs/supabase.png" width="250" />
 </div>
 

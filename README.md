@@ -41,9 +41,7 @@
 
 ## Development
 
-### Run
-
-#### macOS
+### Run (macOS)
 
 ##### supabase
 

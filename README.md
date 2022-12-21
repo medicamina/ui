@@ -29,8 +29,9 @@
 
 ## Project 
 
-🔨 Made with these awesome tools
+🔨 Built with these awesome tools
 
+<br />
 
 <div align="center">
   <a href="https://flutter.dev"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/docs/flutter.png" width="200" /></a>

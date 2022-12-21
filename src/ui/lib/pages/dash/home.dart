@@ -28,6 +28,11 @@ Widget _map(BuildContext context) {
                 fontWeight: globals.darkMode ? FontWeight.normal : FontWeight.bold,
               ),
             ),
+            // trailing: IconButton(
+            //   icon: const Icon(Icons.question_mark),
+            //   onPressed: () {
+            //   },
+            // ),
           ),
           Padding(padding: EdgeInsets.only(top: 32)),
           ChoroplethMap(),
@@ -51,8 +56,10 @@ Widget _personalDetails(BuildContext context) {
               ),
             ),
             // trailing: IconButton(
-            //   icon: const Icon(Icons.more_vert),
-            //   onPressed: () {},
+            //   icon: const Icon(Icons.edit),
+            //   onPressed: () {
+
+            //   },
             // ),
           ),
           ListTile(

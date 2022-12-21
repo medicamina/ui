@@ -99,7 +99,7 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                         visible: kIsWeb,
                         child: ListTile(
                           leading: const Icon(Icons.info_outline),
-                          title: const Text('Information'),
+                          title: const Text('Info'),
                           onTap: () {
                             if (Beamer.of(context).currentBeamLocation.state.routeInformation.location == '/') {
                               return;

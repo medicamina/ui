@@ -31,11 +31,7 @@
 
 <table border="0">
  <tr>
-    <td>
-    
-    ![built with flutter](https://storage.googleapis.com/cms-storage-bucket/4cdf1c5482cd30174cfe.png)
-    
-    </td>
+    <td> ![built with flutter](https://storage.googleapis.com/cms-storage-bucket/4cdf1c5482cd30174cfe.png) </td>
     <td><b style="font-size:30px">Title 2</b></td>
  </tr>
 </table>

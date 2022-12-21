@@ -11,7 +11,7 @@
 
 </div>
 
-# Mission statement
+## Mission statement
 
 🧬 Our goal is to bring easy to read genetic data to mass market
 
@@ -27,7 +27,7 @@
 
 🤧 And discover inherited diseases
 
-# Project 
+## Project 
 
 <div align="center">
 
@@ -37,10 +37,12 @@
 </div>
 
 
-# Run
+## Development
+
+### Run
 
 `./run.sh`
 
-# Stop
+### Stop
 
 `./stop.sh`

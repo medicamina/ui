@@ -1,9 +1,20 @@
-// import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:medicamina/globals.dart' as globals;
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+final supabase = Supabase.instance.client;
 
 class MedicaminaPasswordResetPage extends StatefulWidget {
-  const MedicaminaPasswordResetPage({Key? key}) : super(key: key);
+  const MedicaminaPasswordResetPage({
+    Key? key,
+    required this.snackBarError,
+    required this.snackBarNormal,
+    required this.loadingCallback,
+  }) : super(key: key);
+
+  final Function(bool? val) loadingCallback;
+  final Function(AuthException err) snackBarError;
+  final Function(String message) snackBarNormal;
 
   @override
   State<MedicaminaPasswordResetPage> createState() => _MedicaminaPasswordResetPage();
@@ -60,7 +71,9 @@ class _MedicaminaPasswordResetPage extends State<MedicaminaPasswordResetPage> {
                               prefixIcon: Icon(Icons.email_outlined),
                             ),
                             onChanged: (text) {
-                              _email = text;
+                              setState(() {
+                                _email = text;
+                              });
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -79,7 +92,18 @@ class _MedicaminaPasswordResetPage extends State<MedicaminaPasswordResetPage> {
                           padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(40)),
-                            onPressed: () {},
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                widget.loadingCallback(true);
+                                try {
+                                  await supabase.auth.resetPasswordForEmail(_email);
+                                  widget.snackBarNormal('Check your e-mails');
+                                } on AuthException catch (err, _) {
+                                  widget.snackBarError(err);
+                                }
+                                widget.loadingCallback(false);
+                              }
+                            },
                             child: const Text(
                               'SEND LINK',
                               style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 0.75),

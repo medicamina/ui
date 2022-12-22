@@ -66,7 +66,9 @@ cd ./src/ui/ && flutter create . && flutter run
 
 ```bash
 flutter pub global activate rename
-cd ./src/ui && flutter pub global run rename --appname "medicamina"
+cd ./src/ui && flutter pub global run rename --appname "medicamina" && flutter pub global run rename --bundleId com.medicamina.ui
+flutter clean
+flutter pub get
 ```
 
 #### iOS
@@ -96,7 +98,7 @@ end
 ```
 
 ```bash
-flutter clean 
+flutter clean
 flutter pub get
 cd ./src/ui/macos && pod install
 ```

@@ -185,7 +185,11 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                     beamerKey: _beamerKey,
                   ),
               '/onboarding': (context, state, data) => const MedicaminaOnboardingPage(),
-              '/password': (context, state, data) => const MedicaminaPasswordResetPage(),
+              '/password': (context, state, data) => MedicaminaPasswordResetPage(
+                    loadingCallback: loadingCallbackFunc,
+                    snackBarError: snackBarErrorFunc,
+                    snackBarNormal: snackBarNormalFunc,
+                  ),
             },
           ),
         ),

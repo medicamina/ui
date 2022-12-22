@@ -56,3 +56,14 @@ open -a Docker && ping -i 120 -c 2 google.com > /dev/null && cd ./src/api && doc
 ```bash
 cd ./src/ui/ && flutter create . && flutter run
 ````
+
+### Networking permissions
+
+![https://docs.flutter.dev/development/data-and-backend/networking#platform-notes](https://docs.flutter.dev/development/data-and-backend/networking#platform-notes)
+
+### Rename
+
+```bash
+flutter pub global activate rename
+flutter pub global run rename --appname "medicamina"
+```

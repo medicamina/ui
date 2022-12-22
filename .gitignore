@@ -2,16 +2,15 @@
 node_modules
 coverage
 dist
-build
 .expo
 ._*
-android
-build
-ios
-windows
+./src/**/*/android
+./src/**/*/build
+./src/**/*/ios
+./src/**/*/windows
+./src/**/*/linux
+./src/**/*/macos
 .dart_tool
-linux
-macos
 
 #supabase
 volumes/db/data

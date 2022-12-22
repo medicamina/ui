@@ -57,13 +57,13 @@ open -a Docker && ping -i 120 -c 2 google.com > /dev/null && cd ./src/api && doc
 cd ./src/ui/ && flutter create . && flutter run
 ````
 
-#### Configuring
+### Configuring
 
-##### Networking permissions
+#### Networking permissions
 
 [https://docs.flutter.dev/development/data-and-backend/networking#platform-notes](https://docs.flutter.dev/development/data-and-backend/networking#platform-notes)
 
-##### Rename app
+#### Rename app
 
 ```bash
 flutter pub global activate rename

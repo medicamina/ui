@@ -69,7 +69,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
       currentIndex: _currentIndex,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.prescription), label: 'History'),
+        BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.prescription), label: 'Edicts'),
         BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.file_tree), label: 'Family'),
         BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.account), label: 'Account'),
       ],

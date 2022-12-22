@@ -85,7 +85,7 @@ cd ./src/ui && flutter pub global run rename --appname "medicamina"
 
 ##### ./src/ui/macos/Podfile
 
-```Pod
+```pod
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_macos_build_settings(target)

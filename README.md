@@ -59,11 +59,11 @@ cd ./src/ui/ && flutter create . && flutter run
 
 ### Networking permissions
 
-![https://docs.flutter.dev/development/data-and-backend/networking#platform-notes](https://docs.flutter.dev/development/data-and-backend/networking#platform-notes)
+[https://docs.flutter.dev/development/data-and-backend/networking#platform-notes](https://docs.flutter.dev/development/data-and-backend/networking#platform-notes)
 
 ### Rename
 
 ```bash
 flutter pub global activate rename
-flutter pub global run rename --appname "medicamina"
+cd ./src/ui && flutter pub global run rename --appname "medicamina"
 ```

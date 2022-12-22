@@ -63,7 +63,7 @@ cd ./src/ui/ && flutter create . && flutter run
 
 #### Configuring
 
-#### Rename app
+##### Rename app
 
 ```bash
 flutter pub global activate rename

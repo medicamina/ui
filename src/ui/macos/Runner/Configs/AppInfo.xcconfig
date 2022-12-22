@@ -8,7 +8,7 @@
 PRODUCT_NAME = medicamina;
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.ui
+PRODUCT_BUNDLE_IDENTIFIER = com.medicamina.ui;
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.

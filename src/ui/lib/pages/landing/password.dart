@@ -1,4 +1,6 @@
+// import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:medicamina/globals.dart' as globals;
 
 class MedicaminaPasswordResetPage extends StatefulWidget {
   const MedicaminaPasswordResetPage({Key? key}) : super(key: key);
@@ -8,10 +10,93 @@ class MedicaminaPasswordResetPage extends StatefulWidget {
 }
 
 class _MedicaminaPasswordResetPage extends State<MedicaminaPasswordResetPage> {
+  String _email = "";
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: CircularProgressIndicator(),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.2 : MediaQuery.of(context).size.width * 0.1, top: 24),
+                      child: Text(
+                        "Reset password",
+                        style: globals.darkMode
+                            ? Theme.of(context).textTheme.displayMedium?.merge(const TextStyle(color: Colors.white))
+                            : Theme.of(context).textTheme.displayMedium?.merge(
+                                  const TextStyle(color: Colors.black87),
+                                ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
+                      child: Text("Enter your email to get your account back", style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 24),
+                        Padding(
+                          padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'E-mail address',
+                              prefixIcon: Icon(Icons.email_outlined),
+                            ),
+                            onChanged: (text) {
+                              _email = text;
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Empty email';
+                              }
+                              bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value);
+                              if (!emailValid) {
+                                return 'Invalid email';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Padding(
+                          padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(40)),
+                            onPressed: () {},
+                            child: const Text(
+                              'SEND LINK',
+                              style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 0.75),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+          ],
+        ),
+      ),
     );
   }
 }

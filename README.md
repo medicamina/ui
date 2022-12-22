@@ -57,11 +57,11 @@ open -a Docker && ping -i 120 -c 2 google.com > /dev/null && cd ./src/api && doc
 cd ./src/ui/ && flutter create . && flutter run
 ````
 
-### Networking permissions
+#### Configuring
+
+##### Networking permissions
 
 [https://docs.flutter.dev/development/data-and-backend/networking#platform-notes](https://docs.flutter.dev/development/data-and-backend/networking#platform-notes)
-
-#### Configuring
 
 ##### Rename app
 

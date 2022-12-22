@@ -1,9 +1,11 @@
 name: medicamina
 description: Open source precision medicine.
+version: 1.0.0+1
+repository: https://github.com/medicamina/medicamina
+issue_tracker: https://github.com/medicamina/medicamina/issues
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+1
 
 environment:
   sdk: ">=2.16.2 <3.0.0"

@@ -104,6 +104,7 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                             if (Beamer.of(context).currentBeamLocation.state.routeInformation.location == '/') {
                               return;
                             }
+
                             var history_1 = Beamer.of(context).beamingHistory;
                             var history_2 = history_1[history_1.length - 1].history;
                             if (history_2.length >= 2) {
@@ -112,7 +113,8 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                                 return;
                               }
                             }
-                            Beamer.of(context).beamToNamed('/');
+
+                            Beamer.of(context, root: true).beamToNamed('/');
                           },
                         ),
                       ),

@@ -48,7 +48,7 @@ class _MedicaminaPasswordResetPage extends State<MedicaminaPasswordResetPage> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
-                      child: Text("Enter your email to get your account back", style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
+                      child: Text("Enter your e-mail address to get your account back", style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
                     ),
                   ],
                 ),
@@ -87,11 +87,11 @@ class _MedicaminaPasswordResetPage extends State<MedicaminaPasswordResetPage> {
                             },
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 18),
                         Padding(
                           padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(40)),
+                            style: ElevatedButton.styleFrom(minimumSize: Size(const Size.fromHeight(40).width, 42)),
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 widget.loadingCallback(true);

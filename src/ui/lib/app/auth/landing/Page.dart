@@ -1,5 +1,7 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:medicamina/app/auth/AppBar.dart';
 
 class MedicaminaDefaultLandingPage extends StatefulWidget {
   const MedicaminaDefaultLandingPage({Key? key}) : super(key: key);
@@ -13,9 +15,12 @@ class _MedicaminaDefaultLandingPage extends State<MedicaminaDefaultLandingPage> 
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      controller: _controller,
-      child: MediaQuery.of(context).size.width < 800 ? mobile(context, _controller) : desktop(context, _controller),
+    return Scaffold(
+      appBar: Modular.get<MedicaminaAuthAppBarWidget>(),
+      body: SingleChildScrollView(
+        controller: _controller,
+        child: MediaQuery.of(context).size.width < 800 ? mobile(context, _controller) : desktop(context, _controller),
+      ),
     );
   }
 }

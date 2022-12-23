@@ -12,9 +12,9 @@ class MedicaminaAuthPage extends StatefulWidget {
 class _MedicaminaAuthPage extends State<MedicaminaAuthPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: MedicaminaAuthAppBarWidget(),
-      body: RouterOutlet(),
+    return Scaffold(
+      appBar: Modular.get<MedicaminaAuthAppBarWidget>(),
+      body: const RouterOutlet(),
     );
   }
 }

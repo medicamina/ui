@@ -3,11 +3,14 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina/globals.dart' as globals;
 
 class MedicaminaAppWidget extends StatelessWidget {
-  const MedicaminaAppWidget({Key? key}) : super(key: key);
+  MedicaminaAppWidget({Key? key}) : super(key: key);
+  final myNavigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
     Modular.setInitialRoute('/');
+    Modular.setNavigatorKey(myNavigatorKey);
+    
     return MaterialApp.router(
       title: 'medicamina',
       debugShowCheckedModeBanner: false,

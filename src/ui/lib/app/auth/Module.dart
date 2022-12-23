@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+// import 'package:medicamina/app/auth/AppBar.dart';
 import 'package:medicamina/app/auth/Guards.dart';
 import 'package:medicamina/app/auth/Page.dart';
-import 'package:medicamina/app/auth/States.dart';
+// import 'package:medicamina/app/auth/States.dart';
 
 class MedicaminaAuthModule extends Module {
   @override
   List<Bind> get binds {
-    return [Bind.singleton((i) => MedicaminaAuthLoadingState())];
+    return [
+    ];
   }
 
   @override
@@ -16,9 +18,7 @@ class MedicaminaAuthModule extends Module {
       ChildRoute(
         '/',
         child: (context, args) => const MedicaminaAuthPage(),
-        guards: [
-          MedicaminaAuthGuardFix()
-        ],
+        guards: [MedicaminaAuthGuardFix()],
         children: [
           ChildRoute('/login', child: (context, args) => const Text('login')),
           ChildRoute('/register', child: (context, args) => const Text('register')),

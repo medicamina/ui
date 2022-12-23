@@ -20,7 +20,6 @@ dist
 ./src/ui/windows
 ./src/ui/linux
 
-
 #supabase
 volumes/db/data
 volumes/storage

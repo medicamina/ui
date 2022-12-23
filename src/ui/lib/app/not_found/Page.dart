@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MedicaminaNotFoundPage extends StatelessWidget {
   const MedicaminaNotFoundPage({Key? key}) : super(key: key);
@@ -6,6 +8,10 @@ class MedicaminaNotFoundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('medicamina', style: GoogleFonts.balooTamma2()),
+        centerTitle: true,
+      ),
       body: Center(
         child: Column(
           children: <Widget>[
@@ -28,11 +34,10 @@ class MedicaminaNotFoundPage extends StatelessWidget {
                   const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: () {
-                      // if (Beamer.of(context).canBeamBack) {
-                      //   Beamer.of(beamerKey.currentContext as BuildContext).beamBack();
-                      // } else {
-                      //   Beamer.of(beamerKey.currentContext as BuildContext).beamToNamed('/');
-                      // }
+                      if (Modular.to.canPop()) {
+                        return Modular.to.pop();
+                      }
+                      Modular.to.navigate('/');
                     },
                     child: const Text('Back'),
                   )

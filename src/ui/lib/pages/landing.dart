@@ -114,7 +114,7 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                               }
                             }
 
-                            Beamer.of(context, root: true).beamToNamed('/');
+                            Beamer.of(context).beamToNamed('/');
                           },
                         ),
                       ),

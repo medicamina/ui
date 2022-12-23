@@ -132,7 +132,7 @@ class _MedicaminaLoginPage extends State<MedicaminaLoginPage> {
                         Padding(
                           padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(40)),
+                            style: ElevatedButton.styleFrom(minimumSize: Size(const Size.fromHeight(40).width, 42)),
                             onPressed: _loading
                                 ? null
                                 : () async {

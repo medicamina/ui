@@ -21,7 +21,7 @@ Future<void> main() async {
   runApp(
     ModularApp(
       module: MedicaminaAppModule(),
-      child: const MedicaminaAppWidget(),
+      child: MedicaminaAppWidget(),
     ),
   );
 }

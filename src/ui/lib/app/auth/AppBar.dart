@@ -66,20 +66,7 @@ class _MyWidgetState extends State<MedicaminaAuthAppBarWidget> {
                           leading: const Icon(Icons.info_outline),
                           title: const Text('Info'),
                           onTap: () {
-                            // if (Beamer.of(context).currentBeamLocation.state.routeInformation.location == '/') {
-                            //   return;
-                            // }
-
-                            // var history_1 = Beamer.of(context).beamingHistory;
-                            // var history_2 = history_1[history_1.length - 1].history;
-                            // if (history_2.length >= 2) {
-                            //   if (history_2[history_2.length - 2].routeInformation.location == '/') {
-                            //     Beamer.of(context).popToNamed('/', stacked: false);
-                            //     return;
-                            //   }
-                            // }
-
-                            // Beamer.of(context).beamToNamed('/');
+                            Modular.to.pushNamed('/');
                           },
                         ),
                       ),
@@ -87,40 +74,14 @@ class _MyWidgetState extends State<MedicaminaAuthAppBarWidget> {
                         leading: const Icon(Icons.login_outlined),
                         title: const Text('Login'),
                         onTap: () {
-                          // if (Beamer.of(context).currentBeamLocation.state.routeInformation.location == '/login') {
-                          //   return;
-                          // }
-
-                          // var history_1 = Beamer.of(context).beamingHistory;
-                          // var history_2 = history_1[history_1.length - 1].history;
-                          // if (history_2.length >= 2) {
-                          //   if (history_2[history_2.length - 2].routeInformation.location == '/login') {
-                          //     Beamer.of(context).popToNamed('/login', stacked: false);
-                          //     return;
-                          //   }
-                          // }
-
-                          // Beamer.of(context).beamToNamed('/login');
+                          Modular.to.pushNamed('/auth/login');
                         },
                       ),
                       ListTile(
                         leading: const Icon(Icons.person_add_outlined),
                         title: const Text('Register'),
                         onTap: () {
-                          // if (Beamer.of(context).currentBeamLocation.state.routeInformation.location == '/register') {
-                          //   return;
-                          // }
-
-                          // var history_1 = Beamer.of(context).beamingHistory;
-                          // var history_2 = history_1[history_1.length - 1].history;
-                          // if (history_2.length >= 2) {
-                          //   if (history_2[history_2.length - 2].routeInformation.location == '/register') {
-                          //     Beamer.of(context).popToNamed('/register', stacked: false);
-                          //     return;
-                          //   }
-                          // }
-
-                          // Beamer.of(context).beamToNamed('/register');
+                          Modular.to.pushNamed('/auth/register');
                         },
                       ),
                     ],

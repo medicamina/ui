@@ -4,13 +4,22 @@ coverage
 dist
 .expo
 ._*
+.dart_tool
+
+./src/**/*//macos
 ./src/**/*/android
 ./src/**/*/build
 ./src/**/*/ios
 ./src/**/*/windows
 ./src/**/*/linux
-./src/**/*/macos
-.dart_tool
+
+./src/ui/macos
+./src/ui/android
+./src/ui/build
+./src/ui/ios
+./src/ui/windows
+./src/ui/linux
+
 
 #supabase
 volumes/db/data

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:medicamina/app/auth/landing/Page.dart';
 
 class MedicaminaAppPage extends StatelessWidget {
@@ -7,12 +6,6 @@ class MedicaminaAppPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('medicamina', style: GoogleFonts.balooTamma2()),
-        centerTitle: true,
-      ),
-      body: const MedicaminaDefaultLandingPage(),
-    );
+    return const MedicaminaDefaultLandingPage();
   }
 }

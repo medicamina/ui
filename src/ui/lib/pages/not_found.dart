@@ -1,9 +1,7 @@
-import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
 class MedicaminaNotFoundPage extends StatelessWidget {
-  const MedicaminaNotFoundPage({Key? key, required this.beamerKey}) : super(key: key);
-  final GlobalKey<BeamerState> beamerKey;
+  const MedicaminaNotFoundPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +28,11 @@ class MedicaminaNotFoundPage extends StatelessWidget {
                   const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: () {
-                      if (Beamer.of(context).canBeamBack) {
-                        Beamer.of(beamerKey.currentContext as BuildContext).beamBack();
-                      } else {
-                        Beamer.of(beamerKey.currentContext as BuildContext).beamToNamed('/');
-                      }
+                      // if (Beamer.of(context).canBeamBack) {
+                      //   Beamer.of(beamerKey.currentContext as BuildContext).beamBack();
+                      // } else {
+                      //   Beamer.of(beamerKey.currentContext as BuildContext).beamToNamed('/');
+                      // }
                     },
                     child: const Text('Back'),
                   )

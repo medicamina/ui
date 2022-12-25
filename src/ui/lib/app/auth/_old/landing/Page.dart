@@ -1,25 +1,24 @@
-import 'package:beamer/beamer.dart';
-import 'package:flutter/material.dart';
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-final supabase = Supabase.instance.client;
-
-class MedicaminaMarketingPage extends StatefulWidget {
-  const MedicaminaMarketingPage({Key? key}) : super(key: key);
+class MedicaminaDefaultLandingPage extends StatefulWidget {
+  const MedicaminaDefaultLandingPage({Key? key}) : super(key: key);
 
   @override
-  State<MedicaminaMarketingPage> createState() => _MedicaminaMarketingPage();
+  State<MedicaminaDefaultLandingPage> createState() => _MedicaminaDefaultLandingPage();
 }
 
-class _MedicaminaMarketingPage extends State<MedicaminaMarketingPage> {
+class _MedicaminaDefaultLandingPage extends State<MedicaminaDefaultLandingPage> {
   final ScrollController _controller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      controller: _controller,
-      child: MediaQuery.of(context).size.width < 800 ? mobile(context, _controller) : desktop(context, _controller),
+    return Scaffold(
+      body: SingleChildScrollView(
+        controller: _controller,
+        child: MediaQuery.of(context).size.width < 800 ? mobile(context, _controller) : desktop(context, _controller),
+      ),
     );
   }
 }
@@ -69,7 +68,7 @@ Widget user(BuildContext context, double width) {
             children: <Widget>[
               ElevatedButton(
                 onPressed: () {
-                  Beamer.of(context, root: true).beamToNamed('/register');
+                  // Beamer.of(context, root: true).beamToNamed('/register');
                 },
                 child: const Text('REGISTER'),
               ),

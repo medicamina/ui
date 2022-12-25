@@ -1,10 +1,12 @@
 import 'dart:async';
 
 class MedicaminaAuthLoadingState {
-  MedicaminaAuthLoadingState();
-
-  static bool loading = false;
+  static late bool loading;
   static StreamController<bool> controller = StreamController<bool>.broadcast();
+
+  MedicaminaAuthLoadingState() {
+    setLoading(false);
+  }
 
   void setLoading(bool _loading) {
     loading = _loading;

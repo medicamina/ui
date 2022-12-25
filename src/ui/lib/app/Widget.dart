@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/globals.dart' as globals;
+import 'package:medicamina/app/State.dart';
 
 class MedicaminaAppWidget extends StatelessWidget {
-  MedicaminaAppWidget({Key? key}) : super(key: key);
-  final myNavigatorKey = GlobalKey<NavigatorState>();
+  const MedicaminaAppWidget({Key? key}) : super(key: key);
+  static final navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
     Modular.setInitialRoute('/');
-    Modular.setNavigatorKey(myNavigatorKey);
+    Modular.setNavigatorKey(navigatorKey);
     
     return MaterialApp.router(
       title: 'medicamina',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(useMaterial3: false),
-      darkTheme: ThemeData.dark().copyWith(
-        useMaterial3: false,
+      darkTheme: ThemeData.dark(useMaterial3: false).copyWith(
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Color.fromARGB(255, 88, 88, 88),
         ),
@@ -24,7 +23,7 @@ class MedicaminaAppWidget extends StatelessWidget {
           backgroundColor: Color.fromARGB(255, 88, 88, 88),
         ),
       ),
-      themeMode: globals.darkMode ? ThemeMode.dark : ThemeMode.light,
+      themeMode: Modular.get<MedicaminaThemeState>().getThemeMode(),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
     );

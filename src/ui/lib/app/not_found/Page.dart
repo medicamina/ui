@@ -8,10 +8,12 @@ class MedicaminaNotFoundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('medicamina', style: GoogleFonts.balooTamma2()),
-        centerTitle: true,
-      ),
+      appBar: Modular.args.uri.toString().contains('/dash')
+          ? null
+          : AppBar(
+              title: Text('medicamina', style: GoogleFonts.balooTamma2()),
+              centerTitle: true,
+            ),
       body: Center(
         child: Column(
           children: <Widget>[
@@ -34,8 +36,11 @@ class MedicaminaNotFoundPage extends StatelessWidget {
                   const SizedBox(height: 12),
                   ElevatedButton(
                     onPressed: () {
-                      if (Modular.to.canPop()) {
-                        return Modular.to.pop();
+                      var len = Modular.to.navigateHistory.length;
+                      if (len > 1) {
+                        var uri = Modular.to.navigateHistory[len - 2].uri.toString();
+                        Modular.to.pushNamedAndRemoveUntil(uri, ModalRoute.withName(uri));
+                        return;
                       }
                       Modular.to.navigate('/');
                     },

@@ -1,46 +1,41 @@
-import 'package:beamer/beamer.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:medicamina/app/State.dart';
+import 'package:medicamina/app/auth/States.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:medicamina/globals.dart' as globals;
 
-final supabase = Supabase.instance.client;
-
-class MedicaminaLoginPage extends StatefulWidget {
-  const MedicaminaLoginPage({
-    Key? key,
-    required this.loadingCallback,
-    required this.snackBarError,
-    required this.snackBarNormal,
-    required this.beamerKey,
-  }) : super(key: key);
-
-  final Function(bool? val) loadingCallback;
-  final Function(AuthException err) snackBarError;
-  final Function(String message) snackBarNormal;
-  final GlobalKey<BeamerState> beamerKey;
+class MedicaminaAuthLoginPage extends StatefulWidget {
+  const MedicaminaAuthLoginPage({Key? key}) : super(key: key);
 
   @override
-  State<MedicaminaLoginPage> createState() => _MedicaminaLoginPage();
+  State<MedicaminaAuthLoginPage> createState() => _MedicaminaAuthLoginPage();
 }
 
-class _MedicaminaLoginPage extends State<MedicaminaLoginPage> {
+class _MedicaminaAuthLoginPage extends State<MedicaminaAuthLoginPage> {
   final _formKey = GlobalKey<FormState>();
-  String _email = "";
-  String _password = "";
+  String _email = '';
+  String _password = '';
+  final SupabaseClient _supabaseClient = Modular.get<SupabaseClient>();
   late bool _loading;
+  late StreamSubscription _loadingStream;
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _loading = widget.loadingCallback(null);
+    _loading = Modular.get<MedicaminaAuthLoadingState>().getLoading();
+    _loadingStream = Modular.get<MedicaminaAuthLoadingState>().getStream().listen((value) {
+      setState(() {
+        _loading = value;
+      });
     });
   }
 
   @override
   void dispose() {
     super.dispose();
-    _loading = false;
+    _loadingStream.cancel();
   }
 
   @override
@@ -57,17 +52,18 @@ class _MedicaminaLoginPage extends State<MedicaminaLoginPage> {
                     Padding(
                       padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.2 : MediaQuery.of(context).size.width * 0.1, top: 24),
                       child: Text(
-                        "Welcome",
-                        style: globals.darkMode
+                        'Welcome',
+                        style: Modular.get<MedicaminaThemeState>().getDarkMode()
                             ? Theme.of(context).textTheme.displayMedium?.merge(const TextStyle(color: Colors.white))
                             : Theme.of(context).textTheme.displayMedium?.merge(
                                   const TextStyle(color: Colors.black87),
                                 ),
                       ),
                     ),
+                    const SizedBox(height: 6),
                     Padding(
                       padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
-                      child: Text("Sign in to continue", style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
+                      child: Text('Sign in to continue', style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
                     ),
                   ],
                 ),
@@ -137,13 +133,13 @@ class _MedicaminaLoginPage extends State<MedicaminaLoginPage> {
                                 ? null
                                 : () async {
                                     if (_formKey.currentState!.validate()) {
-                                      widget.loadingCallback(true);
+                                      Modular.get<MedicaminaAuthLoadingState>().setLoading(true);
                                       try {
-                                        await supabase.auth.signInWithPassword(email: _email, password: _password);
+                                        await _supabaseClient.auth.signInWithPassword(email: _email, password: _password);
                                       } on AuthException catch (err, _) {
-                                        widget.snackBarError(err);
+                                        // widget.snackBarError(err);
                                       }
-                                      widget.loadingCallback(false);
+                                      Modular.get<MedicaminaAuthLoadingState>().setLoading(false);
                                     }
                                   },
                             child: const Text(
@@ -161,7 +157,7 @@ class _MedicaminaLoginPage extends State<MedicaminaLoginPage> {
                                 padding: const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
                               ),
                               onPressed: () {
-                                Beamer.of(context, root: true).beamToNamed('/password');
+                                Modular.to.pushNamed('/auth/password');
                               },
                               child: const Text(
                                 'Reset password',

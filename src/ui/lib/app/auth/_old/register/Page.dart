@@ -1,47 +1,41 @@
-import 'package:beamer/beamer.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:medicamina/app/State.dart';
+import 'package:medicamina/app/auth/States.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:medicamina/globals.dart' as globals;
 
-final supabase = Supabase.instance.client;
-
-class MedicaminaRegisterPage extends StatefulWidget {
-  const MedicaminaRegisterPage({
-    Key? key,
-    required this.loadingCallback,
-    required this.snackBarError,
-    required this.snackBarNormal,
-    required this.beamerKey,
-  }) : super(key: key);
-
-  final Function(bool? val) loadingCallback;
-  final Function(AuthException err) snackBarError;
-  final Function(String message) snackBarNormal;
-  final GlobalKey<BeamerState> beamerKey;
+class MedicaminaAuthRegisterPage extends StatefulWidget {
+  const MedicaminaAuthRegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<MedicaminaRegisterPage> createState() => _MedicaminaRegisterPage();
+  State<MedicaminaAuthRegisterPage> createState() => _MedicaminaAuthRegisterPage();
 }
 
-class _MedicaminaRegisterPage extends State<MedicaminaRegisterPage> {
+class _MedicaminaAuthRegisterPage extends State<MedicaminaAuthRegisterPage> {
   final _formKey = GlobalKey<FormState>();
-  String _email = "";
-  String _password = "";
-  String _passwordVerify = "";
+  String _email = '';
+  String _password = '';
+  String _passwordVerify = '';
+  final SupabaseClient _supabaseClient = Modular.get<SupabaseClient>();
   late bool _loading;
+  late StreamSubscription _loadingStream;
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _loading = widget.loadingCallback(null);
+    _loading = Modular.get<MedicaminaAuthLoadingState>().getLoading();
+    _loadingStream = Modular.get<MedicaminaAuthLoadingState>().getStream().listen((value) {
+      setState(() {
+        _loading = value;
+      });
     });
   }
 
   @override
   void dispose() {
     super.dispose();
-    _loading = false;
+    _loadingStream.cancel();
   }
 
   @override
@@ -61,7 +55,7 @@ class _MedicaminaRegisterPage extends State<MedicaminaRegisterPage> {
                         padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.2 : MediaQuery.of(context).size.width * 0.1, top: 24),
                         child: Text(
                           "Let's get started",
-                          style: globals.darkMode
+                          style: Modular.get<MedicaminaThemeState>().getDarkMode()
                               ? Theme.of(context).textTheme.displayMedium?.merge(const TextStyle(color: Colors.white))
                               : Theme.of(context).textTheme.displayMedium?.merge(
                                     const TextStyle(color: Colors.black87),
@@ -69,6 +63,7 @@ class _MedicaminaRegisterPage extends State<MedicaminaRegisterPage> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 6),
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
@@ -172,18 +167,15 @@ class _MedicaminaRegisterPage extends State<MedicaminaRegisterPage> {
                                 ? null
                                 : () async {
                                     if (_formKey.currentState!.validate()) {
-                                      widget.loadingCallback(true);
+                                      Modular.get<MedicaminaAuthLoadingState>().setLoading(true);
                                       try {
-                                        await supabase.auth.signUp(email: _email, password: _password);
-
-                                        widget.snackBarNormal('Please check your e-mails for a verificaiton link');
-                                        widget.loadingCallback(false);
-
-                                        widget.beamerKey.currentState!.routerDelegate.beamToNamed('/login');
+                                        await _supabaseClient.auth.signUp(email: _email, password: _password);
+                                        // widget.snackBarNormal('Please check your e-mails for a verificaiton link');
+                                        Modular.to.pushNamed('/auth/login');
                                       } on AuthException catch (err, _) {
-                                        widget.snackBarError(err);
-                                        widget.loadingCallback(false);
+                                        // widget.snackBarError(err);
                                       }
+                                      Modular.get<MedicaminaAuthLoadingState>().setLoading(false);
                                     }
                                   },
                             child: const Text(
@@ -201,20 +193,7 @@ class _MedicaminaRegisterPage extends State<MedicaminaRegisterPage> {
                                 padding: const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
                               ),
                               onPressed: () {
-                                if (Beamer.of(context).currentBeamLocation.state.routeInformation.location == '/login') {
-                                  return;
-                                }
-
-                                var history_1 = Beamer.of(context).beamingHistory;
-                                var history_2 = history_1[history_1.length - 1].history;
-                                if (history_2.length >= 2) {
-                                  if (history_2[history_2.length - 2].routeInformation.location == '/login') {
-                                    Beamer.of(context, root: true).popToNamed('/login', stacked: false);
-                                    return;
-                                  }
-                                }
-
-                                Beamer.of(context, root: true).beamToNamed('/login');
+                                Modular.to.pushNamed('/auth/login');
                               },
                               child: const Text(
                                 'Already registered?',

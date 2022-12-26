@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:medicamina/app/AppBar.dart';
 import 'package:medicamina/main.dart';
-import 'dart:html' as html;
 
 class MedicaminaDashPage extends StatefulWidget {
   const MedicaminaDashPage({Key? key}) : super(key: key);

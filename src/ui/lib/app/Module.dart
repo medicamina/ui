@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina/app/States.dart';
 import 'package:medicamina/app/AppBar.dart';
 import 'package:medicamina/app/auth/Guards.dart';
-import 'package:medicamina/app/States.dart';
 import 'package:medicamina/app/auth/landing/Page.dart';
 import 'package:medicamina/app/auth/login/Guards.dart';
 import 'package:medicamina/app/auth/login/Page.dart';

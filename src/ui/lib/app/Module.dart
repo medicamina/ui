@@ -1,19 +1,9 @@
-// import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-// import 'package:medicamina/app/Page.dart';
-import 'package:medicamina/app/State.dart';
-// import 'package:medicamina/app/Widget.dart';
-// import 'package:medicamina/app/auth/AppBar.dart';
-// import 'package:medicamina/app/auth/Guards.dart';
-// import 'package:medicamina/app/auth/Module.dart';
-// import 'package:medicamina/app/auth/Page.dart';
-// import 'package:medicamina/app/auth/States.dart';
-// import 'package:medicamina/app/auth/landing/Module.dart';
-import 'package:medicamina/app/auth/AppBar.dart';
+import 'package:medicamina/app/States.dart';
+import 'package:medicamina/app/AppBar.dart';
 import 'package:medicamina/app/auth/Guards.dart';
-import 'package:medicamina/app/auth/States.dart';
+import 'package:medicamina/app/States.dart';
 import 'package:medicamina/app/auth/landing/Page.dart';
 import 'package:medicamina/app/auth/login/Guards.dart';
 import 'package:medicamina/app/auth/login/Page.dart';
@@ -30,8 +20,8 @@ class MedicaminaAppModule extends Module {
   @override
   List<Bind> get binds {
     return [
-      Bind.lazySingleton((i) => const MedicaminaAuthAppBarWidget()),
-      Bind.singleton((i) => MedicaminaAuthLoadingState()),
+      Bind.lazySingleton((i) => const MedicaminaAppBarWidget()),
+      Bind.singleton((i) => MedicaminaAppBarLoadingState()),
       Bind.singleton((i) => MedicaminaThemeState()),
       Bind.singleton((i) => client),
     ];
@@ -52,7 +42,9 @@ class MedicaminaAppModule extends Module {
       ChildRoute('/register', child: (context, args) => const MedicaminaAuthRegisterPage(), guards: [MedicaminaViewIfLoggedOutOnlyGuard()]),
       ChildRoute('/password', child: (context, args) => const MedicaminaAuthPasswordResetPage(), guards: [MedicaminaViewIfLoggedOutOnlyGuard()]),
       ChildRoute('/onboarding', child: (context, args) => Text('/onboarding')),
-
+  
+      RedirectRoute('/dash', to: '/dash/'),
+      RedirectRoute('/dash/settings', to: '/dash/settings/'),
       ModuleRoute('/dash', module: MedicaminaDashModule()),
 
       WildcardRoute(child: (context, args) => const MedicaminaNotFoundPage()),

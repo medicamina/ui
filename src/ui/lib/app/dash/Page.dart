@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:medicamina/app/AppBar.dart';
 import 'package:medicamina/main.dart';
+import 'dart:html' as html;
 
 class MedicaminaDashPage extends StatefulWidget {
   const MedicaminaDashPage({Key? key}) : super(key: key);
@@ -12,10 +14,15 @@ class MedicaminaDashPage extends StatefulWidget {
 }
 
 class _MedicaminaDashPage extends State<MedicaminaDashPage> {
-  late int _currentIndex;
+  late int _currentIndex = -1;
 
   void setCurrentIndexFromUrl() {
     switch (Modular.args.uri.toString()) {
+      case '/dash':
+        setState(() {
+          _currentIndex = 0;
+        });
+        break;
       case '/dash/home':
         setState(() {
           _currentIndex = 0;
@@ -36,6 +43,11 @@ class _MedicaminaDashPage extends State<MedicaminaDashPage> {
           _currentIndex = 3;
         });
         break;
+      case '/dash/settings':
+        setState(() {
+          _currentIndex = 4;
+        });
+        break;
       case '/dash/settings/overview':
         setState(() {
           _currentIndex = 4;
@@ -46,12 +58,18 @@ class _MedicaminaDashPage extends State<MedicaminaDashPage> {
           _currentIndex = 4;
         });
         break;
-      case '/dash/settings/details':
+      case '/dash/settings/profile':
+        setState(() {
+          _currentIndex = 4;
+        });
+        break;
+      case '/dash/settings/subscription':
         setState(() {
           _currentIndex = 4;
         });
         break;
       default:
+        Modular.to.navigate('/dash/home');
         break;
     }
   }
@@ -59,7 +77,6 @@ class _MedicaminaDashPage extends State<MedicaminaDashPage> {
   @override
   void initState() {
     super.initState();
-    setCurrentIndexFromUrl();
     Modular.to.addListener(() {
       setCurrentIndexFromUrl();
     });
@@ -67,18 +84,29 @@ class _MedicaminaDashPage extends State<MedicaminaDashPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (Modular.args.uri.toString() == '/dash/') {
+      Modular.to.navigate('/dash/home');
+      return const Center(child: CircularProgressIndicator());
+    }
+    if (Modular.args.uri.toString() == '/dash/settings/') {
+      Modular.to.navigate('/dash/settings/overview');
+      return const Center(child: CircularProgressIndicator());
+    }
+    setCurrentIndexFromUrl();
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('medicamina', style: GoogleFonts.balooTamma2()),
-        centerTitle: true,
-        leading: Visibility(
-          visible: Modular.to.canPop(),
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {},
-          ),
-        ),
-      ),
+      appBar: Modular.get<MedicaminaAppBarWidget>(),
+      // appBar: AppBar(
+      //   title: Text('medicamina', style: GoogleFonts.balooTamma2()),
+      //   centerTitle: true,
+      //   leading: Visibility(
+      //     visible: Modular.to.canPop(),
+      //     child: IconButton(
+      //       icon: const Icon(Icons.arrow_back),
+      //       onPressed: () {},
+      //     ),
+      //   ),
+      // ),
       body: const RouterOutlet(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -105,6 +133,9 @@ class _MedicaminaDashPage extends State<MedicaminaDashPage> {
               Modular.to.pushNamedOrPopUntil('/dash/family');
               break;
             case 4:
+              if (_currentIndex == index) {
+                break;
+              }
               Modular.to.pushNamedOrPopUntil('/dash/settings/overview');
               break;
           }

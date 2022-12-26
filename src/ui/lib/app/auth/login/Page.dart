@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina/app/States.dart';
 import 'package:medicamina/app/AppBar.dart';
-import 'package:medicamina/app/States.dart';
 import 'package:medicamina/main.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -142,7 +141,7 @@ class _MedicaminaAuthLoginPage extends State<MedicaminaAuthLoginPage> {
                                       if (_formKey.currentState!.validate()) {
                                         Modular.get<MedicaminaAppBarLoadingState>().setLoading(true);
                                         try {
-                                          await _supabaseClient.auth.signInWithPassword(email: _email, password: _password);
+                                          var res = await _supabaseClient.auth.signInWithPassword(email: _email, password: _password);
                                         } on AuthException catch (err, _) {
                                           // widget.snackBarError(err);
                                           return;

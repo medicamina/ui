@@ -284,6 +284,12 @@ class __ChoroplethMapState extends State<ChoroplethMap> {
         SfMaps(
           layers: [
             MapShapeLayer(
+              shapeTooltipBuilder: (context, index) {
+                return Padding(padding: const EdgeInsets.all(4), child: Text(_worldPopulationDensityDetails[index].countryName));
+              },
+              tooltipSettings: MapTooltipSettings(
+                color: Colors.grey[700],
+              ),
               source: _mapShapeSource,
               strokeColor: Colors.white30,
             ),

@@ -10,7 +10,7 @@ class MedicaminaAppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Modular.setInitialRoute('/');
     Modular.setNavigatorKey(navigatorKey);
-    
+
     return MaterialApp.router(
       title: 'medicamina',
       debugShowCheckedModeBanner: false,

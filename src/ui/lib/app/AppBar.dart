@@ -40,7 +40,7 @@ class _MedicaminaAppBarWidget extends State<MedicaminaAppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('medicamina', style: GoogleFonts.balooTamma2()),
+      title: Padding(padding: const EdgeInsets.only(top: 2), child: Text('medicamina', style: GoogleFonts.balooTamma2())),
       centerTitle: true,
       bottom: PreferredSize(
         preferredSize: _loading ? const Size.fromHeight(6.0) : const Size.fromHeight(0),

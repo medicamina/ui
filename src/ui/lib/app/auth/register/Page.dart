@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/app/State.dart';
-import 'package:medicamina/app/auth/AppBar.dart';
-import 'package:medicamina/app/auth/States.dart';
+import 'package:medicamina/app/States.dart';
+import 'package:medicamina/app/AppBar.dart';
+import 'package:medicamina/app/States.dart';
 import 'package:medicamina/main.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -26,8 +26,8 @@ class _MedicaminaAuthRegisterPage extends State<MedicaminaAuthRegisterPage> {
   @override
   void initState() {
     super.initState();
-    _loading = Modular.get<MedicaminaAuthLoadingState>().getLoading();
-    _loadingStream = Modular.get<MedicaminaAuthLoadingState>().getStream().listen((value) {
+    _loading = Modular.get<MedicaminaAppBarLoadingState>().getLoading();
+    _loadingStream = Modular.get<MedicaminaAppBarLoadingState>().getStream().listen((value) {
       setState(() {
         _loading = value;
       });
@@ -43,7 +43,7 @@ class _MedicaminaAuthRegisterPage extends State<MedicaminaAuthRegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Modular.get<MedicaminaAuthAppBarWidget>(),
+      appBar: Modular.get<MedicaminaAppBarWidget>(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -176,7 +176,7 @@ class _MedicaminaAuthRegisterPage extends State<MedicaminaAuthRegisterPage> {
                                   ? null
                                   : () async {
                                       if (_formKey.currentState!.validate()) {
-                                        Modular.get<MedicaminaAuthLoadingState>().setLoading(true);
+                                        Modular.get<MedicaminaAppBarLoadingState>().setLoading(true);
                                         try {
                                           await _supabaseClient.auth.signUp(email: _email, password: _password);
                                           // widget.snackBarNormal('Please check your e-mails for a verificaiton link');
@@ -184,7 +184,7 @@ class _MedicaminaAuthRegisterPage extends State<MedicaminaAuthRegisterPage> {
                                         } on AuthException catch (err, _) {
                                           // widget.snackBarError(err);
                                         }
-                                        Modular.get<MedicaminaAuthLoadingState>().setLoading(false);
+                                        Modular.get<MedicaminaAppBarLoadingState>().setLoading(false);
                                       }
                                     },
                               child: const Text(

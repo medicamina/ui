@@ -26,7 +26,7 @@ extension PushNamedOrPopUntil on IModularNavigator {
   void pushNamedOrPopUntil(String uri) {
     if (uri == Modular.args.uri.toString()) {
       return;
-    }
+    } 
     for (var e in Modular.to.navigateHistory) {
       if (e.uri.toString() == uri) {
         Modular.to.pushNamedAndRemoveUntil(uri, ModalRoute.withName(e.uri.toString()));

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:medicamina/main.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class MedicaminaDashAccountPage extends StatelessWidget {
-  const MedicaminaDashAccountPage({Key? key}) : super(key: key);
+class MedicaminaDashSettingsPage extends StatelessWidget {
+  const MedicaminaDashSettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,14 +71,10 @@ Widget desktop(BuildContext context) {
                             side: const BorderSide(
                               color: Colors.transparent,
                             ),
-                            backgroundColor:
-                                Modular.args.uri.toString() == '/account' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Theme.of(context).buttonTheme.colorScheme?.surface,
+                            backgroundColor: Modular.args.uri.toString() == '/dash/settings/overview' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Theme.of(context).buttonTheme.colorScheme?.surface,
                           ),
                           onPressed: () {
-                            // Beamer.of(context).beamToNamed(
-                            //   '/account',
-                            //   transitionDelegate: const NoAnimationTransitionDelegate(),
-                            // );
+                            Modular.to.pushNamedOrPopUntil('./overview');
                           },
                           child: const Text(
                             'OVERVIEW',
@@ -94,14 +91,10 @@ Widget desktop(BuildContext context) {
                             side: const BorderSide(
                               color: Colors.transparent,
                             ),
-                            backgroundColor:
-                                Modular.args.uri.toString() == '/security' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Theme.of(context).buttonTheme.colorScheme?.surface,
+                            backgroundColor: Modular.args.uri.toString() == '/dash/settings/security' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Theme.of(context).buttonTheme.colorScheme?.surface,
                           ),
                           onPressed: () {
-                            // Beamer.of(context).beamToNamed(
-                            //   '/security',
-                            //   transitionDelegate: const NoAnimationTransitionDelegate(),
-                            // );
+                            Modular.to.pushNamedOrPopUntil('./security');
                           },
                           child: const Text(
                             'SECURITY',
@@ -118,17 +111,13 @@ Widget desktop(BuildContext context) {
                             side: const BorderSide(
                               color: Colors.transparent,
                             ),
-                            backgroundColor:
-                                Modular.args.uri.toString() == '/subscription' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Theme.of(context).buttonTheme.colorScheme?.surface,
+                            backgroundColor: Modular.args.uri.toString() == '/dash/settings/upgrade' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Theme.of(context).buttonTheme.colorScheme?.surface,
                           ),
                           onPressed: () {
-                            // Beamer.of(context).beamToNamed(
-                            //   '/subscription',
-                            //   transitionDelegate: const NoAnimationTransitionDelegate(),
-                            // );
+                            Modular.to.pushNamedOrPopUntil('./upgrade');
                           },
                           child: const Text(
-                            'SUBSCRIPTION',
+                            'UPGRADE',
                             style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 0.75),
                           ),
                         ),
@@ -142,17 +131,13 @@ Widget desktop(BuildContext context) {
                             side: const BorderSide(
                               color: Colors.transparent,
                             ),
-                            backgroundColor:
-                                Modular.args.uri.toString() == '/profile' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Theme.of(context).buttonTheme.colorScheme?.surface,
+                            backgroundColor: Modular.args.uri.toString() == '/dash/settings/profile' ? Theme.of(context).colorScheme.primary.withOpacity(0.12) : Theme.of(context).buttonTheme.colorScheme?.surface,
                           ),
                           onPressed: () {
-                            // Beamer.of(context).beamToNamed(
-                            //   '/profile',
-                            //   transitionDelegate: const NoAnimationTransitionDelegate(),
-                            // );
+                            Modular.to.pushNamedOrPopUntil('./profile');
                           },
                           child: const Text(
-                            'PERSONAL DETAILS',
+                            'PROFILE',
                             style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 0.75),
                           ),
                         ),
@@ -162,12 +147,13 @@ Widget desktop(BuildContext context) {
                         padding: const EdgeInsets.only(left: 6),
                         child: OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                              minimumSize: const Size(1000, 62),
-                              side: const BorderSide(
-                                color: Colors.transparent,
-                              ),
-                              // backgroundColor: Theme.of(context).buttonTheme.colorScheme?.error.withOpacity(0.05),
-                              foregroundColor: Colors.red),
+                            minimumSize: const Size(1000, 62),
+                            side: const BorderSide(
+                              color: Colors.transparent,
+                            ),
+                            // backgroundColor: Theme.of(context).buttonTheme.colorScheme?.error.withOpacity(0.05),
+                            foregroundColor: Colors.red,
+                          ),
                           onPressed: () async => showDialog<String>(
                             context: context,
                             builder: (BuildContext _context) => AlertDialog(
@@ -215,23 +201,8 @@ Widget desktop(BuildContext context) {
                   flex: 6,
                   child: Column(
                     children: [
-                      Expanded(
-                        child: Text("hello"),
-                        // child: Beamer(
-                        //   key: _beamerButtonNavigationKey,
-                        //   routerDelegate: BeamerDelegate(
-                        //     setBrowserTabTitle: false,
-                        //     initialPath: '/account',
-                        //     locationBuilder: RoutesLocationBuilder(
-                        //       routes: {
-                        //         '/account': (p0, p1, p2) => const Text('Account'),
-                        //         '/security': (p0, p1, p2) => const Text('Security'),
-                        //         '/subscription': (p0, p1, p2) => const Text('Subscription'),
-                        //         '/profile': (p0, p1, p2) => const Text('Profile'),
-                        //       },
-                        //     ),
-                        //   ),
-                        // ),
+                      const Expanded(
+                        child: RouterOutlet(),
                         flex: 1,
                       ),
                       Row(

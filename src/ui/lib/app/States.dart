@@ -1,4 +1,27 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+
+class MedicaminaAppBarLoadingState {
+  static late bool loading;
+  static StreamController<bool> controller = StreamController<bool>.broadcast();
+
+  MedicaminaAppBarLoadingState() {
+    setLoading(false);
+  }
+
+  void setLoading(bool _loading) {
+    loading = _loading;
+    controller.add(loading);
+  }
+
+  bool getLoading() {
+    return loading;
+  }
+
+  Stream getStream() {
+    return controller.stream;
+  }
+}
 
 class MedicaminaThemeState {
   static late bool _darkMode;

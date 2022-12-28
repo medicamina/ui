@@ -1,14 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina/app/dash/settings/page.dart';
-import 'package:medicamina/app/dash/settings/billing/page.dart';
-import 'package:medicamina/app/dash/settings/account/page.dart';
-import 'package:medicamina/app/dash/settings/security/page.dart';
+import 'package:medicamina/app/dash/settings/billing/widget.dart';
+import 'package:medicamina/app/dash/settings/account/widget.dart';
+import 'package:medicamina/app/dash/settings/security/widget.dart';
+import 'package:medicamina/app/dash/settings/state.dart';
 import 'package:medicamina/app/not_found/page.dart';
 
 class MedicaminaDashSettingsModule extends Module {
   @override
-  List<Bind> get binds => [];
+  List<Bind> get binds => [
+    Bind.singleton((i) => MedicaminaDashSettingsState())
+  ];
 
   @override
   List<ModularRoute> get routes {

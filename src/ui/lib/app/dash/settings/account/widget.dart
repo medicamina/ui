@@ -263,7 +263,7 @@ class _MedicaminaDashSettingsAccountWidget extends State<MedicaminaDashSettingsA
                             child: Padding(
                               padding: const EdgeInsets.only(left: 6),
                               child: Text(
-                                'Birth town',
+                                'Birthtown',
                                 style: getInputLabelStyle(),
                               ),
                             ),

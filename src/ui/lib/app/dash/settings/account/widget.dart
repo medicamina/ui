@@ -356,7 +356,7 @@ class _MedicaminaDashSettingsAccountWidget extends State<MedicaminaDashSettingsA
                           }),
                 const Padding(padding: EdgeInsets.only(right: 16)),
                 ElevatedButton(
-                  child: const Text(' SAVE '),
+                  child: const Text('SUBMIT'),
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
                     textStyle: const TextStyle(fontWeight: FontWeight.w600, letterSpacing: 1),

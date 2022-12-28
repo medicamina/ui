@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/app/dash/settings/Page.dart';
-
-import '../../not_found/Page.dart';
+import 'package:medicamina/app/dash/settings/page.dart';
+import 'package:medicamina/app/dash/settings/billing/page.dart';
+import 'package:medicamina/app/dash/settings/account/page.dart';
+import 'package:medicamina/app/dash/settings/security/page.dart';
+import 'package:medicamina/app/not_found/page.dart';
 
 class MedicaminaDashSettingsModule extends Module {
   @override
@@ -13,10 +15,9 @@ class MedicaminaDashSettingsModule extends Module {
     return [
       ChildRoute('/', child: (context, args) => const MedicaminaDashSettingsPage(), 
       children: [
-        ChildRoute('/overview', child: (context, args) => const Text('overview'), transition: TransitionType.noTransition),
-        ChildRoute('/security', child: (context, args) => const Text('security'), transition: TransitionType.noTransition),
-        ChildRoute('/profile', child: (context, args) => const Text('profile'), transition: TransitionType.noTransition),
-        ChildRoute('/upgrade', child: (context, args) => const Text('upgrade'), transition: TransitionType.noTransition)
+        ChildRoute('/account', child: (context, args) => const MedicaminaDashSettingsAccountWidget(), transition: TransitionType.noTransition),
+        ChildRoute('/security', child: (context, args) => const MedicaminaDashSettingsSecurityWidget(), transition: TransitionType.noTransition),
+        ChildRoute('/billing', child: (context, args) => const MedicaminaDashSettingsBillingWidget(), transition: TransitionType.noTransition)
       ]),
 
       WildcardRoute(child: (context, args) => const MedicaminaNotFoundPage()),

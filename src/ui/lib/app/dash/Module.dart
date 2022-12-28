@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/app/dash/Guards.dart';
-import 'package:medicamina/app/dash/Page.dart';
-import 'package:medicamina/app/dash/history/Page.dart';
-import 'package:medicamina/app/dash/home/Page.dart';
-import 'package:medicamina/app/dash/settings/Module.dart';
-import 'package:medicamina/app/not_found/Page.dart';
+import 'package:medicamina/app/dash/guards.dart';
+import 'package:medicamina/app/dash/page.dart';
+import 'package:medicamina/app/dash/history/page.dart';
+import 'package:medicamina/app/dash/home/page.dart';
+import 'package:medicamina/app/not_found/page.dart';
+import 'package:medicamina/app/dash/settings/module.dart';
 
 class MedicaminaDashModule extends Module {
   @override

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/src/foundation/key.dart';
-// import 'package:flutter/src/widgets/container.dart';
-// import 'package:flutter/src/widgets/framework.dart';
 
 class MedicaminsaDashHistoryPage extends StatefulWidget {
   const MedicaminsaDashHistoryPage({Key? key}) : super(key: key);
@@ -13,6 +10,11 @@ class MedicaminsaDashHistoryPage extends StatefulWidget {
 class _MedicaminsaDashHistoryPageState extends State<MedicaminsaDashHistoryPage> {
   @override
   Widget build(BuildContext context) {
-    return const Text('history');
+    return const Padding(
+      padding: EdgeInsets.all(6),
+      child: Card(
+        child: Text('History'),
+      ),
+    );
   }
 }

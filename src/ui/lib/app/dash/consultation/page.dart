@@ -10,6 +10,11 @@ class MedicaminaDashConsultationPage extends StatefulWidget {
 class _MedicaminaDashConsultationPageState extends State<MedicaminaDashConsultationPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(children: [
+      SizedBox(height: 48),
+      Text('Book an appointment'),
+      SizedBox(height: 48),
+      CircularProgressIndicator()
+    ],);
   }
 }

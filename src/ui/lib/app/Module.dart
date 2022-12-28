@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/app/States.dart';
-import 'package:medicamina/app/AppBar.dart';
-import 'package:medicamina/app/auth/Guards.dart';
-import 'package:medicamina/app/auth/landing/Page.dart';
-import 'package:medicamina/app/auth/login/Guards.dart';
-import 'package:medicamina/app/auth/login/Page.dart';
-import 'package:medicamina/app/auth/register/Page.dart';
-import 'package:medicamina/app/auth/password/Page.dart';
-import 'package:medicamina/app/dash/Module.dart';
-import 'package:medicamina/app/not_found/Page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:medicamina/app/states.dart';
+import 'package:medicamina/app/appbar.dart';
+import 'package:medicamina/app/auth/guards.dart';
+import 'package:medicamina/app/auth/landing/page.dart';
+import 'package:medicamina/app/auth/login/guards.dart';
+import 'package:medicamina/app/auth/login/page.dart';
+import 'package:medicamina/app/auth/register/page.dart';
+import 'package:medicamina/app/auth/password/page.dart';
+import 'package:medicamina/app/dash/module.dart';
+import 'package:medicamina/app/not_found/page.dart';
 
 class MedicaminaAppModule extends Module {
   MedicaminaAppModule({Key? key, required this.client});

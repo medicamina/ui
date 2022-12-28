@@ -1,7 +1,7 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/app/AppBar.dart';
+import 'package:medicamina/app/appbar.dart';
 
 class MedicaminaDefaultLandingPage extends StatefulWidget {
   const MedicaminaDefaultLandingPage({Key? key}) : super(key: key);

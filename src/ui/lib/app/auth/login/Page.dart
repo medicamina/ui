@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/app/States.dart';
-import 'package:medicamina/app/AppBar.dart';
-import 'package:medicamina/main.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:medicamina/app/states.dart';
+import 'package:medicamina/app/appbar.dart';
+import 'package:medicamina/main.dart';
 
 class MedicaminaAuthLoginPage extends StatefulWidget {
   const MedicaminaAuthLoginPage({Key? key}) : super(key: key);

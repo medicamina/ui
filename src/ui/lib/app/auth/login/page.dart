@@ -141,7 +141,7 @@ class _MedicaminaAuthLoginPage extends State<MedicaminaAuthLoginPage> {
                                       if (_formKey.currentState!.validate()) {
                                         Modular.get<MedicaminaAppBarLoadingState>().setLoading(true);
                                         try {
-                                          var res = await _supabaseClient.auth.signInWithPassword(email: _email, password: _password);
+                                          await _supabaseClient.auth.signInWithPassword(email: _email, password: _password);
                                         } on AuthException catch (err, _) {
                                           // widget.snackBarError(err);
                                           return;

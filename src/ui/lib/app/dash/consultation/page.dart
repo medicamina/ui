@@ -10,7 +10,7 @@ class MedicaminaDashConsultationPage extends StatefulWidget {
 class _MedicaminaDashConsultationPageState extends State<MedicaminaDashConsultationPage> {
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return Column(children: const [
       SizedBox(height: 48),
       Text('Book an appointment'),
       SizedBox(height: 48),

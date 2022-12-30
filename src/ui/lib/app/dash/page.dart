@@ -36,40 +36,45 @@ class _MedicaminaDashPage extends State<MedicaminaDashPage> {
           _currentIndex = 1;
         });
         break;
-      case '/dash/appointment':
+      case '/dash/health':
         setState(() {
           _currentIndex = 2;
         });
         break;
-      case '/dash/family':
+      case '/dash/appointment':
         setState(() {
           _currentIndex = 3;
+        });
+        break;
+      case '/dash/family':
+        setState(() {
+          _currentIndex = 4;
         });
         break;
       // SETTINGS
       case '/dash/settings':
         setState(() {
-          _currentIndex = 4;
+          _currentIndex = 5;
         });
         break;
       case '/dash/settings/':
         setState(() {
-          _currentIndex = 4;
+          _currentIndex = 5;
         });
         break;
       case '/dash/settings/account':
         setState(() {
-          _currentIndex = 4;
+          _currentIndex = 5;
         });
         break;
       case '/dash/settings/security':
         setState(() {
-          _currentIndex = 4;
+          _currentIndex = 5;
         });
         break;
       case '/dash/settings/billing':
         setState(() {
-          _currentIndex = 4;
+          _currentIndex = 5;
         });
         break;
       default:
@@ -116,8 +121,9 @@ class _MedicaminaDashPage extends State<MedicaminaDashPage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.prescription), label: 'Edicts'),
+          BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.heart_pulse), label: 'Health'),
           BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.calendar_clock_outline), label: 'Consultation'),
-          BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.file_tree), label: 'Family'),
+          BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.file_tree_outline), label: 'Family'),
           BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.cog), label: 'Settings'),
         ],
         onTap: (index) {
@@ -129,12 +135,15 @@ class _MedicaminaDashPage extends State<MedicaminaDashPage> {
               Modular.to.pushNamedOrPopUntil('/dash/history');
               break;
             case 2:
-              Modular.to.pushNamedOrPopUntil('/dash/appointment');
+              Modular.to.pushNamedOrPopUntil('/dash/health');
               break;
             case 3:
-              Modular.to.pushNamedOrPopUntil('/dash/family');
+              Modular.to.pushNamedOrPopUntil('/dash/appointment');
               break;
             case 4:
+              Modular.to.pushNamedOrPopUntil('/dash/family');
+              break;
+            case 5:
               if (_currentIndex == index) {
                 break;
               }

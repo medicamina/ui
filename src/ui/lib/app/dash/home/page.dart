@@ -36,11 +36,11 @@ Widget _map(BuildContext context) {
                 fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold,
               ),
             ),
-            // trailing: IconButton(
-            //   icon: const Icon(Icons.question_mark),
-            //   onPressed: () {
-            //   },
-            // ),
+            trailing: IconButton(
+              icon: const Icon(CommunityMaterialIcons.information),
+              onPressed: () {
+              },
+            ),
           ),
           const Padding(padding: EdgeInsets.only(top: 32)),
           const ChoroplethMap(),
@@ -71,9 +71,8 @@ Widget _personalDetails(BuildContext context) {
               ),
             ),
             // trailing: IconButton(
-            //   icon: const Icon(Icons.edit),
+            //   icon: const Icon(CommunityMaterialIcons.account_cog),
             //   onPressed: () {
-
             //   },
             // ),
           ),

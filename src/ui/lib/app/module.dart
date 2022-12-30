@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:medicamina/app/dash/guards.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:medicamina/app/states.dart';
 import 'package:medicamina/app/appbar.dart';
@@ -32,24 +33,31 @@ class MedicaminaAppModule extends Module {
       ChildRoute(
         '/',
         child: (context, args) => const MedicaminaDefaultLandingPage(),
-        guards: [
-          MedicaminaDefaultLandingPageWebOnlyGuard(),
-          MedicaminaViewIfLoggedOutOnlyGuard(),
-        ],
+        guards: [MedicaminaDefaultLandingPageWebOnlyGuard(), MedicaminaViewIfLoggedOutOnlyGuard()],
       ),
-      ChildRoute('/login', child: (context, args) => const MedicaminaAuthLoginPage(), guards: [MedicaminaViewIfLoggedOutOnlyGuard()]),
-      ChildRoute('/register', child: (context, args) => const MedicaminaAuthRegisterPage(), guards: [MedicaminaViewIfLoggedOutOnlyGuard()]),
-      ChildRoute('/password', child: (context, args) => const MedicaminaAuthPasswordResetPage(), guards: [MedicaminaViewIfLoggedOutOnlyGuard()]),
+      ChildRoute(
+        '/login',
+        child: (context, args) => const MedicaminaAuthLoginPage(),
+        guards: [MedicaminaViewIfLoggedOutOnlyGuard()],
+      ),
+      ChildRoute(
+        '/register',
+        child: (context, args) => const MedicaminaAuthRegisterPage(),
+        guards: [MedicaminaViewIfLoggedOutOnlyGuard()],
+      ),
+      ChildRoute(
+        '/password',
+        child: (context, args) => const MedicaminaAuthPasswordResetPage(),
+        // guards: [MedicaminaViewIfLoggedOutOnlyGuard()],
+      ),
       ChildRoute('/onboarding', child: (context, args) => Text('/onboarding')),
-  
+
       RedirectRoute('/dash', to: '/dash/'),
       RedirectRoute('/dash/settings', to: '/dash/settings/'),
-      ModuleRoute('/dash', module: MedicaminaDashModule()),
-
+      RedirectRoute('/dash/settings/', to: '/dash/settings/account'),
+      ModuleRoute('/dash', module: MedicaminaDashModule(), guards: [MedicaminaViewIfLoggedInOnlyGuard()]),
+      
       WildcardRoute(child: (context, args) => const MedicaminaNotFoundPage()),
     ];
   }
-
-  // @override
-  // Widget get view => Text('helo');
 }

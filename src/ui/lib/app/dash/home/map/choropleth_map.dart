@@ -286,7 +286,7 @@ class __ChoroplethMapState extends State<ChoroplethMap> {
             MapShapeLayer(
               shapeTooltipBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(8),
                   child: Text(
                     _worldPopulationDensityDetails[index].countryName,
                     style: const TextStyle(color: Colors.white),

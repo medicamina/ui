@@ -170,7 +170,7 @@ class _MedicaminaAuthRegisterPage extends State<MedicaminaAuthRegisterPage> {
                           Padding(
                             padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(minimumSize: Size(const Size.fromHeight(40).width, 42)),
+                              style: ElevatedButton.styleFrom(minimumSize: Size(const Size.fromHeight(40).width, 42), elevation: 0),
                               onPressed: _loading
                                   ? null
                                   : () async {
@@ -178,17 +178,17 @@ class _MedicaminaAuthRegisterPage extends State<MedicaminaAuthRegisterPage> {
                                         Modular.get<MedicaminaAppBarLoadingState>().setLoading(true);
                                         try {
                                           await _supabaseClient.auth.signUp(email: _email, password: _password);
-                                          // widget.snackBarNormal('Please check your e-mails for a verificaiton link');
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please check your e-mails for a verificaiton link')));
                                           Modular.to.pushNamed('/auth/login');
                                         } on AuthException catch (err, _) {
-                                          // widget.snackBarError(err);
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.message)));
+                                          Modular.get<MedicaminaAppBarLoadingState>().setLoading(false);
                                         }
-                                        Modular.get<MedicaminaAppBarLoadingState>().setLoading(false);
                                       }
                                     },
                               child: const Text(
                                 'REGISTER',
-                                style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 0.75),
+                                style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.75),
                               ),
                             ),
                           ),

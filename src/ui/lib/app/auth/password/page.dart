@@ -117,7 +117,7 @@ class _MedicaminaAuthPasswordResetPage extends State<MedicaminaAuthPasswordReset
                         Padding(
                           padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(minimumSize: Size(const Size.fromHeight(40).width, 42)),
+                            style: ElevatedButton.styleFrom(minimumSize: Size(const Size.fromHeight(40).width, 42), elevation: 0),
                             onPressed: _loading
                                 ? null
                                 : () async {
@@ -133,7 +133,7 @@ class _MedicaminaAuthPasswordResetPage extends State<MedicaminaAuthPasswordReset
                                   },
                             child: const Text(
                               'SEND LINK',
-                              style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 0.75),
+                              style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.75),
                             ),
                           ),
                         ),

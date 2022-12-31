@@ -134,25 +134,25 @@ class _MedicaminaAuthLoginPage extends State<MedicaminaAuthLoginPage> {
                           Padding(
                             padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(minimumSize: Size(const Size.fromHeight(40).width, 42)),
+                              style: ElevatedButton.styleFrom(minimumSize: Size(const Size.fromHeight(40).width, 42), elevation: 0),
                               onPressed: _loading
                                   ? null
                                   : () async {
                                       if (_formKey.currentState!.validate()) {
                                         Modular.get<MedicaminaAppBarLoadingState>().setLoading(true);
                                         try {
+                                          Modular.get<MedicaminaAppBarLoadingState>().setLoading(false);
                                           await _supabaseClient.auth.signInWithPassword(email: _email, password: _password);
+                                          Modular.to.navigate('/dash/home');
                                         } on AuthException catch (err, _) {
-                                          // widget.snackBarError(err);
-                                          return;
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.message)));
+                                          Modular.get<MedicaminaAppBarLoadingState>().setLoading(false);
                                         }
-                                        Modular.get<MedicaminaAppBarLoadingState>().setLoading(false);
-                                        Modular.to.navigate('/dash/home');
                                       }
                                     },
                               child: const Text(
                                 'LOGIN',
-                                style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 0.75),
+                                style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.75),
                               ),
                             ),
                           ),

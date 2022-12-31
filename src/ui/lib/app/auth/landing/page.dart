@@ -124,7 +124,7 @@ Widget doctor(BuildContext context, double width) {
                 onPressed: () {},
                 child: const Text(
                   'UPGRADE',
-                  style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
+                  style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.4),
                 ),
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(110, 45), //////// HERE

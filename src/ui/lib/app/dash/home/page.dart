@@ -39,6 +39,127 @@ Widget _map(BuildContext context) {
             trailing: IconButton(
               icon: const Icon(CommunityMaterialIcons.information),
               onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        elevation: 0,
+                        // shape: Border.all(width: 0, style: BorderStyle.none),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
+                        contentPadding: const EdgeInsets.only(top: 16, bottom: 0, left: 0, right: 0),
+                        titlePadding: const EdgeInsets.only(left: 18, right: 18, top: 16),
+                        title: Text('Genetic ancestry', style: TextStyle(fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold)),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('DISMISS'),
+                          ),
+                        ],
+                        content: SizedBox(
+                          width: 340,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                dense: false,
+                                title: Row(
+                                  children: const [
+                                    Text(
+                                      'European',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    Text(
+                                      '99.7%',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                tileColor: const Color.fromARGB(255, 32, 83, 171),
+                              ),
+                              ListTile(
+                                contentPadding: const EdgeInsets.only(left: 18, right: 18),
+                                dense: true,
+                                title: Row(
+                                  children: [
+                                    const Text('English'),
+                                    Expanded(
+                                      child: Container(),
+                                    ),
+                                    const Text('75%'),
+                                  ],
+                                ),
+                              ),
+                              const Divider(
+                                thickness: 0.3,
+                                height: 0,
+                                indent: 8,
+                                endIndent: 8,
+                              ),
+                              ListTile(
+                                contentPadding: const EdgeInsets.only(left: 18, right: 18),
+                                dense: true,
+                                title: Row(
+                                  children: [
+                                    const Text('Irish'),
+                                    Expanded(
+                                      child: Container(),
+                                    ),
+                                    const Text('25%'),
+                                  ],
+                                ),
+                              ),
+                              ListTile(
+                                dense: false,
+                                title: Row(
+                                  children: const [
+                                    Text(
+                                      'Australian',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    Text(
+                                      '0.3%',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                tileColor: const Color.fromARGB(255, 231, 63, 51),
+                              ),
+                              ListTile(
+                                contentPadding: const EdgeInsets.only(left: 18, right: 18),
+                                dense: true,
+                                title: Row(
+                                  children: [
+                                    const Text('Aboriginal'),
+                                    Expanded(
+                                      child: Container(),
+                                    ),
+                                    const Text('100%'),
+                                  ],
+                                ),
+                              ),
+                              const Divider(
+                                thickness: 0.3,
+                                height: 0,
+                                indent: 8,
+                                endIndent: 8,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    });
               },
             ),
           ),
@@ -70,11 +191,6 @@ Widget _personalDetails(BuildContext context) {
                 fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold,
               ),
             ),
-            // trailing: IconButton(
-            //   icon: const Icon(CommunityMaterialIcons.account_cog),
-            //   onPressed: () {
-            //   },
-            // ),
           ),
           const ListTile(
             leading: Icon(Icons.person_outline),
@@ -133,13 +249,13 @@ class _ResultsTableState extends State<ResultsTable> {
     });
   }
 
-  void updateRowsPerPage(val) {
+  void _updateRowsPerPage(val) {
     setState(() {
       _rowsPerPage = val;
     });
   }
 
-  void updateSearchValue(val) {
+  void _updateSearchValue(val) {
     setState(() {
       _searchValue = val;
     });
@@ -147,6 +263,11 @@ class _ResultsTableState extends State<ResultsTable> {
 
   @override
   Widget build(BuildContext context) {
+
+    setState(() {
+      _rowsPerPage = MediaQuery.of(context).size.width >= 2400 ? 18 : MediaQuery.of(context).size.width >= 2000 ? 12 : MediaQuery.of(context).size.width >= 600 ? 4 : 6;
+    });
+
     return Card(
       shape: RoundedRectangleBorder(
         side: BorderSide(
@@ -170,7 +291,7 @@ class _ResultsTableState extends State<ResultsTable> {
                     suffixIcon: Padding(padding: EdgeInsets.only(right: 12), child: Icon(Icons.search)),
                   ),
                   controller: _searchController,
-                  onChanged: updateSearchValue,
+                  onChanged: _updateSearchValue,
                 ),
               ),
             ),
@@ -199,9 +320,9 @@ class _ResultsTableState extends State<ResultsTable> {
                 child: PaginatedDataTable(
                   showCheckboxColumn: false,
                   dataRowHeight: MediaQuery.of(context).size.width < 600 ? 72 : kMinInteractiveDimension,
-                  rowsPerPage: MediaQuery.of(context).size.width < 600 ? 6 : _rowsPerPage,
-                  onRowsPerPageChanged: MediaQuery.of(context).size.width < 600 ? null : updateRowsPerPage,
-                  availableRowsPerPage: MediaQuery.of(context).size.width < 600 ? [6] : [_defaultRowsPerPage, _defaultRowsPerPage * 2, _defaultRowsPerPage * 3],
+                  rowsPerPage: _rowsPerPage,
+                  onRowsPerPageChanged: MediaQuery.of(context).size.width <= 600 ? null : _updateRowsPerPage,
+                  availableRowsPerPage: MediaQuery.of(context).size.width <= 600 ? [6] : [4, 6, 12, 18],
                   columnSpacing: 24,
                   columns: [
                     DataColumn(
@@ -1828,7 +1949,7 @@ class ResultsData extends DataTableSource {
       "conditon_id": "",
     },
     {
-      "condition": "Smith–Magenis syndrome",
+      "condition": "Smith-Magenis syndrome",
       "risk": "Low",
       "alt_names": [],
       "conditon_id": "",

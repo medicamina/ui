@@ -49,7 +49,7 @@ class MedicaminaThemeState {
   void setDarkMode(bool isDark) {
     _darkMode = isDark;
   }
-  
+
   bool getDarkMode() {
     return _darkMode;
   }

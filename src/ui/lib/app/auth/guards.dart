@@ -7,6 +7,6 @@ class MedicaminaViewIfLoggedOutOnlyGuard extends RouteGuard {
   @override
   Future<bool> canActivate(String path, ModularRoute route) async {
     // current session must not exist
-    return Modular.get<SupabaseClient>().auth.currentSession == null;
+    return Modular.get<SupabaseClient>().auth.currentUser == null;
   }
 }

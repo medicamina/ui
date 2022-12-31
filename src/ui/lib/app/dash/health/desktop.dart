@@ -16,9 +16,21 @@ class _MedicaminaDashHealthDesktopWidgetState extends State<MedicaminaDashHealth
   late DateTime _date = DateTime.now();
   late Text _dateText;
   late bool _showHeartRate = true;
+  late bool _showWeekly = false;
 
-  TextStyle getDateTextStyle() {
-    return TextStyle(fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold, letterSpacing: 0.5, fontSize: 16);
+  TextStyle _getDateTextStyle() {
+    return TextStyle(
+      fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold,
+      letterSpacing: 0.5,
+      fontSize: 16,
+    );
+  }
+
+  IconData? _getWeeklyViewIcon() {
+    if (_showWeekly) {
+      return CommunityMaterialIcons.toggle_switch;
+    }
+    return CommunityMaterialIcons.toggle_switch_off_outline;
   }
 
   @override
@@ -28,7 +40,7 @@ class _MedicaminaDashHealthDesktopWidgetState extends State<MedicaminaDashHealth
   }
 
   void updateDate() {
-    _dateText = Text(DateFormat('EEEE, dd MMM yyyy').format(_date), style: getDateTextStyle());
+    _dateText = Text(DateFormat('EEEE, dd MMM yyyy').format(_date), style: _getDateTextStyle());
   }
 
   @override
@@ -49,11 +61,35 @@ class _MedicaminaDashHealthDesktopWidgetState extends State<MedicaminaDashHealth
                           padding: const EdgeInsets.only(left: 8, right: 8),
                           child: Row(
                             children: [
-                              SizedBox(
-                                width: 320,
-                                child: _dateText,
+                              OutlinedButton(
+                                onPressed: () {
+                                  showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(1990),
+                                    lastDate: DateTime.now(),
+                                  ).then((date) {
+                                    if (date != null) {
+                                      setState(() {
+                                        _date = date;
+                                      });
+                                      updateDate();
+                                    }
+                                  });
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: const [
+                                    Text('Select day'),
+                                    SizedBox(width: 5),
+                                    Icon(
+                                      CommunityMaterialIcons.calendar_month,
+                                      size: 20.0,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Expanded(child: Container()),
+                              const Spacer(),
                               OutlinedButton(
                                 onPressed: () {
                                   setState(() {
@@ -73,7 +109,10 @@ class _MedicaminaDashHealthDesktopWidgetState extends State<MedicaminaDashHealth
                                   ],
                                 ),
                               ),
-                              const SizedBox(width: 5),
+                              SizedBox(
+                                width: 240,
+                                child: Center(child: _dateText),
+                              ),
                               OutlinedButton(
                                 onPressed: DateUtils.dateOnly(_date).isBefore(DateUtils.dateOnly(DateTime.now()))
                                     ? () {
@@ -86,7 +125,7 @@ class _MedicaminaDashHealthDesktopWidgetState extends State<MedicaminaDashHealth
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: const [
-                                    Text('Next day'),
+                                    Text('Forward day'),
                                     SizedBox(width: 5),
                                     Icon(
                                       Icons.arrow_forward,
@@ -95,43 +134,20 @@ class _MedicaminaDashHealthDesktopWidgetState extends State<MedicaminaDashHealth
                                   ],
                                 ),
                               ),
-                              Expanded(child: Container()),
+                              const Spacer(),
                               OutlinedButton(
                                 onPressed: () {
-                                  showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    firstDate: DateTime(1990),
-                                    lastDate: DateTime.now(),
-                                  ).then((date) {
-                                    setState(() {
-                                      _date = date!;
-                                    });
-                                    updateDate();
+                                  setState(() {
+                                    _showWeekly = !_showWeekly;
                                   });
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
-                                  children: const [
-                                    Text('Select day'),
-                                    SizedBox(width: 5),
+                                  children: [
+                                    const Text('Weekly view'),
+                                    const SizedBox(width: 5),
                                     Icon(
-                                      CommunityMaterialIcons.calendar_month,
-                                      size: 20.0,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(width: 5),
-                              OutlinedButton(
-                                onPressed: () {},
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: const [
-                                    Text('Switch to weekly view'),
-                                    SizedBox(width: 5),
-                                    Icon(
-                                      CommunityMaterialIcons.toggle_switch,
+                                      _getWeeklyViewIcon(),
                                       size: 20.0,
                                     ),
                                   ],
@@ -414,11 +430,13 @@ class _MedicaminaDashHealthDesktopWidgetState extends State<MedicaminaDashHealth
                                                     child: Material(
                                                       child: InkWell(
                                                         radius: 84,
-                                                        onTap: () {
-                                                          setState(() {
-                                                            _showHeartRate = true;
-                                                          });
-                                                        },
+                                                        onTap: _showHeartRate
+                                                            ? null
+                                                            : () {
+                                                                setState(() {
+                                                                  _showHeartRate = true;
+                                                                });
+                                                              },
                                                         child: Column(
                                                           mainAxisAlignment: MainAxisAlignment.center,
                                                           children: [
@@ -442,11 +460,13 @@ class _MedicaminaDashHealthDesktopWidgetState extends State<MedicaminaDashHealth
                                                     child: Material(
                                                       child: InkWell(
                                                         radius: 84,
-                                                        onTap: () {
-                                                          setState(() {
-                                                            _showHeartRate = false;
-                                                          });
-                                                        },
+                                                        onTap: _showHeartRate
+                                                            ? () {
+                                                                setState(() {
+                                                                  _showHeartRate = false;
+                                                                });
+                                                              }
+                                                            : null,
                                                         child: Column(
                                                           mainAxisAlignment: MainAxisAlignment.center,
                                                           children: [
@@ -463,7 +483,7 @@ class _MedicaminaDashHealthDesktopWidgetState extends State<MedicaminaDashHealth
                                                 ),
                                               ),
                                             ],
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ],
@@ -779,9 +799,9 @@ class _MedicaminaDashHealthDesktopWidgetState extends State<MedicaminaDashHealth
                                                   child: Column(
                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                     children: const [
-                                                      Icon(Icons.question_answer, size: 66),
+                                                      Icon(CommunityMaterialIcons.glass_mug_variant, size: 66),
                                                       SizedBox(height: 2),
-                                                      Text('Questions', style: TextStyle(fontWeight: FontWeight.normal), textAlign: TextAlign.center),
+                                                      Text('Drugs &\nAlcohol', style: TextStyle(fontWeight: FontWeight.normal), textAlign: TextAlign.center),
                                                     ],
                                                   ),
                                                 ),

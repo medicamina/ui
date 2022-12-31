@@ -6,7 +6,7 @@ import 'package:medicamina/app/states.dart';
 import 'package:medicamina/app/appbar.dart';
 import 'package:medicamina/app/auth/guards.dart';
 import 'package:medicamina/app/auth/landing/page.dart';
-import 'package:medicamina/app/auth/login/guards.dart';
+import 'package:medicamina/app/auth/landing/guards.dart';
 import 'package:medicamina/app/auth/login/page.dart';
 import 'package:medicamina/app/auth/register/page.dart';
 import 'package:medicamina/app/auth/password/page.dart';

@@ -48,6 +48,7 @@ class _MedicaminaDashSettingsDesktopWidgetState extends State<MedicaminaDashSett
     if (uri == _uri) {
       return Border(left: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 1.5));
     }
+    return null;
   }
 
   @override
@@ -128,9 +129,15 @@ class _MedicaminaDashSettingsDesktopWidgetState extends State<MedicaminaDashSett
                               Modular.to.pushNamedOrPopUntil('./billing');
                             },
                           ),
-                          Expanded(
-                            child: Container(),
+                          ListTile(
+                            title: const Text('Logout', style: TextStyle(color: Colors.red)),
+                            onTap: () async {
+                              Modular.get<SupabaseClient>().auth.signOut().then((value) {
+                                Modular.to.navigate('/');
+                              });
+                            },
                           ),
+                          const Spacer(),
                           Padding(
                             padding: const EdgeInsets.all(12),
                             child: Column(

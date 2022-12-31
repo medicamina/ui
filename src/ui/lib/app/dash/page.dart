@@ -31,7 +31,7 @@ class _MedicaminaDashPage extends State<MedicaminaDashPage> {
           _currentIndex = 0;
         });
         break;
-      case '/dash/history':
+      case '/dash/edicts':
         setState(() {
           _currentIndex = 1;
         });
@@ -132,7 +132,7 @@ class _MedicaminaDashPage extends State<MedicaminaDashPage> {
               Modular.to.pushNamedOrPopUntil('/dash/home');
               break;
             case 1:
-              Modular.to.pushNamedOrPopUntil('/dash/history');
+              Modular.to.pushNamedOrPopUntil('/dash/edicts');
               break;
             case 2:
               Modular.to.pushNamedOrPopUntil('/dash/health');

@@ -19,9 +19,9 @@ class MedicaminaDashSettingsModule extends Module {
     return [
       ChildRoute('/', child: (context, args) => const MedicaminaDashSettingsWidget(), 
       children: [
-        ChildRoute('/account', child: (context, args) => const MedicaminaDashSettingsAccountWidget(), transition: TransitionType.noTransition),
-        ChildRoute('/security', child: (context, args) => const MedicaminaDashSettingsSecurityWidget(), transition: TransitionType.noTransition),
-        ChildRoute('/billing', child: (context, args) => const MedicaminaDashSettingsBillingWidget(), transition: TransitionType.noTransition)
+        ChildRoute('/account', child: (context, args) => const MedicaminaDashSettingsAccountWidget(), transition: TransitionType.scale),
+        ChildRoute('/security', child: (context, args) => const MedicaminaDashSettingsSecurityWidget(), transition: TransitionType.scale),
+        ChildRoute('/billing', child: (context, args) => const MedicaminaDashSettingsBillingWidget(), transition: TransitionType.scale)
       ]),
 
       RedirectRoute('/dash/settings/account/', to: '/dash/settings/account'),

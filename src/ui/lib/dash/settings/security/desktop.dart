@@ -51,329 +51,331 @@ class _MedicaminaDashSettingsSecurityDesktopWidget extends State<MedicaminaDashS
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Security', style: Theme.of(context).textTheme.headline6),
-          const SizedBox(height: 4),
-          const Divider(height: 1),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 4),
-                child: Text(
-                  'Change password',
-                  style: getDividerLabelStyle(),
+      child: Scaffold(
+        backgroundColor: Theme.of(context).cardColor,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Security', style: Theme.of(context).textTheme.headline6),
+            const SizedBox(height: 4),
+            const Divider(height: 1),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: Text(
+                    'Change password',
+                    style: getDividerLabelStyle(),
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 32),
-                      child: Text(
-                        'Old password',
-                        style: getInputLabelStyle(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                child: Column(
-                  children: const [
-                    SizedBox(
-                      height: 40,
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(CommunityMaterialIcons.form_textbox_password),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                          border: OutlineInputBorder(),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 32),
+                        child: Text(
+                          'Old password',
+                          style: getInputLabelStyle(),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(flex: 1, child: Container()),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 32),
-                      child: Text(
-                        'New password',
-                        style: getInputLabelStyle(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                child: Column(
-                  children: const [
-                    SizedBox(
-                      height: 40,
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(CommunityMaterialIcons.form_textbox_password),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                          border: OutlineInputBorder(),
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    children: const [
+                      SizedBox(
+                        height: 40,
+                        child: TextField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            suffixIcon: Icon(CommunityMaterialIcons.form_textbox_password),
+                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            border: OutlineInputBorder(),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(flex: 1, child: Container()),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 32),
-                      child: Text(
-                        'Confirm new password',
-                        style: getInputLabelStyle(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                child: Column(
-                  children: const [
-                    SizedBox(
-                      height: 40,
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(CommunityMaterialIcons.form_textbox_password),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                          border: OutlineInputBorder(),
+                Expanded(flex: 1, child: Container()),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 32),
+                        child: Text(
+                          'New password',
+                          style: getInputLabelStyle(),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(flex: 1, child: Container()),
-            ],
-          ),
-          const SizedBox(height: 32),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 4),
-                child: Text(
-                  'Change email address',
-                  style: getDividerLabelStyle(),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 32),
-                      child: Text(
-                        'New email address',
-                        style: getInputLabelStyle(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                child: Column(
-                  children: const [
-                    SizedBox(
-                      height: 40,
-                      child: TextField(
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(CommunityMaterialIcons.at),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                          border: OutlineInputBorder(),
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    children: const [
+                      SizedBox(
+                        height: 40,
+                        child: TextField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            suffixIcon: Icon(CommunityMaterialIcons.form_textbox_password),
+                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            border: OutlineInputBorder(),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(flex: 1, child: Container()),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 32),
-                      child: Text(
-                        'Confirm new email address',
-                        style: getInputLabelStyle(),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                child: Column(
-                  children: const [
-                    SizedBox(
-                      height: 40,
-                      child: TextField(
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(CommunityMaterialIcons.at),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                          border: OutlineInputBorder(),
+                Expanded(flex: 1, child: Container()),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 32),
+                        child: Text(
+                          'Confirm new password',
+                          style: getInputLabelStyle(),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(flex: 1, child: Container()),
-            ],
-          ),
-          const SizedBox(height: 32),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 4),
-                child: Text(
-                  'Sign-in settings',
-                  style: getDividerLabelStyle(),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(flex: 1, child: Container()),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 32),
-                      child: Text(
-                        'Disable password',
-                        style: getInputLabelStyle(),
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    children: const [
+                      SizedBox(
+                        height: 40,
+                        child: TextField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            suffixIcon: Icon(CommunityMaterialIcons.form_textbox_password),
+                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 40,
-                      child: Switch(
-                        value: _emailOnly,
-                        activeColor: Colors.red,
-                        onChanged: (bool value) {
-                          setState(() {
-                            _emailOnly = value;
-                          });
-                        },
+                Expanded(flex: 1, child: Container()),
+              ],
+            ),
+            const SizedBox(height: 32),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: Text(
+                    'Change email address',
+                    style: getDividerLabelStyle(),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 32),
+                        child: Text(
+                          'New email address',
+                          style: getInputLabelStyle(),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(flex: 1, child: Container()),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(flex: 1, child: Container()),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 32),
-                      child: Text(
-                        'SMS verify authentication',
-                        style: getInputLabelStyle(),
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    children: const [
+                      SizedBox(
+                        height: 40,
+                        child: TextField(
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            suffixIcon: Icon(CommunityMaterialIcons.at),
+                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 40,
-                      child: Switch(
-                        value: _smsVerify,
-                        activeColor: Colors.red,
-                        onChanged: (bool value) {
-                          setState(() {
-                            _smsVerify = value;
-                          });
-                        },
+                Expanded(flex: 1, child: Container()),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 32),
+                        child: Text(
+                          'Confirm new email address',
+                          style: getInputLabelStyle(),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(flex: 1, child: Container()),
-            ],
-          ),
-
-          Expanded(child: Container()),
-        ],
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    children: const [
+                      SizedBox(
+                        height: 40,
+                        child: TextField(
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            suffixIcon: Icon(CommunityMaterialIcons.at),
+                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(flex: 1, child: Container()),
+              ],
+            ),
+            const SizedBox(height: 32),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 4),
+                  child: Text(
+                    'Sign-in settings',
+                    style: getDividerLabelStyle(),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(flex: 1, child: Container()),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 32),
+                        child: Text(
+                          'Disable password',
+                          style: getInputLabelStyle(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 40,
+                        child: Switch(
+                          value: _emailOnly,
+                          activeColor: Colors.red,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _emailOnly = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(flex: 1, child: Container()),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(flex: 1, child: Container()),
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 32),
+                        child: Text(
+                          'SMS verify authentication',
+                          style: getInputLabelStyle(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 40,
+                        child: Switch(
+                          value: _smsVerify,
+                          activeColor: Colors.red,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _smsVerify = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(flex: 1, child: Container()),
+              ],
+            ),
+            Expanded(child: Container()),
+          ],
+        ),
       ),
     );
   }

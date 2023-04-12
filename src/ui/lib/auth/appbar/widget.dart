@@ -61,9 +61,11 @@ class _MedicaminaAuthAppBarWidget extends State<MedicaminaAuthAppBarWidget> {
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Visibility(
-                        visible: kIsWeb,
-                        child: ListTile(
+                      // Visibility(
+                      //   visible: kIsWeb,
+                      //   child: 
+                        
+                        ListTile(
                           leading: const Icon(Icons.info_outline),
                           title: const Text('Info'),
                           enabled: Modular.args.uri.toString() != '/',
@@ -72,7 +74,7 @@ class _MedicaminaAuthAppBarWidget extends State<MedicaminaAuthAppBarWidget> {
                             Modular.to.navigate('/');
                           },
                         ),
-                      ),
+                      // ),
                       ListTile(
                         leading: const Icon(Icons.login_outlined),
                         title: const Text('Login'),

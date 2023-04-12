@@ -263,9 +263,14 @@ class _ResultsTableState extends State<ResultsTable> {
 
   @override
   Widget build(BuildContext context) {
-
     setState(() {
-      _rowsPerPage = MediaQuery.of(context).size.width >= 2400 ? 18 : MediaQuery.of(context).size.width >= 2000 ? 12 : MediaQuery.of(context).size.width >= 600 ? 4 : 6;
+      _rowsPerPage = MediaQuery.of(context).size.width >= 2400
+          ? 18
+          : MediaQuery.of(context).size.width >= 2000
+              ? 12
+              : MediaQuery.of(context).size.width >= 600
+                  ? 4
+                  : 6;
     });
 
     return Card(
@@ -280,6 +285,17 @@ class _ResultsTableState extends State<ResultsTable> {
         padding: const EdgeInsets.all(6),
         child: Column(
           children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width - 32,
+              child: ListTile(
+                title: Text(
+                  'Genetic disease threat',
+                  style: TextStyle(
+                    fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
             SizedBox(
               width: MediaQuery.of(context).size.width - 32,
               child: Padding(
@@ -326,8 +342,8 @@ class _ResultsTableState extends State<ResultsTable> {
                   columnSpacing: 24,
                   columns: [
                     DataColumn(
-                      label: SizedBox(
-                        width: 100,
+                      label: Expanded(
+                        flex: 3,
                         child: Text(
                           'Condition',
                           style: Theme.of(context).textTheme.subtitle1,
@@ -335,7 +351,8 @@ class _ResultsTableState extends State<ResultsTable> {
                       ),
                     ),
                     DataColumn(
-                      label: Expanded(
+                      label: SizedBox(
+                        width: (MediaQuery.of(context).size.width - 32) * 0.3,
                         child: Center(
                           child: Text(
                             'Risk',
@@ -2319,7 +2336,13 @@ class ResultsData extends DataTableSource {
           ),
         ),
         DataCell(
-          Center(child: Text(_searchedData[index]['risk'].toString())),
+          SizedBox(
+            width: (MediaQuery.of(context).size.width - 32) * 0.3,
+            child: Center(child: Text(_searchedData[index]['risk'].toString())),
+            // child: Wrap(
+            //   children: [Text(_searchedData[index]['condition'].toString())],
+            // ),
+          ),
         )
       ],
     );
@@ -2371,4 +2394,3 @@ Widget desktop(BuildContext context) {
     ),
   );
 }
-

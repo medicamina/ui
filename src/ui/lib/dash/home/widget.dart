@@ -44,17 +44,16 @@ Widget _map(BuildContext context) {
                     builder: (BuildContext context) {
                       return AlertDialog(
                         elevation: 0,
-                        // shape: Border.all(width: 0, style: BorderStyle.none),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
-                        contentPadding: const EdgeInsets.only(top: 16, bottom: 0, left: 0, right: 0),
+                        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
+                        contentPadding: const EdgeInsets.only(top: 16, bottom: 8, left: 8, right: 8),
                         titlePadding: const EdgeInsets.only(left: 18, right: 18, top: 16),
-                        title: Text('Genetic ancestry', style: TextStyle(fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold)),
+                        title: Text('Genetic origin', style: TextStyle(fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold)),
                         actions: [
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: const Text('DISMISS'),
+                            child: const Text('DISMISS', style: TextStyle(fontWeight: FontWeight.bold),),
                           ),
                         ],
                         content: SizedBox(
@@ -63,6 +62,7 @@ Widget _map(BuildContext context) {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               ListTile(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
                                 dense: false,
                                 title: Row(
                                   children: const [
@@ -74,7 +74,7 @@ Widget _map(BuildContext context) {
                                     ),
                                     Spacer(),
                                     Text(
-                                      '99.7%',
+                                      '99.4%',
                                       style: TextStyle(
                                         color: Colors.white,
                                       ),
@@ -92,7 +92,7 @@ Widget _map(BuildContext context) {
                                     Expanded(
                                       child: Container(),
                                     ),
-                                    const Text('75%'),
+                                    const Text('69%'),
                                   ],
                                 ),
                               ),
@@ -111,11 +111,56 @@ Widget _map(BuildContext context) {
                                     Expanded(
                                       child: Container(),
                                     ),
-                                    const Text('25%'),
+                                    const Text('19%'),
                                   ],
                                 ),
                               ),
+                              const Divider(
+                                thickness: 0.3,
+                                height: 0,
+                                indent: 8,
+                                endIndent: 8,
+                              ),
                               ListTile(
+                                contentPadding: const EdgeInsets.only(left: 18, right: 18),
+                                dense: true,
+                                title: Row(
+                                  children: [
+                                    const Text('Scottish'),
+                                    Expanded(
+                                      child: Container(),
+                                    ),
+                                    const Text('9%'),
+                                  ],
+                                ),
+                              ),
+                              const Divider(
+                                thickness: 0.3,
+                                height: 0,
+                                indent: 8,
+                                endIndent: 8,
+                              ),
+                              ListTile(
+                                contentPadding: const EdgeInsets.only(left: 18, right: 18),
+                                dense: true,
+                                title: Row(
+                                  children: [
+                                    const Text('Belgian'),
+                                    Expanded(
+                                      child: Container(),
+                                    ),
+                                    const Text('3%'),
+                                  ],
+                                ),
+                              ),
+                              const Divider(
+                                thickness: 0.3,
+                                height: 0,
+                                indent: 8,
+                                endIndent: 8,
+                              ),
+                              ListTile(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
                                 dense: false,
                                 title: Row(
                                   children: const [
@@ -142,6 +187,47 @@ Widget _map(BuildContext context) {
                                 title: Row(
                                   children: [
                                     const Text('Aboriginal'),
+                                    Expanded(
+                                      child: Container(),
+                                    ),
+                                    const Text('100%'),
+                                  ],
+                                ),
+                              ),
+                              const Divider(
+                                thickness: 0.3,
+                                height: 0,
+                                indent: 8,
+                                endIndent: 8,
+                              ),
+                              ListTile(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+                                dense: false,
+                                title: Row(
+                                  children: const [
+                                    Text(
+                                      'Indian',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    Text(
+                                      '0.3%',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                tileColor: Color.fromARGB(255, 129, 143, 6),
+                              ),
+                              ListTile(
+                                contentPadding: const EdgeInsets.only(left: 18, right: 18),
+                                dense: true,
+                                title: Row(
+                                  children: [
+                                    const Text('East Indian'),
                                     Expanded(
                                       child: Container(),
                                     ),
@@ -236,18 +322,11 @@ class ResultsTable extends StatefulWidget {
 }
 
 class _ResultsTableState extends State<ResultsTable> {
-  final int _defaultRowsPerPage = 4;
-  late int _rowsPerPage;
+  late int _rowsPerPage = 8;
+  var _availableRowsPerPage = <int>[4, 8, 12, 16];
+  var _canChangeRows = true;
   final _searchController = TextEditingController();
   String _searchValue = '';
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      _rowsPerPage = _defaultRowsPerPage;
-    });
-  }
 
   void _updateRowsPerPage(val) {
     setState(() {
@@ -263,15 +342,54 @@ class _ResultsTableState extends State<ResultsTable> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      _rowsPerPage = MediaQuery.of(context).size.width >= 2400
-          ? 18
-          : MediaQuery.of(context).size.width >= 2000
-              ? 12
-              : MediaQuery.of(context).size.width >= 600
-                  ? 4
-                  : 6;
-    });
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    var rowsSet = false;
+    if (width <= 460) {
+      setState(() {
+        _canChangeRows = false;
+      });
+
+      if (height <= 720) {
+        if (!rowsSet) {
+          setState(() {
+            _rowsPerPage = 4;
+            _availableRowsPerPage = [4];
+          });
+          rowsSet = true;
+        }
+      }
+
+      if (height <= 900) {
+        if (!rowsSet) {
+          setState(() {
+            _rowsPerPage = 6;
+            _availableRowsPerPage = [6];
+          });
+          rowsSet = true;
+        }
+      }
+    }
+
+    if (height <= 800) {
+      if (!rowsSet) {
+        setState(() {
+          _rowsPerPage = 6;
+          _availableRowsPerPage = [6];
+          _canChangeRows = false;
+        });
+        rowsSet = true;
+      }
+    }
+
+    if (height <= 1024) {
+      if (!rowsSet) {
+        setState(() {
+          _availableRowsPerPage = [4, 8, 12];
+        });
+        rowsSet = true;
+      }
+    }
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -337,13 +455,15 @@ class _ResultsTableState extends State<ResultsTable> {
                   showCheckboxColumn: false,
                   dataRowHeight: MediaQuery.of(context).size.width < 600 ? 72 : kMinInteractiveDimension,
                   rowsPerPage: _rowsPerPage,
-                  onRowsPerPageChanged: MediaQuery.of(context).size.width <= 600 ? null : _updateRowsPerPage,
-                  availableRowsPerPage: MediaQuery.of(context).size.width <= 600 ? [6] : [4, 6, 12, 18],
+                  availableRowsPerPage: _availableRowsPerPage,
+                  onRowsPerPageChanged: _canChangeRows ? _updateRowsPerPage : null,
                   columnSpacing: 24,
                   columns: [
                     DataColumn(
-                      label: Expanded(
-                        flex: 3,
+                      // label: Expanded(
+                      //   flex: 3,
+                      label: SizedBox(
+                        width: 1000 > MediaQuery.of(context).size.width ? (MediaQuery.of(context).size.width - 32) * 0.5 : (MediaQuery.of(context).size.width - 32) * 0.8,
                         child: Text(
                           'Condition',
                           style: Theme.of(context).textTheme.subtitle1,
@@ -352,7 +472,7 @@ class _ResultsTableState extends State<ResultsTable> {
                     ),
                     DataColumn(
                       label: SizedBox(
-                        width: (MediaQuery.of(context).size.width - 32) * 0.3,
+                        width: 1000 > MediaQuery.of(context).size.width ? (MediaQuery.of(context).size.width - 32) * 0.15 : (MediaQuery.of(context).size.width - 32) * 0.1,
                         child: Center(
                           child: Text(
                             'Risk',
@@ -2315,21 +2435,21 @@ class ResultsData extends DataTableSource {
     return DataRow(
       onSelectChanged: (val) {
         showDialog(
-            context: context,
-            builder: (builder) {
-              return AlertDialog(
-                title: Text(
-                  _searchedData[index]['condition'],
-                ),
-                content: const Text('Some sort of disease, you might be fucked'),
-              );
-            });
-        // print(_searchedData[index]);
+          context: context,
+          builder: (builder) {
+            return AlertDialog(
+              title: Text(
+                _searchedData[index]['condition'],
+              ),
+              content: const Text('Some sort of disease'),
+            );
+          },
+        );
       },
       cells: [
         DataCell(
           SizedBox(
-            width: (MediaQuery.of(context).size.width - 32) * 0.6,
+            width: 1000 > MediaQuery.of(context).size.width ? (MediaQuery.of(context).size.width - 32) * 0.5 : (MediaQuery.of(context).size.width - 32) * 0.8,
             child: Wrap(
               children: [Text(_searchedData[index]['condition'].toString())],
             ),
@@ -2337,11 +2457,8 @@ class ResultsData extends DataTableSource {
         ),
         DataCell(
           SizedBox(
-            width: (MediaQuery.of(context).size.width - 32) * 0.3,
+            width: 1000 > MediaQuery.of(context).size.width ? (MediaQuery.of(context).size.width - 32) * 0.15 : (MediaQuery.of(context).size.width - 32) * 0.1,
             child: Center(child: Text(_searchedData[index]['risk'].toString())),
-            // child: Wrap(
-            //   children: [Text(_searchedData[index]['condition'].toString())],
-            // ),
           ),
         )
       ],

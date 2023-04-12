@@ -54,17 +54,25 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                         children: [
                           // Visibility(
                           //   visible: kIsWeb,
-                          //   child: 
-                            
-                            ListTile(
-                              leading: const Icon(Icons.info_outline),
-                              title: const Text('Info'),
-                              enabled: Modular.args.uri.toString() != '/',
-                              onTap: () {
-                                Navigator.pop(context);
-                                Modular.to.navigate('/');
-                              },
-                            ),
+                          //   child:
+                          ListTile(
+                            leading: const Icon(Icons.computer),
+                            title: const Text('Dash (debug)'),
+                            enabled: Modular.args.uri.toString() != '/dash',
+                            onTap: () {
+                              Navigator.pop(context);
+                              Modular.to.navigate('/dash/');
+                            },
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.info_outline),
+                            title: const Text('Info'),
+                            enabled: Modular.args.uri.toString() != '/',
+                            onTap: () {
+                              Navigator.pop(context);
+                              Modular.to.navigate('/');
+                            },
+                          ),
                           // ),
                           ListTile(
                             leading: const Icon(Icons.login_outlined),

@@ -42,19 +42,16 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
           title: Padding(padding: const EdgeInsets.only(top: 2), child: Text('medicamina', style: GoogleFonts.balooTamma2())),
           centerTitle: true,
           actions: [
-            Visibility(
-              child: IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (_) => AlertDialog(
-                      title: const Center(child: Text('Navigate')),
-                      content: Column(
+            IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (_) => AlertDialog(
+                    title: const Center(child: Text('Navigate')),
+                    content: SingleChildScrollView(
+                      child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          // Visibility(
-                          //   visible: kIsWeb,
-                          //   child:
                           ListTile(
                             leading: const Icon(Icons.computer),
                             title: const Text('Dash (debug)'),
@@ -73,7 +70,6 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                               Modular.to.navigate('/');
                             },
                           ),
-                          // ),
                           ListTile(
                             leading: const Icon(Icons.login_outlined),
                             title: const Text('Login'),
@@ -104,11 +100,10 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                         ],
                       ),
                     ),
-                  );
-                },
-                icon: const Icon(Icons.menu),
-              ),
-              // visible: Modular.get<SupabaseClient>().auth.currentSession == null,
+                  ),
+                );
+              },
+              icon: const Icon(Icons.menu),
             ),
           ],
         ),
@@ -134,7 +129,7 @@ TextStyle? setHeadlineSize(context) {
 Widget user(BuildContext context, double width) {
   return SizedBox(
     width: MediaQuery.of(context).size.width * width,
-    height: 350,
+    height: 330,
     child: Card(
       child: Column(
         children: <Widget>[
@@ -166,13 +161,13 @@ Widget user(BuildContext context, double width) {
             children: <Widget>[
               ElevatedButton(
                 onPressed: () {
-                  // Beamer.of(context, root: true).beamToNamed('/register');
+                  Modular.to.navigate('/auth/register');
                 },
                 child: const Text('REGISTER'),
               ),
-              const Padding(padding: EdgeInsets.all(5)),
             ],
-          )
+          ),
+          const Spacer(),
         ],
       ),
     ),
@@ -182,7 +177,7 @@ Widget user(BuildContext context, double width) {
 Widget doctor(BuildContext context, double width) {
   return SizedBox(
     width: MediaQuery.of(context).size.width * width,
-    height: 370,
+    height: kIsWeb ? 360 : 380,
     child: Card(
       child: Column(
         children: <Widget>[
@@ -217,19 +212,20 @@ Widget doctor(BuildContext context, double width) {
           Column(
             children: <Widget>[
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Modular.to.navigate('/dash/settings/upgrade');
+                },
                 child: const Text(
                   'UPGRADE',
                   style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.4),
                 ),
                 style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(110, 45), //////// HERE
+                  minimumSize: const Size(110, 45),
                 ),
               ),
-              const Padding(padding: EdgeInsets.all(5)),
             ],
           ),
-          const Padding(padding: EdgeInsets.only(top: 4)),
+          const Spacer(),
         ],
       ),
     ),
@@ -239,7 +235,7 @@ Widget doctor(BuildContext context, double width) {
 Widget geneticTest(BuildContext context, double width) {
   return SizedBox(
     width: MediaQuery.of(context).size.width * width,
-    height: 350,
+    height: 330,
     child: Card(
       child: Column(
         children: <Widget>[
@@ -269,10 +265,15 @@ Widget geneticTest(BuildContext context, double width) {
           const Spacer(),
           Column(
             children: <Widget>[
-              ElevatedButton(onPressed: () {}, child: const Text('ORDER')),
-              const Padding(padding: EdgeInsets.all(5)),
+              ElevatedButton(
+                onPressed: () {
+                  Modular.to.navigate('/dash/settings/order');
+                },
+                child: const Text('ORDER'),
+              ),
             ],
-          )
+          ),
+          const Spacer(),
         ],
       ),
     ),

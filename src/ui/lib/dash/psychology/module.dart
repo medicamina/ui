@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina/dash/psychology/not-found/widget.dart';
 import 'package:medicamina/dash/psychology/widget.dart';

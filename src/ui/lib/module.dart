@@ -25,6 +25,7 @@ class MedicaminaAppModule extends Module {
     ModuleRoute('/auth', module: MedicaminaAuthModule()),
     ModuleRoute('/dash', module: MedicaminaDashModule()),
 
+    RedirectRoute('/auth', to: '/auth/'),
     RedirectRoute('/dash', to: '/dash/'),
     WildcardRoute(child: (context, args) => const MedicaminaNotFoundWidget()),
   ];

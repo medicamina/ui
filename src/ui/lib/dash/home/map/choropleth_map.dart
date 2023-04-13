@@ -261,11 +261,11 @@ class __ChoroplethMapState extends State<ChoroplethMap> {
       primaryValueMapper: (int index) => _worldPopulationDensityDetails[index].countryName,
       shapeColorValueMapper: (int index) => _worldPopulationDensityDetails[index].density,
       shapeColorMappers: const [
-        MapColorMapper(from: 0, to: 25, color: Color.fromRGBO(223, 169, 254, 1), text: '{0},{25}'),
-        MapColorMapper(from: 25, to: 75, color: Color.fromRGBO(190, 78, 253, 1), text: '75'),
-        MapColorMapper(from: 75, to: 150, color: Color.fromRGBO(167, 17, 252, 1), text: '150'),
-        MapColorMapper(from: 150, to: 400, color: Color.fromRGBO(152, 3, 236, 1), text: '400'),
-        MapColorMapper(from: 400, to: 50000, color: Color.fromRGBO(113, 2, 176, 1), text: '>500'),
+        MapColorMapper(from: 0, to: 25, color: Color.fromRGBO(237, 202, 255, 1), text: '{0},{25}'),
+        MapColorMapper(from: 25, to: 75, color: Color.fromRGBO(222, 165, 255, 1), text: '75'),
+        MapColorMapper(from: 75, to: 150, color: Color.fromRGBO(187, 71, 255, 1), text: '150'),
+        MapColorMapper(from: 150, to: 400, color: Color.fromRGBO(170, 22, 255, 1), text: '400'),
+        MapColorMapper(from: 400, to: 50000, color: Color.fromRGBO(132, 0, 208, 1), text: '>500'),
       ],
     );
   }
@@ -278,32 +278,24 @@ class __ChoroplethMapState extends State<ChoroplethMap> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SfMaps(
-          layers: [
-            MapShapeLayer(
-              shapeTooltipBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text(
-                    _worldPopulationDensityDetails[index].countryName,
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                );
-              },
-              tooltipSettings: MapTooltipSettings(
-                color: Colors.grey[700],
+    return SfMaps(
+      layers: [
+        MapShapeLayer(
+          shapeTooltipBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                _worldPopulationDensityDetails[index].countryName,
+                style: const TextStyle(color: Colors.white),
               ),
-              source: _mapShapeSource,
-              strokeColor: Colors.white30,
-            ),
-          ],
+            );
+          },
+          tooltipSettings: MapTooltipSettings(
+            color: Colors.grey[700],
+          ),
+          source: _mapShapeSource,
+          strokeColor: Colors.white30,
         ),
-        const Padding(
-          padding: EdgeInsets.only(top: 10.0, bottom: 10),
-        )
       ],
     );
   }

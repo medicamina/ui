@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina/states.dart';
 
@@ -82,7 +79,7 @@ class _MedicaminaDashSettingsBillingDesktopWidget extends State<MedicaminaDashSe
                             Text(
                               'Next payment due',
                               style: TextStyle(
-                                color: Modular.get<MedicaminaThemeState>().getDarkMode() ? null : Color.fromRGBO(87, 96, 106, 1),
+                                color: Modular.get<MedicaminaThemeState>().getDarkMode() ? null : const Color.fromRGBO(87, 96, 106, 1),
                                 fontWeight: FontWeight.w400,
                                 letterSpacing: 0.4,
                               ),
@@ -92,7 +89,7 @@ class _MedicaminaDashSettingsBillingDesktopWidget extends State<MedicaminaDashSe
                             const SizedBox(height: 20),
                             TextButton(
                               onPressed: () {},
-                              child: Text('View payment history'),
+                              child: const Text('View payment history'),
                             ),
                             // Text('Switch to yearly billing', style: TextStyle(color: Colors.blue),),
                           ],

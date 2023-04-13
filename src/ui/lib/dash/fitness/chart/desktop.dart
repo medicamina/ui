@@ -99,7 +99,7 @@ class TestLineChart extends StatelessWidget {
             curveSmoothness: 0.45,
             isCurved: true,
             dotData: FlDotData(show: false),
-            color: Colors.redAccent,
+            color: Theme.of(context).colorScheme.tertiary,
             spots: showHeartRate
                 ?  heartRates : steps,
           ),

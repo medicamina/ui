@@ -62,30 +62,30 @@ class TestLineChart extends StatelessWidget {
                 showTitles: true,
                 getTitlesWidget: (value, meta) {
                   if (value == 2) {
-                    return Padding(padding: EdgeInsets.only(top: 0), child: Text('2am'),);
+                    return const Padding(padding: EdgeInsets.only(top: 0), child: Text('2am'),);
                   }
                   if (value == 5) {
-                    return Padding(padding: EdgeInsets.only(top: 0), child: Text('5am'),);
+                    return const Padding(padding: EdgeInsets.only(top: 0), child: Text('5am'),);
                   }
                   if (value == 8) {
-                    return Padding(padding: EdgeInsets.only(top: 0), child: Text('8am'),);
+                    return const Padding(padding: EdgeInsets.only(top: 0), child: Text('8am'),);
                   }
                   if (value == 11) {
-                    return Padding(padding: EdgeInsets.only(top: 0), child: Text('11am'),);
+                    return const Padding(padding: EdgeInsets.only(top: 0), child: Text('11am'),);
                   }
                   if (value == 14) {
-                    return Padding(padding: EdgeInsets.only(top: 0), child: Text('2pm'),);
+                    return const Padding(padding: EdgeInsets.only(top: 0), child: Text('2pm'),);
                   }
                   if (value == 17) {
-                    return Padding(padding: EdgeInsets.only(top: 0), child: Text('5pm'),);
+                    return const Padding(padding: EdgeInsets.only(top: 0), child: Text('5pm'),);
                   }
                   if (value == 20) {
-                    return Padding(padding: EdgeInsets.only(top: 0), child: Text('8pm'),);
+                    return const Padding(padding: EdgeInsets.only(top: 0), child: Text('8pm'),);
                   }
                   if (value == 23) {
-                    return Padding(padding: EdgeInsets.only(top: 0), child: Text('11pm'),);
+                    return const Padding(padding: EdgeInsets.only(top: 0), child: Text('11pm'),);
                   }
-                  return Text('');
+                  return const Text('');
                 },
               ),
             )),

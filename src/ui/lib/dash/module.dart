@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina/dash/appointment/widget.dart';
 import 'package:medicamina/dash/edicts/widget.dart';
@@ -38,10 +37,12 @@ class MedicaminaDashModule extends Module {
         WildcardRoute(child: (context, args) => const MedicaminaDashNotFoundWidget()),
       ]),
 
+      // widgets
       RedirectRoute('/dash/home/', to: '/dash/home'),
       RedirectRoute('/dash/edicts/', to: '/dash/edicts'),
       RedirectRoute('/dash/fitness/', to: '/dash/fitness'),
       RedirectRoute('/dash/appointment/', to: '/dash/appointment'),
+      // modules
       RedirectRoute('/dash/family', to: '/dash/family/'),
       RedirectRoute('/dash/psychology', to: '/dash/psychology/'),
       RedirectRoute('/dash/settings', to: '/dash/settings/'),

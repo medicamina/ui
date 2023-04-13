@@ -410,7 +410,7 @@ class _MedicaminaDashFitnessDesktopWidget extends State<MedicaminaDashFitnessDes
                                       ListTile(
                                         title: Text(
                                           _showHeartRate ? 'Heart rate' : 'Daily activity',
-                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                          style: const TextStyle(fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                       Stack(
@@ -818,14 +818,14 @@ class _MedicaminaDashFitnessDesktopWidget extends State<MedicaminaDashFitnessDes
                               ],
                             ),
                           ),
-                          SizedBox(height: 6),
+                          const SizedBox(height: 6),
                         ],
                       ),
                     ),
                   ),
                 ],
               ),
-              Padding(padding: EdgeInsets.only(bottom: 6)),
+              const Padding(padding: EdgeInsets.only(bottom: 6)),
             ],
           ),
         ),

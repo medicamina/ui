@@ -6,13 +6,18 @@ class MedicaminaAppWidget extends StatelessWidget {
   const MedicaminaAppWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     Modular.get<MedicaminaThemeState>().setDarkMode(false);
 
     return MaterialApp.router(
       title: 'medicamina',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(useMaterial3: false).copyWith(colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.orange)),
+      theme: ThemeData.light(useMaterial3: false).copyWith(
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          secondary: Colors.orange,
+          tertiary: Colors.pinkAccent
+        ),
+      ),
       darkTheme: ThemeData.dark(useMaterial3: false).copyWith(
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Color.fromARGB(255, 88, 88, 88),
@@ -24,6 +29,6 @@ class MedicaminaAppWidget extends StatelessWidget {
       themeMode: Modular.get<MedicaminaThemeState>().getThemeMode(),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
-    ); //added by extension 
+    ); //added by extension
   }
 }

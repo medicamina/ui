@@ -253,21 +253,6 @@ class __ChoroplethMapState extends State<ChoroplethMap> {
       _CountryDensityModel('Falkland Is.', 0.2),
       _CountryDensityModel('Greenland', 0.1),
     ];
-
-    _mapShapeSource = MapShapeSource.asset(
-      'assets/world_map.json',
-      shapeDataField: 'name',
-      dataCount: _worldPopulationDensityDetails.length,
-      primaryValueMapper: (int index) => _worldPopulationDensityDetails[index].countryName,
-      shapeColorValueMapper: (int index) => _worldPopulationDensityDetails[index].density,
-      shapeColorMappers: const [
-        MapColorMapper(from: 0, to: 25, color: Color.fromRGBO(237, 202, 255, 1), text: '{0},{25}'),
-        MapColorMapper(from: 25, to: 75, color: Color.fromRGBO(222, 165, 255, 1), text: '75'),
-        MapColorMapper(from: 75, to: 150, color: Color.fromRGBO(187, 71, 255, 1), text: '150'),
-        MapColorMapper(from: 150, to: 400, color: Color.fromRGBO(170, 22, 255, 1), text: '400'),
-        MapColorMapper(from: 400, to: 50000, color: Color.fromRGBO(132, 0, 208, 1), text: '>500'),
-      ],
-    );
   }
 
   @override
@@ -278,6 +263,21 @@ class __ChoroplethMapState extends State<ChoroplethMap> {
 
   @override
   Widget build(BuildContext context) {
+    _mapShapeSource = MapShapeSource.asset(
+      'assets/world_map.json',
+      shapeDataField: 'name',
+      dataCount: _worldPopulationDensityDetails.length,
+      primaryValueMapper: (int index) => _worldPopulationDensityDetails[index].countryName,
+      shapeColorValueMapper: (int index) => _worldPopulationDensityDetails[index].density,
+      shapeColorMappers: [
+        MapColorMapper(from: 0, to: 25, color: Theme.of(context).colorScheme.tertiary.withAlpha(60), text: '{0},{25}'),
+        MapColorMapper(from: 25, to: 75, color: Theme.of(context).colorScheme.tertiary.withAlpha(110), text: '75'),
+        MapColorMapper(from: 75, to: 150, color: Theme.of(context).colorScheme.tertiary.withAlpha(160), text: '150'),
+        MapColorMapper(from: 150, to: 400, color: Theme.of(context).colorScheme.tertiary.withAlpha(200), text: '400'),
+        MapColorMapper(from: 400, to: 50000, color: Theme.of(context).colorScheme.tertiary, text: '>500'),
+      ],
+    );
+
     return SfMaps(
       layers: [
         MapShapeLayer(

@@ -128,7 +128,13 @@ class _MedicaminaDashSettingsDesktopWidgetState extends State<MedicaminaDashSett
                             },
                           ),
                           ListTile(
-                            title: const Text('Logout', style: TextStyle(color: Colors.red)),
+                            tileColor: Colors.red.shade300.withAlpha(20),
+                            title: const Text(
+                              'Logout',
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
                             onTap: () async {
                               Modular.get<SupabaseClient>().auth.signOut().then((value) {
                                 Modular.to.navigate('/');
@@ -142,9 +148,10 @@ class _MedicaminaDashSettingsDesktopWidgetState extends State<MedicaminaDashSett
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 TextButton(
-                                  child: const Text('RESET'),
+                                  child: const Text('CANCEL'),
                                   style: TextButton.styleFrom(
                                     foregroundColor: Colors.red,
+                                    backgroundColor: Colors.red.shade300.withAlpha(20),
                                     padding: const EdgeInsets.only(right: 14, left: 14),
                                   ),
                                   onPressed: _loading

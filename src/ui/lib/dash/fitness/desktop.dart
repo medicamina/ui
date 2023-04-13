@@ -197,10 +197,10 @@ class _MedicaminaDashFitnessDesktopWidget extends State<MedicaminaDashFitnessDes
                                                   children: [
                                                     Column(
                                                       children: [
-                                                        const Icon(
+                                                        Icon(
                                                           Icons.directions_walk,
                                                           size: 140,
-                                                          color: Colors.redAccent,
+                                                          color: Theme.of(context).colorScheme.tertiary,
                                                         ),
                                                         Text(
                                                           'Walking',
@@ -320,10 +320,10 @@ class _MedicaminaDashFitnessDesktopWidget extends State<MedicaminaDashFitnessDes
                                                   children: [
                                                     Column(
                                                       children: [
-                                                        const Icon(
+                                                        Icon(
                                                           Icons.monitor_heart_outlined,
                                                           size: 140,
-                                                          color: Colors.redAccent,
+                                                          color: Theme.of(context).colorScheme.tertiary,
                                                         ),
                                                         Text(
                                                           'Heart rate',
@@ -349,7 +349,7 @@ class _MedicaminaDashFitnessDesktopWidget extends State<MedicaminaDashFitnessDes
                                                     Padding(
                                                       padding: EdgeInsets.zero,
                                                       child: Text(
-                                                        'Healthy',
+                                                        'Daily average',
                                                         style: TextStyle(
                                                           color: Modular.get<MedicaminaThemeState>().getDarkMode() ? null : Colors.black54,
                                                           fontSize: 22,
@@ -445,7 +445,7 @@ class _MedicaminaDashFitnessDesktopWidget extends State<MedicaminaDashFitnessDes
                                                             Icon(
                                                               CommunityMaterialIcons.heart,
                                                               size: _showHeartRate ? 33 : 20,
-                                                              color: _showHeartRate ? Colors.redAccent : Colors.black,
+                                                              color: _showHeartRate ? Theme.of(context).colorScheme.tertiary : Colors.black,
                                                             ),
                                                           ],
                                                         ),
@@ -475,7 +475,7 @@ class _MedicaminaDashFitnessDesktopWidget extends State<MedicaminaDashFitnessDes
                                                             Icon(
                                                               CommunityMaterialIcons.shoe_print,
                                                               size: !_showHeartRate ? 33 : 20,
-                                                              color: !_showHeartRate ? Colors.redAccent : Colors.black,
+                                                              color: !_showHeartRate ? Theme.of(context).colorScheme.tertiary : Colors.black,
                                                             ),
                                                           ],
                                                         ),

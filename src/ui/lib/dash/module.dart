@@ -10,13 +10,14 @@ import 'package:medicamina/dash/home/widget.dart';
 import 'package:medicamina/dash/not-found/widget.dart';
 import 'package:medicamina/dash/psychology/module.dart';
 import 'package:medicamina/dash/settings/module.dart';
+import 'package:medicamina/dash/states.dart';
 import 'package:medicamina/dash/widget.dart';
 
 class MedicaminaDashModule extends Module {
   @override
   List<Bind> get binds {
     return [
-      
+      Bind.lazySingleton((i) => MedicaminaTodaysDrugs())
     ];
   }
 

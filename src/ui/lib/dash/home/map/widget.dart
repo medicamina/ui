@@ -1,4 +1,3 @@
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -29,7 +28,8 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
               ),
             ),
             trailing: IconButton(
-              icon: const Icon(CommunityMaterialIcons.information),
+              tooltip: 'Detailed DNA',
+              icon: const Icon(Icons.fingerprint),
               onPressed: () {
                 showDialog(
                   context: context,
@@ -45,7 +45,10 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 18, right: 18, top: 16, bottom: 16),
-                          child: Text('Genetic origin', style: TextStyle(fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold)),
+                          child: Text(
+                            'Genetic origin',
+                            style: TextStyle(fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold),
+                          ),
                         ),
                       ),
                       content: SizedBox(

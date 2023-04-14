@@ -33,24 +33,32 @@ class _MedicaminaDashHomeTableWidget extends State<MedicaminaDashHomeTableWidget
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     var rowsSet = false;
-    if (width <= 460) {
-      setState(() {
-        _canChangeRows = false;
-      });
 
-      if (height <= 720) {
-        if (!rowsSet) {
+    if (width <= 300) {
+      if (!rowsSet) {
+        if (height <= 700) {
           setState(() {
-            _rowsPerPage = 4;
-            _availableRowsPerPage = [4];
+            _canChangeRows = false;
+            _rowsPerPage = 2;
+            _availableRowsPerPage = [2];
           });
           rowsSet = true;
         }
       }
-
-      if (height <= 900) {
-        if (!rowsSet) {
+      if (!rowsSet) {
+        if (height <= 800) {
           setState(() {
+            _canChangeRows = false;
+            _rowsPerPage = 3;
+            _availableRowsPerPage = [3];
+          });
+          rowsSet = true;
+        }
+      }
+      if (!rowsSet) {
+        if (height <= 1200) {
+          setState(() {
+            _canChangeRows = false;
             _rowsPerPage = 6;
             _availableRowsPerPage = [6];
           });
@@ -59,23 +67,102 @@ class _MedicaminaDashHomeTableWidget extends State<MedicaminaDashHomeTableWidget
       }
     }
 
-    if (height <= 800) {
+    if (width <= 400) {
       if (!rowsSet) {
-        setState(() {
-          _rowsPerPage = 6;
-          _availableRowsPerPage = [6];
-          _canChangeRows = false;
-        });
-        rowsSet = true;
+        if (height <= 700) {
+          setState(() {
+            _canChangeRows = false;
+            _rowsPerPage = 4;
+            _availableRowsPerPage = [4];
+          });
+          rowsSet = true;
+        }
+      }
+      if (!rowsSet) {
+        if (height <= 800) {
+          setState(() {
+            _canChangeRows = false;
+            _rowsPerPage = 6;
+            _availableRowsPerPage = [6];
+          });
+          rowsSet = true;
+        }
+      }
+      if (!rowsSet) {
+        if (height <= 1000) {
+          setState(() {
+            _canChangeRows = false;
+            _rowsPerPage = 7;
+            _availableRowsPerPage = [7];
+          });
+          rowsSet = true;
+        }
       }
     }
 
-    if (height <= 1024) {
+    if (width <= 600) {
       if (!rowsSet) {
-        setState(() {
-          _availableRowsPerPage = [4, 8, 12];
-        });
-        rowsSet = true;
+        if (height <= 700) {
+          setState(() {
+            _canChangeRows = false;
+            _rowsPerPage = 4;
+            _availableRowsPerPage = [4];
+          });
+          rowsSet = true;
+        }
+      }
+      if (!rowsSet) {
+        if (height <= 800) {
+          setState(() {
+            _canChangeRows = false;
+            _rowsPerPage = 6;
+            _availableRowsPerPage = [6];
+          });
+          rowsSet = true;
+        }
+      }
+      if (!rowsSet) {
+        if (height <= 1000) {
+          setState(() {
+            _canChangeRows = false;
+            _rowsPerPage = 7;
+            _availableRowsPerPage = [7];
+          });
+          rowsSet = true;
+        }
+      }
+    }
+
+    if (width <= 500) {
+      if (!rowsSet) {
+        if (MediaQuery.of(context).size.height <= 800) {
+          setState(() {
+            _canChangeRows = false;
+            _rowsPerPage = 5;
+            _availableRowsPerPage = [5];
+          });
+          rowsSet = true;
+        }
+      }
+      if (!rowsSet) {
+        if (height <= 900) {
+          setState(() {
+            _canChangeRows = false;
+            _rowsPerPage = 6;
+            _availableRowsPerPage = [6];
+          });
+          rowsSet = true;
+        }
+      }
+      if (!rowsSet) {
+        if (height <= 1000) {
+          setState(() {
+            _canChangeRows = false;
+            _rowsPerPage = 7;
+            _availableRowsPerPage = [7];
+          });
+          rowsSet = true;
+        }
       }
     }
 
@@ -141,7 +228,11 @@ class _MedicaminaDashHomeTableWidget extends State<MedicaminaDashHomeTableWidget
                       ),
                 child: PaginatedDataTable(
                   showCheckboxColumn: false,
-                  dataRowHeight: MediaQuery.of(context).size.width < 600 ? 72 : kMinInteractiveDimension,
+                  dataRowHeight: MediaQuery.of(context).size.width <= 300
+                      ? 140
+                      : MediaQuery.of(context).size.width <= 1000
+                          ? 72
+                          : kMinInteractiveDimension,
                   rowsPerPage: _rowsPerPage,
                   availableRowsPerPage: _availableRowsPerPage,
                   onRowsPerPageChanged: _canChangeRows ? _updateRowsPerPage : null,
@@ -149,7 +240,11 @@ class _MedicaminaDashHomeTableWidget extends State<MedicaminaDashHomeTableWidget
                   columns: [
                     DataColumn(
                       label: SizedBox(
-                        width: 1000 > MediaQuery.of(context).size.width ? (MediaQuery.of(context).size.width - 32) * 0.6 : (MediaQuery.of(context).size.width - 32) * 0.8,
+                        width: MediaQuery.of(context).size.width <= 300
+                            ? (MediaQuery.of(context).size.width - 32) * 0.4
+                            : MediaQuery.of(context).size.width <= 1000
+                                ? (MediaQuery.of(context).size.width - 32) * 0.6
+                                : (MediaQuery.of(context).size.width - 32) * 0.8,
                         child: Text(
                           'Condition',
                           style: Theme.of(context).textTheme.subtitle1,
@@ -158,7 +253,11 @@ class _MedicaminaDashHomeTableWidget extends State<MedicaminaDashHomeTableWidget
                     ),
                     DataColumn(
                       label: SizedBox(
-                        width: 1000 > MediaQuery.of(context).size.width ? (MediaQuery.of(context).size.width - 32) * 0.15 : (MediaQuery.of(context).size.width - 32) * 0.1,
+                        width: MediaQuery.of(context).size.width <= 300
+                            ? (MediaQuery.of(context).size.width - 32) * 0.25
+                            : MediaQuery.of(context).size.width <= 1000
+                                ? (MediaQuery.of(context).size.width - 32) * 0.15
+                                : (MediaQuery.of(context).size.width - 32) * 0.1,
                         child: Center(
                           child: Text(
                             'Risk',
@@ -2135,7 +2234,11 @@ class ResultsData extends DataTableSource {
       cells: [
         DataCell(
           SizedBox(
-            width: 1000 > MediaQuery.of(context).size.width ? (MediaQuery.of(context).size.width - 32) * 0.6 : (MediaQuery.of(context).size.width - 32) * 0.8,
+            width: MediaQuery.of(context).size.width <= 300
+                ? (MediaQuery.of(context).size.width - 32) * 0.4
+                : MediaQuery.of(context).size.width <= 1000
+                    ? (MediaQuery.of(context).size.width - 32) * 0.6
+                    : (MediaQuery.of(context).size.width - 32) * 0.8,
             child: Wrap(
               children: [Text(_searchedData[index]['condition'].toString())],
             ),
@@ -2143,7 +2246,11 @@ class ResultsData extends DataTableSource {
         ),
         DataCell(
           SizedBox(
-            width: 1000 > MediaQuery.of(context).size.width ? (MediaQuery.of(context).size.width - 32) * 0.15 : (MediaQuery.of(context).size.width - 32) * 0.1,
+            width: MediaQuery.of(context).size.width <= 300
+                ? (MediaQuery.of(context).size.width - 32) * 0.25
+                : MediaQuery.of(context).size.width <= 1000
+                    ? (MediaQuery.of(context).size.width - 32) * 0.15
+                    : (MediaQuery.of(context).size.width - 32) * 0.1,
             child: Center(child: Text(_searchedData[index]['risk'].toString())),
           ),
         )

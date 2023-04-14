@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+
+// Medicamina
 import 'package:medicamina/dash/edicts/desktop.dart';
 import 'package:medicamina/dash/edicts/mobile.dart';
 
@@ -8,9 +9,9 @@ class MedicaminaDashEdictsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (1300 > MediaQuery.of(context).size.width) {
-      return const MedicaminaDashEdictsMobileWidget();
-    }
-    return const MedicaminaDashEdictsDesktopWidget();
+    // if (1300 > MediaQuery.of(context).size.width) {
+      return const Scaffold(body: MedicaminaDashEdictsMobileWidget(),);
+    // }
+    return const Scaffold(body: MedicaminaDashEdictsDesktopWidget(),);
   }
 }

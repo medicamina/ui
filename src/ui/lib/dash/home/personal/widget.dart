@@ -32,40 +32,39 @@ class MedicaminaDashHomePersonalWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                          const ListTile(
-            leading: Icon(Icons.person_outline),
-            title: Text('Name'),
-            subtitle: Text("Jake Spencer Walklate"),
-          ),
-          const ListTile(
-            leading: Icon(CommunityMaterialIcons.gender_male_female),
-            title: Text('Gender'),
-            subtitle: Text('M'),
-          ),
-          const ListTile(
-            leading: Icon(Icons.cake),
-            title: Text('Birthdate'),
-            subtitle: Text('26 Jun 1997'),
-          ),
-          const ListTile(
-            leading: Icon(Icons.bloodtype),
-            title: Text('Blood type'),
-            subtitle: Text('O+'),
-          ),
-          const ListTile(
-            leading: Icon(Icons.height),
-            title: Text('Height'),
-            subtitle: Text('5"5\' [165cm]'),
-          ),
-          const ListTile(
-            leading: Icon(Icons.scale),
-            title: Text('Weight'),
-            subtitle: Text("132lb [60kg]"),
-          ),
+                const ListTile(
+                  leading: Icon(Icons.person_outline),
+                  title: Text('Name'),
+                  subtitle: Text("Jake Spencer Walklate"),
+                ),
+                const ListTile(
+                  leading: Icon(CommunityMaterialIcons.gender_male_female),
+                  title: Text('Gender'),
+                  subtitle: Text('M'),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.cake),
+                  title: Text('Birthdate'),
+                  subtitle: Text('26 Jun 1997'),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.bloodtype),
+                  title: Text('Blood type'),
+                  subtitle: Text('O+'),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.height),
+                  title: Text('Height'),
+                  subtitle: Text('5"5\' [165cm]'),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.scale),
+                  title: Text('Weight'),
+                  subtitle: Text("132lb [60kg]"),
+                ),
               ],
             ),
           ),
-
         ],
       ),
     );

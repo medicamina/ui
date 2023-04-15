@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/avd.dart';
 import 'package:medicamina/states.dart';
 
 class MedicaminaDashHomeTableWidget extends StatefulWidget {
@@ -35,98 +36,34 @@ class _MedicaminaDashHomeTableWidget extends State<MedicaminaDashHomeTableWidget
     var rowsSet = false;
 
     if (width <= 300) {
-      if (!rowsSet) {
-        if (height <= 700) {
+      if (height <= 600) {
+        if (!rowsSet) {
           setState(() {
-            _canChangeRows = false;
             _rowsPerPage = 2;
             _availableRowsPerPage = [2];
+            _canChangeRows = false;
           });
           rowsSet = true;
         }
       }
-      if (!rowsSet) {
-        if (height <= 800) {
+
+      if (height <= 700) {
+        if (!rowsSet) {
           setState(() {
-            _canChangeRows = false;
             _rowsPerPage = 3;
             _availableRowsPerPage = [3];
-          });
-          rowsSet = true;
-        }
-      }
-      if (!rowsSet) {
-        if (height <= 1200) {
-          setState(() {
             _canChangeRows = false;
-            _rowsPerPage = 6;
-            _availableRowsPerPage = [6];
           });
           rowsSet = true;
         }
       }
-    }
 
-    if (width <= 400) {
-      if (!rowsSet) {
-        if (height <= 700) {
+      if (height <= 1000) {
+        if (!rowsSet) {
           setState(() {
-            _canChangeRows = false;
             _rowsPerPage = 4;
             _availableRowsPerPage = [4];
-          });
-          rowsSet = true;
-        }
-      }
-      if (!rowsSet) {
-        if (height <= 800) {
-          setState(() {
             _canChangeRows = false;
-            _rowsPerPage = 6;
-            _availableRowsPerPage = [6];
-          });
-          rowsSet = true;
-        }
-      }
-      if (!rowsSet) {
-        if (height <= 1000) {
-          setState(() {
-            _canChangeRows = false;
-            _rowsPerPage = 7;
-            _availableRowsPerPage = [7];
-          });
-          rowsSet = true;
-        }
-      }
-    }
-
-    if (width <= 600) {
-      if (!rowsSet) {
-        if (height <= 700) {
-          setState(() {
-            _canChangeRows = false;
-            _rowsPerPage = 4;
-            _availableRowsPerPage = [4];
-          });
-          rowsSet = true;
-        }
-      }
-      if (!rowsSet) {
-        if (height <= 800) {
-          setState(() {
-            _canChangeRows = false;
-            _rowsPerPage = 6;
-            _availableRowsPerPage = [6];
-          });
-          rowsSet = true;
-        }
-      }
-      if (!rowsSet) {
-        if (height <= 1000) {
-          setState(() {
-            _canChangeRows = false;
-            _rowsPerPage = 7;
-            _availableRowsPerPage = [7];
           });
           rowsSet = true;
         }
@@ -134,39 +71,66 @@ class _MedicaminaDashHomeTableWidget extends State<MedicaminaDashHomeTableWidget
     }
 
     if (width <= 500) {
-      if (!rowsSet) {
-        if (MediaQuery.of(context).size.height <= 800) {
+      if (height <= 600) {
+        if (!rowsSet) {
           setState(() {
+            _rowsPerPage = 2;
+            _availableRowsPerPage = [2];
             _canChangeRows = false;
+          });
+          rowsSet = true;
+        }
+      }
+
+      if (height <= 700) {
+        if (!rowsSet) {
+          setState(() {
+            _rowsPerPage = 3;
+            _availableRowsPerPage = [3];
+            _canChangeRows = false;
+          });
+          rowsSet = true;
+        }
+      }
+
+      if (height <= 1000) {
+        if (!rowsSet) {
+          setState(() {
             _rowsPerPage = 5;
             _availableRowsPerPage = [5];
+            _canChangeRows = false;
           });
           rowsSet = true;
         }
       }
-      if (!rowsSet) {
-        if (height <= 900) {
+
+      if (height <= 2000) {
+        if (!rowsSet) {
           setState(() {
-            _canChangeRows = false;
             _rowsPerPage = 6;
             _availableRowsPerPage = [6];
-          });
-          rowsSet = true;
-        }
-      }
-      if (!rowsSet) {
-        if (height <= 1000) {
-          setState(() {
             _canChangeRows = false;
-            _rowsPerPage = 7;
-            _availableRowsPerPage = [7];
           });
           rowsSet = true;
         }
       }
     }
 
-    return Card(
+    return Column(
+      children: [
+                    SizedBox(
+              width: MediaQuery.of(context).size.width - 32,
+              child: ListTile(
+                title: Text(
+                  'Genetic disease threat',
+                  style: TextStyle(
+                    fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+
+    Card(
       shape: RoundedRectangleBorder(
         side: BorderSide(
           color: Theme.of(context).colorScheme.onSurface.withAlpha(20),
@@ -178,17 +142,6 @@ class _MedicaminaDashHomeTableWidget extends State<MedicaminaDashHomeTableWidget
         padding: const EdgeInsets.all(6),
         child: Column(
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width - 32,
-              child: ListTile(
-                title: Text(
-                  'Genetic disease threat',
-                  style: TextStyle(
-                    fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
             SizedBox(
               width: MediaQuery.of(context).size.width - 32,
               child: Padding(
@@ -228,23 +181,26 @@ class _MedicaminaDashHomeTableWidget extends State<MedicaminaDashHomeTableWidget
                       ),
                 child: PaginatedDataTable(
                   showCheckboxColumn: false,
-                  dataRowHeight: MediaQuery.of(context).size.width <= 300
-                      ? 140
-                      : MediaQuery.of(context).size.width <= 1000
-                          ? 72
-                          : kMinInteractiveDimension,
+                  dataRowHeight: MediaQuery.of(context).size.width >= 1000
+                      ? kMinInteractiveDimension
+                      : MediaQuery.of(context).size.width >= 800
+                          ? kMinInteractiveDimension + 10
+                          : MediaQuery.of(context).size.width >= 600
+                              ? kMinInteractiveDimension + 20
+                              : MediaQuery.of(context).size.width >= 500
+                                  ? kMinInteractiveDimension + 30
+                                  : MediaQuery.of(context).size.width >= 400
+                                      ? kMinInteractiveDimension + 35
+                                      : MediaQuery.of(context).size.width >= 300
+                                          ? kMinInteractiveDimension + 50
+                                          : kMinInteractiveDimension + 60,
                   rowsPerPage: _rowsPerPage,
                   availableRowsPerPage: _availableRowsPerPage,
                   onRowsPerPageChanged: _canChangeRows ? _updateRowsPerPage : null,
                   columnSpacing: 24,
                   columns: [
                     DataColumn(
-                      label: SizedBox(
-                        width: MediaQuery.of(context).size.width <= 300
-                            ? (MediaQuery.of(context).size.width - 32) * 0.4
-                            : MediaQuery.of(context).size.width <= 1000
-                                ? (MediaQuery.of(context).size.width - 32) * 0.6
-                                : (MediaQuery.of(context).size.width - 32) * 0.8,
+                      label: Expanded(
                         child: Text(
                           'Condition',
                           style: Theme.of(context).textTheme.subtitle1,
@@ -253,11 +209,7 @@ class _MedicaminaDashHomeTableWidget extends State<MedicaminaDashHomeTableWidget
                     ),
                     DataColumn(
                       label: SizedBox(
-                        width: MediaQuery.of(context).size.width <= 300
-                            ? (MediaQuery.of(context).size.width - 32) * 0.25
-                            : MediaQuery.of(context).size.width <= 1000
-                                ? (MediaQuery.of(context).size.width - 32) * 0.15
-                                : (MediaQuery.of(context).size.width - 32) * 0.1,
+                        width: 54,
                         child: Center(
                           child: Text(
                             'Risk',
@@ -274,6 +226,8 @@ class _MedicaminaDashHomeTableWidget extends State<MedicaminaDashHomeTableWidget
           ],
         ),
       ),
+    ),
+          ],
     );
   }
 }
@@ -2234,11 +2188,17 @@ class ResultsData extends DataTableSource {
       cells: [
         DataCell(
           SizedBox(
-            width: MediaQuery.of(context).size.width <= 300
-                ? (MediaQuery.of(context).size.width - 32) * 0.4
-                : MediaQuery.of(context).size.width <= 1000
-                    ? (MediaQuery.of(context).size.width - 32) * 0.6
-                    : (MediaQuery.of(context).size.width - 32) * 0.8,
+            width: MediaQuery.of(context).size.width >= 900
+                ? (MediaQuery.of(context).size.width - 32) * 0.8
+                : MediaQuery.of(context).size.width >= 600
+                    ? (MediaQuery.of(context).size.width - 32) * 0.7
+                    : MediaQuery.of(context).size.width >= 400
+                        ? (MediaQuery.of(context).size.width - 32) * 0.6
+                        : MediaQuery.of(context).size.width >= 300
+                            ? (MediaQuery.of(context).size.width - 32) * 0.6
+                            : MediaQuery.of(context).size.width >= 100
+                                ? (MediaQuery.of(context).size.width - 32) * 0.4
+                                : 0,
             child: Wrap(
               children: [Text(_searchedData[index]['condition'].toString())],
             ),
@@ -2246,11 +2206,7 @@ class ResultsData extends DataTableSource {
         ),
         DataCell(
           SizedBox(
-            width: MediaQuery.of(context).size.width <= 300
-                ? (MediaQuery.of(context).size.width - 32) * 0.25
-                : MediaQuery.of(context).size.width <= 1000
-                    ? (MediaQuery.of(context).size.width - 32) * 0.15
-                    : (MediaQuery.of(context).size.width - 32) * 0.1,
+            width: 54,
             child: Center(child: Text(_searchedData[index]['risk'].toString())),
           ),
         )

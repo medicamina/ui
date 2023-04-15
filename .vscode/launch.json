@@ -1,0 +1,61 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "All Devices",
+      "configurations": [
+        "Pixel",
+        "iPhone-SE",
+        // "iPhone-14ProMax",
+        "Chrome"
+      ],
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Pixel",
+      "cwd": "src/ui",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "emulator-5554"
+  },
+  {
+      "name": "iPhone-SE",
+      "cwd": "src/ui",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "BDAA4559-A5A8-44A4-A5D4-D4E8B18BD0D6"
+  },
+  {
+    "name": "iPhone-14ProMax",
+    "cwd": "src/ui",
+    "request": "launch",
+    "type": "dart",
+    "deviceId": "8A75EE63-9E4A-4109-A42C-836D6A3218C8"
+},
+  {
+    "name": "Chrome",
+    "cwd": "src/ui",
+    "request": "launch",
+    "type": "dart",
+    "deviceId": "chrome"
+  },
+    // {
+    //   "name": "ui (profile mode)",
+    //   "cwd": "src/ui",
+    //   "request": "launch",
+    //   "type": "dart",
+    //   "flutterMode": "profile"
+    // },
+    // {
+    //   "name": "ui (release mode)",
+    //   "cwd": "src/ui",
+    //   "request": "launch",
+    //   "type": "dart",
+    //   "flutterMode": "release"
+    // }
+  ]
+}

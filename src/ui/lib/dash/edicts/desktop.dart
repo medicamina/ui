@@ -51,7 +51,7 @@ class _MedicaminaDashEdictsDesktopWidget extends State<MedicaminaDashEdictsDeskt
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 60,
                                     child: OutlinedButton(
                                       // style: ElevatedButton.styleFrom(elevation: 0),
@@ -61,7 +61,7 @@ class _MedicaminaDashEdictsDesktopWidget extends State<MedicaminaDashEdictsDeskt
                                   ),
                                   const SizedBox(width: 6),
                                   IconButton(
-                                    icon: Icon(Icons.calendar_month),
+                                    icon: const Icon(Icons.calendar_month),
                                     onPressed: () {},
                                     // style: ElevatedButton.styleFrom(elevation: 0),
                                   ),
@@ -71,7 +71,7 @@ class _MedicaminaDashEdictsDesktopWidget extends State<MedicaminaDashEdictsDeskt
                                     child: OutlinedButton(
                                       // style: ElevatedButton.styleFrom(elevation: 0),
                                       onPressed: () {},
-                                      child: Icon(Icons.arrow_forward),
+                                      child: const Icon(Icons.arrow_forward),
                                     ),
                                   ),
                                   const SizedBox(width: 2),

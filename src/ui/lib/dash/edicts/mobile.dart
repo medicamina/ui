@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:medicamina/dash/states.dart';
+import 'package:medicamina/states.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 var drugs = Modular.get<MedicaminaTodaysDrugs>().getDrugs();
@@ -123,7 +124,7 @@ class _MedicaminaDashEdictsMobileWidgetState extends State<MedicaminaDashEdictsM
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Text(
-                          'Your daily medications',
+                          'Daily medications',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -179,6 +180,13 @@ class _MedicaminaDashEdictsMobileWidgetState extends State<MedicaminaDashEdictsM
             SizedBox(
               height: 200,
               child: Card(
+                            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.onSurface.withAlpha(20),
+              ),
+              borderRadius: const BorderRadius.all(Radius.circular(4)),
+            ),
+                elevation: 0,
                 child: Padding(
                   padding: const EdgeInsets.all(6),
                   child: Row(
@@ -191,7 +199,10 @@ class _MedicaminaDashEdictsMobileWidgetState extends State<MedicaminaDashEdictsM
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
                               height: 160,
-                              child: SvgPicture.asset('assets/images/doctor-icon.svg'),
+                              child: SvgPicture.asset(
+                                'assets/images/doctor-icon.svg',
+                                color: Modular.get<MedicaminaThemeState>().getDarkMode() ? Colors.white : Colors.black,
+                              ),
                             ),
                           ],
                         ),
@@ -240,6 +251,247 @@ class _MedicaminaDashEdictsMobileWidgetState extends State<MedicaminaDashEdictsM
               ),
             ),
             _getEScripts(),
+            // Your health
+            ListTile(
+              title: Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Your health',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Center(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width >= 2500
+                    ? 1250
+                    : MediaQuery.of(context).size.width >= 1250
+                        ? 1200
+                        : null,
+                child: AspectRatio(
+                  aspectRatio: MediaQuery.of(context).size.width <= 700 ? 3 : 5,
+                  child: PageView(
+                    physics: const ClampingScrollPhysics(),
+                    controller: PageController(viewportFraction: MediaQuery.of(context).size.width <= 700 ? 0.4 : 0.2),
+                    padEnds: false,
+                    children: [
+                      Column(
+                        children: [
+                          Expanded(
+                            child: Opacity(
+                              opacity: Modular.get<MedicaminaThemeState>().getDarkMode() ? 0.7 : 1,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                elevation: 0,
+                                color: Color.fromRGBO(225, 255, 213, 1),
+                                child: InkWell(
+                                  customBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  onTap: () {
+                                    print("tapped");
+                                  },
+                                  highlightColor: Color.fromRGBO(225, 255, 213, 0.5),
+                                  splashColor: Color.fromRGBO(56, 192, 9, 0.5),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.medication_outlined,
+                                      size: 40,
+                                      color: Color.fromRGBO(56, 192, 9, 1),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          const Text(
+                            'Vitamins',
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Expanded(
+                            child: Opacity(
+                              opacity: Modular.get<MedicaminaThemeState>().getDarkMode() ? 0.7 : 1,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                elevation: 0,
+                                color: Color.fromRGBO(255, 235, 235, 1),
+                                child: InkWell(
+                                  customBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  onTap: () {
+                                    print("tapped");
+                                  },
+                                  highlightColor: Color.fromRGBO(255, 235, 235, 0.5),
+                                  splashColor: Color.fromRGBO(251, 0, 15, 0.5),
+                                  child: Center(
+                                    child: Icon(
+                                      CommunityMaterialIcons.paper_roll_outline,
+                                      size: 40,
+                                      color: Color.fromRGBO(251, 0, 15, 1),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          const Text(
+                            'Allergies',
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Expanded(
+                            child: Opacity(
+                              opacity: Modular.get<MedicaminaThemeState>().getDarkMode() ? 0.7 : 1,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                elevation: 0,
+                                color: Color.fromRGBO(231, 236, 255, 1),
+                                child: InkWell(
+                                  customBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  onTap: () {
+                                    print("tapped");
+                                  },
+                                  highlightColor: Color.fromRGBO(231, 236, 255, 0.5),
+                                  splashColor: Color.fromRGBO(0, 108, 197, 0.5),
+                                  child: Center(
+                                    child: Icon(
+                                      CommunityMaterialIcons.blender,
+                                      size: 40,
+                                      color: Color.fromRGBO(0, 108, 197, 1),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          const Text(
+                            'Diet',
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Expanded(
+                            child: Opacity(
+                              opacity: Modular.get<MedicaminaThemeState>().getDarkMode() ? 0.7 : 1,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                elevation: 0,
+                                color: Color.fromRGBO(237, 229, 255, 1),
+                                child: InkWell(
+                                  customBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  onTap: () {
+                                    print("tapped");
+                                  },
+                                  highlightColor: Color.fromRGBO(237, 229, 255, 0.5),
+                                  splashColor: Color.fromRGBO(145, 18, 189, 0.5),
+                                  child: Center(
+                                    child: Icon(
+                                      CommunityMaterialIcons.thermometer,
+                                      size: 40,
+                                      color: Color.fromRGBO(145, 18, 189, 1),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          const Text(
+                            'Sickness',
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Expanded(
+                            child: Opacity(
+                              opacity: Modular.get<MedicaminaThemeState>().getDarkMode() ? 0.7 : 1,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                elevation: 0,
+                                color: Color.fromRGBO(255, 239, 216, 1),
+                                child: InkWell(
+                                  customBorder: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  onTap: () {
+                                    print("tapped");
+                                  },
+                                  highlightColor: Color.fromRGBO(255, 239, 216, 0.5),
+                                  splashColor: Color.fromRGBO(246, 132, 53, 0.5),
+                                  child: Center(
+                                    child: Icon(
+                                      CommunityMaterialIcons.bandage,
+                                      size: 40,
+                                      color: Color.fromRGBO(246, 132, 53, 1),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          const Text(
+                            'Pain & Injury',
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 12),
           ],
         ),
       ),
@@ -266,6 +518,8 @@ class __EScriptsCarouselItem extends State<_EScriptsCarouselItem> {
           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             QrImage(
+              gapless: false,
+              foregroundColor: Modular.get<MedicaminaThemeState>().getDarkMode() ? Colors.white : Colors.black,
               data: 'https://www.digitalhealth.gov.au/initiatives-and-programs/electronic-prescriptions',
               version: QrVersions.auto,
               size: MediaQuery.of(context).size.width >= 700 ? 220 : 160,
@@ -328,7 +582,7 @@ class __DailyMedicationCarouselItem extends State<_DailyMedicationCarouselItem> 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(CommunityMaterialIcons.pill, size: 26, color: Theme.of(context).colorScheme.primary),
+                  Icon(drugs[widget.itemIndex.toInt()].getIcon(), size: 26, color: Theme.of(context).colorScheme.primary),
                   const SizedBox(height: 2),
                   Text(
                     drugs[widget.itemIndex.toInt()].getName(),

@@ -14,13 +14,9 @@ class MedicaminaDashFitnessWidget extends StatefulWidget {
 class _MedicaminaDashFitnessWidget extends State<MedicaminaDashFitnessWidget> {
   @override
   Widget build(BuildContext context) {
-    late Widget? widget;
-    if (1000 > MediaQuery.of(context).size.width) {
-      widget = const MedicaminaDashFitnessMobileWidget();
-    } else {
-      widget = const MedicaminaDashFitnessDesktopWidget();
+    if (630 >= MediaQuery.of(context).size.width) {
+      return const Scaffold(body: MedicaminaDashFitnessMobileWidget());
     }
-
-    return widget;
+    return const Scaffold(body: MedicaminaDashFitnessDesktopWidget());
   }
 }

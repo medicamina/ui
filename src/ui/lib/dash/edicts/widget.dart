@@ -9,7 +9,7 @@ class MedicaminaDashEdictsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (1300 > MediaQuery.of(context).size.width) {
+    // if (1000 >= MediaQuery.of(context).size.width) {
       return const Scaffold(body: MedicaminaDashEdictsMobileWidget(),);
     // }
     return const Scaffold(body: MedicaminaDashEdictsDesktopWidget(),);

@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+// Medicamina
 import 'package:medicamina/dash/home/map/widget.dart';
 import 'package:medicamina/dash/home/personal/widget.dart';
 import 'package:medicamina/dash/home/table/widget.dart';
@@ -29,6 +31,7 @@ class MedicaminaDashHomeDesktopWidget extends StatelessWidget {
                 MedicaminaDashHomeTableWidget(),
               ],
             ),
+            const SizedBox(height: 12),
           ],
         ),
       ),

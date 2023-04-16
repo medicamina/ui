@@ -1,9 +1,8 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+// Medicamina
 import 'package:medicamina/states.dart';
 
 class MedicaminaDashFitnessHeartWidget extends StatefulWidget {
@@ -61,7 +60,7 @@ class _MedicaminaDashFitnessHeartWidget extends State<MedicaminaDashFitnessHeart
                       children: [
                         Icon(
                           CommunityMaterialIcons.pulse,
-                          size: 112,
+                          size: MediaQuery.of(context).size.width >= 300 ? 112 : 88,
                           color: Theme.of(context).colorScheme.secondary,
                         )
                       ],

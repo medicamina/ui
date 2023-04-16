@@ -1,11 +1,11 @@
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/dash/fitness/heart/widget.dart';
-import 'package:medicamina/dash/fitness/steps/widget.dart';
-import 'package:medicamina/states.dart';
 
-import 'record/widget.dart';
+// Medicamina
+import 'package:medicamina/dash/fitness/chart/desktop.dart';
+import 'package:medicamina/dash/fitness/heart/widget.dart';
+import 'package:medicamina/dash/fitness/recommendations/widget.dart';
+import 'package:medicamina/dash/fitness/record/widget.dart';
+import 'package:medicamina/dash/fitness/steps/widget.dart';
 
 class MedicaminaDashFitnessMobileWidget extends StatelessWidget {
   const MedicaminaDashFitnessMobileWidget({Key? key}) : super(key: key);
@@ -17,9 +17,12 @@ class MedicaminaDashFitnessMobileWidget extends StatelessWidget {
         padding: const EdgeInsets.all(6),
         child: Column(
           children: [
-            MedicaminaDashFitnessStepsWidget(),
-            MedicaminaDashFitnessHeartWidget(),
-            MedicaminaDashFitnessRecordWidget(),
+            const MedicaminaDashFitnessStepsWidget(),
+            const MedicaminaDashFitnessHeartWidget(),
+            const MedicaminaDashFitnessRecordWidget(),
+            const MedicaminaDashFitnessRecommendationsWidget(),
+            MedicaminaDashFitnessActivityLineChart(),
+            const SizedBox(height: 12),
           ],
         ),
       ),

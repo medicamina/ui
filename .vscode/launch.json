@@ -7,7 +7,7 @@
     {
       "name": "All Devices",
       "configurations": [
-        "Pixel",
+        // "Pixel",
         "iPhone-SE",
         // "iPhone-14ProMax",
         "Chrome"

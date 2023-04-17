@@ -5,14 +5,20 @@
   "version": "0.2.0",
   "compounds": [
     {
-      "name": "All Devices",
+      "name": "iOS & web",
       "configurations": [
-        // "Pixel",
         "iPhone-SE",
-        // "iPhone-14ProMax",
         "Chrome"
       ],
-    }
+    },
+    {
+      "name": "Android, iOS & web",
+      "configurations": [
+        "Pixel",
+        "iPhone-SE",
+        "Chrome"
+      ],
+    },
   ],
   "configurations": [
     {
@@ -29,13 +35,6 @@
       "type": "dart",
       "deviceId": "BDAA4559-A5A8-44A4-A5D4-D4E8B18BD0D6"
   },
-  {
-    "name": "iPhone-14ProMax",
-    "cwd": "src/ui",
-    "request": "launch",
-    "type": "dart",
-    "deviceId": "8A75EE63-9E4A-4109-A42C-836D6A3218C8"
-},
   {
     "name": "Chrome",
     "cwd": "src/ui",

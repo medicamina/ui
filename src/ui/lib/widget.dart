@@ -14,9 +14,9 @@ class MedicaminaAppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(useMaterial3: false).copyWith(
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: Color.fromRGBO(0, 144, 241, 1),
-          secondary: Color.fromRGBO(241, 96, 0, 1),
-          tertiary: Color.fromRGBO(241, 0, 144, 1)
+          primary: const Color.fromRGBO(0, 144, 241, 1),
+          secondary: const Color.fromRGBO(241, 96, 0, 1),
+          tertiary: const Color.fromRGBO(241, 0, 144, 1)
         ),
       ),
       darkTheme: ThemeData.dark(useMaterial3: false).copyWith(
@@ -30,6 +30,6 @@ class MedicaminaAppWidget extends StatelessWidget {
       themeMode: Modular.get<MedicaminaThemeState>().getThemeMode(),
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
-    ); //added by extension
+    );
   }
 }

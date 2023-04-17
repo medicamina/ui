@@ -11,7 +11,7 @@ import 'package:medicamina/states.dart';
 
 class MedicaminaAppModule extends Module {
   MedicaminaAppModule({Key? key, required this.supabaseClient});
-  late final SupabaseClient supabaseClient;
+  final SupabaseClient supabaseClient;
   
   @override
   List<Bind> get binds => [

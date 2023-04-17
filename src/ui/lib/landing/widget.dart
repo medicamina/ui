@@ -507,7 +507,8 @@ Widget mobile(BuildContext context, ScrollController controller) {
   );
 }
 
-Widget desktop(BuildContext context, ScrollController controller) {
+
+    Widget desktop(BuildContext context, ScrollController controller) {
   return Column(
     children: [
       Container(

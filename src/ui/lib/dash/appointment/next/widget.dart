@@ -147,7 +147,7 @@ class _MedicaminaDashAppointmentNextWidgetState extends State<MedicaminaDashAppo
             ),
           ),
         ),
-                SizedBox(
+        SizedBox(
           height: MediaQuery.of(context).size.width >= 500
               ? 128
               : MediaQuery.of(context).size.width >= 300
@@ -162,7 +162,8 @@ class _MedicaminaDashAppointmentNextWidgetState extends State<MedicaminaDashAppo
               borderRadius: const BorderRadius.all(Radius.circular(4)),
             ),
             elevation: 0,
-            child: Padding(
+            child: InkWell( // ????????????? SHOULD THE CARD BE AN INKWELL TO CANCEL THE APPOINTMENT?
+              child: Padding(
               padding: const EdgeInsets.all(6),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,6 +185,7 @@ class _MedicaminaDashAppointmentNextWidgetState extends State<MedicaminaDashAppo
                           padding: EdgeInsets.only(left: 12),
                           child: Text(
                             'Friendly pathology',
+                            overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.caption?.copyWith(fontSize: 16, color: Colors.white),
                           ),
                         ),
@@ -198,6 +200,7 @@ class _MedicaminaDashAppointmentNextWidgetState extends State<MedicaminaDashAppo
                           padding: EdgeInsets.only(left: 12, top: 6),
                           child: Text(
                             '116 Health Nut lane',
+                            overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.caption?.copyWith(fontSize: 12, color: Colors.white),
                           ),
                         ),
@@ -245,6 +248,7 @@ class _MedicaminaDashAppointmentNextWidgetState extends State<MedicaminaDashAppo
                   ),
                 ],
               ),
+            ),
             ),
           ),
         ),

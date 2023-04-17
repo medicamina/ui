@@ -1,14 +1,14 @@
 # Developers
 
-Jake Walklate [svnty]
+Jake Walklate [[svnty](https://github.com/svnty)]
 
 # UI/UX
 
-Jake Walklate [svnty]
+Jake Walklate [[svnty](https://github.com/svnty)]
 
 # Researchers
 
-Jake Walklate [svnty]
+Jake Walklate [[svnty](https://github.com/svnty)]
 
 # Sponsors
 

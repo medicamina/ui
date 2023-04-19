@@ -22,7 +22,7 @@ The Licensed Application is not tailored to comply with industry-specific regula
 	  3. lease or lend the Software;
 	  4. redistribute the Software (except as permitted by section 3. hereinbelow);
 	  5. commercially exploit the Software;
-	  6. disassemble, reverse engineer, decompile, modify, or alter the Software for commerical purposes, excluding for the purpose bug bounties and proof of concept feature examples as part of user experience feedback (comprehensive of section 10. hereinbelow);
+	  6. disassemble, reverse engineer, decompile, modify, or alter the Software for commerical purposes, excluding for the purpose bug bounties and proof of concept feature examples as part of user experience feedback (comprehensive of section 9. hereinbelow);
 	  7. translate the Software excluding for collaboration with the prior authorisation of medicamina;
 	  8. reproduce or copy the Software (except as permitted by section 3. hereinbelow);
 	  9. publicly display the Software excluding for reviewing, education or as a media prop;

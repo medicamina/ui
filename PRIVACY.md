@@ -47,9 +47,9 @@ We use Your Personal data to provide and improve the Service. By using the Servi
         - The Company may use Personal Data for the following purposes:
           1. To provide and maintain our Service, including to monitor the usage of our Service.
           2. To manage Your Account:
-            - to manage Your registration as a user of the Service. The Personal Data You provide can give You access to different functionalities of the Service that are available to You as a registered user.
+               - to manage Your registration as a user of the Service. The Personal Data You provide can give You access to different functionalities of the Service that are available to You as a registered user.
           3. For the performance of a contract
-            - the development, compliance and undertaking of the purchase contract for the products, items or services You have purchased or of any other contract with Us through the Service.
+               - the development, compliance and undertaking of the purchase contract for the products, items or services You have purchased or of any other contract with Us through the Service.
 
 
 To contact You: To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication, such as a mobile application's push notifications regarding updates or informative communications related to the functionalities, products or contracted services, including the security updates, when necessary or reasonable for their implementation.

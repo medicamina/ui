@@ -5,7 +5,7 @@ This Privacy Policy describes Our policies and procedures on the collection, use
 We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. 
 
 1. Consent
-  - By using our website, you hereby consent to our Privacy Policy and agree to its terms.
+   - By using our website, you hereby consent to our Privacy Policy and agree to its terms.
 
 2. Collecting and Using Your Personal Data
   - Types of Data Collected:

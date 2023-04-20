@@ -8,7 +8,7 @@ We use Your Personal data to provide and improve the Service. By using the Servi
    - By using our website, you hereby consent to our Privacy Policy and agree to its terms.
 
 2. Collecting and Using Your Personal Data
-  - Types of Data Collected:
+   - Types of Data Collected:
     1. Personal Data
         - While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:
         - Email address

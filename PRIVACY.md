@@ -83,19 +83,19 @@ We use Your Personal data to provide and improve the Service. By using the Servi
           - You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You.
           - Our Service may give You the ability to delete certain information about You from within the Service.
           - You may update, amend, or delete Your information at any time by signing in to Your Account, if you have one, and visiting the account settings section that allows you to manage Your personal information. You may also contact Us to request access to, correct, or delete any personal information that You have provided to Us.
-         - Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so.
+          - Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so.
         - Disclosure of Your Personal Data
           1. Business Transactions:
-            - If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy.
+               - If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy.
           2. Law enforcement
-            - Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency).
+               - Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency).
           3. Other legal requirements
-            - The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:
-              1. Comply with a legal obligation
-              2. Protect and defend the rights or property of the Company
-              3. Prevent or investigate possible wrongdoing in connection with the Service
-              4. Protect the personal safety of Users of the Service or the public
-              5. Protect against legal liability
+               - The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:
+                 1. Comply with a legal obligation
+                 2. Protect and defend the rights or property of the Company
+                 3. Prevent or investigate possible wrongdoing in connection with the Service
+                 4. Protect the personal safety of Users of the Service or the public
+                 5. Protect against legal liability
           - Security of Your Personal Data
             - The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security.
         - Children's Privacy

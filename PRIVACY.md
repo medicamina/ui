@@ -20,7 +20,6 @@ We use Your Personal data to provide and improve the Service. By using the Servi
            - Family members
            - Data that is clearly or inherently medical data
            - Raw data that the app has obtained from sensors, which is processed by the app and can be used independently or combined with other data to come to a conclusion about the user's health status or potential health risks
-
       2. Usage Data
            - Usage Data is collected automatically when using the Service.
            - Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.
@@ -32,9 +31,7 @@ We use Your Personal data to provide and improve the Service. By using the Servi
             2. Facebook
             3. Twitter
             4. LinkedIn
-
     - If You decide to register through or otherwise grant us access to a Third-Party Social Media Service, We may collect Personal data that is already associated with Your Third-Party Social Media Service's account, such as Your name, Your email address, Your activities or Your contact list associated with that account.
-
     - You may also have the option of sharing additional information with the Company through Your Third-Party Social Media Service's account. If You choose to provide such information and Personal Data, during registration or otherwise, You are giving the Company permission to use, share, and store it in a manner consistent with this Privacy Policy.
 
 Information Collected while Using the Application

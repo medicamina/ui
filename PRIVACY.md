@@ -10,16 +10,16 @@ We use Your Personal data to provide and improve the Service. By using the Servi
 2. Collecting and Using Your Personal Data
    - Types of Data Collected:
       1. Personal Data
-        - While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:
-        - Email address
-        - First, middle and last names
-        - Phone number
-        - Address, State, Province, ZIP/Postal code, City
-        - Usage Data
-        - Genetic data
-        - Family members
-        - Data that is clearly or inherently medical data
-        - Raw data that the app has obtained from sensors, which is processed by the app and can be used independently or combined with other data to come to a conclusion about the user's health status or potential health risks
+           - While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:
+           - Email address
+           - First, middle and last names
+           - Phone number
+           - Address, State, Province, ZIP/Postal code, City
+           - Usage Data
+           - Genetic data
+           - Family members
+           - Data that is clearly or inherently medical data
+           - Raw data that the app has obtained from sensors, which is processed by the app and can be used independently or combined with other data to come to a conclusion about the user's health status or potential health risks
 
     1. Usage Data
         - Usage Data is collected automatically when using the Service.

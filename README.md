@@ -39,3 +39,8 @@
   <a href="https://supabase.com"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/assets/github/supabase.png" width="270" /></a>
 </div>
 
+## Sponsor
+
+Become a patron, by simply clicking on this button:
+
+[![](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/medicamina_app)

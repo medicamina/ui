@@ -41,7 +41,7 @@
 
 ## Sponsor
 
-Become a patron, by clicking this button:
+💰 Become a patron, by clicking this button:
 
 <div align="center">
   <a href="https://patreon.com/medicamina_github"><img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" /></a>

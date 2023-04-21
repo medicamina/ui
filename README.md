@@ -41,6 +41,8 @@
 
 ## Sponsor
 
-Become a patron, by simply clicking on this button:
+Become a patron, by clicking this button:
 
-[![](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/medicamina_app)
+<div align="center">
+  [![](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/medicamina_github)
+</div>

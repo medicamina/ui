@@ -7,7 +7,7 @@
 
 <div align="center">
 
-  [![medicamina banner](https://raw.githubusercontent.com/medicamina/medicamina/main/docs/banner.png)](https://github.com/medicamina)
+  [![medicamina banner](https://raw.githubusercontent.com/medicamina/medicamina/main/assets/github/banner.png)](https://github.com/medicamina)
 
 </div>
 
@@ -34,8 +34,8 @@
 <br />
 
 <div align="center">
-  <a href="https://flutter.dev"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/docs/flutter.png" width="200" /></a>
+  <a href="https://flutter.dev"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/assets/github/flutter.png" width="200" /></a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://supabase.com"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/docs/supabase.png" width="270" /></a>
+  <a href="https://supabase.com"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/assets/github/supabase.png" width="270" /></a>
 </div>
 

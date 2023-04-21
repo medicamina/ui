@@ -1,4 +1,4 @@
-# Medicamina UI and DB
+# Medicamina User Interface and Database
 
 ## Project 
 

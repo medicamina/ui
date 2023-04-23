@@ -13,7 +13,7 @@ For help getting started with Flutter, view the [online documentation](https://f
 <br />
 
 <div align="center">
-  <a href="https://flutter.dev"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/assets/github/flutter.png" width="200" /></a>
+  <a href="https://flutter.dev"><img src="https://raw.githubusercontent.com/medicamina/.github/main/assets/flutter.png" width="200" /></a>
   <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
   <!-- <a href="https://supabase.com"><img src="https://raw.githubusercontent.com/medicamina/medicamina/main/assets/github/supabase.png" width="270" /></a> -->
 </div>

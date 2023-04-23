@@ -5,6 +5,7 @@ dist
 .expo
 ._*
 .dart_tool
+examples
 
 ./src/**/*/macos
 ./src/**/*/android

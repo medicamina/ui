@@ -24,7 +24,7 @@ dependencies:
   google_fonts: ^4.0.3
   flutter_modular: ^5.0.3
   date_time_picker: ^2.1.0
-  fl_chart: ^0.55.2
+  fl_chart: ^0.62.0
   flutter_svg: ^2.0.5
   qr_flutter: ^4.0.0
 

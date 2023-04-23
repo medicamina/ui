@@ -6,7 +6,7 @@
 version: 2
 updates:
   - package-ecosystem: "pub" # See documentation for possible values
-    directory: "src/ui" # Location of package manifests
+    directory: "src" # Location of package manifests
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5

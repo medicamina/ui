@@ -6,12 +6,18 @@ dist
 ._*
 .dart_tool
 
-./src/**/*//macos
+./src/**/*/macos
 ./src/**/*/android
 ./src/**/*/build
 ./src/**/*/ios
 ./src/**/*/windows
 ./src/**/*/linux
+
+android
+ios
+linux
+macos
+windows
 
 ./src/ui/macos
 ./src/ui/android

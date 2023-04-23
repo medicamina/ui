@@ -23,35 +23,35 @@
   "configurations": [
     {
       "name": "Pixel",
-      "cwd": "src/ui",
+      "cwd": "src",
       "request": "launch",
       "type": "dart",
       "deviceId": "emulator-5554"
   },
   {
       "name": "iPhone-SE",
-      "cwd": "src/ui",
+      "cwd": "src",
       "request": "launch",
       "type": "dart",
       "deviceId": "BDAA4559-A5A8-44A4-A5D4-D4E8B18BD0D6"
   },
   {
     "name": "Chrome",
-    "cwd": "src/ui",
+    "cwd": "src",
     "request": "launch",
     "type": "dart",
     "deviceId": "chrome"
   },
     // {
     //   "name": "ui (profile mode)",
-    //   "cwd": "src/ui",
+    //   "cwd": "src",
     //   "request": "launch",
     //   "type": "dart",
     //   "flutterMode": "profile"
     // },
     // {
     //   "name": "ui (release mode)",
-    //   "cwd": "src/ui",
+    //   "cwd": "src",
     //   "request": "launch",
     //   "type": "dart",
     //   "flutterMode": "release"

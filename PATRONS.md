@@ -1,8 +1,9 @@
 # Developers
+## UI/UX
 
 Jake S. Walklate [[svnty](https://github.com/svnty)]
 
-# UI/UX
+## API/DB
 
 Jake S. Walklate [[svnty](https://github.com/svnty)]
 

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const String improve = 'Improve your diagnosis';
 const String improveUsing = 'using precision medicine and genomic testing';
@@ -62,14 +63,25 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                             },
                           ),
                           ListTile(
-                            leading: const Icon(Icons.info_outline),
-                            title: const Text('Info'),
+                            leading: const Icon(Icons.home),
+                            title: const Text('Home'),
                             enabled: Modular.args.uri.toString() != '/',
                             onTap: () {
                               Navigator.pop(context);
                               Modular.to.navigate('/');
                             },
                           ),
+                          ListTile(
+                            leading: const Icon(Icons.description),
+                            title: const Text('Documentation'),
+                            onTap: () {
+                              launchUrl(
+                                'https://medicamina.github.io/' as Uri,
+                                mode: kIsWeb ? LaunchMode.externalApplication : LaunchMode.inAppWebView,
+                              );
+                            },
+                          ),
+                          const Divider(),
                           ListTile(
                             leading: const Icon(Icons.login_outlined),
                             title: const Text('Login'),
@@ -97,6 +109,7 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                               Modular.to.navigate('/auth/password');
                             },
                           ),
+
                         ],
                       ),
                     ),

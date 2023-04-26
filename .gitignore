@@ -14,11 +14,24 @@ examples
 ./src/**/*/windows
 ./src/**/*/linux
 
-android
 ios
 linux
 macos
 windows
+
+./macos
+./android
+./build
+./ios
+./windows
+./linux
+
+./src/macos
+./src/android
+./src/build
+./src/ios
+./src/windows
+./src/linux
 
 ./src/ui/macos
 ./src/ui/android

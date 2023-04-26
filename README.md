@@ -6,6 +6,10 @@ The medicamina user interface
 
 For help getting started with Flutter, view the [online documentation](https://flutter.dev/docs), which offers tutorials, samples, guidance on mobile development, and a full API reference.
 
+## Documentation
+
+[medicamina documentaton](https://medicamina.github.io)
+
 ## Project 
 
 🔨 Built with these awesome tools

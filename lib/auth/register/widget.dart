@@ -179,7 +179,7 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                                         try {
                                           await _supabaseClient.auth.signUp(email: _email, password: _password);
                                           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please check your e-mails for a verificaiton link')));
-                                          Modular.to.pushNamed('/login');
+                                          Modular.to.pushNamed('/auth/login');
                                           Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
                                         } on AuthException catch (err, _) {
                                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.message)));

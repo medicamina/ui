@@ -12,7 +12,7 @@ class MedicaminaDashFamilyModule extends Module {
   @override
   List<ModularRoute> get routes {
     return [
-      ChildRoute('/', child: (context, args) => const MedicaminaDashFamilyWidget(), children: [
+      ChildRoute('/', child: (context, args) => MedicaminaDashFamilyWidget(), children: [
 
       ]),
 

@@ -111,41 +111,41 @@ class __EScriptsCarouselItem extends State<_EScriptsCarouselItem> {
             },
           );
         },
-        child: Padding(
-          padding: const EdgeInsets.only(top: 6, bottom: 6, left: 6, right: 6),
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              QrImage(
-                gapless: false,
-                foregroundColor: Modular.get<MedicaminaThemeState>().getDarkMode() ? Colors.white : Colors.black,
-                data: 'https://www.digitalhealth.gov.au/initiatives-and-programs/electronic-prescriptions',
-                version: QrVersions.auto,
-                size: MediaQuery.of(context).size.width >= 700 ? 220 : 160,
-              ),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  children: [
-                    Text('Warfarin', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
-                    const SizedBox(height: 3),
-                    const Text('2 repeats left', textAlign: TextAlign.center),
-                    const SizedBox(height: 3),
-                    Wrap(
-                      children: [
-                        Text(
-                          '12 days left of current script',
-                          style: Theme.of(context).textTheme.caption,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+        // child: Padding(
+        //   padding: const EdgeInsets.only(top: 6, bottom: 6, left: 6, right: 6),
+        //   child: Column(
+        //     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //     children: [
+        //       QrImage(
+        //         gapless: false,
+        //         foregroundColor: Modular.get<MedicaminaThemeState>().getDarkMode() ? Colors.white : Colors.black,
+        //         data: 'https://www.digitalhealth.gov.au/initiatives-and-programs/electronic-prescriptions',
+        //         version: QrVersions.auto,
+        //         size: MediaQuery.of(context).size.width >= 700 ? 220 : 160,
+        //       ),
+        //       Expanded(
+        //         flex: 2,
+        //         child: Column(
+        //           children: [
+        //             Text('Warfarin', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+        //             const SizedBox(height: 3),
+        //             const Text('2 repeats left', textAlign: TextAlign.center),
+        //             const SizedBox(height: 3),
+        //             Wrap(
+        //               children: [
+        //                 Text(
+        //                   '12 days left of current script',
+        //                   style: Theme.of(context).textTheme.caption,
+        //                   textAlign: TextAlign.center,
+        //                 ),
+        //               ],
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }

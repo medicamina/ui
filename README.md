@@ -14,6 +14,13 @@ For help getting started with Flutter, view the [online documentation](https://f
 
 🔨 Built with these awesome tools
 
+## Running the project
+
+```
+flutter pub get
+flutter run
+```
+
 <br />
 
 <div align="center">

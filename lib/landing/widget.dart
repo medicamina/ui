@@ -9,20 +9,24 @@ const String improve = 'Improve your diagnosis';
 const String improveUsing = 'using precision medicine and genomic testing';
 
 const String diseaseDetection = 'Enhance disease detecton';
-const String diseaseDetectionHow = 'Use your genome to provide a more informed and tailored drug prescription.';
+const String diseaseDetectionHow =
+    'Use your genome to provide a more informed and tailored drug prescription.';
 
 const String biomarkers = 'Discover genetic biomarkers';
-const String biomarkerHow = 'Use research and technology to develop individual treatments';
+const String biomarkerHow =
+    'Use research and technology to develop individual treatments';
 
 const String familyTree = 'Analyse your family';
 const String familyTreeHow = 'by creating a family tree.';
 const String familyTreeText = 'Find the ancestry of diseases.';
-const String familyTreeSubtext = 'Create a family tree and discover the origin of genetic variations.';
+const String familyTreeSubtext =
+    'Create a family tree and discover the origin of genetic variations.';
 
 const String machineLearning = 'Use artificial intelligence';
 const String machienLearningWhy = 'to help you avoid drug reactions.';
 const String machineLearningText = 'Machine learning will help you.';
-const String machineLearningSubtext = 'Our open source software can guide you to make better informed diagnostic choices.';
+const String machineLearningSubtext =
+    'Our open source software can guide you to make better informed diagnostic choices.';
 
 class MedicaminaLandingPage extends StatefulWidget {
   const MedicaminaLandingPage({Key? key}) : super(key: key);
@@ -40,7 +44,9 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight - 6),
         child: AppBar(
-          title: Padding(padding: const EdgeInsets.only(top: 2), child: Text('medicamina', style: GoogleFonts.balooTamma2())),
+          title: Padding(
+              padding: const EdgeInsets.only(top: 2),
+              child: Text('medicamina', style: GoogleFonts.balooTamma2())),
           centerTitle: true,
           actions: [
             IconButton(
@@ -76,8 +82,12 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                             title: const Text('Documentation'),
                             onTap: () {
                               launchUrl(
-                                'https://medicamina.github.io/' as Uri,
-                                mode: kIsWeb ? LaunchMode.externalApplication : LaunchMode.inAppWebView,
+                                Uri(
+                                    scheme: 'https',
+                                    host: 'medicamina.github.io'),
+                                mode: kIsWeb
+                                    ? LaunchMode.externalApplication
+                                    : LaunchMode.inAppWebView,
                               );
                             },
                           ),
@@ -85,7 +95,8 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                           ListTile(
                             leading: const Icon(Icons.login_outlined),
                             title: const Text('Login'),
-                            enabled: Modular.args.uri.toString() != '/auth/login',
+                            enabled:
+                                Modular.args.uri.toString() != '/auth/login',
                             onTap: () {
                               Navigator.pop(context);
                               Modular.to.navigate('/auth/login');
@@ -94,7 +105,8 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                           ListTile(
                             leading: const Icon(Icons.person_add_outlined),
                             title: const Text('Register'),
-                            enabled: Modular.args.uri.toString() != '/auth/register',
+                            enabled:
+                                Modular.args.uri.toString() != '/auth/register',
                             onTap: () {
                               Navigator.pop(context);
                               Modular.to.navigate('/auth/register');
@@ -103,13 +115,13 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                           ListTile(
                             leading: const Icon(Icons.lock_open),
                             title: const Text('Reset password'),
-                            enabled: Modular.args.uri.toString() != '/auth/password',
+                            enabled:
+                                Modular.args.uri.toString() != '/auth/password',
                             onTap: () {
                               Navigator.pop(context);
                               Modular.to.navigate('/auth/password');
                             },
                           ),
-
                         ],
                       ),
                     ),
@@ -123,7 +135,9 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
       ),
       body: SingleChildScrollView(
         controller: _controller,
-        child: MediaQuery.of(context).size.width < 800 ? mobile(context, _controller) : desktop(context, _controller),
+        child: MediaQuery.of(context).size.width < 800
+            ? mobile(context, _controller)
+            : desktop(context, _controller),
       ),
     );
   }
@@ -150,25 +164,42 @@ Widget user(BuildContext context, double width) {
             title: Center(
               child: Text(
                 'PERSONAL',
-                style: Theme.of(context).textTheme.headline6?.apply(fontWeightDelta: 5),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    ?.apply(fontWeightDelta: 5),
               ),
             ),
             subtitle: const Center(child: Text('An account for personal use')),
           ),
           ListTile(
             title: Center(
-              child: Text('FREE', style: Theme.of(context).textTheme.headline4?.apply(fontWeightDelta: 5, color: Theme.of(context).textTheme.headline5?.color), textAlign: TextAlign.center),
+              child: Text('FREE',
+                  style: Theme.of(context).textTheme.headline4?.apply(
+                      fontWeightDelta: 5,
+                      color: Theme.of(context).textTheme.headline5?.color),
+                  textAlign: TextAlign.center),
             ),
-            subtitle: const Center(child: Text('Forever', textAlign: TextAlign.center)),
+            subtitle: const Center(
+                child: Text('Forever', textAlign: TextAlign.center)),
           ),
           const Padding(padding: EdgeInsets.only(top: 20)),
-          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Build a family tree', textAlign: TextAlign.center)),
+          const Padding(
+              padding: EdgeInsets.only(left: 4, right: 4),
+              child: Text('Build a family tree', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Import genetic data', textAlign: TextAlign.center)),
+          const Padding(
+              padding: EdgeInsets.only(left: 4, right: 4),
+              child: Text('Import genetic data', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Discover diseases', textAlign: TextAlign.center)),
+          const Padding(
+              padding: EdgeInsets.only(left: 4, right: 4),
+              child: Text('Discover diseases', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Share information with your consultant', textAlign: TextAlign.center)),
+          const Padding(
+              padding: EdgeInsets.only(left: 4, right: 4),
+              child: Text('Share information with your consultant',
+                  textAlign: TextAlign.center)),
           const Spacer(),
           Column(
             children: <Widget>[
@@ -199,7 +230,10 @@ Widget doctor(BuildContext context, double width) {
             title: Center(
               child: Text(
                 'DOCTOR',
-                style: Theme.of(context).textTheme.headline6?.apply(fontWeightDelta: 5),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    ?.apply(fontWeightDelta: 5),
               ),
             ),
             subtitle: const Center(child: Text('An account for consultancy')),
@@ -207,20 +241,39 @@ Widget doctor(BuildContext context, double width) {
           const Padding(padding: EdgeInsets.only(top: 4)),
           ListTile(
             title: Center(
-              child: Text('\$1', style: Theme.of(context).textTheme.headline4?.apply(fontWeightDelta: 5, color: Theme.of(context).textTheme.headline5?.color), textAlign: TextAlign.center),
+              child: Text('\$1',
+                  style: Theme.of(context).textTheme.headline4?.apply(
+                      fontWeightDelta: 5,
+                      color: Theme.of(context).textTheme.headline5?.color),
+                  textAlign: TextAlign.center),
             ),
             subtitle: const Center(
-              child: Tooltip(child: Text('Per active client per month'), message: 'One visit per month', verticalOffset: 10, textAlign: TextAlign.center),
+              child: Tooltip(
+                  child: Text('Per active client per month'),
+                  message: 'One visit per month',
+                  verticalOffset: 10,
+                  textAlign: TextAlign.center),
             ),
           ),
           const Padding(padding: EdgeInsets.only(top: 24)),
-          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Reduce misdiagnosis', textAlign: TextAlign.center)),
+          const Padding(
+              padding: EdgeInsets.only(left: 4, right: 4),
+              child: Text('Reduce misdiagnosis', textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Avoid adverse drug reactions', textAlign: TextAlign.center)),
+          const Padding(
+              padding: EdgeInsets.only(left: 4, right: 4),
+              child: Text('Avoid adverse drug reactions',
+                  textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Send prescription insstructions to clients', textAlign: TextAlign.center)),
+          const Padding(
+              padding: EdgeInsets.only(left: 4, right: 4),
+              child: Text('Send prescription insstructions to clients',
+                  textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Discover drug allergies', textAlign: TextAlign.center)),
+          const Padding(
+              padding: EdgeInsets.only(left: 4, right: 4),
+              child:
+                  Text('Discover drug allergies', textAlign: TextAlign.center)),
           const Spacer(),
           Column(
             children: <Widget>[
@@ -230,7 +283,8 @@ Widget doctor(BuildContext context, double width) {
                 },
                 child: const Text(
                   'UPGRADE',
-                  style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.4),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500, letterSpacing: 0.4),
                 ),
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(110, 45),
@@ -254,27 +308,49 @@ Widget geneticTest(BuildContext context, double width) {
         children: <Widget>[
           ListTile(
             title: Center(
-              child: Text('GENOME TEST', style: Theme.of(context).textTheme.headline6?.apply(fontWeightDelta: 5), textAlign: TextAlign.center),
+              child: Text('GENOME TEST',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.apply(fontWeightDelta: 5),
+                  textAlign: TextAlign.center),
             ),
-            subtitle: const Center(child: Text('Order a genetic test', textAlign: TextAlign.center)),
+            subtitle: const Center(
+                child:
+                    Text('Order a genetic test', textAlign: TextAlign.center)),
           ),
           ListTile(
             title: Center(
               child: Text(
                 '\$900',
-                style: Theme.of(context).textTheme.headline4?.apply(fontWeightDelta: 5, color: Theme.of(context).textTheme.headline5?.color),
+                style: Theme.of(context).textTheme.headline4?.apply(
+                    fontWeightDelta: 5,
+                    color: Theme.of(context).textTheme.headline5?.color),
               ),
             ),
-            subtitle: const Center(child: Text('One time fee', textAlign: TextAlign.center)),
+            subtitle: const Center(
+                child: Text('One time fee', textAlign: TextAlign.center)),
           ),
           const Padding(padding: EdgeInsets.only(top: 20)),
-          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Order a genetic test by mail', textAlign: TextAlign.center)),
+          const Padding(
+              padding: EdgeInsets.only(left: 4, right: 4),
+              child: Text('Order a genetic test by mail',
+                  textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Receive automatically imported data', textAlign: TextAlign.center)),
+          const Padding(
+              padding: EdgeInsets.only(left: 4, right: 4),
+              child: Text('Receive automatically imported data',
+                  textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Build your genetic data in a family tree', textAlign: TextAlign.center)),
+          const Padding(
+              padding: EdgeInsets.only(left: 4, right: 4),
+              child: Text('Build your genetic data in a family tree',
+                  textAlign: TextAlign.center)),
           const Divider(indent: 15, endIndent: 15),
-          const Padding(padding: EdgeInsets.only(left: 4, right: 4), child: Text('Share allergies with practitioners', textAlign: TextAlign.center)),
+          const Padding(
+              padding: EdgeInsets.only(left: 4, right: 4),
+              child: Text('Share allergies with practitioners',
+                  textAlign: TextAlign.center)),
           const Spacer(),
           Column(
             children: <Widget>[
@@ -340,7 +416,9 @@ Widget mobile(BuildContext context, ScrollController controller) {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 8, right: 8),
-                    child: Text(improve, style: Theme.of(context).textTheme.headline3, textAlign: TextAlign.center),
+                    child: Text(improve,
+                        style: Theme.of(context).textTheme.headline3,
+                        textAlign: TextAlign.center),
                   ),
                 ],
               ),
@@ -358,13 +436,16 @@ Widget mobile(BuildContext context, ScrollController controller) {
         ),
       ),
       const SizedBox(height: 44),
-      Icon(CommunityMaterialIcons.stethoscope, size: MediaQuery.of(context).size.width * 0.2),
+      Icon(CommunityMaterialIcons.stethoscope,
+          size: MediaQuery.of(context).size.width * 0.2),
       const SizedBox(height: 22),
       Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Text(diseaseDetection, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+            child: Text(diseaseDetection,
+                style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center),
           ),
           const SizedBox(height: 6),
           const Padding(
@@ -374,13 +455,16 @@ Widget mobile(BuildContext context, ScrollController controller) {
         ],
       ),
       const SizedBox(height: 66),
-      Icon(CommunityMaterialIcons.test_tube, size: MediaQuery.of(context).size.width * 0.2),
+      Icon(CommunityMaterialIcons.test_tube,
+          size: MediaQuery.of(context).size.width * 0.2),
       const SizedBox(height: 22),
       Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Text(biomarkers, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+            child: Text(biomarkers,
+                style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center),
           ),
           const SizedBox(height: 12),
           const Padding(
@@ -398,7 +482,8 @@ Widget mobile(BuildContext context, ScrollController controller) {
           const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.only(left: 4),
-            child: Text('to register and use.', style: Theme.of(context).textTheme.headline6),
+            child: Text('to register and use.',
+                style: Theme.of(context).textTheme.headline6),
           ),
         ],
       ),
@@ -420,23 +505,30 @@ Widget mobile(BuildContext context, ScrollController controller) {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Text(familyTree, style: Theme.of(context).textTheme.headline3, textAlign: TextAlign.center),
+            child: Text(familyTree,
+                style: Theme.of(context).textTheme.headline3,
+                textAlign: TextAlign.center),
           ),
           const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Text(familyTreeHow, style: Theme.of(context).textTheme.headline6, textAlign: TextAlign.center),
+            child: Text(familyTreeHow,
+                style: Theme.of(context).textTheme.headline6,
+                textAlign: TextAlign.center),
           ),
         ],
       ),
       const SizedBox(height: 44),
-      Icon(CommunityMaterialIcons.tree_outline, size: MediaQuery.of(context).size.width * 0.5),
+      Icon(CommunityMaterialIcons.tree_outline,
+          size: MediaQuery.of(context).size.width * 0.5),
       const SizedBox(height: 44),
       Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Text(familyTreeText, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+            child: Text(familyTreeText,
+                style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center),
           ),
           const SizedBox(height: 12),
           const Padding(
@@ -452,23 +544,30 @@ Widget mobile(BuildContext context, ScrollController controller) {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Text(machineLearning, style: Theme.of(context).textTheme.headline3, textAlign: TextAlign.center),
+            child: Text(machineLearning,
+                style: Theme.of(context).textTheme.headline3,
+                textAlign: TextAlign.center),
           ),
           const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Text(machienLearningWhy, style: Theme.of(context).textTheme.headline6, textAlign: TextAlign.center),
+            child: Text(machienLearningWhy,
+                style: Theme.of(context).textTheme.headline6,
+                textAlign: TextAlign.center),
           ),
         ],
       ),
       const SizedBox(height: 44),
-      Icon(CommunityMaterialIcons.robot_happy_outline, size: MediaQuery.of(context).size.width * 0.5),
+      Icon(CommunityMaterialIcons.robot_happy_outline,
+          size: MediaQuery.of(context).size.width * 0.5),
       const SizedBox(height: 44),
       Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Text(machineLearningText, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+            child: Text(machineLearningText,
+                style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center),
           ),
           const SizedBox(height: 12),
           const Padding(
@@ -484,23 +583,29 @@ Widget mobile(BuildContext context, ScrollController controller) {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Text("Made for the love of our community.", style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+            child: Text("Made for the love of our community.",
+                style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center),
           ),
           const SizedBox(height: 12),
           const Padding(
             padding: EdgeInsets.only(left: 8, right: 8),
-            child: Text("Ut ostenderet mundi amorem, quem Christus ostendit.", textAlign: TextAlign.center),
+            child: Text("Ut ostenderet mundi amorem, quem Christus ostendit.",
+                textAlign: TextAlign.center),
           ),
         ],
       ),
       const SizedBox(height: 22),
-      Icon(CommunityMaterialIcons.church, size: MediaQuery.of(context).size.height * 0.1),
+      Icon(CommunityMaterialIcons.church,
+          size: MediaQuery.of(context).size.height * 0.1),
       const SizedBox(height: 44),
       const Divider(indent: 22, endIndent: 22),
       const SizedBox(height: 44),
       TextButton(
         onPressed: () async {
-          controller.animateTo(controller.position.minScrollExtent, duration: const Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+          controller.animateTo(controller.position.minScrollExtent,
+              duration: const Duration(seconds: 1),
+              curve: Curves.fastOutSlowIn);
         },
         child: const Text('Back to the top'),
       ),
@@ -520,8 +625,7 @@ Widget mobile(BuildContext context, ScrollController controller) {
   );
 }
 
-
-    Widget desktop(BuildContext context, ScrollController controller) {
+Widget desktop(BuildContext context, ScrollController controller) {
   return Column(
     children: [
       Container(
@@ -542,7 +646,8 @@ Widget mobile(BuildContext context, ScrollController controller) {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 750 ? 8 : 2),
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width > 750 ? 8 : 2),
                     child: Center(
                       child: Text(
                         'personalised to you.',
@@ -581,7 +686,8 @@ Widget mobile(BuildContext context, ScrollController controller) {
                     const SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.only(left: 4),
-                      child: Text(improveUsing, style: Theme.of(context).textTheme.headline6),
+                      child: Text(improveUsing,
+                          style: Theme.of(context).textTheme.headline6),
                     ),
                   ],
                 ),
@@ -601,7 +707,8 @@ Widget mobile(BuildContext context, ScrollController controller) {
                 flex: 1,
                 child: Column(
                   children: [
-                    Icon(CommunityMaterialIcons.stethoscope, size: MediaQuery.of(context).size.width * 0.2),
+                    Icon(CommunityMaterialIcons.stethoscope,
+                        size: MediaQuery.of(context).size.width * 0.2),
                   ],
                 ),
               ),
@@ -610,7 +717,8 @@ Widget mobile(BuildContext context, ScrollController controller) {
                 flex: 1,
                 child: Column(
                   children: [
-                    Icon(CommunityMaterialIcons.test_tube, size: MediaQuery.of(context).size.width * 0.2),
+                    Icon(CommunityMaterialIcons.test_tube,
+                        size: MediaQuery.of(context).size.width * 0.2),
                   ],
                 ),
               ),
@@ -628,9 +736,12 @@ Widget mobile(BuildContext context, ScrollController controller) {
                 flex: 1,
                 child: Column(
                   children: [
-                    Text(diseaseDetection, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+                    Text(diseaseDetection,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                        textAlign: TextAlign.center),
                     const SizedBox(height: 6),
-                    const Text(diseaseDetectionHow, textAlign: TextAlign.center),
+                    const Text(diseaseDetectionHow,
+                        textAlign: TextAlign.center),
                   ],
                 ),
               ),
@@ -639,7 +750,9 @@ Widget mobile(BuildContext context, ScrollController controller) {
                 flex: 1,
                 child: Column(
                   children: [
-                    Text(biomarkers, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+                    Text(biomarkers,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                        textAlign: TextAlign.center),
                     const SizedBox(height: 12),
                     const Text(biomarkerHow, textAlign: TextAlign.center),
                   ],
@@ -654,7 +767,8 @@ Widget mobile(BuildContext context, ScrollController controller) {
       SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Padding(
-          padding: const EdgeInsets.only(left: 44, right: 44, top: 44, bottom: 44),
+          padding:
+              const EdgeInsets.only(left: 44, right: 44, top: 44, bottom: 44),
           child: Row(
             children: [
               Expanded(
@@ -666,7 +780,8 @@ Widget mobile(BuildContext context, ScrollController controller) {
                     const SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.only(left: 4),
-                      child: Text('to register and use.', style: Theme.of(context).textTheme.headline6),
+                      child: Text('to register and use.',
+                          style: Theme.of(context).textTheme.headline6),
                     ),
                   ],
                 ),
@@ -689,7 +804,8 @@ Widget mobile(BuildContext context, ScrollController controller) {
       SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Padding(
-          padding: const EdgeInsets.only(left: 44, right: 44, top: 44, bottom: 44),
+          padding:
+              const EdgeInsets.only(left: 44, right: 44, top: 44, bottom: 44),
           child: Row(
             children: [
               Expanded(
@@ -697,11 +813,13 @@ Widget mobile(BuildContext context, ScrollController controller) {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(familyTree, style: Theme.of(context).textTheme.headline3),
+                    Text(familyTree,
+                        style: Theme.of(context).textTheme.headline3),
                     const SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.only(left: 4),
-                      child: Text(familyTreeHow, style: Theme.of(context).textTheme.headline6),
+                      child: Text(familyTreeHow,
+                          style: Theme.of(context).textTheme.headline6),
                     ),
                   ],
                 ),
@@ -720,7 +838,10 @@ Widget mobile(BuildContext context, ScrollController controller) {
               Expanded(
                 flex: 1,
                 child: Column(
-                  children: [Icon(CommunityMaterialIcons.tree_outline, size: MediaQuery.of(context).size.height * 0.5)],
+                  children: [
+                    Icon(CommunityMaterialIcons.tree_outline,
+                        size: MediaQuery.of(context).size.height * 0.5)
+                  ],
                 ),
               ),
               const SizedBox(width: 22),
@@ -728,7 +849,9 @@ Widget mobile(BuildContext context, ScrollController controller) {
                 flex: 1,
                 child: Column(
                   children: [
-                    Text(familyTreeText, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+                    Text(familyTreeText,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                        textAlign: TextAlign.center),
                     const SizedBox(height: 12),
                     const Text(familyTreeSubtext, textAlign: TextAlign.center),
                   ],
@@ -744,7 +867,8 @@ Widget mobile(BuildContext context, ScrollController controller) {
       SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Padding(
-          padding: const EdgeInsets.only(left: 44, right: 44, top: 44, bottom: 44),
+          padding:
+              const EdgeInsets.only(left: 44, right: 44, top: 44, bottom: 44),
           child: Row(
             children: [
               Expanded(
@@ -752,11 +876,13 @@ Widget mobile(BuildContext context, ScrollController controller) {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(machineLearning, style: Theme.of(context).textTheme.headline3),
+                    Text(machineLearning,
+                        style: Theme.of(context).textTheme.headline3),
                     const SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.only(left: 4),
-                      child: Text(machienLearningWhy, style: Theme.of(context).textTheme.headline6),
+                      child: Text(machienLearningWhy,
+                          style: Theme.of(context).textTheme.headline6),
                     ),
                   ],
                 ),
@@ -775,7 +901,10 @@ Widget mobile(BuildContext context, ScrollController controller) {
               Expanded(
                 flex: 1,
                 child: Column(
-                  children: [Icon(CommunityMaterialIcons.robot_happy_outline, size: MediaQuery.of(context).size.height * 0.4)],
+                  children: [
+                    Icon(CommunityMaterialIcons.robot_happy_outline,
+                        size: MediaQuery.of(context).size.height * 0.4)
+                  ],
                 ),
               ),
               const SizedBox(width: 22),
@@ -783,9 +912,12 @@ Widget mobile(BuildContext context, ScrollController controller) {
                 flex: 1,
                 child: Column(
                   children: [
-                    Text(machineLearningText, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+                    Text(machineLearningText,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                        textAlign: TextAlign.center),
                     const SizedBox(height: 12),
-                    const Text(machineLearningSubtext, textAlign: TextAlign.center),
+                    const Text(machineLearningSubtext,
+                        textAlign: TextAlign.center),
                   ],
                 ),
               ),
@@ -806,9 +938,13 @@ Widget mobile(BuildContext context, ScrollController controller) {
                 flex: 2,
                 child: Column(
                   children: [
-                    Text("Made for the love of our community.", style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+                    Text("Made for the love of our community.",
+                        style: Theme.of(context).textTheme.headlineSmall,
+                        textAlign: TextAlign.center),
                     const SizedBox(height: 12),
-                    const Text("Ut ostenderet mundi amorem, quem Christus ostendit.", textAlign: TextAlign.center),
+                    const Text(
+                        "Ut ostenderet mundi amorem, quem Christus ostendit.",
+                        textAlign: TextAlign.center),
                   ],
                 ),
               ),
@@ -816,7 +952,10 @@ Widget mobile(BuildContext context, ScrollController controller) {
               Expanded(
                 flex: 1,
                 child: Column(
-                  children: [Icon(CommunityMaterialIcons.church, size: MediaQuery.of(context).size.height * 0.1)],
+                  children: [
+                    Icon(CommunityMaterialIcons.church,
+                        size: MediaQuery.of(context).size.height * 0.1)
+                  ],
                 ),
               ),
               const SizedBox(width: 22),
@@ -828,7 +967,9 @@ Widget mobile(BuildContext context, ScrollController controller) {
       const SizedBox(height: 44),
       TextButton(
         onPressed: () async {
-          controller.animateTo(controller.position.minScrollExtent, duration: const Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+          controller.animateTo(controller.position.minScrollExtent,
+              duration: const Duration(seconds: 1),
+              curve: Curves.fastOutSlowIn);
         },
         child: const Text('Back to the top'),
       ),

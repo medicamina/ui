@@ -8,18 +8,18 @@ For help getting started with Flutter, view the [online documentation](https://f
 
 ## Documentation
 
-[medicamina documentaton](https://medicamina.github.io)
-
-## Project 
-
-🔨 Built with these awesome tools
+[Read the medicamina documentaton](https://medicamina.github.io)
 
 ## Running the project
 
 ```
 flutter pub get
 flutter run
-```
+``` 
+
+## Project 
+
+🔨 Built with these awesome tools
 
 <br />
 

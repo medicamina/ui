@@ -6,7 +6,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina/states.dart';
 
 class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
-  const MedicaminaDashFitnessRecommendationsWidget({Key? key}) : super(key: key);
+  const MedicaminaDashFitnessRecommendationsWidget({Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,12 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Routines',
-                  style: TextStyle(fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold),
+                  'Record',
+                  style: TextStyle(
+                      fontWeight:
+                          Modular.get<MedicaminaThemeState>().getDarkMode()
+                              ? FontWeight.normal
+                              : FontWeight.bold),
                 ),
               ),
             ],
@@ -40,18 +45,32 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox.square(
-                        dimension: MediaQuery.of(context).size.width >= 1000 ? 120 : MediaQuery.of(context).size.width >= 300 ? 90 : 68,
+                        dimension: MediaQuery.of(context).size.width >= 1000
+                            ? 140
+                            : MediaQuery.of(context).size.width >= 300
+                                ? 90
+                                : 68,
                         child: ClipOval(
                           child: Material(
                             child: InkWell(
-                              radius: 120,
+                              radius: 140,
                               onTap: () {},
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.fastfood, size: MediaQuery.of(context).size.width >= 1000 ? 66 : MediaQuery.of(context).size.width >= 300 ? 38 : 22),
+                                  Icon(Icons.scale,
+                                      size: MediaQuery.of(context).size.width >=
+                                              1000
+                                          ? 66
+                                          : MediaQuery.of(context).size.width >=
+                                                  300
+                                              ? 38
+                                              : 22),
                                   const SizedBox(height: 2),
-                                  const Text('Nutrition', style: TextStyle(fontWeight: FontWeight.normal), textAlign: TextAlign.center),
+                                  const Text('Weight',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal),
+                                      textAlign: TextAlign.center),
                                 ],
                               ),
                             ),
@@ -65,18 +84,32 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox.square(
-                        dimension: MediaQuery.of(context).size.width >= 1000 ? 120 : MediaQuery.of(context).size.width >= 300 ? 90 : 68,
+                        dimension: MediaQuery.of(context).size.width >= 1000
+                            ? 140
+                            : MediaQuery.of(context).size.width >= 300
+                                ? 90
+                                : 68,
                         child: ClipOval(
                           child: Material(
                             child: InkWell(
-                              radius: 120,
+                              radius: 140,
                               onTap: () {},
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(CommunityMaterialIcons.bed, size: MediaQuery.of(context).size.width >= 1000 ? 66 : MediaQuery.of(context).size.width >= 300 ? 38 : 22),
+                                  Icon(CommunityMaterialIcons.bed,
+                                      size: MediaQuery.of(context).size.width >=
+                                              1000
+                                          ? 66
+                                          : MediaQuery.of(context).size.width >=
+                                                  300
+                                              ? 38
+                                              : 22),
                                   const SizedBox(height: 2),
-                                  const Text('Sleep', style: TextStyle(fontWeight: FontWeight.normal), textAlign: TextAlign.center),
+                                  const Text('Sleep',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal),
+                                      textAlign: TextAlign.center),
                                 ],
                               ),
                             ),
@@ -90,18 +123,32 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox.square(
-                        dimension: MediaQuery.of(context).size.width >= 1000 ? 120 : MediaQuery.of(context).size.width >= 300 ? 90 : 68,
+                        dimension: MediaQuery.of(context).size.width >= 1000
+                            ? 140
+                            : MediaQuery.of(context).size.width >= 300
+                                ? 90
+                                : 68,
                         child: ClipOval(
                           child: Material(
                             child: InkWell(
-                              radius: 120,
+                              radius: 140,
                               onTap: () {},
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(CommunityMaterialIcons.dumbbell, size: MediaQuery.of(context).size.width >= 1000 ? 66 : MediaQuery.of(context).size.width >= 300 ? 38 : 22),
+                                  Icon(CommunityMaterialIcons.av_timer,
+                                      size: MediaQuery.of(context).size.width >=
+                                              1000
+                                          ? 66
+                                          : MediaQuery.of(context).size.width >=
+                                                  300
+                                              ? 38
+                                              : 22),
                                   const SizedBox(height: 2),
-                                  const Text('Exercises', style: TextStyle(fontWeight: FontWeight.normal), textAlign: TextAlign.center),
+                                  const Text('Blood Pressure',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal),
+                                      textAlign: TextAlign.center),
                                 ],
                               ),
                             ),
@@ -115,18 +162,32 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox.square(
-                        dimension: MediaQuery.of(context).size.width >= 1000 ? 120 : MediaQuery.of(context).size.width >= 300 ? 90 : 68,
+                        dimension: MediaQuery.of(context).size.width >= 1000
+                            ? 140
+                            : MediaQuery.of(context).size.width >= 300
+                                ? 90
+                                : 68,
                         child: ClipOval(
                           child: Material(
                             child: InkWell(
-                              radius: 120,
+                              radius: 140,
                               onTap: () {},
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(CommunityMaterialIcons.glass_mug_variant, size: MediaQuery.of(context).size.width >= 1000 ? 66 : MediaQuery.of(context).size.width >= 300 ? 38 : 22),
+                                  Icon(CommunityMaterialIcons.human_male_height,
+                                      size: MediaQuery.of(context).size.width >=
+                                              1000
+                                          ? 66
+                                          : MediaQuery.of(context).size.width >=
+                                                  300
+                                              ? 38
+                                              : 22),
                                   const SizedBox(height: 2),
-                                  const Text('Drugs &\nAlcohol', style: TextStyle(fontWeight: FontWeight.normal), textAlign: TextAlign.center),
+                                  const Text('Height',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal),
+                                      textAlign: TextAlign.center),
                                 ],
                               ),
                             ),
@@ -142,13 +203,5 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
         ),
       ],
     );
-
-    // return Row(
-    //   children: [
-    //     Expanded(
-    //       child:
-    //     ),
-    //   ],
-    // );
   }
 }

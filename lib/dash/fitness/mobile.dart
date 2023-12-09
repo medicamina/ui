@@ -19,7 +19,7 @@ class MedicaminaDashFitnessMobileWidget extends StatelessWidget {
           children: [
             const MedicaminaDashFitnessStepsWidget(),
             const MedicaminaDashFitnessHeartWidget(),
-            const MedicaminaDashFitnessRecordWidget(),
+            // const MedicaminaDashFitnessRecordWidget(),
             const MedicaminaDashFitnessRecommendationsWidget(),
             MedicaminaDashFitnessActivityLineChart(),
             const SizedBox(height: 12),

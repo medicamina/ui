@@ -23,7 +23,7 @@ class MedicaminaDashFitnessDesktopWidget extends StatelessWidget {
                 Expanded(child: MedicaminaDashFitnessHeartWidget()),
               ],
             ),
-            Row(children: [Flexible(child: MedicaminaDashFitnessRecordWidget())]),
+            // Row(children: [Flexible(child: MedicaminaDashFitnessRecordWidget())]),
             Row(
               children: [
                 Flexible(
@@ -32,7 +32,9 @@ class MedicaminaDashFitnessDesktopWidget extends StatelessWidget {
               ],
             ),
             Row(
-              children: [Flexible(child: MedicaminaDashFitnessActivityLineChart())],
+              children: [
+                Flexible(child: MedicaminaDashFitnessActivityLineChart())
+              ],
             ),
             const SizedBox(height: 12),
           ],

@@ -7,13 +7,16 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:medicamina/states.dart';
 
 class MedicaminaDashSettingsAccountDesktopWidget extends StatefulWidget {
-  const MedicaminaDashSettingsAccountDesktopWidget({Key? key}) : super(key: key);
+  const MedicaminaDashSettingsAccountDesktopWidget({Key? key})
+      : super(key: key);
 
   @override
-  State<MedicaminaDashSettingsAccountDesktopWidget> createState() => _MedicaminaDashSettingsAccountDesktopWidget();
+  State<MedicaminaDashSettingsAccountDesktopWidget> createState() =>
+      _MedicaminaDashSettingsAccountDesktopWidget();
 }
 
-class _MedicaminaDashSettingsAccountDesktopWidget extends State<MedicaminaDashSettingsAccountDesktopWidget> {
+class _MedicaminaDashSettingsAccountDesktopWidget
+    extends State<MedicaminaDashSettingsAccountDesktopWidget> {
   late String _firstName;
   late String _lateName;
   late String _middleName;
@@ -54,19 +57,19 @@ class _MedicaminaDashSettingsAccountDesktopWidget extends State<MedicaminaDashSe
 
   TextStyle? getUploadPhotoSubtitleStyle() {
     if (Modular.get<MedicaminaThemeState>().getDarkMode()) {
-      return TextStyle(color: Theme.of(context).textTheme.caption?.color);
+      return TextStyle(color: Theme.of(context).textTheme.bodySmall?.color);
     }
     return null;
   }
 
   TextStyle? getDividerLabelStyle() {
     if (Modular.get<MedicaminaThemeState>().getDarkMode()) {
-      return Theme.of(context).textTheme.caption?.copyWith(
+      return Theme.of(context).textTheme.bodySmall?.copyWith(
             fontSize: 13.66,
             fontWeight: FontWeight.normal,
           );
     }
-    return Theme.of(context).textTheme.caption?.copyWith(
+    return Theme.of(context).textTheme.bodySmall?.copyWith(
           fontSize: 13.66,
           fontWeight: FontWeight.bold,
         );
@@ -82,7 +85,7 @@ class _MedicaminaDashSettingsAccountDesktopWidget extends State<MedicaminaDashSe
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Profile', style: Theme.of(context).textTheme.headline6),
+            Text('Profile', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 4),
             const Divider(height: 1),
             const SizedBox(height: 6),
@@ -117,12 +120,22 @@ class _MedicaminaDashSettingsAccountDesktopWidget extends State<MedicaminaDashSe
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(children: [Text('Upload profile photo', style: getUploadPhotoTextStyle())]),
+                          Row(children: [
+                            Text('Upload profile photo',
+                                style: getUploadPhotoTextStyle())
+                          ]),
                           const SizedBox(height: 6),
-                          Row(children: [Text('Photo should be at least 300x300px', style: getUploadPhotoSubtitleStyle())]),
+                          Row(children: [
+                            Text('Photo should be at least 300x300px',
+                                style: getUploadPhotoSubtitleStyle())
+                          ]),
                           const SizedBox(height: 12),
                           Row(
-                            children: [OutlinedButton(onPressed: () {}, child: const Text('Upload a photo'))],
+                            children: [
+                              OutlinedButton(
+                                  onPressed: () {},
+                                  child: const Text('Upload a photo'))
+                            ],
                           )
                         ],
                       ),
@@ -170,8 +183,10 @@ class _MedicaminaDashSettingsAccountDesktopWidget extends State<MedicaminaDashSe
                         height: 40,
                         child: TextField(
                           decoration: InputDecoration(
-                            suffixIcon: Icon(CommunityMaterialIcons.alphabetical_variant),
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            suffixIcon: Icon(
+                                CommunityMaterialIcons.alphabetical_variant),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -208,8 +223,10 @@ class _MedicaminaDashSettingsAccountDesktopWidget extends State<MedicaminaDashSe
                         height: 40,
                         child: TextField(
                           decoration: InputDecoration(
-                            suffixIcon: Icon(CommunityMaterialIcons.alphabetical_variant),
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            suffixIcon: Icon(
+                                CommunityMaterialIcons.alphabetical_variant),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -246,8 +263,10 @@ class _MedicaminaDashSettingsAccountDesktopWidget extends State<MedicaminaDashSe
                         height: 40,
                         child: TextField(
                           decoration: InputDecoration(
-                            suffixIcon: Icon(CommunityMaterialIcons.alphabetical_variant),
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            suffixIcon: Icon(
+                                CommunityMaterialIcons.alphabetical_variant),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -284,7 +303,8 @@ class _MedicaminaDashSettingsAccountDesktopWidget extends State<MedicaminaDashSe
                         height: 40,
                         child: DateTimePicker(
                           decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(top: 9, bottom: 0, left: 10),
+                            contentPadding:
+                                EdgeInsets.only(top: 9, bottom: 0, left: 10),
                             hintText: 'MMM dd, YYYY',
                             suffixIcon: Icon(Icons.date_range),
                             border: OutlineInputBorder(),
@@ -335,7 +355,8 @@ class _MedicaminaDashSettingsAccountDesktopWidget extends State<MedicaminaDashSe
                         child: TextField(
                           decoration: InputDecoration(
                             suffixIcon: Icon(CommunityMaterialIcons.map_marker),
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -374,7 +395,8 @@ class _MedicaminaDashSettingsAccountDesktopWidget extends State<MedicaminaDashSe
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             suffixIcon: Icon(CommunityMaterialIcons.cellphone),
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
                             border: OutlineInputBorder(),
                           ),
                         ),

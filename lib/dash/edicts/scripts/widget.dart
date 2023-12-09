@@ -108,8 +108,8 @@ class __EScriptsCarouselItem extends State<_EScriptsCarouselItem> {
             context: context,
             builder: (BuildContext context) {
               return const AlertDialog(
-                title: Text("My title"),
-                content: Text("This is my message."),
+                title: Text('My title'),
+                content: Text('This is my message.'),
                 // actions: [
                 //   ElevatedButton(onPressed: () => context., child: child),
                 // ],

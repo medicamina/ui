@@ -11,10 +11,12 @@ class MedicaminaAuthRegisterWidget extends StatefulWidget {
   const MedicaminaAuthRegisterWidget({Key? key}) : super(key: key);
 
   @override
-  State<MedicaminaAuthRegisterWidget> createState() => _MedicaminaAuthRegisterWidget();
+  State<MedicaminaAuthRegisterWidget> createState() =>
+      _MedicaminaAuthRegisterWidget();
 }
 
-class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> {
+class _MedicaminaAuthRegisterWidget
+    extends State<MedicaminaAuthRegisterWidget> {
   final _formKey = GlobalKey<FormState>();
   String _email = '';
   String _password = '';
@@ -27,7 +29,9 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
   void initState() {
     super.initState();
     _loading = Modular.get<MedicaminaAuthAppBarLoadingState>().getLoading();
-    _loadingStream = Modular.get<MedicaminaAuthAppBarLoadingState>().getStream().listen((value) {
+    _loadingStream = Modular.get<MedicaminaAuthAppBarLoadingState>()
+        .getStream()
+        .listen((value) {
       setState(() {
         _loading = value;
       });
@@ -54,12 +58,23 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
-                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.2 : MediaQuery.of(context).size.width * 0.1, top: 24),
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width > 800
+                                ? MediaQuery.of(context).size.width * 0.2
+                                : MediaQuery.of(context).size.width * 0.1,
+                            top: 24),
                         child: Text(
                           "Let's get started",
-                          style: Modular.get<MedicaminaThemeState>().getDarkMode()
-                              ? Theme.of(context).textTheme.displayMedium?.merge(const TextStyle(color: Colors.white))
-                              : Theme.of(context).textTheme.displayMedium?.merge(
+                          style: Modular.get<MedicaminaThemeState>()
+                                  .getDarkMode()
+                              ? Theme.of(context)
+                                  .textTheme
+                                  .displayMedium
+                                  ?.merge(const TextStyle(color: Colors.white))
+                              : Theme.of(context)
+                                  .textTheme
+                                  .displayMedium
+                                  ?.merge(
                                     const TextStyle(color: Colors.black87),
                                   ),
                         ),
@@ -69,8 +84,15 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
-                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
-                        child: Text("Fill out the form to create a new account", style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width > 800
+                                ? MediaQuery.of(context).size.width * 0.205
+                                : MediaQuery.of(context).size.width * 0.115),
+                        child: Text('Fill out the form to create a new account',
+                            style: Theme.of(context)
+                                .textTheme
+                                .displaySmall
+                                ?.merge(const TextStyle(fontSize: 20))),
                       ),
                     ),
                   ],
@@ -87,7 +109,13 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                         children: [
                           const SizedBox(height: 24),
                           Padding(
-                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                            padding: MediaQuery.of(context).size.width > 800
+                                ? EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width *
+                                        0.20,
+                                    right:
+                                        MediaQuery.of(context).size.width * 0.2)
+                                : const EdgeInsets.only(left: 24, right: 24),
                             child: TextFormField(
                               autofillHints: const [AutofillHints.email],
                               keyboardType: TextInputType.emailAddress,
@@ -103,7 +131,9 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                                 if (value == null || value.isEmpty) {
                                   return 'Empty email';
                                 }
-                                bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value);
+                                bool emailValid = RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(value);
                                 if (!emailValid) {
                                   return 'Invalid email';
                                 }
@@ -113,7 +143,13 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                           ),
                           const SizedBox(height: 12),
                           Padding(
-                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                            padding: MediaQuery.of(context).size.width > 800
+                                ? EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width *
+                                        0.20,
+                                    right:
+                                        MediaQuery.of(context).size.width * 0.2)
+                                : const EdgeInsets.only(left: 24, right: 24),
                             child: TextFormField(
                               autofillHints: const [AutofillHints.password],
                               keyboardType: TextInputType.visiblePassword,
@@ -139,7 +175,13 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                           ),
                           const SizedBox(height: 12),
                           Padding(
-                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                            padding: MediaQuery.of(context).size.width > 800
+                                ? EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width *
+                                        0.20,
+                                    right:
+                                        MediaQuery.of(context).size.width * 0.2)
+                                : const EdgeInsets.only(left: 24, right: 24),
                             child: TextFormField(
                               autofillHints: const [AutofillHints.password],
                               keyboardType: TextInputType.visiblePassword,
@@ -168,28 +210,52 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                           ),
                           const SizedBox(height: 18),
                           Padding(
-                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                            padding: MediaQuery.of(context).size.width > 800
+                                ? EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width *
+                                        0.20,
+                                    right:
+                                        MediaQuery.of(context).size.width * 0.2)
+                                : const EdgeInsets.only(left: 24, right: 24),
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(minimumSize: Size(const Size.fromHeight(40).width, 42), elevation: 0),
+                              style: ElevatedButton.styleFrom(
+                                  minimumSize:
+                                      Size(const Size.fromHeight(40).width, 42),
+                                  elevation: 0),
                               onPressed: _loading
                                   ? null
                                   : () async {
                                       if (_formKey.currentState!.validate()) {
-                                        Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(true);
+                                        Modular.get<
+                                                MedicaminaAuthAppBarLoadingState>()
+                                            .setLoading(true);
                                         try {
-                                          await _supabaseClient.auth.signUp(email: _email, password: _password);
-                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please check your e-mails for a verificaiton link')));
+                                          await _supabaseClient.auth.signUp(
+                                              email: _email,
+                                              password: _password);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      'Please check your e-mails for a verificaiton link')));
                                           Modular.to.pushNamed('/auth/login');
-                                          Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
+                                          Modular.get<
+                                                  MedicaminaAuthAppBarLoadingState>()
+                                              .setLoading(false);
                                         } on AuthException catch (err, _) {
-                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.message)));
-                                          Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                                  content: Text(err.message)));
+                                          Modular.get<
+                                                  MedicaminaAuthAppBarLoadingState>()
+                                              .setLoading(false);
                                         }
                                       }
                                     },
                               child: const Text(
                                 'REGISTER',
-                                style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.75),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.75),
                               ),
                             ),
                           ),
@@ -199,7 +265,8 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                             children: [
                               TextButton(
                                 style: TextButton.styleFrom(
-                                  padding: const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
+                                  padding: const EdgeInsets.only(
+                                      left: 22, right: 22, top: 15, bottom: 15),
                                 ),
                                 onPressed: () {
                                   Modular.to.navigate('/auth/login');

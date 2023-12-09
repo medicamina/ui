@@ -6,7 +6,7 @@ class MedicaminaDashGuard extends RouteGuard {
 
   @override
   bool canActivate(String path, ModularRoute route) {
-    return true;
+    //return true;
     return Modular.get<SupabaseClient>().auth.currentUser != null;
   }
 }

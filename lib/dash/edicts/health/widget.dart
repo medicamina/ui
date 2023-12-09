@@ -22,7 +22,11 @@ class MedicaminaDashEdictsHealthWidget extends StatelessWidget {
                   children: [
                     Text(
                       'Your health',
-                      style: TextStyle(fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold),
+                      style: TextStyle(
+                          fontWeight:
+                              Modular.get<MedicaminaThemeState>().getDarkMode()
+                                  ? FontWeight.normal
+                                  : FontWeight.bold),
                     ),
                   ],
                 ),
@@ -42,14 +46,19 @@ class MedicaminaDashEdictsHealthWidget extends StatelessWidget {
               child: PageView(
                 allowImplicitScrolling: true,
                 physics: const ClampingScrollPhysics(),
-                controller: PageController(viewportFraction: MediaQuery.of(context).size.width <= 700 ? 0.4 : 0.2),
+                controller: PageController(
+                    viewportFraction:
+                        MediaQuery.of(context).size.width <= 700 ? 0.4 : 0.2),
                 padEnds: false,
                 children: [
                   Column(
                     children: [
                       Expanded(
                         child: Opacity(
-                          opacity: Modular.get<MedicaminaThemeState>().getDarkMode() ? 0.7 : 1,
+                          opacity:
+                              Modular.get<MedicaminaThemeState>().getDarkMode()
+                                  ? 0.7
+                                  : 1,
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
@@ -61,9 +70,10 @@ class MedicaminaDashEdictsHealthWidget extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15.0),
                               ),
                               onTap: () {
-                                print("tapped");
+                                print('tapped');
                               },
-                              highlightColor: Color.fromRGBO(225, 255, 213, 0.5),
+                              highlightColor:
+                                  Color.fromRGBO(225, 255, 213, 0.5),
                               splashColor: Color.fromRGBO(56, 192, 9, 0.5),
                               child: Center(
                                 child: Icon(
@@ -89,7 +99,10 @@ class MedicaminaDashEdictsHealthWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Opacity(
-                          opacity: Modular.get<MedicaminaThemeState>().getDarkMode() ? 0.7 : 1,
+                          opacity:
+                              Modular.get<MedicaminaThemeState>().getDarkMode()
+                                  ? 0.7
+                                  : 1,
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
@@ -103,7 +116,8 @@ class MedicaminaDashEdictsHealthWidget extends StatelessWidget {
                               onTap: () {
                                 print("tapped");
                               },
-                              highlightColor: Color.fromRGBO(255, 235, 235, 0.5),
+                              highlightColor:
+                                  Color.fromRGBO(255, 235, 235, 0.5),
                               splashColor: Color.fromRGBO(251, 0, 15, 0.5),
                               child: Center(
                                 child: Icon(
@@ -129,7 +143,10 @@ class MedicaminaDashEdictsHealthWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Opacity(
-                          opacity: Modular.get<MedicaminaThemeState>().getDarkMode() ? 0.7 : 1,
+                          opacity:
+                              Modular.get<MedicaminaThemeState>().getDarkMode()
+                                  ? 0.7
+                                  : 1,
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
@@ -143,7 +160,8 @@ class MedicaminaDashEdictsHealthWidget extends StatelessWidget {
                               onTap: () {
                                 print("tapped");
                               },
-                              highlightColor: Color.fromRGBO(231, 236, 255, 0.5),
+                              highlightColor:
+                                  Color.fromRGBO(231, 236, 255, 0.5),
                               splashColor: Color.fromRGBO(0, 108, 197, 0.5),
                               child: Center(
                                 child: Icon(
@@ -160,7 +178,7 @@ class MedicaminaDashEdictsHealthWidget extends StatelessWidget {
                         height: 4,
                       ),
                       const Text(
-                        'Dietry choices',
+                        'Diet',
                         textAlign: TextAlign.center,
                       )
                     ],
@@ -169,7 +187,10 @@ class MedicaminaDashEdictsHealthWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Opacity(
-                          opacity: Modular.get<MedicaminaThemeState>().getDarkMode() ? 0.7 : 1,
+                          opacity:
+                              Modular.get<MedicaminaThemeState>().getDarkMode()
+                                  ? 0.7
+                                  : 1,
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
@@ -183,7 +204,8 @@ class MedicaminaDashEdictsHealthWidget extends StatelessWidget {
                               onTap: () {
                                 print("tapped");
                               },
-                              highlightColor: Color.fromRGBO(237, 229, 255, 0.5),
+                              highlightColor:
+                                  Color.fromRGBO(237, 229, 255, 0.5),
                               splashColor: Color.fromRGBO(145, 18, 189, 0.5),
                               child: Center(
                                 child: Icon(
@@ -209,7 +231,10 @@ class MedicaminaDashEdictsHealthWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Opacity(
-                          opacity: Modular.get<MedicaminaThemeState>().getDarkMode() ? 0.7 : 1,
+                          opacity:
+                              Modular.get<MedicaminaThemeState>().getDarkMode()
+                                  ? 0.7
+                                  : 1,
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
@@ -223,7 +248,8 @@ class MedicaminaDashEdictsHealthWidget extends StatelessWidget {
                               onTap: () {
                                 print("tapped");
                               },
-                              highlightColor: Color.fromRGBO(255, 239, 216, 0.5),
+                              highlightColor:
+                                  Color.fromRGBO(255, 239, 216, 0.5),
                               splashColor: Color.fromRGBO(246, 132, 53, 0.5),
                               child: Center(
                                 child: Icon(

@@ -146,6 +146,7 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
                                               : 22),
                                   const SizedBox(height: 2),
                                   const Text('Blood Pressure',
+                                      overflow: TextOverflow.visible,
                                       style: TextStyle(
                                           fontWeight: FontWeight.normal),
                                       textAlign: TextAlign.center),
@@ -185,6 +186,46 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
                                               : 22),
                                   const SizedBox(height: 2),
                                   const Text('Height',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal),
+                                      textAlign: TextAlign.center),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      SizedBox.square(
+                        dimension: MediaQuery.of(context).size.width >= 1000
+                            ? 140
+                            : MediaQuery.of(context).size.width >= 300
+                                ? 90
+                                : 68,
+                        child: ClipOval(
+                          child: Material(
+                            child: InkWell(
+                              radius: 140,
+                              onTap: () {},
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.gas_meter,
+                                      size: MediaQuery.of(context).size.width >=
+                                              1000
+                                          ? 66
+                                          : MediaQuery.of(context).size.width >=
+                                                  300
+                                              ? 38
+                                              : 22),
+                                  const SizedBox(height: 2),
+                                  const Text('Blood Glucose',
+                                      overflow: TextOverflow.visible,
                                       style: TextStyle(
                                           fontWeight: FontWeight.normal),
                                       textAlign: TextAlign.center),

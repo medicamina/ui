@@ -15,15 +15,24 @@ class MedicaminaDashPsychologyNotFoundWidget extends StatelessWidget {
                 const Padding(padding: EdgeInsets.only(top: 50)),
                 Text(
                   'ERROR',
-                  style: Theme.of(context).textTheme.headline3?.apply(heightDelta: 0, heightFactor: 0, color: Theme.of(context).textTheme.bodySmall?.color),
+                  style: Theme.of(context).textTheme.displaySmall?.apply(
+                      heightDelta: 0,
+                      heightFactor: 0,
+                      color: Theme.of(context).textTheme.bodySmall?.color),
                 ),
                 Text(
                   '404',
-                  style: Theme.of(context).textTheme.headline1?.apply(heightDelta: 0, heightFactor: 0),
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayLarge
+                      ?.apply(heightDelta: 0, heightFactor: 0),
                 ),
                 Text(
                   'Page not found',
-                  style: Theme.of(context).textTheme.subtitle1?.apply(heightDelta: 0, heightFactor: 0),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.apply(heightDelta: 0, heightFactor: 0),
                 ),
                 const SizedBox(height: 12),
                 ElevatedButton(

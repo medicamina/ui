@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medicamina/dash/appointment/mobile.dart';
-import 'package:medicamina/dash/appointment/next/widget.dart';
 
 class MedicaminaDashAppointmentWidget extends StatelessWidget {
   const MedicaminaDashAppointmentWidget({Key? key}) : super(key: key);
@@ -8,7 +7,9 @@ class MedicaminaDashAppointmentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // if (1000 >= MediaQuery.of(context).size.width) {
-      return const Scaffold(body: MedicaminaDashAppointmentMobileWidget(),);
+    return const Scaffold(
+      body: MedicaminaDashAppointmentMobileWidget(),
+    );
     // }
     // return const Scaffold(body: MedicaminaDashEdictsDesktopWidget(),);
 

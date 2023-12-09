@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:medicamina/dash/fitness/chart/desktop.dart';
 import 'package:medicamina/dash/fitness/heart/widget.dart';
 import 'package:medicamina/dash/fitness/recommendations/widget.dart';
-import 'package:medicamina/dash/fitness/record/widget.dart';
+//import 'package:medicamina/dash/fitness/record/widget.dart';
 import 'package:medicamina/dash/fitness/steps/widget.dart';
 
 class MedicaminaDashFitnessMobileWidget extends StatelessWidget {

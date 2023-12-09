@@ -1,4 +1,3 @@
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina/states.dart';
@@ -44,7 +43,7 @@ class _MedicaminaDashAppointmentNextWidgetState
                   children: [
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.add_circle_outline),
+                      icon: const Icon(Icons.add_circle_outline),
                       tooltip: 'New appointment',
                     ),
                   ],
@@ -74,15 +73,16 @@ class _MedicaminaDashAppointmentNextWidgetState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: 2,
+                    flex: 10,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(6),
+                          padding: const EdgeInsets.all(6),
                           child: Text(
                             '4th September',
+                            overflow: TextOverflow.ellipsis,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleLarge
@@ -90,7 +90,7 @@ class _MedicaminaDashAppointmentNextWidgetState
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 12),
+                          padding: const EdgeInsets.only(left: 12),
                           child: Text(
                             'Dr Al E Gator',
                             style: Theme.of(context)
@@ -100,7 +100,7 @@ class _MedicaminaDashAppointmentNextWidgetState
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 12, top: 6),
+                          padding: const EdgeInsets.only(left: 12, top: 6),
                           child: Text(
                             '11 AM',
                             style: Theme.of(context)
@@ -110,7 +110,7 @@ class _MedicaminaDashAppointmentNextWidgetState
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 12, top: 6),
+                          padding: const EdgeInsets.only(left: 12, top: 6),
                           child: Text(
                             '123 Health Nut lane',
                             style: Theme.of(context)
@@ -123,7 +123,7 @@ class _MedicaminaDashAppointmentNextWidgetState
                     ),
                   ),
                   Expanded(
-                    flex: 1,
+                    flex: 6,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -158,9 +158,9 @@ class _MedicaminaDashAppointmentNextWidgetState
                                       throw 'Could not open the map.';
                                     }
                                   },
-                                  child: Column(
+                                  child: const Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
+                                    children: [
                                       Icon(
                                         Icons.map,
                                         size: 44,
@@ -172,6 +172,21 @@ class _MedicaminaDashAppointmentNextWidgetState
                               ),
                             ),
                           ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {},
                         ),
                       ],
                     ),
@@ -204,15 +219,16 @@ class _MedicaminaDashAppointmentNextWidgetState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      flex: 2,
+                      flex: 10,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(6),
+                            padding: const EdgeInsets.all(6),
                             child: Text(
                               '20th November',
+                              overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleLarge
@@ -220,34 +236,34 @@ class _MedicaminaDashAppointmentNextWidgetState
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 12),
+                            padding: const EdgeInsets.only(left: 12),
                             child: Text(
                               'Friendly pathology',
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme
-                                  .caption
+                                  .bodySmall
                                   ?.copyWith(fontSize: 16, color: Colors.white),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 12, top: 6),
+                            padding: const EdgeInsets.only(left: 12, top: 6),
                             child: Text(
                               '1 PM',
                               style: Theme.of(context)
                                   .textTheme
-                                  .caption
+                                  .bodySmall
                                   ?.copyWith(fontSize: 12, color: Colors.white),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 12, top: 6),
+                            padding: const EdgeInsets.only(left: 12, top: 6),
                             child: Text(
                               '116 Health Nut lane',
                               overflow: TextOverflow.ellipsis,
                               style: Theme.of(context)
                                   .textTheme
-                                  .caption
+                                  .bodySmall
                                   ?.copyWith(fontSize: 12, color: Colors.white),
                             ),
                           ),
@@ -255,7 +271,7 @@ class _MedicaminaDashAppointmentNextWidgetState
                       ),
                     ),
                     Expanded(
-                      flex: 1,
+                      flex: 6,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -279,10 +295,10 @@ class _MedicaminaDashAppointmentNextWidgetState
                                   child: InkWell(
                                     radius: 84,
                                     onTap: () {},
-                                    child: Column(
+                                    child: const Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: const [
+                                      children: [
                                         Icon(
                                           Icons.map,
                                           size: 44,
@@ -294,6 +310,21 @@ class _MedicaminaDashAppointmentNextWidgetState
                                 ),
                               ),
                             ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
                           ),
                         ],
                       ),

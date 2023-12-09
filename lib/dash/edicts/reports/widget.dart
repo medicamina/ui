@@ -22,7 +22,11 @@ class MedicaminaDashEdictsReportsWidget extends StatelessWidget {
                   children: [
                     Text(
                       'Recent doctor reports',
-                      style: TextStyle(fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold),
+                      style: TextStyle(
+                          fontWeight:
+                              Modular.get<MedicaminaThemeState>().getDarkMode()
+                                  ? FontWeight.normal
+                                  : FontWeight.bold),
                     ),
                   ],
                 ),
@@ -66,7 +70,10 @@ class MedicaminaDashEdictsReportsWidget extends StatelessWidget {
                           height: 160,
                           child: SvgPicture.asset(
                             'assets/images/doctor-icon.svg',
-                            color: Modular.get<MedicaminaThemeState>().getDarkMode() ? Colors.white : Colors.black,
+                            color: Modular.get<MedicaminaThemeState>()
+                                    .getDarkMode()
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
                       ],
@@ -80,14 +87,25 @@ class MedicaminaDashEdictsReportsWidget extends StatelessWidget {
                         Text(
                           'Dr. Hugh Mungus',
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.titleLarge?.apply(fontWeightDelta: 1),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.apply(fontWeightDelta: 1),
                         ),
                         const SizedBox(height: 3),
-                        Text('Prescription update', textAlign: TextAlign.center, style: Theme.of(context).textTheme.caption?.copyWith(fontSize: 16)),
+                        Text('Prescription update',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(fontSize: 16)),
                         const SizedBox(height: 3),
-                        const Text('2mg Pencilin once daily 8am', textAlign: TextAlign.center),
+                        const Text('2mg Pencilin once daily 8am',
+                            textAlign: TextAlign.center),
                         const Spacer(flex: 3),
-                        Text('Two months ago', textAlign: TextAlign.center, style: Theme.of(context).textTheme.caption)
+                        Text('Two months ago',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodySmall)
                       ],
                     ),
                   )

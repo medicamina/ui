@@ -8,8 +8,8 @@ class MedicaminaAuthAppBarLoadingState {
     setLoading(false);
   }
 
-  void setLoading(bool _loading) {
-    loading = _loading;
+  void setLoading(bool isLoading) {
+    loading = isLoading;
     controller.add(loading);
   }
 

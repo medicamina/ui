@@ -59,15 +59,15 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          ListTile(
-                            leading: const Icon(Icons.computer),
-                            title: const Text('Dash (debug)'),
-                            enabled: Modular.args.uri.toString() != '/dash',
-                            onTap: () {
-                              Navigator.pop(context);
-                              Modular.to.navigate('/dash/');
-                            },
-                          ),
+                          // ListTile(
+                          //   leading: const Icon(Icons.computer),
+                          //   title: const Text('Dash (debug)'),
+                          //   enabled: Modular.args.uri.toString() != '/dash',
+                          //   onTap: () {
+                          //     Navigator.pop(context);
+                          //     Modular.to.navigate('/dash/');
+                          //   },
+                          // ),
                           ListTile(
                             leading: const Icon(Icons.home),
                             title: const Text('Home'),
@@ -83,8 +83,9 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
                             onTap: () {
                               launchUrl(
                                 Uri(
-                                    scheme: 'https',
-                                    host: 'medicamina.github.io'),
+                                  scheme: 'https',
+                                  host: 'docs.medicamina.us',
+                                ),
                                 mode: kIsWeb
                                     ? LaunchMode.externalApplication
                                     : LaunchMode.inAppWebView,

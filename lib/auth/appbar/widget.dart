@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medicamina/auth/states.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MedicaminaAuthAppBarWidget extends StatefulWidget
     implements PreferredSizeWidget {
@@ -73,14 +75,27 @@ class _MedicaminaAuthAppBarWidget extends State<MedicaminaAuthAppBarWidget> {
                       //   child:
 
                       ListTile(
-                        leading: const Icon(Icons.info_outline),
-                        title: const Text('Info'),
+                        leading: const Icon(Icons.home),
+                        title: const Text('Home'),
                         enabled: Modular.args.uri.toString() != '/',
                         onTap: () {
                           Navigator.pop(context);
                           Modular.to.navigate('/');
                         },
                       ),
+                      ListTile(
+                        leading: const Icon(Icons.description),
+                        title: const Text('Documentation'),
+                        onTap: () {
+                          launchUrl(
+                            Uri(scheme: 'https', host: 'docs.medicamina.us'),
+                            mode: kIsWeb
+                                ? LaunchMode.externalApplication
+                                : LaunchMode.inAppWebView,
+                          );
+                        },
+                      ),
+                      const Divider(),
                       // ),
                       ListTile(
                         leading: const Icon(Icons.login_outlined),

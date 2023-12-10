@@ -20,7 +20,7 @@ examples
 /ios
 /windows
 /linux
-/firebase
+/.firebase
 
 ./macos
 ./android
@@ -28,7 +28,7 @@ examples
 ./ios
 ./windows
 ./linux
-./firebase
+./.firebase
 
 ./src/macos
 ./src/android

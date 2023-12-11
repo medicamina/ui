@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class MedicaminaThemeState {
   static late bool _darkMode;
@@ -15,7 +16,9 @@ class MedicaminaThemeState {
   }
 
   void setDarkModeFromDeviceBrightness() {
-    var platformBrightness = MediaQueryData.fromWindow(WidgetsBinding.instance.window).platformBrightness;
+    // TODO: Check this?
+    var platformBrightness =
+        SchedulerBinding.instance.platformDispatcher.platformBrightness;
     if (platformBrightness == Brightness.dark) {
       _darkMode = true;
       return;

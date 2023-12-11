@@ -1,6 +1,6 @@
 LIMITED USE SOFTWARE LICENSE AGREEMENT
 
-_Copyright (c) Medicamina_
+_Copyright (c) 2022 Medicamina_
 
 This Limited Use Software License Agreement (the "Agreement") is a legal agreement between you, the end-user, and medicamina. 
 

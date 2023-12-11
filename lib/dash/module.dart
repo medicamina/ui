@@ -16,28 +16,12 @@ import 'package:medicamina/dash/widget.dart';
 class MedicaminaDashModule extends Module {
   @override
   List<Bind> get binds {
-    return [
-      Bind.lazySingleton((i) => MedicaminaTodaysDrugs())
-    ];
+    return [Bind.lazySingleton((i) => MedicaminaTodaysDrugs())];
   }
 
   @override
   List<ModularRoute> get routes {
     return [
-      ChildRoute('/', guards: [MedicaminaDashGuard()], child: (context, args) => const MedicaminaDashWidget(), children: [
-        ChildRoute('/home', child: (context, args) => const MedicaminaDashHomeWidget()),
-        ChildRoute('/edicts', child: (context, args) => const MedicaminaDashEdictsWidget()),
-        ChildRoute('/fitness', child: (context, args) => const MedicaminaDashFitnessWidget()),
-        ChildRoute('/appointment', child: (context, args) => const MedicaminaDashAppointmentWidget()),
-
-        // Modules
-        ModuleRoute('/family', module: MedicaminaDashFamilyModule()),
-        ModuleRoute('/psychology', module: MedicaminaDashPsychologyModule()),
-        ModuleRoute('/settings', module: MedicaminaDashSettingsModule()),
-
-        WildcardRoute(child: (context, args) => const MedicaminaDashNotFoundWidget()),
-      ]),
-
       // widgets
       RedirectRoute('/dash/home/', to: '/dash/home'),
       RedirectRoute('/dash/edicts/', to: '/dash/edicts'),
@@ -47,6 +31,55 @@ class MedicaminaDashModule extends Module {
       RedirectRoute('/dash/family', to: '/dash/family/'),
       RedirectRoute('/dash/psychology', to: '/dash/psychology/'),
       RedirectRoute('/dash/settings', to: '/dash/settings/'),
+
+      ChildRoute('/',
+          guards: [MedicaminaDashGuard()],
+          child: (context, args) => const MedicaminaDashWidget(),
+          children: [
+            RedirectRoute('/home/', to: '/home'),
+            RedirectRoute('/edicts/', to: '/edicts'),
+            RedirectRoute('/fitness/', to: '/fitness'),
+            RedirectRoute('/appointment/', to: '/appointment'),
+            // modules
+            RedirectRoute('/family', to: '/family/'),
+            RedirectRoute('/psychology', to: '/psychology/'),
+            RedirectRoute('/settings', to: '/settings/'),
+
+            ChildRoute(
+              '/home',
+              child: (context, args) => const MedicaminaDashHomeWidget(),
+            ),
+            ChildRoute(
+              '/edicts',
+              child: (context, args) => const MedicaminaDashEdictsWidget(),
+            ),
+            ChildRoute(
+              '/fitness',
+              child: (context, args) => const MedicaminaDashFitnessWidget(),
+            ),
+            ChildRoute(
+              '/appointment',
+              child: (context, args) => const MedicaminaDashAppointmentWidget(),
+            ),
+
+            // Modules
+            ModuleRoute(
+              '/family',
+              module: MedicaminaDashFamilyModule(),
+            ),
+            ModuleRoute(
+              '/psychology',
+              module: MedicaminaDashPsychologyModule(),
+            ),
+            ModuleRoute(
+              '/settings',
+              module: MedicaminaDashSettingsModule(),
+            ),
+
+            WildcardRoute(
+              child: (context, args) => const MedicaminaDashNotFoundWidget(),
+            ),
+          ]),
     ];
   }
 }

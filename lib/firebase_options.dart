@@ -67,7 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1045910743865',
     projectId: 'medicamina',
     storageBucket: 'medicamina.appspot.com',
-    iosBundleId: 'us.medicamina.app',
+    iosBundleId: 'us.medicamina.ios',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -76,6 +76,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1045910743865',
     projectId: 'medicamina',
     storageBucket: 'medicamina.appspot.com',
-    iosBundleId: 'us.medicamina.app',
+    iosBundleId: 'us.medicamina.mac',
   );
 }

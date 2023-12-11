@@ -70,10 +70,6 @@ class _MedicaminaAuthAppBarWidget extends State<MedicaminaAuthAppBarWidget> {
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Visibility(
-                      //   visible: kIsWeb,
-                      //   child:
-
                       ListTile(
                         leading: const Icon(Icons.home),
                         title: const Text('Home'),
@@ -88,7 +84,10 @@ class _MedicaminaAuthAppBarWidget extends State<MedicaminaAuthAppBarWidget> {
                         title: const Text('Documentation'),
                         onTap: () {
                           launchUrl(
-                            Uri(scheme: 'https', host: 'docs.medicamina.us'),
+                            Uri(
+                              scheme: 'https',
+                              host: 'docs.medicamina.us',
+                            ),
                             mode: kIsWeb
                                 ? LaunchMode.externalApplication
                                 : LaunchMode.inAppWebView,

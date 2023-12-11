@@ -26,12 +26,13 @@ class _MedicaminaDashAppointmentNextWidgetState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Next appointment',
+                      'Appointments',
                       style: TextStyle(
-                          fontWeight:
-                              Modular.get<MedicaminaThemeState>().getDarkMode()
-                                  ? FontWeight.normal
-                                  : FontWeight.bold),
+                        fontWeight:
+                            Modular.get<MedicaminaThemeState>().getDarkMode()
+                                ? FontWeight.normal
+                                : FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),

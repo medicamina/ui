@@ -4,19 +4,17 @@ import 'package:medicamina/dash/family/widget.dart';
 class MedicaminaDashFamilyModule extends Module {
   @override
   List<Bind> get binds {
-    return [
-      
-    ];
+    return [];
   }
 
   @override
   List<ModularRoute> get routes {
     return [
-      ChildRoute('/', child: (context, args) => MedicaminaDashFamilyWidget(), children: [
-
-      ]),
-
-      // RedirectRoute('/dash/home/', to: '/dash/home'),
+      ChildRoute(
+        '/',
+        child: (context, args) => MedicaminaDashFamilyWidget(),
+        children: [],
+      ),
     ];
   }
 }

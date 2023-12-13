@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 // Medicamina
-import 'package:medicamina/dash/fitness/desktop.dart';
-import 'package:medicamina/dash/fitness/mobile.dart';
+import 'package:medicamina_ui/dash/fitness/desktop.dart';
+import 'package:medicamina_ui/dash/fitness/mobile.dart';
 
 class MedicaminaDashFitnessWidget extends StatefulWidget {
   const MedicaminaDashFitnessWidget({Key? key}) : super(key: key);
 
   @override
-  State<MedicaminaDashFitnessWidget> createState() => _MedicaminaDashFitnessWidget();
+  State<MedicaminaDashFitnessWidget> createState() =>
+      _MedicaminaDashFitnessWidget();
 }
 
 class _MedicaminaDashFitnessWidget extends State<MedicaminaDashFitnessWidget> {

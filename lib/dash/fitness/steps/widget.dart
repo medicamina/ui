@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 // Medicamina
-import 'package:medicamina/states.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDashFitnessStepsWidget extends StatefulWidget {
   const MedicaminaDashFitnessStepsWidget({Key? key}) : super(key: key);
 
   @override
-  State<MedicaminaDashFitnessStepsWidget> createState() => _MedicaminaDashFitnessStepsWidgetState();
+  State<MedicaminaDashFitnessStepsWidget> createState() =>
+      _MedicaminaDashFitnessStepsWidgetState();
 }
 
-class _MedicaminaDashFitnessStepsWidgetState extends State<MedicaminaDashFitnessStepsWidget> {
+class _MedicaminaDashFitnessStepsWidgetState
+    extends State<MedicaminaDashFitnessStepsWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,7 +27,10 @@ class _MedicaminaDashFitnessStepsWidgetState extends State<MedicaminaDashFitness
                   Text(
                     'Steps taken',
                     style: TextStyle(
-                      fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold,
+                      fontWeight:
+                          Modular.get<MedicaminaThemeState>().getDarkMode()
+                              ? FontWeight.normal
+                              : FontWeight.bold,
                     ),
                   ),
                 ],
@@ -33,7 +38,11 @@ class _MedicaminaDashFitnessStepsWidgetState extends State<MedicaminaDashFitness
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [IconButton(onPressed: () {}, icon: Icon(CommunityMaterialIcons.shoe_print))],
+                  children: [
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(CommunityMaterialIcons.shoe_print))
+                  ],
                 ),
               )
             ],
@@ -60,7 +69,9 @@ class _MedicaminaDashFitnessStepsWidgetState extends State<MedicaminaDashFitness
                       children: [
                         Icon(
                           CommunityMaterialIcons.run,
-                          size: MediaQuery.of(context).size.width >= 300 ? 112 : 88,
+                          size: MediaQuery.of(context).size.width >= 300
+                              ? 112
+                              : 88,
                           color: Theme.of(context).colorScheme.secondary,
                         )
                       ],
@@ -71,7 +82,11 @@ class _MedicaminaDashFitnessStepsWidgetState extends State<MedicaminaDashFitness
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Daily total', style: Theme.of(context).textTheme.caption?.copyWith(fontSize: 14)),
+                        Text('Daily total',
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption
+                                ?.copyWith(fontSize: 14)),
                         Text('8,736', style: TextStyle(fontSize: 44)),
                       ],
                     ),

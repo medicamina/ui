@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 // Medicamina
-import 'package:medicamina/dash/home/map/choropleth_map.dart';
-import 'package:medicamina/states.dart';
+import 'package:medicamina_ui/dash/home/map/choropleth_map.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDashHomeMapWidget extends StatelessWidget {
   const MedicaminaDashHomeMapWidget({Key? key}) : super(key: key);
@@ -16,7 +16,9 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
           title: Text(
             'Your ancestry',
             style: TextStyle(
-              fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold,
+              fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode()
+                  ? FontWeight.normal
+                  : FontWeight.bold,
             ),
           ),
           trailing: IconButton(
@@ -28,7 +30,8 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     elevation: 0,
-                    contentPadding: const EdgeInsets.only(top: 0, bottom: 0, left: 8, right: 8),
+                    contentPadding: const EdgeInsets.only(
+                        top: 0, bottom: 0, left: 8, right: 8),
                     titlePadding: const EdgeInsets.all(0),
                     title: Container(
                       decoration: BoxDecoration(
@@ -36,10 +39,15 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 18, right: 18, top: 16, bottom: 16),
+                        padding: const EdgeInsets.only(
+                            left: 18, right: 18, top: 16, bottom: 16),
                         child: Text(
                           'Genetic origin',
-                          style: TextStyle(fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold),
+                          style: TextStyle(
+                              fontWeight: Modular.get<MedicaminaThemeState>()
+                                      .getDarkMode()
+                                  ? FontWeight.normal
+                                  : FontWeight.bold),
                         ),
                       ),
                     ),
@@ -50,7 +58,8 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             ListTile(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(3)),
                               dense: false,
                               title: Row(
                                 children: const [
@@ -72,7 +81,8 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                               tileColor: const Color.fromARGB(255, 32, 83, 171),
                             ),
                             ListTile(
-                              contentPadding: const EdgeInsets.only(left: 18, right: 18),
+                              contentPadding:
+                                  const EdgeInsets.only(left: 18, right: 18),
                               dense: true,
                               title: Row(
                                 children: [
@@ -91,7 +101,8 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                               endIndent: 8,
                             ),
                             ListTile(
-                              contentPadding: const EdgeInsets.only(left: 18, right: 18),
+                              contentPadding:
+                                  const EdgeInsets.only(left: 18, right: 18),
                               dense: true,
                               title: Row(
                                 children: [
@@ -110,7 +121,8 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                               endIndent: 8,
                             ),
                             ListTile(
-                              contentPadding: const EdgeInsets.only(left: 18, right: 18),
+                              contentPadding:
+                                  const EdgeInsets.only(left: 18, right: 18),
                               dense: true,
                               title: Row(
                                 children: [
@@ -129,7 +141,8 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                               endIndent: 8,
                             ),
                             ListTile(
-                              contentPadding: const EdgeInsets.only(left: 18, right: 18),
+                              contentPadding:
+                                  const EdgeInsets.only(left: 18, right: 18),
                               dense: true,
                               title: Row(
                                 children: [
@@ -148,7 +161,8 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                               endIndent: 8,
                             ),
                             ListTile(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(3)),
                               dense: false,
                               title: Row(
                                 children: const [
@@ -170,7 +184,8 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                               tileColor: const Color.fromARGB(255, 231, 63, 51),
                             ),
                             ListTile(
-                              contentPadding: const EdgeInsets.only(left: 18, right: 18),
+                              contentPadding:
+                                  const EdgeInsets.only(left: 18, right: 18),
                               dense: true,
                               title: Row(
                                 children: [
@@ -189,7 +204,8 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                               endIndent: 8,
                             ),
                             ListTile(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(3)),
                               dense: false,
                               title: Row(
                                 children: const [
@@ -211,7 +227,8 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                               tileColor: const Color.fromARGB(255, 129, 143, 6),
                             ),
                             ListTile(
-                              contentPadding: const EdgeInsets.only(left: 18, right: 18),
+                              contentPadding:
+                                  const EdgeInsets.only(left: 18, right: 18),
                               dense: true,
                               title: Row(
                                 children: [
@@ -239,7 +256,8 @@ class MedicaminaDashHomeMapWidget extends StatelessWidget {
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               style: ButtonStyle(
-                                padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.only(left: 22, right: 22)),
+                                padding: MaterialStateProperty.all<EdgeInsets>(
+                                    const EdgeInsets.only(left: 22, right: 22)),
                               ),
                             ),
                             const Padding(padding: EdgeInsets.only(top: 6)),

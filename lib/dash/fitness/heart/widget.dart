@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 // Medicamina
-import 'package:medicamina/states.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDashFitnessHeartWidget extends StatefulWidget {
   const MedicaminaDashFitnessHeartWidget({Key? key}) : super(key: key);
 
   @override
-  State<MedicaminaDashFitnessHeartWidget> createState() => _MedicaminaDashFitnessHeartWidget();
+  State<MedicaminaDashFitnessHeartWidget> createState() =>
+      _MedicaminaDashFitnessHeartWidget();
 }
 
-class _MedicaminaDashFitnessHeartWidget extends State<MedicaminaDashFitnessHeartWidget> {
+class _MedicaminaDashFitnessHeartWidget
+    extends State<MedicaminaDashFitnessHeartWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,7 +27,10 @@ class _MedicaminaDashFitnessHeartWidget extends State<MedicaminaDashFitnessHeart
                   Text(
                     'Heart rate',
                     style: TextStyle(
-                      fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode() ? FontWeight.normal : FontWeight.bold,
+                      fontWeight:
+                          Modular.get<MedicaminaThemeState>().getDarkMode()
+                              ? FontWeight.normal
+                              : FontWeight.bold,
                     ),
                   ),
                 ],
@@ -33,7 +38,11 @@ class _MedicaminaDashFitnessHeartWidget extends State<MedicaminaDashFitnessHeart
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [IconButton(onPressed: () {}, icon: Icon(Icons.monitor_heart_outlined))],
+                  children: [
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.monitor_heart_outlined))
+                  ],
                 ),
               )
             ],
@@ -60,7 +69,9 @@ class _MedicaminaDashFitnessHeartWidget extends State<MedicaminaDashFitnessHeart
                       children: [
                         Icon(
                           CommunityMaterialIcons.pulse,
-                          size: MediaQuery.of(context).size.width >= 300 ? 112 : 88,
+                          size: MediaQuery.of(context).size.width >= 300
+                              ? 112
+                              : 88,
                           color: Theme.of(context).colorScheme.secondary,
                         )
                       ],
@@ -71,7 +82,11 @@ class _MedicaminaDashFitnessHeartWidget extends State<MedicaminaDashFitnessHeart
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Hourly average', style: Theme.of(context).textTheme.caption?.copyWith(fontSize: 14)),
+                        Text('Hourly average',
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption
+                                ?.copyWith(fontSize: 14)),
                         Text('80 bpm', style: TextStyle(fontSize: 44)),
                       ],
                     ),

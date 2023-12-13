@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/auth/appbar/widget.dart';
+import 'package:medicamina_ui/auth/appbar/widget.dart';
 
 class MedicaminaAuthWidget extends StatelessWidget {
   const MedicaminaAuthWidget({Key? key}) : super(key: key);

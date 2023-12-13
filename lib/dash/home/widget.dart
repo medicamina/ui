@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 // Medicamina
-import 'package:medicamina/dash/home/desktop.dart';
-import 'package:medicamina/dash/home/mobile.dart';
+import 'package:medicamina_ui/dash/home/desktop.dart';
+import 'package:medicamina_ui/dash/home/mobile.dart';
 
 class MedicaminaDashHomeWidget extends StatelessWidget {
   const MedicaminaDashHomeWidget({Key? key}) : super(key: key);
@@ -10,8 +10,12 @@ class MedicaminaDashHomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (900 >= MediaQuery.of(context).size.width) {
-      return const Scaffold(body: MedicaminaDashHomeMobileWidget(),);
+      return const Scaffold(
+        body: MedicaminaDashHomeMobileWidget(),
+      );
     }
-    return const Scaffold(body: MedicaminaDashHomeDesktopWidget(),);
+    return const Scaffold(
+      body: MedicaminaDashHomeDesktopWidget(),
+    );
   }
 }

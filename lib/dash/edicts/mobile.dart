@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
 // Medicamina
-import 'package:medicamina/dash/edicts/health/widget.dart';
-import 'package:medicamina/dash/edicts/medication/widget.dart';
-import 'package:medicamina/dash/edicts/reports/widget.dart';
-import 'package:medicamina/dash/edicts/scripts/widget.dart';
+import 'package:medicamina_ui/dash/edicts/health/widget.dart';
+import 'package:medicamina_ui/dash/edicts/medication/widget.dart';
+import 'package:medicamina_ui/dash/edicts/reports/widget.dart';
+import 'package:medicamina_ui/dash/edicts/scripts/widget.dart';
 
 class MedicaminaDashEdictsMobileWidget extends StatefulWidget {
   const MedicaminaDashEdictsMobileWidget({Key? key}) : super(key: key);
 
   @override
-  State<MedicaminaDashEdictsMobileWidget> createState() => _MedicaminaDashEdictsMobileWidgetState();
+  State<MedicaminaDashEdictsMobileWidget> createState() =>
+      _MedicaminaDashEdictsMobileWidgetState();
 }
 
-class _MedicaminaDashEdictsMobileWidgetState extends State<MedicaminaDashEdictsMobileWidget> {
-  
+class _MedicaminaDashEdictsMobileWidgetState
+    extends State<MedicaminaDashEdictsMobileWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

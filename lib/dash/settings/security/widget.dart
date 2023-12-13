@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medicamina/dash/settings/security/desktop.dart';
-import 'package:medicamina/dash/settings/security/mobile.dart';
+import 'package:medicamina_ui/dash/settings/security/desktop.dart';
+import 'package:medicamina_ui/dash/settings/security/mobile.dart';
 
 class MedicaminaDashSettingsSecurityWidget extends StatelessWidget {
   const MedicaminaDashSettingsSecurityWidget({Key? key}) : super(key: key);

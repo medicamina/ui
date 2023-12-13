@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medicamina/dash/appointment/mobile.dart';
+import 'package:medicamina_ui/dash/appointment/mobile.dart';
 
 class MedicaminaDashAppointmentWidget extends StatelessWidget {
   const MedicaminaDashAppointmentWidget({Key? key}) : super(key: key);

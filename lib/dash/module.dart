@@ -1,17 +1,17 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/dash/appointment/widget.dart';
-import 'package:medicamina/dash/edicts/widget.dart';
-import 'package:medicamina/dash/family/module.dart';
-import 'package:medicamina/dash/fitness/widget.dart';
 
 // Medicamina
-import 'package:medicamina/dash/guards.dart';
-import 'package:medicamina/dash/home/widget.dart';
-import 'package:medicamina/dash/not-found/widget.dart';
-import 'package:medicamina/dash/psychology/module.dart';
-import 'package:medicamina/dash/settings/module.dart';
-import 'package:medicamina/dash/states.dart';
-import 'package:medicamina/dash/widget.dart';
+import 'package:medicamina_ui/dash/appointment/widget.dart';
+import 'package:medicamina_ui/dash/edicts/widget.dart';
+import 'package:medicamina_ui/dash/family/module.dart';
+import 'package:medicamina_ui/dash/fitness/widget.dart';
+import 'package:medicamina_ui/dash/guards.dart';
+import 'package:medicamina_ui/dash/home/widget.dart';
+import 'package:medicamina_ui/dash/not-found/widget.dart';
+import 'package:medicamina_ui/dash/psychology/module.dart';
+import 'package:medicamina_ui/dash/settings/module.dart';
+import 'package:medicamina_ui/dash/states.dart';
+import 'package:medicamina_ui/dash/widget.dart';
 
 class MedicaminaDashModule extends Module {
   @override

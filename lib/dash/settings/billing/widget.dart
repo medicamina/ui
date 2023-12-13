@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medicamina/dash/settings/billing/desktop.dart';
-import 'package:medicamina/dash/settings/billing/mobile.dart';
+import 'package:medicamina_ui/dash/settings/billing/desktop.dart';
+import 'package:medicamina_ui/dash/settings/billing/mobile.dart';
 
 class MedicaminaDashSettingsBillingWidget extends StatelessWidget {
   const MedicaminaDashSettingsBillingWidget({Key? key}) : super(key: key);

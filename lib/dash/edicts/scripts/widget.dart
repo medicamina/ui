@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 // Medicamina
-import 'package:medicamina/states.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDashEdictsScriptsWidget extends StatefulWidget {
   const MedicaminaDashEdictsScriptsWidget({Key? key}) : super(key: key);

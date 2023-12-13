@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 // Medicamina
-import 'package:medicamina/dash/states.dart';
-import 'package:medicamina/states.dart';
+import 'package:medicamina_ui/dash/states.dart';
+import 'package:medicamina_ui/states.dart';
 
 var currentIndex = 0;
 final drugs = Modular.get<MedicaminaTodaysDrugs>().getDrugs();

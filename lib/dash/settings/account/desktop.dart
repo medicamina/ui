@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 
 // Medicamina
-import 'package:medicamina/states.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDashSettingsAccountDesktopWidget extends StatefulWidget {
   const MedicaminaDashSettingsAccountDesktopWidget({Key? key})

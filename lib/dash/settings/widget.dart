@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/dash/settings/desktop.dart';
-import 'package:medicamina/dash/settings/mobile.dart';
+import 'package:medicamina_ui/dash/settings/desktop.dart';
+import 'package:medicamina_ui/dash/settings/mobile.dart';
 
 class MedicaminaDashSettingsWidget extends StatelessWidget {
   const MedicaminaDashSettingsWidget({Key? key}) : super(key: key);

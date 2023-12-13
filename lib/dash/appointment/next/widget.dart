@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/states.dart';
+import 'package:medicamina_ui/states.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MedicaminaDashAppointmentNextWidget extends StatefulWidget {

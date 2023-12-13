@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 // Medicamina
-import 'package:medicamina/dash/settings/account/desktop.dart';
-import 'package:medicamina/dash/settings/account/mobile.dart';
+import 'package:medicamina_ui/dash/settings/account/desktop.dart';
+import 'package:medicamina_ui/dash/settings/account/mobile.dart';
 
 class MedicaminaDashSettingsAccountWidget extends StatelessWidget {
   const MedicaminaDashSettingsAccountWidget({Key? key}) : super(key: key);

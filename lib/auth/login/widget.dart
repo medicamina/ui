@@ -1,15 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/states.dart';
-import 'package:medicamina/auth/states.dart';
+import 'package:medicamina_ui/states.dart';
+import 'package:medicamina_ui/auth/states.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MedicaminaAuthLoginWidget extends StatefulWidget {
   const MedicaminaAuthLoginWidget({Key? key}) : super(key: key);
 
   @override
-  State<MedicaminaAuthLoginWidget> createState() => _MedicaminaAuthLoginWidget();
+  State<MedicaminaAuthLoginWidget> createState() =>
+      _MedicaminaAuthLoginWidget();
 }
 
 class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
@@ -24,7 +25,9 @@ class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
   void initState() {
     super.initState();
     _loading = Modular.get<MedicaminaAuthAppBarLoadingState>().getLoading();
-    _loadingStream = Modular.get<MedicaminaAuthAppBarLoadingState>().getStream().listen((value) {
+    _loadingStream = Modular.get<MedicaminaAuthAppBarLoadingState>()
+        .getStream()
+        .listen((value) {
       setState(() {
         _loading = value;
       });
@@ -49,11 +52,18 @@ class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.2 : MediaQuery.of(context).size.width * 0.1, top: 24),
+                      padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width > 800
+                              ? MediaQuery.of(context).size.width * 0.2
+                              : MediaQuery.of(context).size.width * 0.1,
+                          top: 24),
                       child: Text(
                         'Welcome',
                         style: Modular.get<MedicaminaThemeState>().getDarkMode()
-                            ? Theme.of(context).textTheme.displayMedium?.merge(const TextStyle(color: Colors.white))
+                            ? Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.merge(const TextStyle(color: Colors.white))
                             : Theme.of(context).textTheme.displayMedium?.merge(
                                   const TextStyle(color: Colors.black87),
                                 ),
@@ -61,8 +71,15 @@ class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
                     ),
                     const SizedBox(height: 6),
                     Padding(
-                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
-                      child: Text('Sign in to continue', style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
+                      padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width > 800
+                              ? MediaQuery.of(context).size.width * 0.205
+                              : MediaQuery.of(context).size.width * 0.115),
+                      child: Text('Sign in to continue',
+                          style: Theme.of(context)
+                              .textTheme
+                              .displaySmall
+                              ?.merge(const TextStyle(fontSize: 20))),
                     ),
                   ],
                 ),
@@ -78,7 +95,13 @@ class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
                         children: [
                           const SizedBox(height: 24),
                           Padding(
-                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                            padding: MediaQuery.of(context).size.width > 800
+                                ? EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width *
+                                        0.20,
+                                    right:
+                                        MediaQuery.of(context).size.width * 0.2)
+                                : const EdgeInsets.only(left: 24, right: 24),
                             child: TextFormField(
                               autofillHints: const [AutofillHints.email],
                               keyboardType: TextInputType.emailAddress,
@@ -94,7 +117,9 @@ class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
                                 if (value == null || value.isEmpty) {
                                   return 'Empty email';
                                 }
-                                bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value);
+                                bool emailValid = RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(value);
                                 if (!emailValid) {
                                   return 'Invalid email';
                                 }
@@ -104,7 +129,13 @@ class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
                           ),
                           const SizedBox(height: 12),
                           Padding(
-                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                            padding: MediaQuery.of(context).size.width > 800
+                                ? EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width *
+                                        0.20,
+                                    right:
+                                        MediaQuery.of(context).size.width * 0.2)
+                                : const EdgeInsets.only(left: 24, right: 24),
                             child: TextFormField(
                               autofillHints: const [AutofillHints.password],
                               keyboardType: TextInputType.visiblePassword,
@@ -130,27 +161,49 @@ class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
                           ),
                           const SizedBox(height: 18),
                           Padding(
-                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                            padding: MediaQuery.of(context).size.width > 800
+                                ? EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width *
+                                        0.20,
+                                    right:
+                                        MediaQuery.of(context).size.width * 0.2)
+                                : const EdgeInsets.only(left: 24, right: 24),
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(minimumSize: Size(const Size.fromHeight(40).width, 42), elevation: 0),
+                              style: ElevatedButton.styleFrom(
+                                  minimumSize:
+                                      Size(const Size.fromHeight(40).width, 42),
+                                  elevation: 0),
                               onPressed: _loading
                                   ? null
                                   : () async {
                                       if (_formKey.currentState!.validate()) {
-                                        Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(true);
+                                        Modular.get<
+                                                MedicaminaAuthAppBarLoadingState>()
+                                            .setLoading(true);
                                         try {
-                                          Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
-                                          await _supabaseClient.auth.signInWithPassword(email: _email, password: _password);
+                                          Modular.get<
+                                                  MedicaminaAuthAppBarLoadingState>()
+                                              .setLoading(false);
+                                          await _supabaseClient.auth
+                                              .signInWithPassword(
+                                                  email: _email,
+                                                  password: _password);
                                           Modular.to.navigate('/dash/home');
                                         } on AuthException catch (err, _) {
-                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.message)));
-                                          Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                                  content: Text(err.message)));
+                                          Modular.get<
+                                                  MedicaminaAuthAppBarLoadingState>()
+                                              .setLoading(false);
                                         }
                                       }
                                     },
                               child: const Text(
                                 'LOGIN',
-                                style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.75),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.75),
                               ),
                             ),
                           ),
@@ -160,7 +213,8 @@ class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
                             children: [
                               TextButton(
                                 style: TextButton.styleFrom(
-                                  padding: const EdgeInsets.only(left: 22, right: 22, top: 15, bottom: 15),
+                                  padding: const EdgeInsets.only(
+                                      left: 22, right: 22, top: 15, bottom: 15),
                                 ),
                                 onPressed: () {
                                   Modular.to.navigate('/auth/password');

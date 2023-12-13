@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina/dash/module.dart';
-import 'package:medicamina/not-found/widget.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 // Medicamina
-import 'package:medicamina/auth/module.dart';
-import 'package:medicamina/landing/widget.dart';
-import 'package:medicamina/states.dart';
+import 'package:medicamina_ui/dash/module.dart';
+import 'package:medicamina_ui/not-found/widget.dart';
+import 'package:medicamina_ui/auth/module.dart';
+import 'package:medicamina_ui/landing/widget.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaAppModule extends Module {
   MedicaminaAppModule({Key? key, required this.supabaseClient});

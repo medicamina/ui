@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 // Medicamina
-import 'package:medicamina/states.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDashFitnessRecordWidget extends StatefulWidget {
   const MedicaminaDashFitnessRecordWidget({Key? key}) : super(key: key);

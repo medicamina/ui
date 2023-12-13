@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 // Medicamina
-import 'package:medicamina/states.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDashSettingsSecurityDesktopWidget extends StatefulWidget {
-  const MedicaminaDashSettingsSecurityDesktopWidget({Key? key}) : super(key: key);
+  const MedicaminaDashSettingsSecurityDesktopWidget({Key? key})
+      : super(key: key);
 
   @override
-  State<MedicaminaDashSettingsSecurityDesktopWidget> createState() => _MedicaminaDashSettingsSecurityDesktopWidget();
+  State<MedicaminaDashSettingsSecurityDesktopWidget> createState() =>
+      _MedicaminaDashSettingsSecurityDesktopWidget();
 }
 
-class _MedicaminaDashSettingsSecurityDesktopWidget extends State<MedicaminaDashSettingsSecurityDesktopWidget> {
+class _MedicaminaDashSettingsSecurityDesktopWidget
+    extends State<MedicaminaDashSettingsSecurityDesktopWidget> {
   late bool _emailOnly = false;
   late bool _smsVerify = true;
 
@@ -28,9 +31,15 @@ class _MedicaminaDashSettingsSecurityDesktopWidget extends State<MedicaminaDashS
 
   TextStyle? getDividerLabelStyle() {
     if (Modular.get<MedicaminaThemeState>().getDarkMode()) {
-      return Theme.of(context).textTheme.caption?.copyWith(fontSize: 13.66, fontWeight: FontWeight.normal);
+      return Theme.of(context)
+          .textTheme
+          .caption
+          ?.copyWith(fontSize: 13.66, fontWeight: FontWeight.normal);
     }
-    return Theme.of(context).textTheme.caption?.copyWith(fontSize: 13.66, fontWeight: FontWeight.bold);
+    return Theme.of(context)
+        .textTheme
+        .caption
+        ?.copyWith(fontSize: 13.66, fontWeight: FontWeight.bold);
   }
 
   Color getInputLabelColor() {
@@ -99,8 +108,10 @@ class _MedicaminaDashSettingsSecurityDesktopWidget extends State<MedicaminaDashS
                         child: TextField(
                           obscureText: true,
                           decoration: InputDecoration(
-                            suffixIcon: Icon(CommunityMaterialIcons.form_textbox_password),
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            suffixIcon: Icon(
+                                CommunityMaterialIcons.form_textbox_password),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -138,8 +149,10 @@ class _MedicaminaDashSettingsSecurityDesktopWidget extends State<MedicaminaDashS
                         child: TextField(
                           obscureText: true,
                           decoration: InputDecoration(
-                            suffixIcon: Icon(CommunityMaterialIcons.form_textbox_password),
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            suffixIcon: Icon(
+                                CommunityMaterialIcons.form_textbox_password),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -177,8 +190,10 @@ class _MedicaminaDashSettingsSecurityDesktopWidget extends State<MedicaminaDashS
                         child: TextField(
                           obscureText: true,
                           decoration: InputDecoration(
-                            suffixIcon: Icon(CommunityMaterialIcons.form_textbox_password),
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            suffixIcon: Icon(
+                                CommunityMaterialIcons.form_textbox_password),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -229,7 +244,8 @@ class _MedicaminaDashSettingsSecurityDesktopWidget extends State<MedicaminaDashS
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             suffixIcon: Icon(CommunityMaterialIcons.at),
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -268,7 +284,8 @@ class _MedicaminaDashSettingsSecurityDesktopWidget extends State<MedicaminaDashS
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             suffixIcon: Icon(CommunityMaterialIcons.at),
-                            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
                             border: OutlineInputBorder(),
                           ),
                         ),

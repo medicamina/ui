@@ -6,8 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 // Medicamina
-import 'package:medicamina/module.dart';
-import 'package:medicamina/widget.dart';
+import 'package:medicamina_ui/module.dart';
+import 'package:medicamina_ui/widget.dart';
 
 Future<void> main() async {
   setPathUrlStrategy();

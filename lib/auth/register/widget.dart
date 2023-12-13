@@ -4,8 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 // Medicamina
-import 'package:medicamina/auth/states.dart';
-import 'package:medicamina/states.dart';
+import 'package:medicamina_ui/auth/states.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaAuthRegisterWidget extends StatefulWidget {
   const MedicaminaAuthRegisterWidget({Key? key}) : super(key: key);

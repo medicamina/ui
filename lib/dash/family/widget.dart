@@ -11,6 +11,8 @@ class _MedicaminaDashFamilyWidget extends State<MedicaminaDashFamilyWidget> {
 
   final Graph graph = Graph()..isTree = true;
   BuchheimWalkerConfiguration builder = BuchheimWalkerConfiguration();
+  final TransformationController _transformationController =
+      TransformationController();
 
   @override
   void initState() {
@@ -52,73 +54,71 @@ class _MedicaminaDashFamilyWidget extends State<MedicaminaDashFamilyWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: InteractiveViewer(
-        boundaryMargin: EdgeInsets.all(MediaQuery.of(context).size.width >
-                MediaQuery.of(context).size.height
-            ? MediaQuery.of(context).size.height -
-                (MediaQuery.of(context).size.height / 3)
-            : MediaQuery.of(context).size.width -
-                (MediaQuery.of(context).size.width / 5)),
-        minScale: 0.5,
-        maxScale: 2,
-        child: OverflowBox(
-          alignment: Alignment.center,
-          minWidth: 0.0,
-          minHeight: 0.0,
-          maxWidth: MediaQuery.of(context).size.width < 768
-              ? 868
-              : MediaQuery.of(context).size.width,
-          maxHeight: MediaQuery.of(context).size.height,
-          child:
-              // Container(
+      body: Stack(
+        children: [
+          InteractiveViewer(
+            transformationController: _transformationController,
+            boundaryMargin: EdgeInsets.all(MediaQuery.of(context).size.width >
+                    MediaQuery.of(context).size.height
+                ? MediaQuery.of(context).size.height -
+                    (MediaQuery.of(context).size.height / 3)
+                : MediaQuery.of(context).size.width -
+                    (MediaQuery.of(context).size.width / 5)),
+            minScale: 0.5,
+            maxScale: 2,
+            child: OverflowBox(
+              alignment: Alignment.center,
+              minWidth: 0.0,
+              minHeight: 0.0,
+              maxWidth: MediaQuery.of(context).size.width < 768
+                  ? 868
+                  : MediaQuery.of(context).size.width,
+              maxHeight: MediaQuery.of(context).size.height,
+              child:
+                  // Container(
 
-              //   child:
-              GraphView(
-            algorithm: BuchheimWalkerAlgorithm(
-              builder,
-              TreeEdgeRenderer(builder),
+                  //   child:
+                  GraphView(
+                algorithm: BuchheimWalkerAlgorithm(
+                  builder,
+                  TreeEdgeRenderer(builder),
+                ),
+                graph: graph,
+                paint: Paint()
+                  ..color = Theme.of(context).textTheme.bodyLarge!.color!
+                  ..strokeWidth = 1
+                  ..style = PaintingStyle.stroke,
+                builder: (Node node) {
+                  // I can decide what widget should be shown here based on the id
+                  var a = node.key?.value as int;
+                  return rectangleWidget(a);
+                },
+                // ),
+              ),
             ),
-            graph: graph,
-            paint: Paint()
-              ..color = Theme.of(context).textTheme.bodyLarge!.color!
-              ..strokeWidth = 1
-              ..style = PaintingStyle.stroke,
-            builder: (Node node) {
-              // I can decide what widget should be shown here based on the id
-              var a = node.key?.value as int;
-              return rectangleWidget(a);
-            },
-            // ),
           ),
-        ),
+          Column(
+            children: [
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(Icons.remove),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(Icons.home),
+                onPressed: () {
+                  _transformationController.value = Matrix4.identity()
+                    ..translate(0.0, 0.0);
+                },
+              ),
+            ],
+          )
+        ],
       ),
     );
-
-    // child: InteractiveViewer(
-    //   transformationController: _transformationController,
-    //   boundaryMargin: const EdgeInsets.all(100),
-    //   minScale: 0.1,
-    //   constrained: false,
-    //   maxScale: 1.5,
-    //   child:
-    // Container(
-    //   width: MediaQuery.of(context).size.width,
-    //   height: MediaQuery.of(context).size.height * 1.25,
-
-    // child:
-    //     GraphView(
-    //   graph: graph,
-    //   algorithm:
-    //       BuchheimWalkerAlgorithm(builder, TreeEdgeRenderer(builder)),
-    //   paint: Paint()
-    //     ..color = Colors.green
-    //     ..strokeWidth = 1
-    //     ..style = PaintingStyle.stroke,
-
-    // ),
-    // ),
-    // ),
-    // );
   }
 }
 

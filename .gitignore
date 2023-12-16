@@ -7,42 +7,9 @@ dist
 .dart_tool
 examples
 
-./src/**/*/macos
-./src/**/*/android
-./src/**/*/build
-./src/**/*/ios
-./src/**/*/windows
-./src/**/*/linux
-
-/macos
-/android
-/build
-/ios
-/windows
-/linux
 /.firebase
 
-./macos
-./android
-./build
-./ios
-./windows
-./linux
 ./.firebase
-
-./src/macos
-./src/android
-./src/build
-./src/ios
-./src/windows
-./src/linux
-
-./src/ui/macos
-./src/ui/android
-./src/ui/build
-./src/ui/ios
-./src/ui/windows
-./src/ui/linux
 
 #supabase
 volumes/db/data
@@ -121,9 +88,6 @@ buck-out/
 
 # Bundle artifacts
 *.jsbundle
-
-# CocoaPods
-/ios/Pods/
 
 # Expo
 .expo/

@@ -64,16 +64,16 @@ class _MedicaminaDashFamilyWidget extends State<MedicaminaDashFamilyWidget> {
                     (MediaQuery.of(context).size.height / 3)
                 : MediaQuery.of(context).size.width -
                     (MediaQuery.of(context).size.width / 5)),
-            minScale: 0.5,
-            maxScale: 2,
+            minScale: 1,
+            maxScale: 1.5,
             child: OverflowBox(
               alignment: Alignment.center,
               minWidth: 0.0,
               minHeight: 0.0,
               maxWidth: MediaQuery.of(context).size.width < 768
-                  ? 868
-                  : MediaQuery.of(context).size.width,
-              maxHeight: MediaQuery.of(context).size.height,
+                  ? 894
+                  : MediaQuery.of(context).size.width + 92,
+              maxHeight: MediaQuery.of(context).size.height + 220,
               child:
                   // Container(
 

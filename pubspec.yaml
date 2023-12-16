@@ -4,7 +4,7 @@ version: 1.0.0+1
 repository: https://github.com/medicamina/ui
 issue_tracker: https://github.com/medicamina/ui/issues
 documentation: https://docs.medicamina.us/
-funding: https://patreon.com/medicamina_github
+funding: [https://patreon.com/medicamina_github]
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 

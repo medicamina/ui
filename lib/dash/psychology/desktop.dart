@@ -22,8 +22,10 @@ class MedicaminaDashPsychologyDesktopWidget extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MedicaminaPsychologyMyerBriggsWidget(),
                   Expanded(
+                      flex: 1, child: MedicaminaPsychologyMyerBriggsWidget()),
+                  Expanded(
+                    flex: 2,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

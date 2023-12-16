@@ -219,7 +219,7 @@ class _MedicaminaDashHomeTableWidget
                         ),
                         DataColumn(
                           label: SizedBox(
-                            width: 54,
+                            width: 58,
                             child: Center(
                               child: Text(
                                 'Risk',
@@ -2233,8 +2233,10 @@ class ResultsData extends DataTableSource {
         ),
         DataCell(
           SizedBox(
-            width: 54,
-            child: Center(child: Text(_searchedData[index]['risk'].toString())),
+            width: 58,
+            child: Center(
+                child: Text(_searchedData[index]['risk'].toString(),
+                    overflow: TextOverflow.ellipsis)),
           ),
         )
       ],

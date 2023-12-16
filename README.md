@@ -14,6 +14,7 @@ Read the [medicamina documentaton](https://docs.medicamina.us)
 
 ```bash
 flutter pub get
+flutter create .
 flutter run
 ``` 
 

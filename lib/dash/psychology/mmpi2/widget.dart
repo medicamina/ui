@@ -1,3 +1,4 @@
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina_ui/states.dart';
@@ -7,17 +8,29 @@ class MedicaminaPsychologyMMPI2Widget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // SizedBox(
-        //   width: 380,
-        //   child:
         ListTile(
-          title: Text(
-            'MMPI-2',
-            style: TextStyle(
-              fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode()
-                  ? FontWeight.normal
-                  : FontWeight.bold,
-            ),
+          title: Row(
+            children: [
+              Text(
+                'MMPI-2',
+                style: TextStyle(
+                  fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode()
+                      ? FontWeight.normal
+                      : FontWeight.bold,
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(CommunityMaterialIcons
+                            .clipboard_text_multiple_outline))
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
         // ),

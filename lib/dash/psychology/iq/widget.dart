@@ -4,6 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina_ui/states.dart';
 
 class MedicaminaPsychologyIQWidget extends StatelessWidget {
+  const MedicaminaPsychologyIQWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,13 +14,28 @@ class MedicaminaPsychologyIQWidget extends StatelessWidget {
         //   width: 380,
         //   child:
         ListTile(
-          title: Text(
-            'IQ',
-            style: TextStyle(
-              fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode()
-                  ? FontWeight.normal
-                  : FontWeight.bold,
-            ),
+          title: Row(
+            children: [
+              Text(
+                'IQ',
+                style: TextStyle(
+                  fontWeight: Modular.get<MedicaminaThemeState>().getDarkMode()
+                      ? FontWeight.normal
+                      : FontWeight.bold,
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    IconButton(
+                        onPressed: () {},
+                        icon:
+                            Icon(CommunityMaterialIcons.head_question_outline))
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
         // ),

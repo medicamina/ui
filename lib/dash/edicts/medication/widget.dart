@@ -25,11 +25,12 @@ class _MedicaminaDashEdictsMedicationWidget
   Widget build(BuildContext context) {
     setState(() {
       _pageController = PageController(
-          viewportFraction: MediaQuery.of(context).size.width > 1000
-              ? 0.3
-              : MediaQuery.of(context).size.width > 600
-                  ? 0.4
-                  : 0.6);
+        viewportFraction: MediaQuery.of(context).size.width > 1000
+            ? 0.3
+            : MediaQuery.of(context).size.width > 600
+                ? 0.4
+                : 0.6,
+      );
     });
 
     Widget _getTodaysDrugs() {
@@ -62,8 +63,9 @@ class _MedicaminaDashEdictsMedicationWidget
                 controller: _pageController,
                 itemBuilder: (context, index) {
                   return _DailyMedicationCarouselItem(
-                      itemIndex: index.toDouble(),
-                      pageController: _pageController);
+                    itemIndex: index.toDouble(),
+                    pageController: _pageController,
+                  );
                 },
               ),
             )
@@ -150,8 +152,11 @@ class __DailyMedicationCarouselItem extends State<_DailyMedicationCarouselItem>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(drugs[widget.itemIndex.toInt()].getIcon(),
-                      size: 26, color: Theme.of(context).colorScheme.primary),
+                  Icon(
+                    drugs[widget.itemIndex.toInt()].getIcon(),
+                    size: 26,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   const SizedBox(height: 2),
                   Text(
                     drugs[widget.itemIndex.toInt()].getName(),
@@ -174,9 +179,10 @@ class __DailyMedicationCarouselItem extends State<_DailyMedicationCarouselItem>
               child: Column(
                 children: [
                   SizedBox(
-                      height: kIsWeb
-                          ? (MediaQuery.of(context).size.width > 290 ? 6 : 0)
-                          : 5),
+                    height: kIsWeb
+                        ? (MediaQuery.of(context).size.width > 290 ? 6 : 0)
+                        : 5,
+                  ),
                   Center(
                     child: Text(
                       drugs[widget.itemIndex.toInt()].getTime(),
@@ -188,9 +194,10 @@ class __DailyMedicationCarouselItem extends State<_DailyMedicationCarouselItem>
                     ),
                   ),
                   SizedBox(
-                      height: kIsWeb
-                          ? (MediaQuery.of(context).size.width > 290 ? 10 : 6)
-                          : 8),
+                    height: kIsWeb
+                        ? (MediaQuery.of(context).size.width > 290 ? 10 : 6)
+                        : 8,
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       drugs[widget.itemIndex.toInt()].setTaken(!checked);
@@ -203,14 +210,16 @@ class __DailyMedicationCarouselItem extends State<_DailyMedicationCarouselItem>
                       }
                       if (widget.itemIndex < widget.pageController.page!) {
                         widget.pageController.previousPage(
-                            duration: const Duration(milliseconds: 700),
-                            curve: Curves.easeIn);
+                          duration: const Duration(milliseconds: 700),
+                          curve: Curves.easeIn,
+                        );
                         return;
                       }
                       if (widget.pageController.page != drugs.length - 1) {
                         widget.pageController.nextPage(
-                            duration: const Duration(milliseconds: 700),
-                            curve: Curves.easeIn);
+                          duration: const Duration(milliseconds: 700),
+                          curve: Curves.easeIn,
+                        );
                         return;
                       }
                     },
@@ -228,9 +237,10 @@ class __DailyMedicationCarouselItem extends State<_DailyMedicationCarouselItem>
                     ),
                   ),
                   SizedBox(
-                      height: kIsWeb
-                          ? (MediaQuery.of(context).size.width > 290 ? 6 : 0)
-                          : 0),
+                    height: kIsWeb
+                        ? (MediaQuery.of(context).size.width > 290 ? 6 : 0)
+                        : 0,
+                  ),
                 ],
               ),
             ),

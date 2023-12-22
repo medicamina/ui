@@ -81,6 +81,13 @@ class _MedicaminaDashWidget extends State<MedicaminaDashWidget> {
       Modular.to.navigate('/dash/appointment');
     }
 
+    if (Modular.args.uri.toString() == '/dash/appointment/booking/') {
+      setState(() {
+        _currentIndex = 3;
+      });
+      Modular.to.navigate('/dash/appointment/booking');
+    }
+
     if (Modular.args.uri.toString() == '/dash/family') {
       setState(() {
         _currentIndex = 4;

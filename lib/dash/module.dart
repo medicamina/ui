@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:medicamina_ui/dash/appointment/booking/widget.dart';
 
 // Medicamina
 import 'package:medicamina_ui/dash/appointment/widget.dart';
@@ -27,6 +28,8 @@ class MedicaminaDashModule extends Module {
       RedirectRoute('/dash/edicts/', to: '/dash/edicts'),
       RedirectRoute('/dash/fitness/', to: '/dash/fitness'),
       RedirectRoute('/dash/appointment/', to: '/dash/appointment'),
+      RedirectRoute('/dash/appointment/booking/',
+          to: '/dash/appointment/booking'),
       // modules
       RedirectRoute('/dash/family', to: '/dash/family/'),
       RedirectRoute('/dash/psychology', to: '/dash/psychology/'),
@@ -40,6 +43,7 @@ class MedicaminaDashModule extends Module {
             RedirectRoute('/edicts/', to: '/edicts'),
             RedirectRoute('/fitness/', to: '/fitness'),
             RedirectRoute('/appointment/', to: '/appointment'),
+            RedirectRoute('/appointment/booking/', to: '/appointment/booking'),
             // modules
             RedirectRoute('/family', to: '/family/'),
             RedirectRoute('/psychology', to: '/psychology/'),
@@ -60,6 +64,11 @@ class MedicaminaDashModule extends Module {
             ChildRoute(
               '/appointment',
               child: (context, args) => const MedicaminaDashAppointmentWidget(),
+            ),
+            ChildRoute(
+              '/appointment/booking',
+              child: (context, args) =>
+                  MedicaminaDashboardAppointmentBookingWidget(),
             ),
 
             // Modules

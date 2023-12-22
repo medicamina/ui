@@ -9,6 +9,27 @@ import 'package:medicamina_ui/dash/home/table/widget.dart';
 class MedicaminaDashHomeMobileWidget extends StatelessWidget {
   const MedicaminaDashHomeMobileWidget({Key? key}) : super(key: key);
 
+  double? getCardHeight(BuildContext context) {
+    if (MediaQuery.of(context).size.width >
+        MediaQuery.of(context).size.height) {
+      return 440;
+    }
+
+    if (!kIsWeb) {
+      return 496;
+    }
+    if (kIsWeb) {
+      if (Theme.of(context).platform == TargetPlatform.iOS) {
+        return 524;
+      }
+      if (Theme.of(context).platform == TargetPlatform.android) {
+        return 524;
+      }
+      return 496;
+    }
+    return 440;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -19,13 +40,17 @@ class MedicaminaDashHomeMobileWidget extends StatelessWidget {
             SizedBox(
               height: 440,
               child: Row(
-                children: const [Expanded(child: MedicaminaDashHomeMapWidget())],
+                children: const [
+                  Expanded(child: MedicaminaDashHomeMapWidget())
+                ],
               ),
             ),
             SizedBox(
-              height: kIsWeb ? 440 : 496,
+              height: getCardHeight(context),
               child: Row(
-                children: const [Expanded(child: MedicaminaDashHomePersonalWidget())],
+                children: const [
+                  Expanded(child: MedicaminaDashHomePersonalWidget())
+                ],
               ),
             ),
             const MedicaminaDashHomeTableWidget(),

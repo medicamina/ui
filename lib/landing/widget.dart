@@ -148,7 +148,7 @@ TextStyle? setHeadlineSize(context) {
 Widget user(BuildContext context, double width) {
   return SizedBox(
     width: MediaQuery.of(context).size.width * width,
-    height: 330,
+    height: 334,
     child: Card(
       child: Column(
         children: <Widget>[
@@ -299,7 +299,7 @@ Widget doctor(BuildContext context, double width) {
 Widget geneticTest(BuildContext context, double width) {
   return SizedBox(
     width: MediaQuery.of(context).size.width * width,
-    height: 330,
+    height: 334,
     child: Card(
       child: Column(
         children: <Widget>[
@@ -321,7 +321,7 @@ Widget geneticTest(BuildContext context, double width) {
           ListTile(
             title: Center(
               child: Text(
-                '\$900',
+                '\$200',
                 style: Theme.of(context).textTheme.headlineMedium?.apply(
                       fontWeightDelta: 5,
                       color: Theme.of(context).textTheme.headlineSmall?.color,

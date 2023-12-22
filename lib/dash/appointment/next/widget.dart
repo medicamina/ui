@@ -43,7 +43,9 @@ class _MedicaminaDashAppointmentNextWidgetState
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Modular.to.navigate('appointment/booking');
+                      },
                       icon: const Icon(Icons.add_circle_outline),
                       tooltip: 'New appointment',
                     ),

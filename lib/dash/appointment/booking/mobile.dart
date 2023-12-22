@@ -95,9 +95,56 @@ class _MedicaminaDashAppointmentBookingMobileWidgetState
                 height: 100,
                 width: double.infinity,
                 child: Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(6),
-                    child: Text('Dr Al E Gator'),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4),
+                    onTap: () {},
+                    child: Padding(
+                      padding: EdgeInsets.all(6),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: FittedBox(
+                              child: Icon(Icons.local_hospital),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Dr Al E Gator',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.w900),
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(right: 12),
+                                        child: Icon(Icons.arrow_forward)),
+                                  ],
+                                ),
+                                Row(children: [Text('123 Health nut lane')]),
+                                Row(children: [
+                                  Expanded(
+                                    child: Text('Open 9am to 5pm'),
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.only(right: 12),
+                                      child: Text('0.3km away'))
+                                ]),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   elevation: 0,
                 ),
@@ -106,9 +153,56 @@ class _MedicaminaDashAppointmentBookingMobileWidgetState
                 height: 100,
                 width: double.infinity,
                 child: Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(6),
-                    child: Text('Dr Hugh Mungus'),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4),
+                    onTap: () {},
+                    child: Padding(
+                      padding: EdgeInsets.all(6),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: FittedBox(
+                              child: Icon(Icons.local_hospital),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Friendly Pathology',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.w900),
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(right: 12),
+                                        child: Icon(Icons.arrow_forward)),
+                                  ],
+                                ),
+                                Row(children: [Text('116 Health nut lane')]),
+                                Row(children: [
+                                  Expanded(
+                                    child: Text('Open 9am to 5pm'),
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.only(right: 12),
+                                      child: Text('0.4km away'))
+                                ]),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   elevation: 0,
                 ),
@@ -117,9 +211,56 @@ class _MedicaminaDashAppointmentBookingMobileWidgetState
                 height: 100,
                 width: double.infinity,
                 child: Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(6),
-                    child: Text('Dr'),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4),
+                    onTap: () {},
+                    child: Padding(
+                      padding: EdgeInsets.all(6),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: FittedBox(
+                              child: Icon(Icons.local_hospital),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        'Dr Hugh Mungus',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.w900),
+                                      ),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(right: 12),
+                                        child: Icon(Icons.arrow_forward)),
+                                  ],
+                                ),
+                                Row(children: [Text('89 Hospital street')]),
+                                Row(children: [
+                                  Expanded(
+                                    child: Text('Open 9am to 5pm'),
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.only(right: 12),
+                                      child: Text('2.5km away'))
+                                ]),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   elevation: 0,
                 ),

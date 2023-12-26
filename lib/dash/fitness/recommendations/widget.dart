@@ -58,19 +58,24 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.scale,
-                                      size: MediaQuery.of(context).size.width >=
-                                              1000
-                                          ? 66
-                                          : MediaQuery.of(context).size.width >=
-                                                  300
-                                              ? 38
-                                              : 22),
+                                  Icon(
+                                    Icons.scale,
+                                    size: MediaQuery.of(context).size.width >=
+                                            1000
+                                        ? 66
+                                        : MediaQuery.of(context).size.width >=
+                                                300
+                                            ? 38
+                                            : 22,
+                                  ),
                                   const SizedBox(height: 2),
-                                  const Text('Weight',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.normal),
-                                      textAlign: TextAlign.center),
+                                  const Text(
+                                    'Weight',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ],
                               ),
                             ),
@@ -97,19 +102,24 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(CommunityMaterialIcons.bed,
-                                      size: MediaQuery.of(context).size.width >=
-                                              1000
-                                          ? 66
-                                          : MediaQuery.of(context).size.width >=
-                                                  300
-                                              ? 38
-                                              : 22),
+                                  Icon(
+                                    CommunityMaterialIcons.bed,
+                                    size: MediaQuery.of(context).size.width >=
+                                            1000
+                                        ? 66
+                                        : MediaQuery.of(context).size.width >=
+                                                300
+                                            ? 38
+                                            : 22,
+                                  ),
                                   const SizedBox(height: 2),
-                                  const Text('Sleep',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.normal),
-                                      textAlign: TextAlign.center),
+                                  const Text(
+                                    'Sleep',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ],
                               ),
                             ),
@@ -136,20 +146,25 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(CommunityMaterialIcons.av_timer,
-                                      size: MediaQuery.of(context).size.width >=
-                                              1000
-                                          ? 66
-                                          : MediaQuery.of(context).size.width >=
-                                                  300
-                                              ? 38
-                                              : 22),
+                                  Icon(
+                                    CommunityMaterialIcons.av_timer,
+                                    size: MediaQuery.of(context).size.width >=
+                                            1000
+                                        ? 66
+                                        : MediaQuery.of(context).size.width >=
+                                                300
+                                            ? 38
+                                            : 22,
+                                  ),
                                   const SizedBox(height: 2),
-                                  const Text('Blood Pressure',
-                                      overflow: TextOverflow.visible,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.normal),
-                                      textAlign: TextAlign.center),
+                                  const Text(
+                                    'Pressure',
+                                    overflow: TextOverflow.visible,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ],
                               ),
                             ),
@@ -176,19 +191,24 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(CommunityMaterialIcons.human_male_height,
-                                      size: MediaQuery.of(context).size.width >=
-                                              1000
-                                          ? 66
-                                          : MediaQuery.of(context).size.width >=
-                                                  300
-                                              ? 38
-                                              : 22),
+                                  Icon(
+                                    CommunityMaterialIcons.human_male_height,
+                                    size: MediaQuery.of(context).size.width >=
+                                            1000
+                                        ? 66
+                                        : MediaQuery.of(context).size.width >=
+                                                300
+                                            ? 38
+                                            : 22,
+                                  ),
                                   const SizedBox(height: 2),
-                                  const Text('Height',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.normal),
-                                      textAlign: TextAlign.center),
+                                  const Text(
+                                    'Height',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ],
                               ),
                             ),
@@ -215,20 +235,25 @@ class MedicaminaDashFitnessRecommendationsWidget extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.gas_meter,
-                                      size: MediaQuery.of(context).size.width >=
-                                              1000
-                                          ? 66
-                                          : MediaQuery.of(context).size.width >=
-                                                  300
-                                              ? 38
-                                              : 22),
+                                  Icon(
+                                    Icons.gas_meter,
+                                    size: MediaQuery.of(context).size.width >=
+                                            1000
+                                        ? 66
+                                        : MediaQuery.of(context).size.width >=
+                                                300
+                                            ? 38
+                                            : 22,
+                                  ),
                                   const SizedBox(height: 2),
-                                  const Text('Blood Glucose',
-                                      overflow: TextOverflow.visible,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.normal),
-                                      textAlign: TextAlign.center),
+                                  const Text(
+                                    'Glucose',
+                                    overflow: TextOverflow.visible,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ],
                               ),
                             ),

@@ -95,9 +95,18 @@ class _MedicaminaDashAppointmentBookingMobileWidgetState
                 height: 100,
                 width: double.infinity,
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color:
+                          Theme.of(context).colorScheme.onSurface.withAlpha(20),
+                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                  ),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(4),
-                    onTap: () {},
+                    onTap: () {
+                      Modular.to.navigate('/dash/appointment/booking/1');
+                    },
                     child: Padding(
                       padding: EdgeInsets.all(6),
                       child: Row(
@@ -131,14 +140,16 @@ class _MedicaminaDashAppointmentBookingMobileWidgetState
                                   ],
                                 ),
                                 Row(children: [Text('123 Health nut lane')]),
-                                Row(children: [
-                                  Expanded(
-                                    child: Text('Open 9am to 5pm'),
-                                  ),
-                                  Padding(
-                                      padding: EdgeInsets.only(right: 12),
-                                      child: Text('0.3km away'))
-                                ]),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text('Open 9am to 5pm'),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(right: 12),
+                                        child: Text('0.3km away'))
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -153,9 +164,18 @@ class _MedicaminaDashAppointmentBookingMobileWidgetState
                 height: 100,
                 width: double.infinity,
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color:
+                          Theme.of(context).colorScheme.onSurface.withAlpha(20),
+                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                  ),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(4),
-                    onTap: () {},
+                    onTap: () {
+                      Modular.to.navigate('/dash/appointment/booking/2');
+                    },
                     child: Padding(
                       padding: EdgeInsets.all(6),
                       child: Row(
@@ -189,14 +209,16 @@ class _MedicaminaDashAppointmentBookingMobileWidgetState
                                   ],
                                 ),
                                 Row(children: [Text('116 Health nut lane')]),
-                                Row(children: [
-                                  Expanded(
-                                    child: Text('Open 9am to 5pm'),
-                                  ),
-                                  Padding(
-                                      padding: EdgeInsets.only(right: 12),
-                                      child: Text('0.4km away'))
-                                ]),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text('Open 9am to 5pm'),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(right: 12),
+                                        child: Text('0.4km away'))
+                                  ],
+                                ),
                               ],
                             ),
                           ),
@@ -211,9 +233,18 @@ class _MedicaminaDashAppointmentBookingMobileWidgetState
                 height: 100,
                 width: double.infinity,
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color:
+                          Theme.of(context).colorScheme.onSurface.withAlpha(20),
+                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                  ),
                   child: InkWell(
                     borderRadius: BorderRadius.circular(4),
-                    onTap: () {},
+                    onTap: () {
+                      Modular.to.navigate('/dash/appointment/booking/3');
+                    },
                     child: Padding(
                       padding: EdgeInsets.all(6),
                       child: Row(
@@ -247,14 +278,16 @@ class _MedicaminaDashAppointmentBookingMobileWidgetState
                                   ],
                                 ),
                                 Row(children: [Text('89 Hospital street')]),
-                                Row(children: [
-                                  Expanded(
-                                    child: Text('Open 9am to 5pm'),
-                                  ),
-                                  Padding(
-                                      padding: EdgeInsets.only(right: 12),
-                                      child: Text('2.5km away'))
-                                ]),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text('Open 9am to 5pm'),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.only(right: 12),
+                                        child: Text('2.5km away'))
+                                  ],
+                                ),
                               ],
                             ),
                           ),

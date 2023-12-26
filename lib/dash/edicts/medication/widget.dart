@@ -9,6 +9,27 @@ import 'package:medicamina_ui/states.dart';
 var currentIndex = 0;
 final drugs = Modular.get<MedicaminaTodaysDrugs>().getDrugs();
 
+class CustomScrollPhysics extends ScrollPhysics {
+  const CustomScrollPhysics({ScrollPhysics? parent}) : super(parent: parent);
+
+  @override
+  CustomScrollPhysics applyTo(ScrollPhysics? ancestor) {
+    return CustomScrollPhysics(parent: buildParent(ancestor));
+  }
+
+  @override
+  Simulation createBallisticSimulation(
+      ScrollMetrics position, double velocity) {
+    // Override the method to return a dummy simulation
+    return ScrollSpringSimulation(spring, position.pixels, 0.0, velocity);
+  }
+
+  @override
+  double applyPhysicsToUserOffset(ScrollMetrics position, double offset) {
+    return offset;
+  }
+}
+
 class MedicaminaDashEdictsMedicationWidget extends StatefulWidget {
   const MedicaminaDashEdictsMedicationWidget({Key? key}) : super(key: key);
 
@@ -49,27 +70,21 @@ class _MedicaminaDashEdictsMedicationWidget
       }
       return SizedBox(
         height: 110,
-        child: ListView(
-          children: [
-            SizedBox(
-              height: 110.0,
-              child: PageView.builder(
-                physics: const ClampingScrollPhysics(),
-                itemCount: drugs.length,
-                onPageChanged: (value) {
-                  currentIndex = value;
-                },
-                padEnds: false,
-                controller: _pageController,
-                itemBuilder: (context, index) {
-                  return _DailyMedicationCarouselItem(
-                    itemIndex: index.toDouble(),
-                    pageController: _pageController,
-                  );
-                },
-              ),
-            )
-          ],
+        child: PageView.builder(
+          scrollDirection: Axis.horizontal,
+          physics: ClampingScrollPhysics(),
+          itemCount: drugs.length,
+          onPageChanged: (value) {
+            currentIndex = value;
+          },
+          padEnds: false,
+          controller: _pageController,
+          itemBuilder: (context, index) {
+            return _DailyMedicationCarouselItem(
+              itemIndex: index.toDouble(),
+              pageController: _pageController,
+            );
+          },
         ),
       );
     }
@@ -148,7 +163,7 @@ class __DailyMedicationCarouselItem extends State<_DailyMedicationCarouselItem>
         child: Row(
           children: [
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -175,7 +190,7 @@ class __DailyMedicationCarouselItem extends State<_DailyMedicationCarouselItem>
             ),
             const SizedBox(width: 2),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Column(
                 children: [
                   SizedBox(
@@ -186,6 +201,7 @@ class __DailyMedicationCarouselItem extends State<_DailyMedicationCarouselItem>
                   Center(
                     child: Text(
                       drugs[widget.itemIndex.toInt()].getTime(),
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme

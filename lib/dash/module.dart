@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:medicamina_ui/dash/appointment/booking/calender/widget.dart';
 import 'package:medicamina_ui/dash/appointment/booking/widget.dart';
 
 // Medicamina
@@ -69,6 +70,10 @@ class MedicaminaDashModule extends Module {
               '/appointment/booking',
               child: (context, args) =>
                   MedicaminaDashboardAppointmentBookingWidget(),
+            ),
+            ChildRoute(
+              '/appointment/booking/:id',
+              child: (context, args) => BookingCalendarDemoApp(),
             ),
 
             // Modules

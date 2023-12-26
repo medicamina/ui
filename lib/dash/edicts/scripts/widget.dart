@@ -35,25 +35,19 @@ class _MedicaminaDashEdictsScriptsWidgetState
       }
       return SizedBox(
         height: MediaQuery.of(context).size.width >= 700 ? 300 : 240,
-        child: ListView(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.width >= 700 ? 300 : 240,
-              child: PageView.builder(
-                itemCount: 2,
-                padEnds: false,
-                controller: PageController(
-                    viewportFraction: MediaQuery.of(context).size.width >= 1000
-                        ? 0.4
-                        : MediaQuery.of(context).size.width >= 300
-                            ? 0.6
-                            : 0.8),
-                itemBuilder: (context, index) {
-                  return const _EScriptsCarouselItem();
-                },
-              ),
-            )
-          ],
+        child: PageView.builder(
+          physics: ClampingScrollPhysics(),
+          itemCount: 2,
+          padEnds: false,
+          controller: PageController(
+              viewportFraction: MediaQuery.of(context).size.width >= 1000
+                  ? 0.4
+                  : MediaQuery.of(context).size.width >= 300
+                      ? 0.6
+                      : 0.8),
+          itemBuilder: (context, index) {
+            return const _EScriptsCarouselItem();
+          },
         ),
       );
     }
@@ -124,10 +118,6 @@ class __EScriptsCarouselItem extends State<_EScriptsCarouselItem> {
             children: [
               QrImageView(
                 gapless: false,
-                foregroundColor:
-                    Modular.get<MedicaminaThemeState>().getDarkMode()
-                        ? Colors.white
-                        : Colors.black,
                 data:
                     'https://www.digitalhealth.gov.au/initiatives-and-programs/electronic-prescriptions',
                 version: QrVersions.auto,

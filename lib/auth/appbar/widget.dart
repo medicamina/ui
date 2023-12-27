@@ -45,9 +45,10 @@ class _MedicaminaAuthAppBarWidget extends State<MedicaminaAuthAppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Padding(
-          padding: const EdgeInsets.only(top: 2),
-          child: Text('medicamina', style: GoogleFonts.balooTamma2())),
+      title: const Padding(
+        padding: EdgeInsets.only(top: 2),
+        child: Text('medicamina'),
+      ),
       centerTitle: true,
       bottom: PreferredSize(
         preferredSize:

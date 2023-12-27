@@ -1,6 +1,8 @@
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:universal_io/io.dart';
 
 // Medicamina
 import 'package:medicamina_ui/states.dart';
@@ -40,8 +42,9 @@ class _MedicaminaDashFitnessStepsWidgetState
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     IconButton(
-                        onPressed: () {},
-                        icon: Icon(CommunityMaterialIcons.shoe_print))
+                      onPressed: () {},
+                      icon: Icon(CommunityMaterialIcons.shoe_print),
+                    )
                   ],
                 ),
               )
@@ -69,9 +72,11 @@ class _MedicaminaDashFitnessStepsWidgetState
                       children: [
                         Icon(
                           CommunityMaterialIcons.run,
-                          size: MediaQuery.of(context).size.width >= 300
-                              ? 112
-                              : 88,
+                          size: (Platform.isIOS || Platform.isAndroid) && kIsWeb
+                              ? 66
+                              : MediaQuery.of(context).size.width >= 300
+                                  ? 112
+                                  : 88,
                           color: Theme.of(context).colorScheme.secondary,
                         )
                       ],
@@ -85,7 +90,7 @@ class _MedicaminaDashFitnessStepsWidgetState
                         Text('Daily total',
                             style: Theme.of(context)
                                 .textTheme
-                                .caption
+                                .bodySmall
                                 ?.copyWith(fontSize: 14)),
                         Text('8,736', style: TextStyle(fontSize: 44)),
                       ],

@@ -1,6 +1,8 @@
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:universal_io/io.dart';
 
 // Medicamina
 import 'package:medicamina_ui/states.dart';
@@ -69,9 +71,11 @@ class _MedicaminaDashFitnessHeartWidget
                       children: [
                         Icon(
                           CommunityMaterialIcons.pulse,
-                          size: MediaQuery.of(context).size.width >= 300
-                              ? 112
-                              : 88,
+                          size: (Platform.isIOS || Platform.isAndroid) && kIsWeb
+                              ? 66
+                              : MediaQuery.of(context).size.width >= 300
+                                  ? 112
+                                  : 88,
                           color: Theme.of(context).colorScheme.secondary,
                         )
                       ],
@@ -85,7 +89,7 @@ class _MedicaminaDashFitnessHeartWidget
                         Text('Hourly average',
                             style: Theme.of(context)
                                 .textTheme
-                                .caption
+                                .bodySmall
                                 ?.copyWith(fontSize: 14)),
                         Text('80 bpm', style: TextStyle(fontSize: 44)),
                       ],

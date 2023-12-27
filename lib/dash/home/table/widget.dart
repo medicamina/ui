@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // Medicamina
 import 'package:medicamina_ui/states.dart';
@@ -167,29 +168,51 @@ class _MedicaminaDashHomeTableWidget
                   child: Theme(
                     data: Modular.get<MedicaminaThemeState>().getDarkMode()
                         ? ThemeData.dark().copyWith(
+                            textTheme: GoogleFonts.robotoTextTheme(),
                             cardTheme: CardTheme(
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 side: const BorderSide(
-                                    color: Colors.white12, width: 1),
+                                  color: Colors.white12,
+                                  width: 1,
+                                ),
                                 borderRadius: BorderRadius.circular(4),
                               ),
                             ),
                           )
                         : ThemeData.light().copyWith(
+                            textTheme: GoogleFonts.robotoTextTheme(),
                             cardTheme: CardTheme(
                               color: Colors.white,
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 side: const BorderSide(
-                                    color: Colors.black12, width: 1),
+                                  color: Colors.black12,
+                                  width: 1,
+                                ),
                                 borderRadius: BorderRadius.circular(4),
                               ),
                             ),
                           ),
                     child: PaginatedDataTable(
                       showCheckboxColumn: false,
-                      dataRowHeight: MediaQuery.of(context).size.width >= 1000
+                      dataRowMinHeight: MediaQuery.of(context).size.width >=
+                              1000
+                          ? kMinInteractiveDimension
+                          : MediaQuery.of(context).size.width >= 800
+                              ? kMinInteractiveDimension + 10
+                              : MediaQuery.of(context).size.width >= 600
+                                  ? kMinInteractiveDimension + 20
+                                  : MediaQuery.of(context).size.width >= 500
+                                      ? kMinInteractiveDimension + 30
+                                      : MediaQuery.of(context).size.width >= 400
+                                          ? kMinInteractiveDimension + 35
+                                          : MediaQuery.of(context).size.width >=
+                                                  300
+                                              ? kMinInteractiveDimension + 50
+                                              : kMinInteractiveDimension + 60,
+                      dataRowMaxHeight: MediaQuery.of(context).size.width >=
+                              1000
                           ? kMinInteractiveDimension
                           : MediaQuery.of(context).size.width >= 800
                               ? kMinInteractiveDimension + 10
@@ -2235,8 +2258,19 @@ class ResultsData extends DataTableSource {
           SizedBox(
             width: 58,
             child: Center(
-                child: Text(_searchedData[index]['risk'].toString(),
-                    overflow: TextOverflow.ellipsis)),
+              child: Text(
+                _searchedData[index]['risk'].toString(),
+                style: TextStyle(
+                  color: _searchedData[index]['risk'].toString() == 'High'
+                      ? Colors.red
+                      : null,
+                  fontWeight: _searchedData[index]['risk'].toString() == 'High'
+                      ? FontWeight.bold
+                      : null,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ),
         )
       ],

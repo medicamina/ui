@@ -1,3 +1,4 @@
+// import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,14 +21,24 @@ class MedicaminaAppWidget extends StatelessWidget {
           secondary: const Color.fromRGBO(241, 96, 0, 1),
           tertiary: const Color.fromRGBO(241, 0, 144, 1),
         ),
+        appBarTheme: AppBarTheme(
+          titleTextStyle: GoogleFonts.baloo2().copyWith(
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
         textTheme: GoogleFonts.robotoTextTheme(),
       ),
       darkTheme: ThemeData.dark(useMaterial3: false).copyWith(
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Color.fromARGB(255, 88, 88, 88),
         ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 88, 88, 88),
+        appBarTheme: AppBarTheme(
+          backgroundColor: const Color.fromARGB(255, 88, 88, 88),
+          titleTextStyle: GoogleFonts.baloo2().copyWith(
+            fontSize: 20,
+            color: Colors.white,
+          ),
         ),
         textTheme: GoogleFonts.robotoTextTheme(),
       ),

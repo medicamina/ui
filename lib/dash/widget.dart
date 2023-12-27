@@ -116,8 +116,9 @@ class _MedicaminaDashWidget extends State<MedicaminaDashWidget> {
       appBar: PreferredSize(
         child: AppBar(
           title: Padding(
-              padding: const EdgeInsets.only(top: 2),
-              child: Text('medicamina', style: GoogleFonts.balooTamma2())),
+            padding: const EdgeInsets.only(top: 2),
+            child: Text('medicamina'),
+          ),
         ),
         preferredSize: const Size.fromHeight(kToolbarHeight - 6),
       ),

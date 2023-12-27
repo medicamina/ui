@@ -44,9 +44,10 @@ class _MedicaminaLandingPage extends State<MedicaminaLandingPage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight - 6),
         child: AppBar(
-          title: Padding(
-              padding: const EdgeInsets.only(top: 2),
-              child: Text('medicamina', style: GoogleFonts.balooTamma2())),
+          title: const Padding(
+            padding: EdgeInsets.only(top: 2),
+            child: Text('medicamina'),
+          ),
           centerTitle: true,
           actions: [
             IconButton(

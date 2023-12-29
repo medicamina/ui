@@ -33,6 +33,7 @@ dependencies:
   booking_calendar: ^1.1.9
   mockito: ^5.4.4
   universal_io: ^2.2.2
+  intl: 
 
 dev_dependencies:
   flutter_test:

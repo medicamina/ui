@@ -185,6 +185,7 @@ class _MedicaminaDashAppointmentWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 12, top: 6),
                       child: Text(
                         _MedicaminaAppointment.address,
+                        overflow: TextOverflow.ellipsis,
                         style: Theme.of(context)
                             .textTheme
                             .bodySmall

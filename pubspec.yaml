@@ -23,7 +23,10 @@ dependencies:
   supabase_flutter: ^1.2.2
   google_fonts: ^4.0.3
   flutter_modular: ^5.0.3
-  date_time_picker: ^2.1.0
+  date_time_picker:
+    git:
+      url: https://github.com/arsarsars1/date_time_picker.git
+      ref: new_version
   fl_chart: ^0.62.0
   flutter_svg: ^2.0.5
   qr_flutter: ^4.0.0
@@ -33,6 +36,7 @@ dependencies:
   universal_io: ^2.2.2
   intl: 
   calendar_timeline: ^1.1.2
+  device_preview: ^1.1.0
 
 dev_dependencies:
   flutter_test:

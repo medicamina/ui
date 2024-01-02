@@ -69,11 +69,12 @@ class MedicaminaDashModule extends Module {
             ChildRoute(
               '/appointment/booking',
               child: (context, args) =>
-                  MedicaminaDashboardAppointmentBookingWidget(),
+                  MedicaminaDashAppointmentBookingWidget(),
             ),
             ChildRoute(
               '/appointment/booking/:id',
-              child: (context, args) => BookingCalendarDemoApp(),
+              child: (context, args) =>
+                  MedicaminaDashAppointmentBookingCalendar(),
             ),
 
             // Modules

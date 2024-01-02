@@ -3,17 +3,16 @@ import 'package:medicamina_ui/dash/appointment/booking/desktop.dart';
 import 'package:medicamina_ui/dash/appointment/booking/mobile.dart';
 // import 'package:table_calendar/table_calendar.dart';
 
-class MedicaminaDashboardAppointmentBookingWidget extends StatefulWidget {
-  const MedicaminaDashboardAppointmentBookingWidget({Key? key})
-      : super(key: key);
+class MedicaminaDashAppointmentBookingWidget extends StatefulWidget {
+  const MedicaminaDashAppointmentBookingWidget({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() =>
-      _MedicaminaDashBoardAppointmentBookingWidget();
+      _MedicaminaDashAppointmentBookingWidget();
 }
 
-class _MedicaminaDashBoardAppointmentBookingWidget
-    extends State<MedicaminaDashboardAppointmentBookingWidget> {
+class _MedicaminaDashAppointmentBookingWidget
+    extends State<MedicaminaDashAppointmentBookingWidget> {
   @override
   Widget build(BuildContext context) {
     if (MediaQuery.of(context).size.width > 1024) {

@@ -2,16 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:calendar_timeline/calendar_timeline.dart';
+import 'package:intl/intl.dart';
 
-class BookingCalendarDemoApp extends StatefulWidget {
-  const BookingCalendarDemoApp({Key? key}) : super(key: key);
+class MedicaminaBookingCalendarSlot {
+  late DateTime time;
+  late bool isSelected;
+  late bool isAvailable;
 
-  @override
-  State<BookingCalendarDemoApp> createState() => _BookingCalendarDemoAppState();
+  MedicaminaBookingCalendarSlot(this.time, this.isSelected, this.isAvailable);
 }
 
-class _BookingCalendarDemoAppState extends State<BookingCalendarDemoApp> {
-  final now = DateTime.now();
+class MedicaminaDashAppointmentBookingCalendar extends StatefulWidget {
+  const MedicaminaDashAppointmentBookingCalendar({Key? key}) : super(key: key);
+
+  @override
+  State<MedicaminaDashAppointmentBookingCalendar> createState() =>
+      _MedicaminaDashAppointmentBookingCalendar();
+}
+
+class _MedicaminaDashAppointmentBookingCalendar
+    extends State<MedicaminaDashAppointmentBookingCalendar> {
+  List<MedicaminaBookingCalendarSlot> items = [
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 8, 30), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 9, 00), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 9, 30), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 10, 00), true, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 10, 30), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 11, 00), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 11, 30), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 12, 00), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 12, 30), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 13, 00), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 13, 30), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 14, 00), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 14, 30), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 15, 00), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 15, 30), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 16, 00), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 16, 30), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 17, 00), false, true),
+    MedicaminaBookingCalendarSlot(DateTime(2023, 1, 1, 17, 30), false, true),
+  ];
+
+  DateTime initialDate = DateTime.now();
 
   @override
   void initState() {
@@ -20,36 +53,18 @@ class _BookingCalendarDemoAppState extends State<BookingCalendarDemoApp> {
 
   @override
   Widget build(BuildContext context) {
-    const items = [
-      '8:30am',
-      '9am',
-      '9:30am',
-      '10am',
-      '10:30am',
-      '11am',
-      '11:30am',
-      '12pm',
-      '12:30pm',
-      '1pm',
-      '1:30pm',
-      '2pm',
-      '2:30pm',
-      '3pm',
-      '3:30pm',
-      '4pm',
-      '4:30pm',
-      '5pm',
-      '5:30pm'
-    ];
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CalendarTimeline(
             // showYears: true,
-            initialDate: DateTime.now(),
+            initialDate: initialDate,
             firstDate: DateTime.now().subtract(const Duration(days: 1)),
-            lastDate: DateTime.now().add(const Duration(days: 365)),
-            onDateSelected: (date) => print(date),
+            lastDate: DateTime.now().add(const Duration(days: 180)),
+            onDateSelected: (date) => setState(() {
+              initialDate = date;
+            }),
             leftMargin: MediaQuery.of(context).size.width * 0.35,
             monthColor: Colors.blueGrey,
             dayColor: Theme.of(context).colorScheme.primary,
@@ -71,41 +86,31 @@ class _BookingCalendarDemoAppState extends State<BookingCalendarDemoApp> {
                       MediaQuery.of(context).size.width >= 768 ? 5 : 3),
               itemCount: items.length,
               itemBuilder: (context, index) {
-                return Container(
-                  // color: (index % 2 == 0) ? Colors.green : Colors.yellow,
-                  child: Center(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: Text(items[index]),
+                return Center(
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      fixedSize: Size(100, 100),
+                      backgroundColor: items[index].isSelected
+                          ? Theme.of(context).primaryColor.withAlpha(50)
+                          : null,
                     ),
+                    onPressed: items[index].isAvailable
+                        ? () {
+                            for (var i = 0; i < items.length; i++) {
+                              items[i].isSelected = false;
+                            }
+                            setState(() {
+                              items[index].isSelected =
+                                  !items[index].isSelected;
+                            });
+                          }
+                        : null,
+                    child: Text(DateFormat.jm().format(items[index].time)),
                   ),
                 );
               },
             ),
           ),
-          // Expanded(
-          //   child: Row(
-          //     children: [
-          //       Spacer(flex: 2),
-          //       Expanded(
-          //         flex: MediaQuery.of(context).size.width >= 1024 ? 1 : 6,
-          //         child: ListView.builder(
-          //           itemCount: items.length,
-          //           itemBuilder: (BuildContext context, int index) {
-          //             return ListTile(
-          //               title: OutlinedButton(
-          //                 style: OutlinedButton.styleFrom(elevation: 0),
-          //                 onPressed: () {},
-          //                 child: Text(items[index]),
-          //               ),
-          //             );
-          //           },
-          //         ),
-          //       ),
-          //       Spacer(flex: 2),
-          //     ],
-          //   ),
-          // ),
           Padding(
             padding: EdgeInsets.all(6),
             child: Row(

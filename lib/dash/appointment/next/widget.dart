@@ -10,8 +10,11 @@ class MedicaminaAppointment {
   late final String address;
   late bool newest = false;
 
-  MedicaminaAppointment(
-      {required this.date, required this.drName, required this.address});
+  MedicaminaAppointment({
+    required this.date,
+    required this.drName,
+    required this.address,
+  });
 
   setNewest(bool isNewest) {
     newest = isNewest;
@@ -43,17 +46,20 @@ class _MedicaminaDashAppointmentNextWidgetState
     extends State<MedicaminaDashAppointmentNextWidget> {
   List<MedicaminaAppointment> appointments = [
     MedicaminaAppointment(
-        date: DateTime(2022, 6, 26, 10, 30, 0, 0, 0),
-        drName: 'Dr Al E Gator',
-        address: '123 Health Nut Lane, Sydney'),
+      date: DateTime(2022, 6, 26, 10, 30, 0, 0, 0),
+      drName: 'Dr Al E Gator',
+      address: '123 Health Nut Lane, Sydney',
+    ),
     MedicaminaAppointment(
-        date: DateTime(2021, 1, 14, 16, 15, 0, 0, 0),
-        drName: 'Friendly Pathology',
-        address: '116 Hospital Avenue, Paramatta'),
+      date: DateTime(2021, 1, 14, 16, 15, 0, 0, 0),
+      drName: 'Friendly Pathology',
+      address: '116 Hospital Avenue, Paramatta',
+    ),
     MedicaminaAppointment(
-        date: DateTime(2023, 9, 12, 11, 45, 0, 0, 0),
-        drName: 'Dr Hugh Mungus',
-        address: 'Via TeleHealth'),
+      date: DateTime(2023, 9, 12, 11, 45, 0, 0, 0),
+      drName: 'Dr Hugh Mungus',
+      address: 'Via TeleHealth',
+    ),
   ];
 
   @override

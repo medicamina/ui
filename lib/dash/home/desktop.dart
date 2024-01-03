@@ -47,11 +47,9 @@ class MedicaminaDashHomeDesktopWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Row(
-              children: const [
+            
                 MedicaminaDashHomeTableWidget(),
-              ],
-            ),
+            
             const SizedBox(height: 12),
           ],
         ),

@@ -9,7 +9,7 @@ funding: [https://patreon.com/medicamina_github]
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=2.19.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -37,6 +37,7 @@ dependencies:
   intl: 
   calendar_timeline: ^1.1.2
   device_preview: ^1.1.0
+  random_date: ^0.0.7
 
 dev_dependencies:
   flutter_test:

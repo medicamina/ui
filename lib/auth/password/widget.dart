@@ -1,7 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:http/http.dart' as http;
 
 // Medicamina
 import 'package:medicamina_ui/states.dart';
@@ -11,15 +12,12 @@ class MedicaminaAuthPasswordWidget extends StatefulWidget {
   const MedicaminaAuthPasswordWidget({Key? key}) : super(key: key);
 
   @override
-  State<MedicaminaAuthPasswordWidget> createState() =>
-      _MedicaminaAuthPasswordWidget();
+  State<MedicaminaAuthPasswordWidget> createState() => _MedicaminaAuthPasswordWidget();
 }
 
-class _MedicaminaAuthPasswordWidget
-    extends State<MedicaminaAuthPasswordWidget> {
+class _MedicaminaAuthPasswordWidget extends State<MedicaminaAuthPasswordWidget> {
   final _formKey = GlobalKey<FormState>();
   String _email = '';
-  final SupabaseClient _supabaseClient = Modular.get<SupabaseClient>();
   late bool _loading;
   late StreamSubscription _loadingStream;
 
@@ -27,9 +25,7 @@ class _MedicaminaAuthPasswordWidget
   void initState() {
     super.initState();
     _loading = Modular.get<MedicaminaAuthAppBarLoadingState>().getLoading();
-    _loadingStream = Modular.get<MedicaminaAuthAppBarLoadingState>()
-        .getStream()
-        .listen((value) {
+    _loadingStream = Modular.get<MedicaminaAuthAppBarLoadingState>().getStream().listen((value) {
       setState(() {
         _loading = value;
       });
@@ -56,23 +52,12 @@ class _MedicaminaAuthPasswordWidget
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width > 800
-                                ? MediaQuery.of(context).size.width * 0.2
-                                : MediaQuery.of(context).size.width * 0.1,
-                            top: 24),
+                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.2 : MediaQuery.of(context).size.width * 0.1, top: 24),
                         child: Text(
                           "Reset password",
-                          style: Modular.get<MedicaminaThemeState>()
-                                  .getDarkMode()
-                              ? Theme.of(context)
-                                  .textTheme
-                                  .displayMedium
-                                  ?.merge(const TextStyle(color: Colors.white))
-                              : Theme.of(context)
-                                  .textTheme
-                                  .displayMedium
-                                  ?.merge(
+                          style: Modular.get<MedicaminaThemeState>().getDarkMode()
+                              ? Theme.of(context).textTheme.displayMedium?.merge(const TextStyle(color: Colors.white))
+                              : Theme.of(context).textTheme.displayMedium?.merge(
                                     const TextStyle(color: Colors.black87),
                                   ),
                         ),
@@ -82,16 +67,8 @@ class _MedicaminaAuthPasswordWidget
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width > 800
-                                ? MediaQuery.of(context).size.width * 0.205
-                                : MediaQuery.of(context).size.width * 0.115),
-                        child: Text(
-                            "Enter your e-mail address to get your account back",
-                            style: Theme.of(context)
-                                .textTheme
-                                .displaySmall
-                                ?.merge(const TextStyle(fontSize: 20))),
+                        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
+                        child: Text("Enter your e-mail address to get your account back", style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
                       ),
                     ),
                   ],
@@ -108,13 +85,7 @@ class _MedicaminaAuthPasswordWidget
                         const SizedBox(height: 24),
                         AutofillGroup(
                           child: Padding(
-                            padding: MediaQuery.of(context).size.width > 800
-                                ? EdgeInsets.only(
-                                    left: MediaQuery.of(context).size.width *
-                                        0.20,
-                                    right:
-                                        MediaQuery.of(context).size.width * 0.2)
-                                : const EdgeInsets.only(left: 24, right: 24),
+                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                             child: TextFormField(
                               autocorrect: false,
                               enableSuggestions: false,
@@ -134,9 +105,7 @@ class _MedicaminaAuthPasswordWidget
                                 if (value == null || value.isEmpty) {
                                   return 'Empty email';
                                 }
-                                bool emailValid = RegExp(
-                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                    .hasMatch(value);
+                                bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value);
                                 if (!emailValid) {
                                   return 'Invalid email';
                                 }
@@ -147,41 +116,40 @@ class _MedicaminaAuthPasswordWidget
                         ),
                         const SizedBox(height: 18),
                         Padding(
-                          padding: MediaQuery.of(context).size.width > 800
-                              ? EdgeInsets.only(
-                                  left:
-                                      MediaQuery.of(context).size.width * 0.20,
-                                  right:
-                                      MediaQuery.of(context).size.width * 0.2)
-                              : const EdgeInsets.only(left: 24, right: 24),
+                          padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                minimumSize:
-                                    Size(const Size.fromHeight(40).width, 42),
-                                elevation: 0),
+                            style: ElevatedButton.styleFrom(minimumSize: Size(const Size.fromHeight(40).width, 42), elevation: 0),
                             onPressed: _loading
                                 ? null
                                 : () async {
                                     if (_formKey.currentState!.validate()) {
-                                      Modular.get<
-                                              MedicaminaAuthAppBarLoadingState>()
-                                          .setLoading(true);
+                                      Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(true);
                                       try {
-                                        await _supabaseClient.auth
-                                            .resetPasswordForEmail(_email);
-                                      } on AuthException catch (err, _) {
-                                        // widget.snackBarError(err);
+                                        http.post(
+                                          Uri.https('medicamina.azurewebsites.net', 'auth/reset'),
+                                          headers: <String, String>{
+                                            'Content-Type': 'application/json; charset=UTF-8',
+                                          },
+                                          body: jsonEncode({'email': _email}),
+                                        ).then((response) {
+                                          Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
+                                          if (response.statusCode == 200) {
+                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                              content: Text(response.body),
+                                            ));
+                                          } else {
+                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.body)));
+                                          }
+                                        });
+                                      } catch (e, _) {
+                                        print(e);
+                                        Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
                                       }
-                                      Modular.get<
-                                              MedicaminaAuthAppBarLoadingState>()
-                                          .setLoading(false);
                                     }
                                   },
                             child: const Text(
                               'RESET',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0.75),
+                              style: TextStyle(fontWeight: FontWeight.w500, letterSpacing: 0.75),
                             ),
                           ),
                         ),

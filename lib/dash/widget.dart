@@ -1,7 +1,6 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MedicaminaDashWidget extends StatefulWidget {
   const MedicaminaDashWidget({Key? key}) : super(key: key);
@@ -11,32 +10,10 @@ class MedicaminaDashWidget extends StatefulWidget {
 }
 
 class _MedicaminaDashWidget extends State<MedicaminaDashWidget> {
-  final uris = [
-    '/dash/home',
-    '/dash/edicts',
-    '/dash/fitness',
-    '/dash/appointment',
-    '/dash/family',
-    '/dash/psychology',
-    '/dash/settings'
-  ];
+  final uris = ['/dash/home', '/dash/edicts', '/dash/fitness', '/dash/appointment', '/dash/family', '/dash/psychology', '/dash/settings'];
   late int _currentIndex = -1;
 
-  @override
-  void initState() {
-    super.initState();
-
-    Modular.to.addListener(() {
-      for (var i = 0; i < uris.length; i++) {
-        if (Modular.args.uri.toString().contains(uris[i])) {
-          setState(() {
-            _currentIndex = i;
-          });
-          break;
-        }
-      }
-    });
-
+  void setIndex() {
     for (var i = 0; i < uris.length; i++) {
       if (Modular.args.uri.toString().contains(uris[i])) {
         setState(() {
@@ -45,6 +22,14 @@ class _MedicaminaDashWidget extends State<MedicaminaDashWidget> {
         break;
       }
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    setIndex();
+    Modular.to.addListener(setIndex);
 
     if (Modular.args.uri.toString() == '/dash/') {
       setState(() {
@@ -111,6 +96,12 @@ class _MedicaminaDashWidget extends State<MedicaminaDashWidget> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    Modular.to.removeListener(setIndex);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -130,25 +121,31 @@ class _MedicaminaDashWidget extends State<MedicaminaDashWidget> {
               enableFeedback: true,
               currentIndex: _currentIndex <= 0 ? 0 : _currentIndex,
               items: const [
+                BottomNavigationBarItem(icon: Icon(CommunityMaterialIcons.human), label: 'You'),
                 BottomNavigationBarItem(
-                    icon: Icon(CommunityMaterialIcons.human), label: 'You'),
+                  icon: Icon(CommunityMaterialIcons.prescription),
+                  label: 'Edicts',
+                ),
                 BottomNavigationBarItem(
-                    icon: Icon(CommunityMaterialIcons.prescription),
-                    label: 'Edicts'),
+                  icon: Icon(CommunityMaterialIcons.heart_pulse),
+                  label: 'Fitness',
+                ),
                 BottomNavigationBarItem(
-                    icon: Icon(CommunityMaterialIcons.heart_pulse),
-                    label: 'Fitness'),
+                  icon: Icon(CommunityMaterialIcons.calendar_clock_outline),
+                  label: 'Appointment',
+                ),
                 BottomNavigationBarItem(
-                    icon: Icon(CommunityMaterialIcons.calendar_clock_outline),
-                    label: 'Appointment'),
+                  icon: Icon(CommunityMaterialIcons.file_tree_outline),
+                  label: 'Family',
+                ),
                 BottomNavigationBarItem(
-                    icon: Icon(CommunityMaterialIcons.file_tree_outline),
-                    label: 'Family'),
+                  icon: Icon(CommunityMaterialIcons.brain),
+                  label: 'Psychology',
+                ),
                 BottomNavigationBarItem(
-                    icon: Icon(CommunityMaterialIcons.brain),
-                    label: 'Psychology'),
-                BottomNavigationBarItem(
-                    icon: Icon(CommunityMaterialIcons.cog), label: 'Settings'),
+                  icon: Icon(CommunityMaterialIcons.cog),
+                  label: 'Settings',
+                ),
               ],
               onTap: (index) {
                 setState(() {

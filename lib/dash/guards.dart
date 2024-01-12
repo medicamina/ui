@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDashGuard extends RouteGuard {
   MedicaminaDashGuard() : super(redirectTo: '/auth/login');
@@ -7,6 +7,6 @@ class MedicaminaDashGuard extends RouteGuard {
   @override
   bool canActivate(String path, ModularRoute route) {
     //return true;
-    return Modular.get<SupabaseClient>().auth.currentUser != null;
+    return Modular.get<MedicaminaUserState>().getToken() != null;
   }
 }

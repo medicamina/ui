@@ -7,7 +7,7 @@ class MedicaminaDashSettingsBillingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (1000 > MediaQuery.of(context).size.width) {
+    if (1024 > MediaQuery.of(context).size.width) {
       return const MedicaminaDashSettingsBillingMobileWidget();
     }
     return const MedicaminaDashSettingsBillingDesktopWidget();

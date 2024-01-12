@@ -37,18 +37,8 @@ class _MedicaminaDashAppointmentBookingMobileWidgetState
                 child: TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Speciality, practice or physician',
+                    hintText: 'Speciality, practice, physician, suburb, postcode or regio',
                     prefixIcon: Icon(Icons.search),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(6),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Suburb, postcode or region',
-                    prefixIcon: Icon(Icons.location_pin),
                   ),
                 ),
               ),

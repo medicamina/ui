@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDashSettingsDesktopWidget extends StatefulWidget {
   const MedicaminaDashSettingsDesktopWidget({Key? key}) : super(key: key);
@@ -128,6 +128,14 @@ class _MedicaminaDashSettingsDesktopWidgetState extends State<MedicaminaDashSett
                             },
                           ),
                           ListTile(
+                            title: const Text('Switch to Doctor View'),
+                            shape: getActiveBorderStyle('/dash/settings/doctor'),
+                            enabled: _uri != '/dash/settings/doctor',
+                            onTap: () {
+                              Modular.to.navigate('/clinic/appointments');
+                            },
+                          ),
+                          ListTile(
                             tileColor: Colors.red.shade300.withAlpha(20),
                             title: const Text(
                               'Logout',
@@ -136,9 +144,8 @@ class _MedicaminaDashSettingsDesktopWidgetState extends State<MedicaminaDashSett
                               ),
                             ),
                             onTap: () async {
-                              Modular.get<SupabaseClient>().auth.signOut().then((value) {
-                                Modular.to.navigate('/');
-                              });
+                              Modular.get<MedicaminaUserState>().logout();
+                              Modular.to.navigate('/');
                             },
                           ),
                           const Spacer(),
@@ -223,40 +230,3 @@ class _MedicaminaDashSettingsDesktopWidgetState extends State<MedicaminaDashSett
     );
   }
 }
-
-// class MedicaminaDashSettingsDesktopWidget extends StatefulWidget {
-//   const MedicaminaDashSettingsDesktopWidget({Key? key}) : super(key: key);
-
-//   @override
-//   State<MedicaminaDashSettingsDesktopWidget> createState() => _MedicaminaDashSettingsDesktopWidgetState();
-// }
-
-// class _MedicaminaDashSettingsDesktopWidgetState extends State<MedicaminaDashSettingsDesktopWidget> {
-//   // var email = Modular.get<SupabaseClient>().auth.currentUser!.email;
-
-  
-//   @override
-//   Widget build(BuildContext context) {
-//     throw Text('hello');
-//   }
-//   // late StreamSubscription _loadingStream;
-
-
-
-//   // @override
-//   // void dispose() {
-//   //   super.dispose();
-//   //   Modular.to.removeListener(setUri);
-//   //   _loadingStream.cancel();
-//   // }
-
-
-
-//   // @override
-//   // Widget build(BuildContext context) {
-//   //       if (Modular.args.uri.toString() == '/dash/settings/') {
-//   //     Modular.to.navigate('/dash/settings/account');
-//   //   }
-
-
-// }

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaNotFoundWidget extends StatelessWidget {
   const MedicaminaNotFoundWidget({Key? key}) : super(key: key);
@@ -41,10 +41,8 @@ class MedicaminaNotFoundWidget extends StatelessWidget {
                             ),
                           ),
                           Visibility(
-                            visible: Modular.get<SupabaseClient>()
-                                    .auth
-                                    .currentUser ==
-                                null,
+                            visible: Modular.get<MedicaminaUserState>()
+                                    .getToken() == null,
                             child: Column(
                               children: [
                                 ListTile(
@@ -82,9 +80,8 @@ class MedicaminaNotFoundWidget extends StatelessWidget {
                             ),
                           ),
                           Visibility(
-                            visible: Modular.get<SupabaseClient>()
-                                    .auth
-                                    .currentUser !=
+                            visible: Modular.get<MedicaminaUserState>()
+                                    .getToken() !=
                                 null,
                             child: Column(
                               children: [
@@ -108,7 +105,6 @@ class MedicaminaNotFoundWidget extends StatelessWidget {
                 },
                 icon: const Icon(Icons.menu),
               ),
-              // visible: Modular.get<SupabaseClient>().auth.currentSession == null,
             ),
           ],
         ),

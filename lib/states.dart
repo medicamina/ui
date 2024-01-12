@@ -34,3 +34,22 @@ class MedicaminaThemeState {
     return _darkMode;
   }
 }
+
+class MedicaminaUserState {
+  static String? jwtToken;
+
+  MedicaminaUserState();
+
+  void login(String token) {
+    jwtToken = token;
+  }
+
+  void logout() {
+    jwtToken = null;
+  }
+
+  String? getToken() {
+    return jwtToken;
+  }
+}
+

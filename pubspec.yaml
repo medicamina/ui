@@ -20,7 +20,6 @@ dependencies:
   syncfusion_flutter_maps: ^21.1.39
   event: ^2.1.2
   badges: ^3.1.1
-  supabase_flutter: ^1.2.2
   google_fonts: ^4.0.3
   flutter_modular: ^5.0.3
   date_time_picker:
@@ -38,6 +37,8 @@ dependencies:
   calendar_timeline: ^1.1.2
   device_preview: ^1.1.0
   random_date: ^0.0.7
+  calendar_view: ^1.0.4
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:

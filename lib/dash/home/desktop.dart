@@ -10,8 +10,7 @@ class MedicaminaDashHomeDesktopWidget extends StatelessWidget {
   const MedicaminaDashHomeDesktopWidget({Key? key}) : super(key: key);
 
   double? getCardHeight(BuildContext context) {
-    if (MediaQuery.of(context).size.width >
-        MediaQuery.of(context).size.height) {
+    if (MediaQuery.of(context).size.width > MediaQuery.of(context).size.height) {
       return 440;
     }
 
@@ -39,17 +38,15 @@ class MedicaminaDashHomeDesktopWidget extends StatelessWidget {
           children: [
             SizedBox(
               height: getCardHeight(context),
-              child: Row(
+              child: const Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: const [
+                children: [
                   Expanded(child: MedicaminaDashHomeMapWidget()),
                   Expanded(child: MedicaminaDashHomePersonalWidget()),
                 ],
               ),
             ),
-            
-                MedicaminaDashHomeTableWidget(),
-            
+            MedicaminaDashHomeTableWidget(),
             const SizedBox(height: 12),
           ],
         ),

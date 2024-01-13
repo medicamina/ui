@@ -40,7 +40,7 @@ class MedicaminaDashHomeMobileWidget extends StatelessWidget {
             SizedBox(
               height: 440,
               child: Row(
-                children: const [
+                children: [
                   Expanded(child: MedicaminaDashHomeMapWidget())
                 ],
               ),
@@ -48,7 +48,7 @@ class MedicaminaDashHomeMobileWidget extends StatelessWidget {
             SizedBox(
               height: getCardHeight(context),
               child: Row(
-                children: const [
+                children: [
                   Expanded(child: MedicaminaDashHomePersonalWidget())
                 ],
               ),

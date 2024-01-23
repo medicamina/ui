@@ -990,6 +990,16 @@ class _MedicaminaDashSettingsWidgetState extends State<MedicaminaDashSettingsWid
             SettingsTile.navigation(
               title: Text('Clinics'),
               leading: Icon(CupertinoIcons.house_alt),
+              onPressed: (context) {},
+            ),
+            SettingsTile.navigation(
+              title: Text('Switch mode'),
+              leading: Icon(CupertinoIcons.arrow_2_circlepath ),
+              onPressed: (context) {},
+            ),
+            SettingsTile.navigation(
+              title: Text('Billing'),
+              leading: Icon(CupertinoIcons.money_dollar),
               description: Text('Doctors settings'),
               onPressed: (context) {},
             ),

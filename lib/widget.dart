@@ -44,6 +44,9 @@ class _MedicaminaAppWidgetState extends State<MedicaminaAppWidget> {
               color: Colors.white,
             ),
           ),
+          textTheme: GoogleFonts.robotoTextTheme(
+            ThemeData(brightness: Brightness.light).textTheme, 
+          ), 
           // textTheme: GoogleFonts.robotoTextTheme(),
         ),
         darkTheme: ThemeData.dark(useMaterial3: false).copyWith(
@@ -57,7 +60,9 @@ class _MedicaminaAppWidgetState extends State<MedicaminaAppWidget> {
               color: Colors.white,
             ),
           ),
-          // textTheme: GoogleFonts.robotoTextTheme(),
+          textTheme: GoogleFonts.robotoTextTheme(
+            ThemeData(brightness: Brightness.dark).textTheme,
+          ),
         ),
         themeMode: _theme,
         routeInformationParser: Modular.routeInformationParser,

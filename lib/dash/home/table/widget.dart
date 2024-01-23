@@ -168,7 +168,7 @@ class _MedicaminaDashHomeTableWidget
                   child: Theme(
                     data: Modular.get<MedicaminaThemeState>().getDarkMode()
                         ? ThemeData.dark().copyWith(
-                            // textTheme: GoogleFonts.robotoTextTheme(),
+                            textTheme: GoogleFonts.robotoTextTheme(ThemeData(brightness: Brightness.dark).textTheme,),
                             cardTheme: CardTheme(
                               // color: Color.fromARGB(255, 52, 52, 52),
                               color: Color.fromARGB(255, 60, 60, 60),

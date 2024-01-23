@@ -117,7 +117,9 @@ class __EScriptsCarouselItem extends State<_EScriptsCarouselItem> {
             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               QrImageView(
-                gapless: false,
+                eyeStyle: Modular.get<MedicaminaThemeState>().getDarkMode() ? const QrEyeStyle(eyeShape: QrEyeShape.square, color: Colors.white) : const QrEyeStyle(eyeShape: QrEyeShape.square, color: Colors.black),
+                dataModuleStyle: Modular.get<MedicaminaThemeState>().getDarkMode() ? const QrDataModuleStyle(dataModuleShape: QrDataModuleShape.square, color: Colors.white) : const QrDataModuleStyle(dataModuleShape: QrDataModuleShape.square, color: Colors.black),
+                gapless: true,
                 data:
                     'https://www.digitalhealth.gov.au/initiatives-and-programs/electronic-prescriptions',
                 version: QrVersions.auto,

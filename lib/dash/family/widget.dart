@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:graphview/GraphView.dart';
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDashFamilyWidget extends StatefulWidget {
   @override
@@ -91,7 +93,7 @@ class _MedicaminaDashFamilyWidget extends State<MedicaminaDashFamilyWidget> {
                 builder: (Node node) {
                   // I can decide what widget should be shown here based on the id
                   var a = node.key?.value as int;
-                  return rectangleWidget(a);
+                  return rectangleWidget(a, context);
                 },
                 // ),
               ),
@@ -122,7 +124,7 @@ class _MedicaminaDashFamilyWidget extends State<MedicaminaDashFamilyWidget> {
   }
 }
 
-Widget rectangleWidget(int a) {
+Widget rectangleWidget(int a, BuildContext context) {
   String getName(int b) {
     if (a == 1) {
       return 'Jake Walklate';
@@ -205,7 +207,7 @@ Widget rectangleWidget(int a) {
         borderRadius: BorderRadius.circular(4),
         boxShadow: [
           BoxShadow(
-              color: const Color.fromRGBO(187, 222, 251, 1), spreadRadius: 1),
+              color: Modular.get<MedicaminaThemeState>().getDarkMode() ?  Theme.of(context).primaryColor : const Color.fromRGBO(187, 222, 251, 1), spreadRadius: 1),
         ],
       ),
       child: Column(

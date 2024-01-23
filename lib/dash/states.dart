@@ -1,7 +1,13 @@
 // ignore_for_file: prefer_final_fields
 
+import 'dart:convert';
+
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:event/event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:http/http.dart' as http;
+import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDrug {
   String _name = '';
@@ -41,14 +47,10 @@ class MedicaminaTodaysDrugs {
   final _drugs = <MedicaminaDrug>[];
 
   MedicaminaTodaysDrugs() {
-    _drugs.add(
-        MedicaminaDrug('Aspirin', '8 AM', '2mg', CommunityMaterialIcons.pill));
-    _drugs.add(MedicaminaDrug(
-        'Insulin', '11 PM', '1mg', CommunityMaterialIcons.needle));
-    _drugs.add(MedicaminaDrug(
-        'Metoprolol', '10 AM', '3mg', CommunityMaterialIcons.pill));
-    _drugs.add(MedicaminaDrug(
-        'Reitnol', '8 AM', '0.5mg', CommunityMaterialIcons.lotion_outline));
+    _drugs.add(MedicaminaDrug('Aspirin', '8 AM', '2mg', CommunityMaterialIcons.pill));
+    _drugs.add(MedicaminaDrug('Insulin', '11 PM', '1mg', CommunityMaterialIcons.needle));
+    _drugs.add(MedicaminaDrug('Metoprolol', '10 AM', '3mg', CommunityMaterialIcons.pill));
+    _drugs.add(MedicaminaDrug('Reitnol', '8 AM', '0.5mg', CommunityMaterialIcons.lotion_outline));
 
     // _drugs.add(MedicaminaDrug('Adderall', '8 AM', '0.5mg', CommunityMaterialIcons.pill));
   }
@@ -66,4 +68,63 @@ class MedicaminaScript {
 
 class MedicaminaScripts {
   var _scripts = <MedicaminaScript>[];
+}
+
+class HttpError implements Exception {
+  final String msg;
+  const HttpError(this.msg);
+  String toString() => 'FooException: $msg';
+}
+
+class MedicmainaPersonalDetails {
+  String? firstName;
+  String? middleName;
+  String? lastName;
+  DateTime? dob;
+  String? gender;
+  String? bloodType;
+  double? height;
+  double? weight;
+  Event emitter = Event();
+  // static bool lock = false;
+
+  MedicmainaPersonalDetails();
+
+  bool isEmpty() {
+    if (firstName?.isEmpty ?? true) {
+      return true;
+    }
+    if (lastName?.isEmpty ?? true) {
+      return true;
+    }
+    return false;
+  }
+
+  void getData() {
+    http.get(
+      Uri.https('medicamina.azurewebsites.net', 'dash/home/personal'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
+      },
+    ).then((response) {
+      if (response.statusCode == 200) {
+        if (jsonDecode(response.body)['firstName'] == null) {
+          emitter.broadcast();
+          return;
+        }
+        firstName = jsonDecode(response.body)['firstName'];
+        middleName = jsonDecode(response.body)['middleName'];
+        lastName = jsonDecode(response.body)['lastName'];
+        gender = jsonDecode(response.body)['gender'];
+        dob = DateTime.parse(jsonDecode(response.body)['dob']);
+        bloodType = jsonDecode(response.body)['bloodType'];
+        height = jsonDecode(response.body)['height'].toDouble();
+        weight = jsonDecode(response.body)['weight'].toDouble();
+        emitter.broadcast();
+      } else {
+        throw HttpError(response.body);
+      }
+    });
+  }
 }

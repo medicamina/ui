@@ -114,7 +114,7 @@ class _MedicaminaDashWidget extends State<MedicaminaDashWidget> {
         preferredSize: const Size.fromHeight(kToolbarHeight - 6),
       ),
       body: const RouterOutlet(),
-      bottomNavigationBar: _currentIndex == -1
+      bottomNavigationBar: _currentIndex == -1 || Modular.args.uri.toString() == '/dash/home/personal'
           ? null
           : BottomNavigationBar(
               type: BottomNavigationBarType.fixed,

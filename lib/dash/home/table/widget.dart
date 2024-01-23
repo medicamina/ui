@@ -168,12 +168,14 @@ class _MedicaminaDashHomeTableWidget
                   child: Theme(
                     data: Modular.get<MedicaminaThemeState>().getDarkMode()
                         ? ThemeData.dark().copyWith(
-                            textTheme: GoogleFonts.robotoTextTheme(),
+                            // textTheme: GoogleFonts.robotoTextTheme(),
                             cardTheme: CardTheme(
+                              // color: Color.fromARGB(255, 52, 52, 52),
+                              color: Color.fromARGB(255, 60, 60, 60),
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 side: const BorderSide(
-                                  color: Colors.white12,
+                                  color: Color.fromARGB(255, 110, 110, 110),
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(4),
@@ -236,7 +238,7 @@ class _MedicaminaDashHomeTableWidget
                           label: Expanded(
                             child: Text(
                               'Condition',
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Modular.get<MedicaminaThemeState>().getDarkMode() ? null : TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -246,7 +248,7 @@ class _MedicaminaDashHomeTableWidget
                             child: Center(
                               child: Text(
                                 'Risk',
-                                style: Theme.of(context).textTheme.titleMedium,
+                                style: Modular.get<MedicaminaThemeState>().getDarkMode() ? null : TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),

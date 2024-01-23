@@ -7,7 +7,8 @@ import 'package:medicamina_ui/auth/states.dart';
 import 'package:http/http.dart' as http;
 
 class MedicaminaAuthLoginWidget extends StatefulWidget {
-  const MedicaminaAuthLoginWidget({Key? key}) : super(key: key);
+  const MedicaminaAuthLoginWidget({Key? key, required this.doctorRoute}) : super(key: key);
+  final bool doctorRoute;
 
   @override
   State<MedicaminaAuthLoginWidget> createState() => _MedicaminaAuthLoginWidget();
@@ -149,7 +150,11 @@ class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
                                             Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
                                             if (response.statusCode == 200) {
                                               Modular.get<MedicaminaUserState>().login(jsonDecode(response.body)['auth']);
-                                              Modular.to.navigate('/dash/home');
+                                              if (widget.doctorRoute) {
+                                                Modular.to.navigate('/dash/settings/billing');
+                                              } else {
+                                                Modular.to.navigate('/dash/home');
+                                              }
                                             } else {
                                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.body)));
                                             }

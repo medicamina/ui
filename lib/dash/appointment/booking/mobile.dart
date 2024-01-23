@@ -29,7 +29,6 @@ class _MedicaminaDashAppointmentBookingMobileWidgetState
                   style: Theme.of(context)
                       .textTheme
                       .displaySmall
-                      ?.apply(color: Colors.black.withAlpha(175)),
                 ),
               ),
               Padding(

@@ -135,6 +135,7 @@ class _MedicaminaDashSettingsDesktopWidgetState extends State<MedicaminaDashSett
                               Modular.to.navigate('/clinic/appointments');
                             },
                           ),
+                          const Spacer(),
                           ListTile(
                             tileColor: Colors.red.shade300.withAlpha(20),
                             title: const Text(
@@ -148,69 +149,28 @@ class _MedicaminaDashSettingsDesktopWidgetState extends State<MedicaminaDashSett
                               Modular.to.navigate('/');
                             },
                           ),
-                          const Spacer(),
+                          
                           Padding(
-                            padding: const EdgeInsets.all(12),
+                            padding: const EdgeInsets.all(0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                TextButton(
-                                  child: const Text('CANCEL'),
-                                  style: TextButton.styleFrom(
-                                    foregroundColor: Colors.red,
-                                    backgroundColor: Colors.red.shade300.withAlpha(20),
-                                    padding: const EdgeInsets.only(right: 14, left: 14),
-                                  ),
-                                  onPressed: _loading
-                                      ? null
-                                      : () {
-                                          showDialog<String>(
-                                            context: context,
-                                            builder: (BuildContext _context) => AlertDialog(
-                                              title: const Text(
-                                                'Discard changes?',
-                                                style: TextStyle(fontWeight: FontWeight.w600),
-                                              ),
-                                              content: const Text('If you chose to continue all changes will be reverted to the prevous configuration.'),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  onPressed: () => Navigator.pop(_context, 'BACK'),
-                                                  child: const Text('BACK'),
-                                                ),
-                                                TextButton(
-                                                  style: TextButton.styleFrom(foregroundColor: Theme.of(context).buttonTheme.colorScheme?.surface),
-                                                  onPressed: () {
-                                                    Navigator.pop(_context, 'CONTINUE');
-                                                    // Beamer.of(context).beamToNamed(
-                                                    //   '/account',
-                                                    //   transitionDelegate: const NoAnimationTransitionDelegate(),
-                                                    // );
-                                                  },
-                                                  child: const Text(
-                                                    'CONTINUE',
-                                                    style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                ),
+
                                 const SizedBox(height: 4),
-                                ElevatedButton(
-                                  child: const Text('SUBMIT'),
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 0,
-                                    textStyle: const TextStyle(fontWeight: FontWeight.w600, letterSpacing: 1),
-                                    padding: const EdgeInsets.only(right: 18, left: 18),
-                                  ),
-                                  onPressed: () => null,
-                                  // onPressed: Modular.get<MedicaminaAppBarLoadingState>().getLoading()
-                                  //     ? null
-                                  //     : () {
-                                  //         Modular.get<MedicaminaAppBarLoadingState>().setLoading(true);
-                                  //       },
-                                ),
+                                // ElevatedButton(
+                                //   child: const Text('SUBMIT'),
+                                //   style: ElevatedButton.styleFrom(
+                                //     elevation: 0,
+                                //     textStyle: const TextStyle(fontWeight: FontWeight.w600, letterSpacing: 1),
+                                //     padding: const EdgeInsets.only(right: 18, left: 18),
+                                //   ),
+                                //   onPressed: () => null,
+                                //   // onPressed: Modular.get<MedicaminaAppBarLoadingState>().getLoading()
+                                //   //     ? null
+                                //   //     : () {
+                                //   //         Modular.get<MedicaminaAppBarLoadingState>().setLoading(true);
+                                //   //       },
+                                // ),
                                 const Padding(padding: EdgeInsets.only(right: 14)),
                               ],
                             ),

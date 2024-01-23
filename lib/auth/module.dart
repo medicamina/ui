@@ -20,19 +20,32 @@ class MedicaminaAuthModule extends Module {
   @override
   List<ModularRoute> get routes {
     return [
-      ChildRoute('/',
-          guards: [MedicaminaAuthGuard()],
-          child: (context, args) => const MedicaminaAuthWidget(),
-          children: [
-            ChildRoute('/login',
-                child: (context, args) => const MedicaminaAuthLoginWidget()),
-            ChildRoute('/register',
-                child: (context, args) => const MedicaminaAuthRegisterWidget()),
-            ChildRoute('/password',
-                child: (context, args) => const MedicaminaAuthPasswordWidget()),
-            WildcardRoute(
-                child: (context, args) => const MedicaminaAuthNotFoundWidget()),
-          ]),
+      ChildRoute(
+        '/',
+        guards: [MedicaminaAuthGuard()],
+        child: (context, args) => const MedicaminaAuthWidget(),
+        children: [
+          ChildRoute(
+            '/login',
+            child: (context, args) => const MedicaminaAuthLoginWidget(doctorRoute: false),
+          ),
+          ChildRoute(
+            '/upgrade',
+            child: (context, args) => const MedicaminaAuthLoginWidget(doctorRoute: true),
+          ),
+          ChildRoute(
+            '/register',
+            child: (context, args) => const MedicaminaAuthRegisterWidget(),
+          ),
+          ChildRoute(
+            '/password',
+            child: (context, args) => const MedicaminaAuthPasswordWidget(),
+          ),
+          WildcardRoute(
+            child: (context, args) => const MedicaminaAuthNotFoundWidget(),
+          ),
+        ],
+      ),
       RedirectRoute('/auth/login/', to: '/auth/login'),
     ];
   }

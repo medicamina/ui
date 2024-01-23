@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 // Medicamina
 import 'package:medicamina_ui/auth/states.dart';
@@ -20,8 +21,12 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
   String _email = '';
   String _password = '';
   String _passwordVerify = '';
+  String _phoneNumber = '';
   late bool _loading;
   late StreamSubscription _loadingStream;
+
+  String initialCountry = 'AU';
+  final TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
@@ -70,7 +75,10 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
                         padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
-                        child: Text('Fill out the form to create a new account', style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),
+                        child: Text(
+                          'Fill out the form to create a new account',
+                          style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20)),
+                        ),
                       ),
                     ),
                   ],
@@ -108,6 +116,24 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                                   return 'Invalid email';
                                 }
                                 return null;
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Padding(
+                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                            child: IntlPhoneField(
+                              decoration: InputDecoration(
+                                labelText: 'Phone Number',
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(),
+                                ),
+                              ),
+                              initialCountryCode: 'AU',
+                              onChanged: (phone) {
+                                setState(() {
+                                  _phoneNumber = phone.completeNumber;
+                                });
                               },
                             ),
                           ),
@@ -183,10 +209,10 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                                             headers: <String, String>{
                                               'Content-Type': 'application/json; charset=UTF-8',
                                             },
-                                            body: jsonEncode({'email': _email, 'password': _password}),
+                                            body: jsonEncode({'email': _email, 'password': _password, 'phoneNumber': _phoneNumber}),
                                           )
                                               .then((response) {
-                                                Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
+                                            Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
                                             if (response.statusCode == 200) {
                                               Modular.get<MedicaminaUserState>().login(jsonDecode(response.body)['auth']);
                                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(

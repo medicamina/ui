@@ -275,7 +275,7 @@ Widget doctor(BuildContext context, double width) {
             children: <Widget>[
               ElevatedButton(
                 onPressed: () {
-                  Modular.to.navigate('/dash/settings/upgrade');
+                  Modular.to.navigate('/auth/upgrade');
                 },
                 child: Text(
                   'UPGRADE',

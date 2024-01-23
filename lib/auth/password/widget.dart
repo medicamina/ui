@@ -65,7 +65,7 @@ class _MedicaminaAuthPasswordWidget extends State<MedicaminaAuthPasswordWidget> 
                     ),
                     const SizedBox(height: 6),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery.of(context).size.width - MediaQuery.of(context).size.width * 0.10,
                       child: Padding(
                         padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > 800 ? MediaQuery.of(context).size.width * 0.205 : MediaQuery.of(context).size.width * 0.115),
                         child: Text("Enter your e-mail address to get your account back", style: Theme.of(context).textTheme.displaySmall?.merge(const TextStyle(fontSize: 20))),

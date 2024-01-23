@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina_ui/clinic/appointments/widget.dart';
 import 'package:medicamina_ui/clinic/guards.dart';
 import 'package:medicamina_ui/clinic/not-found/widget.dart';
+import 'package:medicamina_ui/clinic/start/widget.dart';
 import 'package:medicamina_ui/clinic/widget.dart';
 
 // Medicamina
@@ -29,10 +30,12 @@ class MedicaminaClinicModule extends Module {
             RedirectRoute('/prescribe/', to: '/prescribe'),
             RedirectRoute('/settings/', to: '/settings'),
 
+
             ChildRoute(
               '/appointments',
               child: (context, args) => const MedicaminaClinicAppointmentsWidget(),
             ),
+            ChildRoute('/start', child: ((context, args) => const MedicaminaClinicStartWidget())),
           
             WildcardRoute(
               child: (context, args) => const MedicaminaClinicNotFoundWidget(),

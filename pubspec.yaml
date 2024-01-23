@@ -39,6 +39,9 @@ dependencies:
   random_date: ^0.0.7
   calendar_view: ^1.0.4
   http: ^0.13.5
+  dropdown_button2: ^2.3.9
+  intl_phone_field: ^3.2.0
+  settings_ui: ^2.0.2
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,7 @@ import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
+import 'package:medicamina_ui/dash/states.dart';
 
 // Medicamina
 import 'package:medicamina_ui/states.dart';
@@ -19,23 +20,42 @@ class _MedicaminaDashHomePersonalWidget extends State<MedicaminaDashHomePersonal
   @override
   void initState() {
     super.initState();
-    http.get(
-      Uri.https('medicamina.azurewebsites.net', 'dash/home/personal'),
-      headers: <String, String>{'Content-Type': 'application/json; charset=UTF-8', 'Authorization': Modular.get<MedicaminaUserState>().getToken() as String},
-    ).then((response) {
-      if (response.statusCode == 200) {
-        firstName = jsonDecode(response.body)['firstName'];
-        lastName = jsonDecode(response.body)['lastName'];
-        gender = jsonDecode(response.body)['gender'];
-        print('Check DOB');
-        dob = DateTime.parse(jsonDecode(response.body)['dob']);
-        bloodType = jsonDecode(response.body)['bloodType'];
-        height = jsonDecode(response.body)['height'];
-        weight = jsonDecode(response.body)['weight'];
+    Modular.get<MedicmainaPersonalDetails>().emitter.subscribe((args) {
+      if (!Modular.get<MedicmainaPersonalDetails>().isEmpty()) {
+        updateData();
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.body)));
+        Modular.to.navigate('/dash/home/personal');
       }
     });
+
+    try {
+      if (Modular.get<MedicmainaPersonalDetails>().isEmpty()) {
+        Modular.get<MedicmainaPersonalDetails>().getData();
+      } else {
+        updateData();
+      }
+    } on HttpError catch (err) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.msg)));
+    }
+  }
+
+  void updateData() {
+    setState(() {
+      firstName = Modular.get<MedicmainaPersonalDetails>().firstName;
+      middleName = Modular.get<MedicmainaPersonalDetails>().middleName;
+      lastName = Modular.get<MedicmainaPersonalDetails>().lastName;
+      gender = Modular.get<MedicmainaPersonalDetails>().gender;
+      dob = Modular.get<MedicmainaPersonalDetails>().dob;
+      bloodType = Modular.get<MedicmainaPersonalDetails>().bloodType;
+      height = Modular.get<MedicmainaPersonalDetails>().height as double;
+      weight = Modular.get<MedicmainaPersonalDetails>().weight as double;
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    Modular.get<MedicmainaPersonalDetails>().emitter.unsubscribeAll();
   }
 
   String getHeight(double height) {
@@ -50,7 +70,53 @@ class _MedicaminaDashHomePersonalWidget extends State<MedicaminaDashHomePersonal
     return '${pounds.round()}lbs [${weight.round()}kg]';
   }
 
+  String? getBloodType(String? bloodType) {
+    if (bloodType?.isEmpty ?? true) {
+      return 'Unknown';
+    }
+    return bloodType;
+  }
+
+  String? getMiddleName(String? middleName) {
+    if (middleName?.isEmpty ?? true) {
+      return '';
+    }
+    return '$middleName ';
+  }
+
+  String getMonth(int? month) {
+    switch (month) {
+      case 1:
+        return 'Jan';
+      case 2:
+        return 'Feb';
+      case 3:
+        return 'Mar';
+      case 4:
+        return 'Apr';
+      case 5:
+        return 'May';
+      case 6:
+        return 'Jun';
+      case 7:
+        return 'Jul';
+      case 8:
+        return 'Aug';
+      case 9:
+        return 'Sep';
+      case 10:
+        return 'Oct';
+      case 11:
+        return 'Nov';
+      case 12:
+        return 'Dec';
+      default:
+        return '';
+    }
+  }
+
   String? firstName;
+  String? middleName;
   String? lastName;
   String? gender;
   DateTime? dob;
@@ -80,14 +146,16 @@ class _MedicaminaDashHomePersonalWidget extends State<MedicaminaDashHomePersonal
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
               ),
               elevation: 0,
-              child: Column(
+              child: const Column(
                 children: [
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                          child: CircularProgressIndicator(),
+                          child: CircularProgressIndicator(
+                            color: Colors.grey,
+                          ),
                         ),
                       ],
                     ),
@@ -127,32 +195,32 @@ class _MedicaminaDashHomePersonalWidget extends State<MedicaminaDashHomePersonal
                       ListTile(
                         leading: const Icon(Icons.person_outline),
                         title: const Text('Name'),
-                        subtitle: Text('$firstName $lastName'),
+                        subtitle: Text('$firstName ${getMiddleName(middleName)}$lastName', style: TextStyle(color: const Color.fromARGB(255, 132, 132, 132))),
                       ),
                       ListTile(
                         leading: const Icon(CommunityMaterialIcons.gender_male_female),
                         title: const Text('Gender'),
-                        subtitle: Text('$gender'),
+                        subtitle: Text('$gender', style: TextStyle(color: const Color.fromARGB(255, 132, 132, 132))),
                       ),
                       ListTile(
                         leading: const Icon(Icons.cake),
                         title: const Text('Birthdate'),
-                        subtitle: Text('${dob?.day} ${dob?.month} ${dob?.year}'),
+                        subtitle: Text('${dob?.day} ${getMonth(dob?.month)} ${dob?.year}', style: TextStyle(color: const Color.fromARGB(255, 132, 132, 132))),
                       ),
                       ListTile(
                         leading: const Icon(Icons.bloodtype),
                         title: const Text('Blood type'),
-                        subtitle: Text('$bloodType'),
+                        subtitle: Text(getBloodType(bloodType) as String, style: TextStyle(color: const Color.fromARGB(255, 132, 132, 132))),
                       ),
                       ListTile(
                         leading: const Icon(Icons.height),
                         title: const Text('Height'),
-                        subtitle: Text(getHeight(height)),
+                        subtitle: Text(getHeight(height), style: TextStyle(color: const Color.fromARGB(255, 132, 132, 132))),
                       ),
                       ListTile(
                         leading: const Icon(Icons.scale),
                         title: const Text('Weight'),
-                        subtitle: Text(getWeight(weight)),
+                        subtitle: Text(getWeight(weight), style: TextStyle(color: const Color.fromARGB(255, 132, 132, 132))),
                       ),
                     ],
                   ),

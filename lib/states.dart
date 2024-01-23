@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:event/event.dart';
 
 class MedicaminaThemeState {
   static late bool _darkMode;
+  var changedState = Event();
 
   MedicaminaThemeState() {
     setDarkModeFromDeviceBrightness();

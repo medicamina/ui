@@ -29,11 +29,7 @@ class _MedicaminaDashHomePersonalWidget extends State<MedicaminaDashHomePersonal
     });
 
     try {
-      if (Modular.get<MedicmainaPersonalDetails>().isEmpty()) {
-        Modular.get<MedicmainaPersonalDetails>().getData();
-      } else {
-        updateData();
-      }
+      Modular.get<MedicmainaPersonalDetails>().getData();
     } on HttpError catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.msg)));
     }

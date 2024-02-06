@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
@@ -24,6 +26,7 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
   String _phoneNumber = '';
   late bool _loading;
   late StreamSubscription _loadingStream;
+  final dio = Dio();
 
   String initialCountry = 'AU';
   final TextEditingController controller = TextEditingController();
@@ -120,24 +123,24 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                             ),
                           ),
                           const SizedBox(height: 12),
-                          Padding(
-                            padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
-                            child: IntlPhoneField(
-                              decoration: InputDecoration(
-                                labelText: 'Phone Number',
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(),
-                                ),
-                              ),
-                              initialCountryCode: 'AU',
-                              onChanged: (phone) {
-                                setState(() {
-                                  _phoneNumber = phone.completeNumber;
-                                });
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 12),
+                          // Padding(
+                          //   padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
+                          //   child: IntlPhoneField(
+                          //     decoration: InputDecoration(
+                          //       labelText: 'Phone Number',
+                          //       border: OutlineInputBorder(
+                          //         borderSide: BorderSide(),
+                          //       ),
+                          //     ),
+                          //     initialCountryCode: 'AU',
+                          //     onChanged: (phone) {
+                          //       setState(() {
+                          //         _phoneNumber = phone.completeNumber;
+                          //       });
+                          //     },
+                          //   ),
+                          // ),
+                          // const SizedBox(height: 12),
                           Padding(
                             padding: MediaQuery.of(context).size.width > 800 ? EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.20, right: MediaQuery.of(context).size.width * 0.2) : const EdgeInsets.only(left: 24, right: 24),
                             child: TextFormField(
@@ -202,30 +205,28 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                                   : () async {
                                       if (_formKey.currentState!.validate()) {
                                         Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(true);
-                                        try {
-                                          http
-                                              .post(
-                                            Uri.https('medicamina.azurewebsites.net', 'auth/register'),
-                                            headers: <String, String>{
-                                              'Content-Type': 'application/json; charset=UTF-8',
+                                        const url = kReleaseMode ? 'https://medicamina.azurewebsites.net/auth/register' : 'http://localhost:8080/auth/register';
+                                        var response = await dio.post(
+                                          url,
+                                          options: Options(
+                                            headers: {
+                                              'Content-type': 'application/json; charset=utf-8',
                                             },
-                                            body: jsonEncode({'email': _email, 'password': _password, 'phoneNumber': _phoneNumber}),
-                                          )
-                                              .then((response) {
-                                            Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
-                                            if (response.statusCode == 200) {
-                                              Modular.get<MedicaminaUserState>().login(jsonDecode(response.body)['auth']);
-                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                                content: Text(response.body),
-                                              ));
-                                              Modular.to.navigate('/dash/home');
-                                            } else {
-                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.body)));
-                                            }
-                                          });
-                                        } catch (e, _) {
-                                          print(e);
-                                          Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
+                                            validateStatus: (status) {
+                                              return true;
+                                            },
+                                          ),
+                                          data: {
+                                            'email': _email,
+                                            'password': _password,
+                                          },
+                                        );
+                                        Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
+                                        if (response.statusCode == 200) {
+                                          Modular.get<MedicaminaUserState>().login(response.data['auth']);
+                                          Modular.to.navigate('/dash');
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.data.toString())));
                                         }
                                       }
                                     },

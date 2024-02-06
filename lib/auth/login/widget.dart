@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina_ui/states.dart';
 import 'package:medicamina_ui/auth/states.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class MedicaminaAuthLoginWidget extends StatefulWidget {
   const MedicaminaAuthLoginWidget({Key? key, required this.doctorRoute}) : super(key: key);
@@ -20,6 +20,7 @@ class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
   String _password = '';
   late bool _loading;
   late StreamSubscription _loadingStream;
+  final dio = Dio();
 
   @override
   void initState() {
@@ -139,29 +140,28 @@ class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
                                   : () async {
                                       if (_formKey.currentState!.validate()) {
                                         Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(true);
-                                        try {
-                                          http.post(
-                                            Uri.https('medicamina.azurewebsites.net', 'auth/login'),
-                                            headers: <String, String>{
-                                              'Content-Type': 'application/json; charset=UTF-8',
+                                        const url = kReleaseMode ? 'https://medicamina.azurewebsites.net/auth/login' : 'http://localhost:8080/auth/login';
+                                        var response = await dio.post(
+                                          url,
+                                          options: Options(
+                                            headers: {
+                                              'Content-type': 'application/json; charset=utf-8',
                                             },
-                                            body: jsonEncode({'email': _email, 'password': _password}),
-                                          ).then((response) {
-                                            Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
-                                            if (response.statusCode == 200) {
-                                              Modular.get<MedicaminaUserState>().login(jsonDecode(response.body)['auth']);
-                                              if (widget.doctorRoute) {
-                                                Modular.to.navigate('/dash/settings/billing');
-                                              } else {
-                                                Modular.to.navigate('/dash/home');
-                                              }
-                                            } else {
-                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.body)));
-                                            }
-                                          });
-                                        } catch (e, _) {
-                                          print(e);
-                                          Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
+                                            validateStatus: (status) {
+                                              return true;
+                                            },
+                                          ),
+                                          data: {
+                                            'email': _email,
+                                            'password': _password,
+                                          },
+                                        );
+                                        Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
+                                        if (response.statusCode == 200) {
+                                          Modular.get<MedicaminaUserState>().login(response.data['auth']);
+                                          Modular.to.navigate('/dash');
+                                        } else {
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.data.toString())));
                                         }
                                       }
                                     },

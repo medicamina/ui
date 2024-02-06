@@ -195,7 +195,7 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
                 return Center(
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
-                      fixedSize: Size(100, 100),
+                      fixedSize: Size(100, 40),
                       backgroundColor: items[index].isSelected ? Theme.of(context).primaryColor.withAlpha(50) : null,
                     ),
                     onPressed: items[index].isAvailable

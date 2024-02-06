@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_final_fields
-
 import 'dart:convert';
 
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:dio/dio.dart';
 import 'package:event/event.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
@@ -86,6 +86,7 @@ class MedicmainaPersonalDetails {
   double? height;
   double? weight;
   Event emitter = Event();
+  final dio = Dio();
   // static bool lock = false;
 
   MedicmainaPersonalDetails();
@@ -100,31 +101,37 @@ class MedicmainaPersonalDetails {
     return false;
   }
 
-  void getData() {
-    http.get(
-      Uri.https('medicamina.azurewebsites.net', 'dash/home/personal'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
-      },
-    ).then((response) {
-      if (response.statusCode == 200) {
-        if (jsonDecode(response.body)['firstName'] == null) {
-          emitter.broadcast();
-          return;
-        }
-        firstName = jsonDecode(response.body)['firstName'];
-        middleName = jsonDecode(response.body)['middleName'];
-        lastName = jsonDecode(response.body)['lastName'];
-        gender = jsonDecode(response.body)['gender'];
-        dob = DateTime.parse(jsonDecode(response.body)['dob']);
-        bloodType = jsonDecode(response.body)['bloodType'];
-        height = jsonDecode(response.body)['height'].toDouble();
-        weight = jsonDecode(response.body)['weight'].toDouble();
-        emitter.broadcast();
-      } else {
-        throw HttpError(response.body);
+  void getData() async {
+    if (!isEmpty()) {
+      return emitter.broadcast();
+    }
+    const url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/home/personal' : 'http://localhost:8080/dash/home/personal';
+    var response = await dio.get(
+      url,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
+        },
+        validateStatus: (status) {
+          return true;
+        },
+      ),
+    );
+    if (response.statusCode == 200) {
+      if (response.data['firstName'] == null || response.data['lastName'] == null) {
+        return emitter.broadcast();
       }
-    });
+      firstName = response.data['firstName'];
+      middleName = response.data['middleName'];
+      lastName = response.data['lastName'];
+      gender = response.data['gender'];
+      dob = DateTime.parse(response.data['dob']);
+      bloodType = response.data['bloodType'];
+      height = response.data['height'].toDouble();
+      weight = response.data['weight'].toDouble();
+      return emitter.broadcast();
+    }
+    throw HttpError(response.data);
   }
 }

@@ -77,6 +77,7 @@ class _MedicaminaAuthAppBarWidget extends State<MedicaminaAuthAppBarWidget> {
                         enabled: Modular.args.uri.toString() != '/',
                         onTap: () {
                           Navigator.pop(context);
+                          Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
                           Modular.to.navigate('/');
                         },
                       ),
@@ -103,6 +104,7 @@ class _MedicaminaAuthAppBarWidget extends State<MedicaminaAuthAppBarWidget> {
                         enabled: Modular.args.uri.toString() != '/auth/login',
                         onTap: () {
                           Navigator.pop(context);
+                          Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
                           Modular.to.navigate('/auth/login');
                         },
                       ),
@@ -113,6 +115,7 @@ class _MedicaminaAuthAppBarWidget extends State<MedicaminaAuthAppBarWidget> {
                             Modular.args.uri.toString() != '/auth/register',
                         onTap: () {
                           Navigator.pop(context);
+                          Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
                           Modular.to.navigate('/auth/register');
                         },
                       ),
@@ -123,6 +126,7 @@ class _MedicaminaAuthAppBarWidget extends State<MedicaminaAuthAppBarWidget> {
                             Modular.args.uri.toString() != '/auth/password',
                         onTap: () {
                           Navigator.pop(context);
+                          Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(false);
                           Modular.to.navigate('/auth/password');
                         },
                       ),

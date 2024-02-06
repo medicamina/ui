@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:medicamina_ui/dash/states.dart';
 import 'package:medicamina_ui/states.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:cool_stepper/cool_stepper.dart';
+import 'package:open_location_picker/open_location_picker.dart';
 
 class MedicaminaDashPersonalOnboardingWidget extends StatefulWidget {
   const MedicaminaDashPersonalOnboardingWidget({super.key});
@@ -16,12 +18,6 @@ class MedicaminaDashPersonalOnboardingWidget extends StatefulWidget {
 }
 
 class _MedicaminaDashPersonalOnboardingWidgetState extends State<MedicaminaDashPersonalOnboardingWidget> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   int _index = 0;
   final _formKey = GlobalKey<FormState>();
   String? _firstName;
@@ -37,7 +33,177 @@ class _MedicaminaDashPersonalOnboardingWidgetState extends State<MedicaminaDashP
   bool _submitting = false;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    
+  }
+
+  @override
+  Widget build(BuildContext context)  {
+    return CoolStepper(
+      config: CoolStepperConfig(
+        footerPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        backText: 'BACK',
+      ),
+      onCompleted: () {},
+      steps: <CoolStep>[
+        CoolStep(
+          title: 'Basic Information',
+          subtitle: 'Please fill some of the basic information to get started',
+          content: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  initialValue: _firstName,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'First name',
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      _firstName = value;
+                    });
+                  },
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your first name';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 6),
+                TextFormField(
+                  initialValue: _middleName,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Middle name (optional)',
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      _middleName = value;
+                    });
+                  },
+                  validator: (String? value) {
+                    return null;
+                  },
+                ),
+                SizedBox(height: 6),
+                TextFormField(
+                  initialValue: _lastName,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Last name',
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      _lastName = value;
+                    });
+                  },
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your last name';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 6),
+                DateTimePicker(
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.only(top: 9, bottom: 0, left: 10),
+                    hintText: 'Date of Birth',
+                    suffixIcon: Icon(Icons.date_range),
+                    border: OutlineInputBorder(),
+                  ),
+                  initialValue: _dob,
+                  firstDate: DateTime(1910),
+                  useRootNavigator: true,
+                  lastDate: DateTime.now(),
+                  dateLabelText: 'Date',
+                  onChanged: (val) {
+                    setState(() {
+                      _dob = val;
+                    });
+                  },
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return 'Please enter a birthdate';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 6),
+                DropdownButtonHideUnderline(
+                  child: DropdownButton2<String>(
+                    isExpanded: true,
+                    hint: Text(
+                      'Select gender',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(context).hintColor,
+                      ),
+                    ),
+                    items: const [
+                      DropdownMenuItem<String>(
+                        value: 'MALE',
+                        child: Text('MALE'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: 'FEMALE',
+                        child: Text('FEMALE'),
+                      ),
+                    ],
+                    value: _gender,
+                    onChanged: (String? value) {
+                      setState(() {
+                        _gender = value;
+                      });
+                    },
+                    buttonStyleData: ButtonStyleData(
+                      padding: EdgeInsets.only(right: 6),
+                      height: 48,
+                      // width: 140,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(
+                          color: Colors.black38,
+                        ),
+                        // color: Colors.grey.withAlpha(50)
+                      ),
+                    ),
+                    menuItemStyleData: const MenuItemStyleData(
+                      height: 40,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          validation: () {
+            if (!_formKey.currentState!.validate()) {
+              return 'Fill form correctly';
+            }
+            return null;
+          },
+        ),
+        CoolStep(
+          title: 'Weight and Height',
+          subtitle: 'Please fill your out weight and height',
+          content: Column(
+            children: [
+    OpenMapPicker(
+      decoration: const InputDecoration(hintText: "My location"),
+      onSaved: (FormattedLocation? newValue) {
+        /// save new value
+      },
+    ),
+            ],
+          ),
+          validation: () {},
+        ),
+      ],
+    );
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(

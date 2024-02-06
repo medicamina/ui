@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
@@ -125,8 +126,9 @@ class _MedicaminaAuthPasswordWidget extends State<MedicaminaAuthPasswordWidget> 
                                     if (_formKey.currentState!.validate()) {
                                       Modular.get<MedicaminaAuthAppBarLoadingState>().setLoading(true);
                                       try {
+                                        const url = kReleaseMode ? 'medicamina.azurewebsites.net' : 'localhost:8080';
                                         http.post(
-                                          Uri.https('medicamina.azurewebsites.net', 'auth/reset'),
+                                          Uri.https(url, 'auth/reset'),
                                           headers: <String, String>{
                                             'Content-Type': 'application/json; charset=UTF-8',
                                           },

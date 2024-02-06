@@ -1,31 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:medicamina_ui/dash/appointment/mobile.dart';
+import 'package:medicamina_ui/dash/appointment/next/widget.dart';
 
 class MedicaminaDashAppointmentWidget extends StatelessWidget {
   const MedicaminaDashAppointmentWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // if (1000 >= MediaQuery.of(context).size.width) {
     return const Scaffold(
-      body: MedicaminaDashAppointmentMobileWidget(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(6),
+          child: MedicaminaDashAppointmentNextWidget(),
+        ),
+      ),
     );
-    // }
-    // return const Scaffold(body: MedicaminaDashEdictsDesktopWidget(),);
-
-    // return Scaffold(
-
-    //   body: Center(
-    //     child: Column(
-    //       children: [
-    //         MedicaminaDashAppointmentNextWidget(),
-    //         SizedBox(height: 48),
-    //         Text('Book an appointment with a doctor'),
-    //         SizedBox(height: 48),
-    //         CircularProgressIndicator(),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }

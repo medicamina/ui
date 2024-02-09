@@ -1,14 +1,11 @@
-import 'dart:convert';
-
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:dio/dio.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina_ui/dash/states.dart';
 import 'package:medicamina_ui/states.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:http/http.dart' as http;
 
 class MedicaminaDashSettingsPersonalWidget extends StatefulWidget {
   const MedicaminaDashSettingsPersonalWidget({super.key});
@@ -18,40 +15,48 @@ class MedicaminaDashSettingsPersonalWidget extends StatefulWidget {
 }
 
 class _MedicaminaDashSettingsPersonalWidgetState extends State<MedicaminaDashSettingsPersonalWidget> {
+  final dio = Dio();
+
   @override
   void initState() {
     super.initState();
-    const url = kReleaseMode ? 'medicamina.azurewebsites.net' : 'localhost:8080';
-    http.get(
-      Uri.https(url, 'dash/settings/personal'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
-      },
-    ).then((response) {
-      if (response.statusCode == 200) {
-        var jsonResponse = jsonDecode(response.body);
-        setState(() {
-          _firstName = jsonResponse['firstName'];
-          _firstNameController = TextEditingController(text: _firstName);
-          _middleName = jsonResponse['middleName'];
-          _middleNameController = TextEditingController(text: _middleName);
-          _lastName = jsonResponse['lastName'];
-          _lastNameController = TextEditingController(text: _lastName);
-          _dob = jsonResponse['dob'];
-          _dobController = TextEditingController(text: _dob);
-          _gender = jsonResponse['gender'];
-          _birthCity = jsonResponse['birthCity'];
-          _birthCityController = TextEditingController(text: _birthCity);
-          _birthState = jsonResponse['birthState'];
-          _birthStateController = TextEditingController(text: _birthState);
-          _birthCountry = jsonResponse['birthCountry'];
-          _birthCountryController = TextEditingController(text: _birthCountry);
-        });
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.body)));
-      }
-    });
+    getData();
+  }
+
+  void getData() async {
+    const url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/settings/personal' : 'http://localhost:8080/dash/settings/personal';
+    var response = await dio.get(
+      url,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
+        },
+        validateStatus: (status) => true,
+      ),
+    );
+    if (response.statusCode == 200) {
+      var jsonResponse = response.data;
+      setState(() {
+        _firstName = jsonResponse['firstName'];
+        _firstNameController = TextEditingController(text: _firstName);
+        _middleName = jsonResponse['middleName'];
+        _middleNameController = TextEditingController(text: _middleName);
+        _lastName = jsonResponse['lastName'];
+        _lastNameController = TextEditingController(text: _lastName);
+        _dob = jsonResponse['dob'];
+        _dobController = TextEditingController(text: _dob);
+        _gender = jsonResponse['gender'];
+        _birthCity = jsonResponse['birthCity'];
+        _birthCityController = TextEditingController(text: _birthCity);
+        _birthState = jsonResponse['birthState'];
+        _birthStateController = TextEditingController(text: _birthState);
+        _birthCountry = jsonResponse['birthCountry'];
+        _birthCountryController = TextEditingController(text: _birthCountry);
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.data)));
+    }
   }
 
   String? _firstName = '';
@@ -77,11 +82,10 @@ class _MedicaminaDashSettingsPersonalWidgetState extends State<MedicaminaDashSet
     if (_firstName?.isEmpty ?? true) {
       if (_lastName?.isEmpty ?? true) {
         return SizedBox(
-                    child: Center(child: CircularProgressIndicator()),
-                    height: 200.0,
-                    width: 200.0,
-                  );
-    
+          child: Center(child: CircularProgressIndicator()),
+          height: 200.0,
+          width: 200.0,
+        );
       }
     }
     return Form(
@@ -277,9 +281,11 @@ class _MedicaminaDashSettingsPersonalWidgetState extends State<MedicaminaDashSet
                       flex: 3,
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
-                        onPressed: _submitting ? null : () {
-                          Navigator.pop(context);
-                        },
+                        onPressed: _submitting
+                            ? null
+                            : () {
+                                Navigator.pop(context);
+                              },
                         child: Text('Cancel'),
                       ),
                     ),
@@ -289,45 +295,41 @@ class _MedicaminaDashSettingsPersonalWidgetState extends State<MedicaminaDashSet
                       child: OutlinedButton(
                         onPressed: _submitting
                             ? null
-                            : () {
+                            : () async {
                                 if (_personalFormKey.currentState!.validate()) {
                                   setState(() {
                                     _submitting = true;
                                   });
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Saving')));
-                                  const url = kReleaseMode ? 'medicamina.azurewebsites.net' : 'localhost:8080';
-                                  http
-                                      .post(
-                                    Uri.https(url, 'dash/settings/account'),
-                                    headers: <String, String>{
-                                      'Content-Type': 'application/json; charset=UTF-8',
-                                      'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
-                                    },
-                                    body: jsonEncode({
+                                  var url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/settings/personal' : 'http://localhost:8080/dash/settings/personal';
+                                  var response = await dio.post(
+                                    url,
+                                    options: Options(
+                                      headers: {
+                                        'Content-Type': 'application/json; charset=UTF-8',
+                                        'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
+                                      },
+                                      validateStatus: (status) => true,
+                                    ),
+                                    data: {
                                       'firstName': _firstName,
                                       'middleName': _middleName,
                                       'lastName': _lastName,
                                       'dob': _dob,
                                       'gender': _gender,
-                                      'birthCountry': _birthCountry,
-                                      'birthState': _birthState,
                                       'birthCity': _birthCity,
-                                    }),
-                                  )
-                                      .then(
-                                    (response) {
-                                      setState(() {
-                                        _submitting = false;
-                                      });
-                                      Modular.get<MedicmainaPersonalDetails>().firstName = null;
-                                      Modular.get<MedicmainaPersonalDetails>().lastName = null;
-                                      if (response.statusCode == 200) {
-                                        Navigator.maybePop(context);
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.body)));
-                                      }
+                                      'birthState': _birthState,
+                                      'birthCountry': _birthCountry,
                                     },
                                   );
+                                  if (response.statusCode == 200) {
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.data)));
+                                    setState(() {
+                                      _submitting = false;
+                                    });
+                                  }
                                 }
                               },
                         child: Text('Submit'),

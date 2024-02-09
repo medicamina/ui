@@ -1,13 +1,10 @@
-import 'dart:convert';
-
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:medicamina_ui/dash/settings/states.dart';
-import 'package:medicamina_ui/dash/states.dart';
 import 'package:medicamina_ui/states.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:http/http.dart' as http;
 
 class MedicaminaDashSettingsPhoneWidget extends StatefulWidget {
   const MedicaminaDashSettingsPhoneWidget({super.key});
@@ -21,6 +18,7 @@ class _MedicaminaDashSettingsPhoneWidgetState extends State<MedicaminaDashSettin
   TextEditingController? _phoneNumberController;
   final _phoneFormKey = GlobalKey<FormState>();
   String? _phoneNumber = '';
+  final dio = Dio();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +31,7 @@ class _MedicaminaDashSettingsPhoneWidgetState extends State<MedicaminaDashSettin
         ),
         sections: [
           SettingsSection(
+            title: Text('Change phone number'),
             tiles: [
               SettingsTile(
                 title: IntlPhoneField(
@@ -76,36 +75,34 @@ class _MedicaminaDashSettingsPhoneWidgetState extends State<MedicaminaDashSettin
                       child: OutlinedButton(
                         onPressed: _submitting
                             ? null
-                            : () {
+                            : () async {
                                 if (_phoneFormKey.currentState!.validate()) {
                                   setState(() {
                                     _submitting = true;
                                   });
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Saving')));
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Submitting')));
-                                  http
-                                      .post(
-                                    Uri.https('medicamina.azurewebsites.net', 'dash/settings/phone-number'),
-                                    headers: <String, String>{
-                                      'Content-Type': 'application/json; charset=UTF-8',
-                                      'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
-                                    },
-                                    body: jsonEncode({
-                                      'newPhoneNumber': _phoneNumber
-                                    }),
-                                  )
-                                      .then(
-                                    (response) {
-                                      setState(() {
-                                        _submitting = false;
-                                      });
-                                      if (response.statusCode == 200) {
-                                        Navigator.maybePop(context);
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.body)));
-                                      }
-                                    },
+                                  var url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/settings/phone-number' : 'http://localhost:8080/dash/settings/phone-number';
+                                  var response = await dio.post(
+                                    url,
+                                    options: Options(
+                                      headers: {
+                                        'Content-Type': 'application/json; charset=UTF-8',
+                                        'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
+                                      },
+                                      validateStatus: (status) => true,
+                                    ),
+                                    data: {
+                                      'phoneNumber': _phoneNumber 
+                                    }
                                   );
+                                  if (response.statusCode == 200) {
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.data)));
+                                    setState(() {
+                                      _submitting = false;
+                                    });
+                                  }
                                 }
                               },
                         child: Text('Submit'),

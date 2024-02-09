@@ -1,13 +1,9 @@
-import 'dart:convert';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina_ui/dash/settings/states.dart';
-import 'package:medicamina_ui/dash/states.dart';
 import 'package:medicamina_ui/states.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:http/http.dart' as http;
 
 class MedicaminaDashSettingsEmailWidget extends StatefulWidget {
   const MedicaminaDashSettingsEmailWidget({super.key});
@@ -20,6 +16,7 @@ class _MedicaminaDashSettingsEmailWidgetState extends State<MedicaminaDashSettin
   final _emailFormKey = GlobalKey<FormState>();
   bool _submitting = false;
   String _emailAddress = '';
+  final dio = Dio();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +30,7 @@ class _MedicaminaDashSettingsEmailWidgetState extends State<MedicaminaDashSettin
         ),
         sections: [
           SettingsSection(
+            title: Text('Change Email address'),
             tiles: [
               SettingsTile(
                 title: Padding(
@@ -99,40 +97,34 @@ class _MedicaminaDashSettingsEmailWidgetState extends State<MedicaminaDashSettin
                       child: OutlinedButton(
                         onPressed: _submitting
                             ? null
-                            : () {
+                            : () async {
                                 if (_emailFormKey.currentState!.validate()) {
                                   setState(() {
                                     _submitting = true;
                                   });
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Saving')));
-                                  const url = kReleaseMode ? 'medicamina.azurewebsites.net' : 'localhost:8080';
-                                  http
-                                      .post(
-                                    Uri.https(url, 'dash/settings/email'),
-                                    headers: <String, String>{
-                                      'Content-Type': 'application/json; charset=UTF-8',
-                                      'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
-                                    },
-                                    body: jsonEncode({
-                                      'newEmail': _emailAddress
-                                    }),
-                                  )
-                                      .then(
-                                    (response) {
-                                      setState(() {
-                                        _submitting = false;
-                                      });
-                                      Modular.get<MedicmainaPersonalDetails>().firstName = null;
-                                      Modular.get<MedicmainaPersonalDetails>().lastName = null;
-                                      Modular.get<MedicaminaDashSettingsAccountState>().firstName = null;
-                                      Modular.get<MedicaminaDashSettingsAccountState>().lastName = null;
-                                      if (response.statusCode == 200) {
-                                        Navigator.maybePop(context);
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.body)));
-                                      }
-                                    },
+                                  var url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/settings/email' : 'http://localhost:8080/dash/settings/email';
+                                  var response = await dio.post(
+                                    url,
+                                    options: Options(
+                                      headers: {
+                                        'Content-Type': 'application/json; charset=UTF-8',
+                                        'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
+                                      },
+                                      validateStatus: (status) => true,
+                                    ),
+                                    data: {
+                                      'emailAddress': _emailAddress 
+                                    }
                                   );
+                                  if (response.statusCode == 200) {
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.data)));
+                                    setState(() {
+                                      _submitting = false;
+                                    });
+                                  }
                                 }
                               },
                         child: Text('Submit'),

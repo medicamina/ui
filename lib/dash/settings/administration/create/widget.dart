@@ -1,12 +1,13 @@
-import 'dart:convert';
+import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+// import 'package:image_picker/image_picker.dart';
 import 'package:medicamina_ui/states.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:http/http.dart' as http;
 
 class MedicaminaDashSettingsClinicCreateWidget extends StatefulWidget {
   const MedicaminaDashSettingsClinicCreateWidget({super.key});
@@ -25,9 +26,32 @@ class _MedicaminaDashSettingsClinicCreateWidgetState extends State<MedicaminaDas
   TextEditingController? _suburbController;
   String? _country = '';
   TextEditingController? _countryController;
-  String? _specialty;
+  String? _zipCode = '';
+  TextEditingController? _zipCodeController;
+  String? _speciality;
   final _createClinicFormKey = GlobalKey<FormState>();
-  // TextEditingController? _specialtyController;
+  String? _businessNumber = '';
+  TextEditingController? _businessNumberController;
+  final dio = Dio();
+
+  File? file;
+  String status = '';
+  String? base64Image;
+  File? tmpFile;
+  String errMessage = 'Error Uploading Image';
+  // var imagePicker = ImagePicker();
+
+  Widget showImage() {
+    if (file != null) {
+      return Flexible(
+        child: Image.file(
+          file as File,
+          fit: BoxFit.fill,
+        ),
+      );
+    }
+    return SizedBox.shrink();
+  }
 
   @override
   void initState() {
@@ -36,6 +60,8 @@ class _MedicaminaDashSettingsClinicCreateWidgetState extends State<MedicaminaDas
     _addressController = TextEditingController(text: _address);
     _suburbController = TextEditingController(text: _suburb);
     _countryController = TextEditingController(text: _country);
+    _businessNumberController = TextEditingController(text: _businessNumber);
+    _zipCodeController = TextEditingController(text: _zipCode);
   }
 
   @override
@@ -43,15 +69,46 @@ class _MedicaminaDashSettingsClinicCreateWidgetState extends State<MedicaminaDas
     return Form(
       key: _createClinicFormKey,
       child: SettingsList(
-      platform: DevicePlatform.iOS,
-      darkTheme: const SettingsThemeData(
-        settingsListBackground: Color.fromARGB(255, 48, 48, 48),
-        settingsSectionBackground: Color.fromARGB(255, 66, 66, 66),
-      ),
+        platform: DevicePlatform.iOS,
+        darkTheme: const SettingsThemeData(
+          settingsListBackground: Color.fromARGB(255, 48, 48, 48),
+          settingsSectionBackground: Color.fromARGB(255, 66, 66, 66),
+        ),
         sections: [
           SettingsSection(
             title: Text('Create clinic'),
             tiles: [
+              SettingsTile(
+                description: Text('Clinic Photo'),
+                title: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 4),
+                  child: Row(
+                    children: [
+                      Column(
+                        children: const [
+                          Icon(
+                            Icons.account_box,
+                            size: 140,
+                          ),
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(children: [Text('Upload clinic photo')]),
+                          // const SizedBox(height: 6),
+                          // Row(children: [Text('Photo should be at least 300x300px')]),
+                          const SizedBox(height: 12),
+                          Row(
+                            children: [OutlinedButton(onPressed: () {}, child: const Text('Upload a photo'))],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               SettingsTile(
                 description: Text('Clinic name'),
                 title: Padding(
@@ -70,6 +127,30 @@ class _MedicaminaDashSettingsClinicCreateWidgetState extends State<MedicaminaDas
                       });
                     },
                     decoration: InputDecoration.collapsed(hintText: 'Clinic name'),
+                  ),
+                ),
+              ),
+              SettingsTile(
+                description: Tooltip(
+                  child: Text('Business number (ℹ️)'),
+                  message: 'Example: Employer Identification Number or Australian Business Number',
+                ),
+                title: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 4),
+                  child: TextFormField(
+                    controller: _businessNumberController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a unique business indetifier';
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        _businessNumber = value;
+                      });
+                    },
+                    decoration: InputDecoration.collapsed(hintText: 'Unique business identifier'),
                   ),
                 ),
               ),
@@ -105,11 +186,31 @@ class _MedicaminaDashSettingsClinicCreateWidgetState extends State<MedicaminaDas
                     },
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter a clinic suburb';
+                        return 'Please enter a clinic city';
                       }
                       return null;
                     }),
-                    decoration: InputDecoration.collapsed(hintText: 'Clinic suburb'),
+                    decoration: InputDecoration.collapsed(hintText: 'Clinic city'),
+                  ),
+                ),
+              ),
+              SettingsTile(
+                title: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 4),
+                  child: TextFormField(
+                    controller: _zipCodeController,
+                    onChanged: (value) {
+                      setState(() {
+                        _zipCode = value;
+                      });
+                    },
+                    validator: ((value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a clinic zip code';
+                      }
+                      return null;
+                    }),
+                    decoration: InputDecoration.collapsed(hintText: 'Clinic zip code'),
                   ),
                 ),
               ),
@@ -167,10 +268,10 @@ class _MedicaminaDashSettingsClinicCreateWidgetState extends State<MedicaminaDas
                           child: Text('Pathology'),
                         )
                       ],
-                      value: _specialty,
+                      value: _speciality,
                       onChanged: (String? value) {
                         setState(() {
-                          _specialty = value;
+                          _speciality = value;
                         });
                       },
                       buttonStyleData: const ButtonStyleData(
@@ -197,9 +298,11 @@ class _MedicaminaDashSettingsClinicCreateWidgetState extends State<MedicaminaDas
                       flex: 3,
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
-                        onPressed: _submitting ? null : () {
-                          Navigator.pop(context);
-                        },
+                        onPressed: _submitting
+                            ? null
+                            : () {
+                                Navigator.pop(context);
+                              },
                         child: Text('Cancel'),
                       ),
                     ),
@@ -209,42 +312,41 @@ class _MedicaminaDashSettingsClinicCreateWidgetState extends State<MedicaminaDas
                       child: OutlinedButton(
                         onPressed: _submitting
                             ? null
-                            : () {
+                            : () async {
                                 if (_createClinicFormKey.currentState!.validate()) {
                                   setState(() {
                                     _submitting = true;
                                   });
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Saving')));
-                                  const url = kReleaseMode ? 'medicamina.azurewebsites.net' : 'localhost:8080';
-                                  http
-                                      .post(
-                                    Uri.https(url, 'dash/settings/clinic/create'),
-                                    headers: <String, String>{
-                                      'Content-Type': 'application/json; charset=UTF-8',
-                                      'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
-                                    },
-                                    body: jsonEncode(
-                                      {
-                                        'name': _name,
-                                        'address': _address,
-                                        'suburb': _suburb,
-                                        'country': _country,
-                                        'specialty': _specialty,
+                                  const url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/settings/clinic/create' : 'http://localhost:8080/dash/settings/clinic/create';
+                                  var response = await dio.post(
+                                    url,
+                                    options: Options(
+                                      headers: {
+                                        'Content-Type': 'application/json; charset=UTF-8',
+                                        'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
                                       },
+                                      validateStatus: (status) => true,
                                     ),
-                                  )
-                                      .then(
-                                    (response) {
-                                      setState(() {
-                                        _submitting = false;
-                                      });
-                                      if (response.statusCode == 200) {
-                                        Navigator.maybePop(context);
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.body)));
-                                      }
+                                    data: {
+                                      'name': _name,
+                                      'address': _address,
+                                      'suburb': _suburb,
+                                      'zipcode': _zipCode,
+                                      'country': _country,
+                                      'speciality': _speciality,
+                                      'businessNumber': _businessNumber,
                                     },
                                   );
+                                  if (response.statusCode == 200) {
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.data)));
+                                    setState(() {
+                                      _submitting = false;
+                                    });
+                                  }
                                 }
                               },
                         child: Text('Submit'),

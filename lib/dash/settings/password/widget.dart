@@ -1,12 +1,9 @@
-import 'dart:convert';
-
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:medicamina_ui/dash/settings/states.dart';
-import 'package:medicamina_ui/dash/states.dart';
 import 'package:medicamina_ui/states.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:http/http.dart' as http;
 
 class MedicaminaDashSettingsPasswordWidget extends StatefulWidget {
   const MedicaminaDashSettingsPasswordWidget({super.key});
@@ -19,6 +16,7 @@ class _MedicaminaDashSettingsPasswordWidgetState extends State<MedicaminaDashSet
   final _passwordFormKey = GlobalKey<FormState>();
   bool _submitting = false;
   String _password = '';
+  final dio = Dio();
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +30,7 @@ class _MedicaminaDashSettingsPasswordWidgetState extends State<MedicaminaDashSet
         ),
         sections: [
           SettingsSection(
+            title: Text('Change password'),
             tiles: [
               SettingsTile(
                 title: Padding(
@@ -85,9 +84,11 @@ class _MedicaminaDashSettingsPasswordWidgetState extends State<MedicaminaDashSet
                       flex: 3,
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
-                        onPressed: _submitting ? null : () {
-                          Navigator.pop(context);
-                        },
+                        onPressed: _submitting
+                            ? null
+                            : () {
+                                Navigator.pop(context);
+                              },
                         child: Text('Cancel'),
                       ),
                     ),
@@ -97,47 +98,34 @@ class _MedicaminaDashSettingsPasswordWidgetState extends State<MedicaminaDashSet
                       child: OutlinedButton(
                         onPressed: _submitting
                             ? null
-                            : () {
+                            : () async {
                                 if (_passwordFormKey.currentState!.validate()) {
                                   setState(() {
                                     _submitting = true;
                                   });
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Saving')));
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Submitting')));
-                                  http
-                                      .post(
-                                    Uri.https('medicamina.azurewebsites.net', 'dash/settings/account'),
-                                    headers: <String, String>{
-                                      'Content-Type': 'application/json; charset=UTF-8',
-                                      'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
-                                    },
-                                    body: jsonEncode({
-                                      // 'firstName': _firstName,
-                                      // 'middleName': _middleName,
-                                      // 'lastName': _lastName,
-                                      // 'dob': _dob?.toIso8601String(),
-                                      // 'gender': _gender,
-                                      // 'birthCountry': _birthCountry,
-                                      // 'birthState': _birthState,
-                                      // 'birthCity': _birthCity,
-                                    }),
-                                  )
-                                      .then(
-                                    (response) {
-                                      setState(() {
-                                        _submitting = false;
-                                      });
-                                      Modular.get<MedicmainaPersonalDetails>().firstName = null;
-                                      Modular.get<MedicmainaPersonalDetails>().lastName = null;
-                                      Modular.get<MedicaminaDashSettingsAccountState>().firstName = null;
-                                      Modular.get<MedicaminaDashSettingsAccountState>().lastName = null;
-                                      if (response.statusCode == 200) {
-                                        Navigator.maybePop(context);
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.body)));
-                                      }
-                                    },
+                                  var url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/settings/password' : 'http://localhost:8080/dash/settings/password';
+                                  var response = await dio.post(
+                                    url,
+                                    options: Options(
+                                      headers: {
+                                        'Content-Type': 'application/json; charset=UTF-8',
+                                        'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
+                                      },
+                                      validateStatus: (status) => true,
+                                    ),
+                                    data: {
+                                      'password': _password 
+                                    }
                                   );
+                                  if (response.statusCode == 200) {
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.data)));
+                                    setState(() {
+                                      _submitting = false;
+                                    });
+                                  }
                                 }
                               },
                         child: Text('Submit'),

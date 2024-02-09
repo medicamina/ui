@@ -49,6 +49,18 @@ dependencies:
       url: https://github.com/ephammer/flutter-cool-stepper.git
       ref: master
   open_location_picker: ^1.1.0
+  # permission_handler: ^11.2.0
+  # image_picker: ^1.0.7
+  # flutter_image_compress: ^2.1.0
+  # path_provider: ^2.1.2
+  fluttermoji: ^1.0.2
+  search_map_location: ^0.0.6
+  shimmer: ^3.0.0
+  fuzzy: ^0.5.1
+  geolocator: ^10.1.0
+
+dependency_overrides: 
+  http: ^1.2.0
 
 dev_dependencies:
   flutter_test:

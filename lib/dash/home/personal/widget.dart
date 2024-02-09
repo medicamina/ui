@@ -1,16 +1,13 @@
-import 'dart:convert';
-
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:http/http.dart' as http;
-import 'package:medicamina_ui/dash/states.dart';
 
 // Medicamina
+import 'package:medicamina_ui/dash/states.dart';
 import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDashHomePersonalWidget extends StatefulWidget {
-  const MedicaminaDashHomePersonalWidget({Key? key}) : super(key: key);
+  const MedicaminaDashHomePersonalWidget({super.key});
 
   @override
   State<StatefulWidget> createState() => _MedicaminaDashHomePersonalWidget();

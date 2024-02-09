@@ -1,5 +1,4 @@
-import 'dart:convert';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:medicamina_ui/dash/settings/administration/join/widget.dart';
 import 'package:medicamina_ui/dash/settings/widget.dart';
 import 'package:medicamina_ui/states.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:http/http.dart' as http;
 
 class MedicaminaDashSettingsClinicsWidget extends StatefulWidget {
   const MedicaminaDashSettingsClinicsWidget({super.key});
@@ -23,29 +21,37 @@ class _MedicaminaDashSettingsClinicsWidgetState extends State<MedicaminaDashSett
   var _joined = [];
   var _pending = [];
   var _loading = true;
+  final dio = Dio();
 
   @override
   void initState() {
     super.initState();
-    const url = kReleaseMode ? 'medicamina.azurewebsites.net' : 'localhost:8080';
-    http.get(Uri.http(url, 'dash/settings/clinic'), headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
-    }).then((response) {
+    getData();
+  }
+
+  void getData() async {
+    var url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/settings/clinic' : 'http://localhost:8080/dash/settings/clinic';
+    var response = await dio.get(
+      url,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
+        },
+        validateStatus: (status) => true,
+      ),
+    );
+    if (response.statusCode == 200) {
+      var jsonObject = response.data;
       setState(() {
+        _pending = jsonObject['pending'];
+        _owned = jsonObject['owned'];
+        _joined = jsonObject['joined'];
         _loading = false;
       });
-      if (response.statusCode == 200) {
-        var jsonObject = jsonDecode(response.body);
-        setState(() {
-          _pending = jsonObject['pending'];
-          _owned = jsonObject['owned'];
-          _joined = jsonObject['joined'];
-        });
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.body)));
-      }
-    });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.data)));
+    }
   }
 
   @override

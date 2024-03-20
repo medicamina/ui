@@ -314,6 +314,91 @@ class _MedicaminaDashSettingsClinicCreateWidgetState extends State<MedicaminaDas
                             ? null
                             : () async {
                                 if (_createClinicFormKey.currentState!.validate()) {
+                                  bool sundayOperating = false;
+                                  TimeOfDay? sundayOpen = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 9, 0));
+                                  TimeOfDay? sundayOpenUtc;
+                                  var sundayOpenDate = DateTime(2000, 1, 1, sundayOpen!.hour, sundayOpen!.minute);
+                                  sundayOpenDate = sundayOpenDate.toUtc();
+                                  sundayOpenUtc = TimeOfDay.fromDateTime(sundayOpenDate);
+                                  TimeOfDay? sundayClose = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 17, 0));
+                                  TimeOfDay? sundayCloseUtc;
+                                  var sundayCloseDate = DateTime(2000, 1, 1, sundayClose!.hour, sundayClose!.minute);
+                                  sundayCloseDate = sundayCloseDate.toUtc();
+                                  sundayCloseUtc = TimeOfDay.fromDateTime(sundayCloseDate);
+
+                                  bool mondayOperating = true;
+                                  TimeOfDay? mondayOpen = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 9, 0));
+                                  TimeOfDay? mondayOpenUtc;
+                                  var mondayOpenDate = DateTime(2000, 1, 1, mondayOpen!.hour, mondayOpen!.minute);
+                                  mondayOpenDate = mondayOpenDate.toUtc();
+                                  mondayOpenUtc = TimeOfDay.fromDateTime(mondayOpenDate);
+                                  TimeOfDay? mondayClose = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 17, 0));
+                                  TimeOfDay? mondayCloseUtc;
+                                  var mondayCloseDate = DateTime(2000, 1, 1, mondayClose!.hour, mondayClose!.minute);
+                                  mondayCloseDate = mondayCloseDate.toUtc();
+                                  mondayCloseUtc = TimeOfDay.fromDateTime(mondayCloseDate);
+
+                                  bool tuesdayOperating = true;
+                                  TimeOfDay? tuesdayOpen = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 9, 0));
+                                  TimeOfDay? tuesdayOpenUtc;
+                                  var tuesdayOpenDate = DateTime(2000, 1, 1, tuesdayOpen!.hour, tuesdayOpen!.minute);
+                                  tuesdayOpenDate = tuesdayOpenDate.toUtc();
+                                  tuesdayOpenUtc = TimeOfDay.fromDateTime(tuesdayOpenDate);
+                                  TimeOfDay? tuesdayClose = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 17, 0));
+                                  TimeOfDay? tuesdayCloseUtc;
+                                  tuesdayClose = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 17, 0));
+                                  var tuesdayCloseDate = DateTime(2000, 1, 1, tuesdayClose!.hour, tuesdayClose!.minute);
+                                  tuesdayCloseDate = tuesdayCloseDate.toUtc();
+                                  tuesdayCloseUtc = TimeOfDay.fromDateTime(tuesdayCloseDate);
+
+                                  bool wednesdayOperating = true;
+                                  TimeOfDay? wednesdayOpen = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 9, 0));
+                                  TimeOfDay? wednesdayOpenUtc;
+                                  var wednesdayOpenDate = DateTime(2000, 1, 1, wednesdayOpen!.hour, wednesdayOpen!.minute);
+                                  wednesdayOpenDate = wednesdayOpenDate.toUtc();
+                                  wednesdayOpenUtc = TimeOfDay.fromDateTime(wednesdayOpenDate);
+                                  TimeOfDay? wednesdayClose = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 17, 0));
+                                  TimeOfDay? wednesdayCloseUtc;
+                                  var wednesdayCloseDate = DateTime(2000, 1, 1, wednesdayClose!.hour, wednesdayClose!.minute);
+                                  wednesdayCloseDate = wednesdayCloseDate.toUtc();
+                                  wednesdayCloseUtc = TimeOfDay.fromDateTime(wednesdayCloseDate);
+
+                                  bool thursdayOperating = true;
+                                  TimeOfDay? thursdayOpen = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 9, 0));
+                                  TimeOfDay? thursdayOpenUtc;
+                                  var thursdayOpenDate = DateTime(2000, 1, 1, thursdayOpen!.hour, thursdayOpen!.minute);
+                                  thursdayOpenDate = thursdayOpenDate.toUtc();
+                                  thursdayOpenUtc = TimeOfDay.fromDateTime(thursdayOpenDate);
+                                  TimeOfDay? thursdayClose = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 17, 0));
+                                  TimeOfDay? thursdayCloseUtc;
+                                  var thursdayCloseDate = DateTime(2000, 1, 1, thursdayClose!.hour, thursdayClose!.minute);
+                                  thursdayCloseDate = thursdayCloseDate.toUtc();
+                                  thursdayCloseUtc = TimeOfDay.fromDateTime(thursdayCloseDate);
+
+                                  bool fridayOperating = true;
+                                  TimeOfDay? fridayOpen = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 9, 0));
+                                  TimeOfDay? fridayOpenUtc;
+                                  var fridayOpenDate = DateTime(2000, 1, 1, fridayOpen!.hour, fridayOpen!.minute);
+                                  fridayOpenDate = fridayOpenDate.toUtc();
+                                  fridayOpenUtc = TimeOfDay.fromDateTime(fridayOpenDate);
+                                  TimeOfDay? fridayClose = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 17, 0));
+                                  TimeOfDay? fridayCloseUtc;
+                                  var fridayCloseDate = DateTime(2000, 1, 1, fridayClose!.hour, fridayClose!.minute);
+                                  fridayCloseDate = fridayCloseDate.toUtc();
+                                  fridayCloseUtc = TimeOfDay.fromDateTime(fridayCloseDate);
+
+                                  bool saturdayOperating = false;
+                                  TimeOfDay? saturdayOpen = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 9, 0));
+                                  TimeOfDay? saturdayOpenUtc;
+                                  var saturdayOpenDate = DateTime(2000, 1, 1, saturdayOpen!.hour, saturdayOpen!.minute);
+                                  saturdayOpenDate = saturdayOpenDate.toUtc();
+                                  saturdayOpenUtc = TimeOfDay.fromDateTime(saturdayOpenDate);
+                                  TimeOfDay? saturdayClose = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 17, 0));
+                                  TimeOfDay? saturdayCloseUtc;
+                                  var saturdayCloseDate = DateTime(2000, 1, 1, saturdayClose!.hour, saturdayClose!.minute);
+                                  saturdayCloseDate = saturdayCloseDate.toUtc();
+                                  saturdayCloseUtc = TimeOfDay.fromDateTime(saturdayCloseDate);
+                                  
                                   setState(() {
                                     _submitting = true;
                                   });
@@ -336,6 +421,27 @@ class _MedicaminaDashSettingsClinicCreateWidgetState extends State<MedicaminaDas
                                       'country': _country,
                                       'speciality': _speciality,
                                       'businessNumber': _businessNumber,
+                                      'sundayOpen': '${DateTime(2000, 1, 1, sundayOpenUtc!.hour, sundayOpenUtc!.minute).toIso8601String()}Z',
+                                      'sundayClose': '${DateTime(2000, 1, 1, sundayCloseUtc!.hour, sundayCloseUtc!.minute).toIso8601String()}Z',
+                                      'sundayOperating': sundayOperating,
+                                      'mondayOpen': '${DateTime(2000, 1, 1, mondayOpenUtc!.hour, mondayOpenUtc!.minute).toIso8601String()}Z',
+                                      'mondayClose': '${DateTime(2000, 1, 1, mondayCloseUtc!.hour, mondayCloseUtc!.minute).toIso8601String()}Z',
+                                      'mondayOperating': mondayOperating,
+                                      'tuesdayOpen': '${DateTime(2000, 1, 1, tuesdayOpenUtc!.hour, tuesdayOpenUtc!.minute).toIso8601String()}Z',
+                                      'tuesdayClose': '${DateTime(2000, 1, 1, tuesdayCloseUtc!.hour, tuesdayCloseUtc!.minute).toIso8601String()}Z',
+                                      'tuesdayOperating': tuesdayOperating,
+                                      'wednesdayOpen': '${DateTime(2000, 1, 1, wednesdayOpenUtc!.hour, wednesdayOpenUtc!.minute).toIso8601String()}Z',
+                                      'wednesdayClose': '${DateTime(2000, 1, 1, wednesdayCloseUtc!.hour, wednesdayCloseUtc!.minute).toIso8601String()}Z',
+                                      'wednesdayOperating': wednesdayOperating,
+                                      'thursdayOpen': '${DateTime(2000, 1, 1, thursdayOpenUtc!.hour, thursdayOpenUtc!.minute).toIso8601String()}Z',
+                                      'thursdayClose': '${DateTime(2000, 1, 1, thursdayCloseUtc!.hour, thursdayCloseUtc!.minute).toIso8601String()}Z',
+                                      'thursdayOperating': thursdayOperating,
+                                      'fridayOpen': '${DateTime(2000, 1, 1, fridayOpenUtc!.hour, fridayOpenUtc!.minute).toIso8601String()}Z',
+                                      'fridayClose': '${DateTime(2000, 1, 1, fridayCloseUtc!.hour, fridayCloseUtc!.minute).toIso8601String()}Z',
+                                      'fridayOperating': fridayOperating,
+                                      'saturdayOpen': '${DateTime(2000, 1, 1, saturdayOpenUtc!.hour, saturdayOpenUtc!.minute).toIso8601String()}Z',
+                                      'saturdayClose': '${DateTime(2000, 1, 1, saturdayCloseUtc!.hour, saturdayCloseUtc!.minute).toIso8601String()}Z',
+                                      'saturdayOperating': saturdayOperating,
                                     },
                                   );
                                   if (response.statusCode == 200) {

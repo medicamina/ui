@@ -1,4 +1,5 @@
 import 'package:community_material_icon/community_material_icon.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -612,6 +613,51 @@ Widget mobile(BuildContext context, ScrollController controller) {
           ),
         ],
       ),
+            const SizedBox(height: 44),
+      const Divider(indent: 22, endIndent: 22),
+      const SizedBox(height: 44),
+      Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8),
+            child: Text(
+              "Book an appointment",
+              style: Theme.of(context).textTheme.displaySmall,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8),
+            child: Text(
+              "with a consultant.",
+              style: Theme.of(context).textTheme.titleLarge,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
+      const SizedBox(height: 44),
+      Icon(CupertinoIcons.calendar_today,
+          size: MediaQuery.of(context).size.width * 0.5),
+      const SizedBox(height: 44),
+      Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8),
+            child: Text(
+              "Connect with your local clinic.",
+              style: Theme.of(context).textTheme.headlineSmall,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          const SizedBox(height: 12),
+          const Padding(
+            padding: EdgeInsets.only(left: 8, right: 8),
+            child: Text("Book an appointment with your local clinic in app and online.", textAlign: TextAlign.center),
+          ),
+        ],
+      ),
       const SizedBox(height: 44),
       const Divider(indent: 22, endIndent: 22),
       const SizedBox(height: 44),
@@ -973,16 +1019,7 @@ Widget desktop(BuildContext context, ScrollController controller) {
           padding: const EdgeInsets.all(22),
           child: Row(
             children: [
-              Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    Icon(CommunityMaterialIcons.robot_happy_outline,
-                        size: MediaQuery.of(context).size.height * 0.4)
-                  ],
-                ),
-              ),
-              const SizedBox(width: 22),
+                            const SizedBox(width: 22),
               Expanded(
                 flex: 1,
                 child: Column(
@@ -992,6 +1029,84 @@ Widget desktop(BuildContext context, ScrollController controller) {
                         textAlign: TextAlign.center),
                     const SizedBox(height: 12),
                     const Text(machineLearningSubtext,
+                        textAlign: TextAlign.center),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: [
+                    Icon(CommunityMaterialIcons.robot_happy_outline,
+                        size: MediaQuery.of(context).size.height * 0.4)
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 44),
+            ],
+          ),
+        ),
+      ),
+     const SizedBox(height: 66),
+      const Divider(indent: 22, endIndent: 22),
+      SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Padding(
+          padding:
+              const EdgeInsets.only(left: 44, right: 44, top: 44, bottom: 44),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Book an appointment",
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
+                    const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4),
+                      child: Text(
+                        "with a consultant.",
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(flex: 1, child: Container()),
+            ],
+          ),
+        ),
+      ),
+      SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Padding(
+          padding: const EdgeInsets.all(22),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: [
+                    Icon(CupertinoIcons.calendar_today,
+                        size: MediaQuery.of(context).size.height * 0.4)
+                  ],
+                ),
+              ),
+              const SizedBox(width: 22),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: [
+                    Text("Connect with your local clinic.",
+                        style: Theme.of(context).textTheme.headlineSmall,
+                        textAlign: TextAlign.center),
+                    const SizedBox(height: 12),
+                    const Text("Book an appointment with your local clinic in app and online.",
                         textAlign: TextAlign.center),
                   ],
                 ),

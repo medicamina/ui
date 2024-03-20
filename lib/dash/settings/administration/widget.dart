@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina_ui/dash/settings/administration/create/widget.dart';
 import 'package:medicamina_ui/dash/settings/administration/join/widget.dart';
+import 'package:medicamina_ui/dash/settings/administration/edit/widget.dart';
+import 'package:medicamina_ui/dash/settings/administration/joined/widget.dart';
 import 'package:medicamina_ui/dash/settings/widget.dart';
 import 'package:medicamina_ui/states.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -30,8 +32,8 @@ class _MedicaminaDashSettingsClinicsWidgetState extends State<MedicaminaDashSett
   }
 
   void getData() async {
-    var url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/settings/clinic' : 'http://localhost:8080/dash/settings/clinic';
-    var response = await dio.get(
+    const url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/settings/clinic' : 'http://localhost:8080/dash/settings/clinic';
+    final response = await dio.get(
       url,
       options: Options(
         headers: {
@@ -132,7 +134,12 @@ class PendingClinics extends AbstractSettingsSection {
       return SettingsSection(
         title: Text('Pending approval'),
         tiles: [
-          for (var i in pending) SettingsTile.navigation(title: Text(i['name'])),
+          for (var i in pending)
+            SettingsTile.navigation(
+                onPressed: ((context) {
+                  Navigation.navigateTo(context: context, screen: MedicaminaDashSettingsAdministrationEditWidget(i), style: NavigationRouteStyle.material);
+                }),
+                title: Text(i['name'])),
         ],
       );
     }
@@ -150,7 +157,12 @@ class OwnedClinics extends AbstractSettingsSection {
       return SettingsSection(
         title: Text('Owned clinics'),
         tiles: [
-          for (var i in owned) SettingsTile.navigation(title: Text(i['name'])),
+          for (var i in owned)
+            SettingsTile.navigation(
+                onPressed: ((context) {
+                  Navigation.navigateTo(context: context, screen: MedicaminaDashSettingsAdministrationEditWidget(i), style: NavigationRouteStyle.material);
+                }),
+                title: Text(i['name'])),
         ],
       );
     }
@@ -168,7 +180,13 @@ class JoinedClinics extends AbstractSettingsSection {
       return SettingsSection(
         title: Text('Joined clinics'),
         tiles: [
-          for (var i in joined) SettingsTile.navigation(title: Text(i['name'])),
+          for (var i in joined)
+            SettingsTile.navigation(
+              title: Text(i['name']),
+              onPressed: (context) {
+                Navigation.navigateTo(context: context, screen: MedicaminaDashSettingsClinicJoinedWidget(clinic: i), style: NavigationRouteStyle.material);
+              },
+            ),
         ],
       );
     }

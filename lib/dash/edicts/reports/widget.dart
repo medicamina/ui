@@ -86,7 +86,7 @@ class MedicaminaDashEdictsReportsWidget extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleLarge?.apply(fontWeightDelta: 1),
                         ),
                         const SizedBox(height: 3),
-                        Text('Prescription update', textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 16)),
+                        Text('Prescription update', textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 16, color: const Color.fromARGB(255, 132, 132, 132))),
                         const SizedBox(height: 3),
                         const Text('2mg Pencilin once daily 8am', textAlign: TextAlign.center),
                         const Spacer(flex: 3),

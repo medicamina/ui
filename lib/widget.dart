@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:medicamina_ui/states.dart';
+import 'package:geolocator/geolocator.dart';
 
 class MedicaminaAppWidget extends StatefulWidget {
   const MedicaminaAppWidget({super.key});
@@ -27,6 +27,11 @@ class _MedicaminaAppWidgetState extends State<MedicaminaAppWidget> {
       });
     });
     FlutterNativeSplash.remove();
+    getLocation();
+  }
+
+  void getLocation() async {
+    LocationPermission permission = await Geolocator.requestPermission();
   }
 
   @override

@@ -9,6 +9,7 @@ import 'package:medicamina_ui/dash/settings/open-source-license/widget.dart';
 import 'package:medicamina_ui/dash/settings/password/widget.dart';
 import 'package:medicamina_ui/dash/settings/personal/widget.dart';
 import 'package:medicamina_ui/dash/settings/phone-number/widget.dart';
+import 'package:medicamina_ui/dash/settings/physician/widget.dart';
 import 'package:medicamina_ui/states.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -29,12 +30,13 @@ class Navigation {
     required BuildContext context,
     required Widget screen,
     required NavigationRouteStyle style,
+    routeName
   }) async {
     Route? route;
     if (style == NavigationRouteStyle.cupertino) {
       route = CupertinoPageRoute<T>(builder: (_) => screen);
     } else if (style == NavigationRouteStyle.material) {
-      route = MaterialPageRoute<T>(builder: (_) => screen);
+      route = MaterialPageRoute<T>(builder: (_) => screen, settings: RouteSettings(name: routeName != null ? routeName : screen.runtimeType.toString()));
     }
 
     return await Navigator.push<dynamic>(context, route!);
@@ -165,7 +167,9 @@ class _MedicaminaDashSettingsWidgetState extends State<MedicaminaDashSettingsWid
             SettingsTile.navigation(
               title: Text('Physician account'),
               leading: Icon(CupertinoIcons.heart),
-              onPressed: (context) {},
+              onPressed: (context) {
+                Navigation.navigateTo(context: context, screen: MedicaminaDashSettingsPhysicianWidget(), style: NavigationRouteStyle.material, routeName: 'home');
+              },
             ),
             SettingsTile.navigation(
               title: Text('Administration'),

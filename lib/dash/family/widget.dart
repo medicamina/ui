@@ -4,47 +4,196 @@ import 'package:graphview/GraphView.dart';
 import 'package:medicamina_ui/states.dart';
 
 class MedicaminaDashFamilyWidget extends StatefulWidget {
+  const MedicaminaDashFamilyWidget({super.key});
+
   @override
   _MedicaminaDashFamilyWidget createState() => _MedicaminaDashFamilyWidget();
 }
 
-class _MedicaminaDashFamilyWidget extends State<MedicaminaDashFamilyWidget> {
-  // _MedicaminaDashFamilyWidget({Key? key}) : super(key: key);
-
+class _MedicaminaDashFamilyWidget extends State<MedicaminaDashFamilyWidget> with SingleTickerProviderStateMixin {
   final Graph graph = Graph()..isTree = true;
   BuchheimWalkerConfiguration builder = BuchheimWalkerConfiguration();
-  final TransformationController _transformationController =
-      TransformationController();
+  late Map<String, dynamic> json;
+  late TransformationController _transformationController;
+  late AnimationController _animationController;
+  late Animation<Matrix4> _animation;
+  double _totalWidth = 0.0;
+  double _totalHeight = 0.0;
+  GlobalKey _graphKey = GlobalKey();
+
+  void _calculateTotalWidth() {
+    RenderBox? graphBox = _graphKey.currentContext?.findRenderObject() as RenderBox?;
+
+    if (graphBox != null) {
+      setState(() {
+        _totalWidth = graphBox.size.width;
+        _totalHeight = graphBox.size.height;
+      });
+    } else {
+      print('Failed to calculate total width');
+    }
+  }
+
+  @override
+  void dispose() {
+    _transformationController.dispose();
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  Map<String, dynamic>? findNodeById(List<Map<String, dynamic>> nodes, int id) {
+    for (var node in nodes) {
+      if (node['id'] == id) {
+        return node;
+      }
+      // Check father
+      if (node.containsKey('father') && node['father'] != null) {
+        var foundNode = findNodeById([node['father']], id);
+        if (foundNode != null) {
+          return foundNode;
+        }
+      }
+      // Check mother
+      if (node.containsKey('mother') && node['mother'] != null) {
+        var foundNode = findNodeById([node['mother']], id);
+        if (foundNode != null) {
+          return foundNode;
+        }
+      }
+    }
+    return null;
+  }
+
+  void addEdgesFromNode(Map<String, dynamic>? node, Graph graph) {
+    if (node == null) return;
+
+    final int nodeId = node['id'];
+
+    void addParentEdge(String parentType) {
+      if (node.containsKey(parentType) && node[parentType] != null) {
+        final int parentId = node[parentType]['id'];
+        graph.addEdge(Node.Id(nodeId), Node.Id(parentId));
+
+        // Recursively add edges for the parent node
+        addEdgesFromNode(node[parentType], graph);
+      }
+    }
+
+    // Add edges for both father and mother
+    addParentEdge('father');
+    addParentEdge('mother');
+  }
 
   @override
   void initState() {
     super.initState();
-    final node1 = Node.Id(1);
-    final node2 = Node.Id(2);
-    // final node3 = Node.Id(3);
-    final node4 = Node.Id(4);
-    final node5 = Node.Id(5);
-    final node6 = Node.Id(6);
-    final node8 = Node.Id(7);
-    final node7 = Node.Id(8);
-    final node9 = Node.Id(9);
-    // final node10 = Node.Id(10);
-    final node11 = Node.Id(11);
-    final node12 = Node.Id(12);
-    final node13 = Node.Id(13);
+    _transformationController = TransformationController();
 
-    graph.addEdge(node1, node2);
-    // graph.addEdge(node1, node3, paint: Paint()..color = Colors.red);
-    graph.addEdge(node1, node4);
-    graph.addEdge(node2, node5);
-    graph.addEdge(node2, node6);
-    graph.addEdge(node6, node7);
-    graph.addEdge(node6, node8);
-    graph.addEdge(node4, node9);
-    // graph.addEdge(node4, node10);
-    graph.addEdge(node4, node11);
-    graph.addEdge(node11, node13);
-    graph.addEdge(node11, node12);
+    // Initialize the AnimationController
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+
+    json = {
+      'nodes': [
+        {
+          'id': 1,
+          'label': 'Jake Walklate',
+          'gender': 'person',
+          'father': {
+            'id': 2,
+            'label': 'Spencer Walklate',
+            'gender': 'male',
+            'father': {
+              'id': 4,
+              'label': 'Spencer Walklate',
+              'gender': 'male',
+              'father': {
+                'id': 8,
+                'label': 'Spencer Henry Walklate',
+                'gender': 'male',
+                'father': {'id': 16, 'label': 'Spencer Walklate', 'gender': 'male'},
+                'mother': {'id': 17, 'label': 'May Hope Ashton', 'gender': 'female'}
+              },
+              'mother': {
+                'id': 9,
+                'label': 'Linda Maude O\'Keeffe',
+                'gender': 'female',
+                'father': {'id': 18, 'label': 'Thomas O\'Keeffe', 'gender': 'male'},
+                'mother': {'id': 19, 'label': 'Annabella M Olive', 'gender': 'female'}
+              }
+            },
+            'mother': {
+              'id': 5,
+              'label': 'Janice White',
+              'gender': 'female',
+              'father': {
+                'id': 10,
+                'label': 'Stephen White',
+                'gender': 'male',
+                'father': {'id': 20, 'label': 'Aaron William White', 'gender': 'male'},
+                'mother': {'id': 21, 'label': 'Florence Eliza Thallin', 'gender': 'female'},
+              },
+              'mother': {
+                'id': 11,
+                'label': 'Thyra Lyell Burdon',
+                'gender': 'female',
+                'father': {'id': 22, 'label': 'Walter Ronald Burdon', 'gender': 'male'},
+                'mother': {'id': 23, 'label': 'Ida Isabel Smith', 'gender': 'female'},
+              },
+            },
+          },
+          'mother': {
+            'id': 3,
+            'label': 'Amanda Lennon',
+            'gender': 'female',
+            'mother': {
+              'id': 6,
+              'label': 'Linda Jury',
+              'gender': 'female',
+              'mother': {
+                'id': 15,
+                'label': 'Beatrice Caldwell',
+                'gender': 'female',
+                'father': {'id': 30, 'label': 'Alexander Francis Caldwell', 'gender': 'male'},
+                'mother': {'id': 31, 'label': 'Ada Eccelston', 'gender': 'female'},
+              },
+              'father': {
+                'id': 14,
+                'label': 'Jonathan Jury',
+                'gender': 'male',
+                'father': {'id': 28, 'label': 'Alfred John Jury', 'gender': 'male'},
+                'mother': {'id': 29, 'label': 'Miriam Price', 'gender': 'female'},
+              },
+            },
+            'father': {
+              'id': 7,
+              'label': 'Greg Lennon',
+              'gender': 'male',
+              'father': {
+                'id': 12,
+                'label': 'William Lennon',
+                'gender': 'male',
+                'father': {'id': 24, 'label': 'William Norman Lennon', 'gender': 'male'},
+                'mother': {'id': 25, 'label': 'Kathleen May Middleton', 'gender': 'female'},
+              },
+              'mother': {
+                'id': 13,
+                'label': 'Fay Blake',
+                'gender': 'female',
+                'father': {'id': 26, 'label': 'Aubrey James Blake', 'gender': 'male'},
+                'mother': {'id': 27, 'label': 'Lorna Jane Cook', 'gender': 'female'},
+              },
+            },
+          }
+        },
+      ],
+    };
+
+    json['nodes']?.forEach((element) {
+      addEdgesFromNode(element, graph);
+    });
 
     builder
       ..siblingSeparation = (80)
@@ -53,167 +202,192 @@ class _MedicaminaDashFamilyWidget extends State<MedicaminaDashFamilyWidget> {
       ..orientation = (BuchheimWalkerConfiguration.ORIENTATION_BOTTOM_TOP);
   }
 
+  void _animateTransformation(Matrix4 begin, Matrix4 end) {
+    _animation = Matrix4Tween(begin: begin, end: end).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    )..addListener(() {
+        _transformationController.value = _animation.value;
+      });
+
+    _animationController.forward(from: 0);
+  }
+
+  void _resetTransformation() {
+    _calculateTotalWidth();
+
+    if (_animationController.isAnimating) {
+      _animationController.stop();
+    }
+    _animateTransformation(
+      _transformationController.value,
+      Matrix4.identity()..translate(-_totalWidth / 1.5, -_totalHeight / 2),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          InteractiveViewer(
-            transformationController: _transformationController,
-            boundaryMargin: EdgeInsets.all(MediaQuery.of(context).size.width >
-                    MediaQuery.of(context).size.height
-                ? MediaQuery.of(context).size.height -
-                    (MediaQuery.of(context).size.height / 3)
-                : MediaQuery.of(context).size.width -
-                    (MediaQuery.of(context).size.width / 5)),
-            minScale: 1,
-            maxScale: 1.5,
-            child: OverflowBox(
-              alignment: Alignment.center,
-              minWidth: 0.0,
-              minHeight: 0.0,
-              maxWidth: MediaQuery.of(context).size.width < 768
-                  ? 894
-                  : MediaQuery.of(context).size.width + 92,
-              maxHeight: MediaQuery.of(context).size.height + 220,
-              child:
-                  // Container(
-
-                  //   child:
-                  GraphView(
-                algorithm: BuchheimWalkerAlgorithm(
-                  builder,
-                  TreeEdgeRenderer(builder),
-                ),
-                graph: graph,
-                paint: Paint()
-                  ..color = Theme.of(context).textTheme.bodyLarge!.color!
-                  ..strokeWidth = 1
-                  ..style = PaintingStyle.stroke,
-                builder: (Node node) {
-                  // I can decide what widget should be shown here based on the id
-                  var a = node.key?.value as int;
-                  return rectangleWidget(a, context);
-                },
-                // ),
-              ),
+    return Stack(
+      children: [
+        InteractiveViewer(
+          key: _graphKey,
+          transformationController: _transformationController,
+          constrained: false,
+          boundaryMargin: EdgeInsets.all(100),
+          minScale: 0.01,
+          maxScale: 5.6,
+          child: Container(
+            padding: EdgeInsets.all(50),
+            child: GraphView(
+              graph: graph,
+              algorithm: BuchheimWalkerAlgorithm(builder, TreeEdgeRenderer(builder)),
+              paint: Paint()
+                ..color = Colors.black
+                ..strokeWidth = 1.0
+                ..style = PaintingStyle.stroke,
+              builder: (Node node) {
+                var a = node.key?.value as int;
+                var nodes = json['nodes'];
+                var nodeValue = findNodeById(nodes, a);
+                return RectangleWidget(nodeValue, graph);
+              },
             ),
           ),
-          Column(
-            children: [
-              IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(Icons.remove),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(Icons.home),
-                onPressed: () {
-                  _transformationController.value = Matrix4.identity()
-                    ..translate(0.0, 0.0);
-                },
-              ),
-            ],
-          )
-        ],
-      ),
+        ),
+        Column(
+          children: [
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                final matrix = _transformationController.value;
+                final translation = matrix.getTranslation();
+                final focalPoint = Offset(translation.x, translation.y);
+
+                _transformationController.value = Matrix4.identity()
+                  ..translate(focalPoint.dx, focalPoint.dy)
+                  ..scale(1.5);
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.remove),
+              onPressed: () {
+                final matrix = _transformationController.value;
+                final translation = matrix.getTranslation();
+                final focalPoint = Offset(translation.x, translation.y);
+
+                _transformationController.value = Matrix4.identity()
+                  ..translate(translation.x, translation.y)
+                  ..scale(1.0000001);
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: _resetTransformation,
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
 
-Widget rectangleWidget(int a, BuildContext context) {
-  String getName(int b) {
-    if (a == 1) {
-      return 'Jake Walklate';
-    }
-    if (a == 2) {
-      return 'Spencer Walklate';
-    }
-    if (a == 4) {
-      return 'Amanda Lennon';
-    }
-    if (a == 5) {
-      return 'Spencer Walklate';
-    }
-    if (a == 6) {
-      return 'Janice White';
-    }
-    if (a == 7) {
-      return 'Thyra Burdon';
-    }
-    if (a == 8) {
-      return 'Stephen White';
-    }
-    if (a == 9) {
-      return 'Greg Lennon';
-    }
-    if (a == 11) {
-      return 'Linda Jury';
-    }
-    if (a == 12) {
-      return 'Beatrice Caldwell';
-    }
-    if (a == 13) {
-      return 'John Lennon';
-    }
-    return '';
+class RectangleWidget extends StatefulWidget {
+  final Map<String, dynamic>? nodeValue;
+  final Graph graph;
+
+  RectangleWidget(this.nodeValue, this.graph, {Key? key}) : super(key: key);
+
+  @override
+  State<RectangleWidget> createState() => _RectangleWidgetState();
+}
+
+class _RectangleWidgetState extends State<RectangleWidget> {
+  late String label;
+  late String gender;
+  bool activated = true;
+
+  @override
+  void initState() {
+    super.initState();
+    label = widget.nodeValue?['label'] ?? 'Unknown';
+    gender = widget.nodeValue?['gender'] ?? 'person';
   }
 
-  IconData getIcon(int a) {
-    if (a == 1) {
-      return Icons.person;
-    }
-    if (a == 2) {
+  IconData getIcon(String? gender) {
+    if (gender == 'male') {
       return Icons.man;
     }
-    if (a == 4) {
-      return Icons.woman;
-    }
-    if (a == 5) {
-      return Icons.man;
-    }
-    if (a == 6) {
-      return Icons.woman;
-    }
-    if (a == 7) {
-      return Icons.woman;
-    }
-    if (a == 8) {
-      return Icons.man;
-    }
-    if (a == 9) {
-      return Icons.man;
-    }
-    if (a == 11) {
-      return Icons.woman;
-    }
-    if (a == 12) {
+    if (gender == 'female') {
       return Icons.woman;
     }
     return Icons.person;
   }
 
-  return InkWell(
-    onTap: () {
-      print('clicked');
-    },
-    hoverColor: Colors.red,
-    child: Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        boxShadow: [
-          BoxShadow(
-              color: Modular.get<MedicaminaThemeState>().getDarkMode() ?  Theme.of(context).primaryColor : const Color.fromRGBO(187, 222, 251, 1), spreadRadius: 1),
-        ],
-      ),
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [Icon(getIcon(a)), Text(getName(a))],
+        children: [
+          SizedBox(
+            width: 130,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    ElevatedButton(onPressed: (() => {}), child: Icon(Icons.edit), style: ElevatedButton.styleFrom(elevation: 0)),
+                    Spacer(),
+                    ElevatedButton(
+                      onPressed: (() {
+                        setState(() {
+                          activated = !activated;
+                        });
+                        if (!activated) {
+                          widget.graph.removeNode(Node.Id(widget.nodeValue?['father']['id'])!);
+                          widget.graph.removeNode(Node.Id(widget.nodeValue?['mother']['id'])!);
+                        } else {
+                          widget.graph.addEdge(Node.Id(widget.nodeValue?['id']), Node.Id(widget.nodeValue?['father']['id']));
+                          widget.graph.addEdge(Node.Id(widget.nodeValue?['id']), Node.Id(widget.nodeValue?['mother']['id']));
+                        }
+                        widget.graph.notifyGraphObserver();
+                      }),
+                      style: ElevatedButton.styleFrom(elevation: 0),
+                      child: Icon(activated ? Icons.arrow_upward : Icons.arrow_downward),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 130,
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          boxShadow: [
+                            BoxShadow(color: Modular.get<MedicaminaThemeState>().getDarkMode() ? Theme.of(context).primaryColor : const Color.fromRGBO(187, 222, 251, 1), spreadRadius: 1),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Icon(getIcon(gender)),
+                            Text(
+                              label,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-    ),
-  );
+    );
+  }
 }

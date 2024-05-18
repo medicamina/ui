@@ -63,16 +63,32 @@ class MedicaminaUserState {
 
   MedicaminaUserState();
 
-  void login(String token) {
+  void login(String token) async {
     jwtToken = token;
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('jwtToken', jwtToken!);
   }
 
   void logout() {
     jwtToken = null;
   }
 
-  String? getToken() {
-    return jwtToken;
+  Future<String?> getToken() async {
+    if (jwtToken != null) {
+      return jwtToken;
+    }
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      final String? jwtToken = prefs.getString('jwtToken');
+
+      if (jwtToken != null) {
+        return jwtToken;
+      }
+    } catch (e) {
+      print(e);
+    }
+    return null;
   }
 }
 

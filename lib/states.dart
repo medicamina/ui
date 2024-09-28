@@ -70,8 +70,10 @@ class MedicaminaUserState {
     prefs.setString('jwtToken', jwtToken!);
   }
 
-  void logout() {
+  void logout() async {
     jwtToken = null;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('jwtToken');
   }
 
   Future<String?> getToken() async {

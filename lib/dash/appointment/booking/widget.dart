@@ -104,7 +104,7 @@ class _MedicaminaDashAppointmentBookingWidget extends State<MedicaminaDashAppoin
       options: Options(
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': Modular.get<MedicaminaUserState>().getToken() as String,
+          'Authorization': await Modular.get<MedicaminaUserState>().getToken() as String,
         },
         validateStatus: (status) => true,
       ),
@@ -116,6 +116,7 @@ class _MedicaminaDashAppointmentBookingWidget extends State<MedicaminaDashAppoin
     for (var clinic in response.data) {
       _clinics.add(clinic);
     }
+    // print(response.data[0]['clinic']['doctors']);
     setState(() {
       _clinics = _clinics;
       _loaded = true;
@@ -151,7 +152,7 @@ class _MedicaminaDashAppointmentBookingWidget extends State<MedicaminaDashAppoin
 
         if (clinic['clinic']['doctors'].isNotEmpty) {
           results = [];
-          for (var doctor in clinic['doctors']) {
+          for (var doctor in clinic['clinic']['doctors']) {
             String doctorName = doctor['name'].toLowerCase();
             String doctorSpeciality = doctor['speciality'].toLowerCase();
             fuzzy = Fuzzy([doctorName, doctorSpeciality]);
@@ -536,7 +537,8 @@ class _MedicaminaDashAppointmentBookingClinicWidget extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(4),
           onTap: () {
-            Modular.to.navigate('/dash/appointment/booking/' + clinic['id']);
+            Modular.to.navigate('/dash/appointment/doctor/' + clinic['id'], arguments: clinic['clinic']['doctors']);
+            // Modular.to.navigate('/dash/appointment/booking/' + clinic['id']);
           },
           child: Padding(
             padding: EdgeInsets.all(6),

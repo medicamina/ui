@@ -186,7 +186,7 @@ class _MedicaminaDashFamilyWidget extends State<MedicaminaDashFamilyWidget> with
                 'mother': {'id': 27, 'label': 'Lorna Jane Cook', 'gender': 'female'},
               },
             },
-          }
+          },
         },
       ],
     };
@@ -272,8 +272,7 @@ class _MedicaminaDashFamilyWidget extends State<MedicaminaDashFamilyWidget> with
               onPressed: () {
                 final matrix = _transformationController.value;
                 final translation = matrix.getTranslation();
-                final focalPoint = Offset(translation.x, translation.y);
-
+                
                 _transformationController.value = Matrix4.identity()
                   ..translate(translation.x, translation.y)
                   ..scale(1.0000001);
@@ -344,8 +343,10 @@ class _RectangleWidgetState extends State<RectangleWidget> {
                           activated = !activated;
                         });
                         if (!activated) {
-                          widget.graph.removeNode(Node.Id(widget.nodeValue?['father']['id'])!);
-                          widget.graph.removeNode(Node.Id(widget.nodeValue?['mother']['id'])!);
+                          // widget.graph.removeNode(Node.Id(widget.nodeValue?['father']['id'])!);
+                          // widget.graph.removeNode(Node.Id(widget.nodeValue?['mother']['id'])!);
+                          widget.graph.removeEdge(widget.graph.getEdgeBetween(Node.Id(widget.nodeValue?['id']), Node.Id(widget.nodeValue?['father']['id']))!);
+                          widget.graph.removeEdge(widget.graph.getEdgeBetween(Node.Id(widget.nodeValue?['id']), Node.Id(widget.nodeValue?['mother']['id']))!);
                         } else {
                           widget.graph.addEdge(Node.Id(widget.nodeValue?['id']), Node.Id(widget.nodeValue?['father']['id']));
                           widget.graph.addEdge(Node.Id(widget.nodeValue?['id']), Node.Id(widget.nodeValue?['mother']['id']));

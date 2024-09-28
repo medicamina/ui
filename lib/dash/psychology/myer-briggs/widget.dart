@@ -48,7 +48,7 @@ class MedicaminaPsychologyMyerBriggsWidget extends StatelessWidget {
                   padding: EdgeInsets.all(6),
                   child: Center(
                     child: Image.asset(
-                      'assets/images/campaigner.jpg',
+                      'assets/images/campaigner.png',
                     ),
                   ),
                 ),

@@ -1,14 +1,18 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:intl/intl.dart';
+import 'package:medicamina_ui/states.dart';
 import 'dart:math';
 import 'package:random_date/random_date.dart';
 
-final _random = new Random();
+final _random = Random();
 
-int next(int min, int max) => min + _random.nextInt(max - min);
+int next(int min, int max) {
+  return min + _random.nextInt(max - min);
+}
 
 class MedicaminaBookingCalendarSlot {
   late DateTime time;
@@ -28,6 +32,7 @@ class MedicaminaDashAppointmentBookingCalendar extends StatefulWidget {
 class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppointmentBookingCalendar> {
   List<DateTime> unavailableDates = [for (var i = 0; i < 500; i++) RandomDate.withRange(2024, 2025).random().copyWith(hour: next(8, 17), minute: (next(1, 2) % 2) == 0 ? 30 : 0)];
 
+  // TODO: Get this from the API
   List<MedicaminaBookingCalendarSlot> items = [
     MedicaminaBookingCalendarSlot(
       DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 8, 30),
@@ -129,10 +134,39 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
   late DateTime selectedDateTime = DateTime.now().subtract(const Duration(days: 1));
 
   DateTime initialDate = DateTime.now();
+  final dio = Dio();
+  late String doctorId;
+  late String clinicId;
+
+  void getDoctorData() async {
+    var url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/appointment/booking/$clinicId/$doctorId' : 'http://localhost:8080/dash/appointment/booking/$clinicId/$doctorId';
+    var response = await dio.post(
+      url,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': await Modular.get<MedicaminaUserState>().getToken() as String,
+        },
+        validateStatus: (status) => true,
+      ),
+      data: {
+      },
+    );
+
+    print(response.data);
+    setState(() {
+      // doctors = response.data['doctors'];
+    });
+  }
+
 
   @override
   void initState() {
     super.initState();
+    print(Modular.to.path);
+    doctorId = Modular.to.path.split('/').last;
+    clinicId = Modular.to.path.split('/')[Modular.to.path.split('/').length-1];
+    getDoctorData();
     for (var i = 0; i < items.length; i++) {
       if (unavailableDates.contains(items[i].time)) {
         setState(() {
@@ -216,7 +250,7 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(6),
+            padding: EdgeInsets.all(12),
             child: Row(
               children: [
                 Expanded(
@@ -224,6 +258,7 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
                     padding: EdgeInsets.symmetric(horizontal: 6),
                     child: OutlinedButton(
                       onPressed: () {
+                        print(Modular.to.navigateHistory.last.uri);
                         Modular.to.navigate('/dash/appointment/booking');
                       },
                       style: OutlinedButton.styleFrom(

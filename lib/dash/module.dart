@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:medicamina_ui/dash/appointment/booking/calender/widget.dart';
+import 'package:medicamina_ui/dash/appointment/booking/doctor/widget.dart';
 import 'package:medicamina_ui/dash/appointment/booking/widget.dart';
 
 // Medicamina
@@ -35,6 +36,7 @@ class MedicaminaDashModule extends Module {
       RedirectRoute('/dash/fitness/', to: '/dash/fitness'),
       RedirectRoute('/dash/appointment/', to: '/dash/appointment'),
       RedirectRoute('/dash/appointment/booking/', to: '/dash/appointment/booking'),
+      RedirectRoute('/dash/appointment/doctor/', to: '/dash/appointment/doctor'),
       // modules
       RedirectRoute('/dash/family', to: '/dash/family/'),
       RedirectRoute('/dash/psychology', to: '/dash/psychology/'),
@@ -51,6 +53,7 @@ class MedicaminaDashModule extends Module {
           RedirectRoute('/fitness/', to: '/fitness'),
           RedirectRoute('/appointment/', to: '/appointment'),
           RedirectRoute('/appointment/booking/', to: '/appointment/booking'),
+          RedirectRoute('/appointment/doctor/', to: '/appointment/doctor'),
           // modules
           RedirectRoute('/family', to: '/family/'),
           RedirectRoute('/psychology', to: '/psychology/'),
@@ -81,8 +84,17 @@ class MedicaminaDashModule extends Module {
             child: (context, args) => MedicaminaDashAppointmentBookingWidget(),
           ),
           ChildRoute(
-            '/appointment/booking/:id',
+            '/appointment/booking/:clinicId/:doctorId',
             child: (context, args) => MedicaminaDashAppointmentBookingCalendar(),
+          ),
+
+          ChildRoute(
+            '/appointment/doctor',
+            child: (context, args) => MedicaminaDashAppointmentDoctorWidget(),
+          ),
+          ChildRoute(
+            '/appointment/doctor/:clinicId',
+            child: (context, args) => MedicaminaDashAppointmentDoctorWidget(),
           ),
 
           // Modules

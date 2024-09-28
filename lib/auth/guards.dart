@@ -5,7 +5,7 @@ class MedicaminaAuthGuard extends RouteGuard {
   MedicaminaAuthGuard() : super(redirectTo: '/dash');
 
   @override
-  bool canActivate(String path, ModularRoute route) {
-    return Modular.get<MedicaminaUserState>().getToken() == null;
+  Future<bool> canActivate(String path, ModularRoute route) async {
+    return await Modular.get<MedicaminaUserState>().getToken() == null;
   }
 }

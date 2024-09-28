@@ -40,7 +40,7 @@ class _MedicaminaDashSettingsPhysicianWidgetState extends State<MedicaminaDashSe
         options: Options(
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': Modular.get<MedicaminaUserState>().getToken(),
+            'Authorization': await Modular.get<MedicaminaUserState>().getToken(),
           },
           validateStatus: (status) => true,
         ),

@@ -109,10 +109,11 @@ class _MedicaminaDashAppointmentBookingWidget extends State<MedicaminaDashAppoin
         validateStatus: (status) => true,
       ),
       data: {
-        'latitude': position!.latitude,
         'longitude': position!.longitude,
-      },
+        'latitude': position!.latitude,
+      }
     );
+
     for (var clinic in response.data) {
       _clinics.add(clinic);
     }
@@ -350,7 +351,14 @@ class _MedicaminaDashAppointmentBookingWidget extends State<MedicaminaDashAppoin
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(4)),
                   ),
-                  child: Text('No results nearby to show'),
+                  child: Container(
+                      height: 100,
+                      width: double.infinity,
+                      // color: Colors.white,
+                      child: Center(
+                        child: Text('No practices found'),
+                      ),
+                    ),
                 ),
               ],
             ),

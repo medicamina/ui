@@ -31,105 +31,9 @@ class MedicaminaDashAppointmentBookingCalendar extends StatefulWidget {
 
 class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppointmentBookingCalendar> {
   List<DateTime> unavailableDates = [for (var i = 0; i < 500; i++) RandomDate.withRange(2024, 2025).random().copyWith(hour: next(8, 17), minute: (next(1, 2) % 2) == 0 ? 30 : 0)];
-
+  List<String> weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   // TODO: Get this from the API
-  List<MedicaminaBookingCalendarSlot> items = [
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 8, 30),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 9, 00),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 9, 30),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 10, 00),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 10, 30),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 11, 00),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 11, 30),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 12, 00),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 12, 30),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 13, 00),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 13, 30),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 14, 00),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 14, 30),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 15, 00),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 15, 30),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 16, 00),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 16, 30),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 17, 00),
-      false,
-      true,
-    ),
-    MedicaminaBookingCalendarSlot(
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 17, 30),
-      false,
-      true,
-    ),
-  ];
+  List<MedicaminaBookingCalendarSlot> items = [];
 
   late DateTime selectedDateTime = DateTime.now().subtract(const Duration(days: 1));
 
@@ -137,10 +41,11 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
   final dio = Dio();
   late String doctorId;
   late String clinicId;
+  var doctorData = null;
 
   void getDoctorData() async {
     var url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/appointment/booking/$clinicId/$doctorId' : 'http://localhost:8080/dash/appointment/booking/$clinicId/$doctorId';
-    var response = await dio.post(
+    var response = await dio.get(
       url,
       options: Options(
         headers: {
@@ -149,32 +54,256 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
         },
         validateStatus: (status) => true,
       ),
-      data: {
-      },
     );
 
-    print(response.data);
     setState(() {
-      // doctors = response.data['doctors'];
+      doctorData = response.data;
     });
-  }
 
+    for (var hour in doctorData['hours']) {
+      if (hour['clinicId'] == clinicId) {
+        if (hour['doctorId'] == doctorId) {
+          if (hour['isClinic'] == false) {
+            var dateNow = DateTime.now();
+            String dayName = weekdays[dateNow.weekday - 1];
+            switch (dayName) {
+              case 'Sunday':
+                {
+                  var openTime = DateTime.parse(hour['sundayOpen']).toLocal();
+                  var closeTime = DateTime.parse(hour['sundayClose']).toLocal();
+
+                  var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                  var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                  var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                  var lastDate = openDate;
+
+                  var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                  int consultLength = int.parse(hour['consultLength'].toString());
+
+                  int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                  items = [];
+                  for (var i = 0; i < numberOfIntervals; i++) {
+                    if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                      break;
+                    }
+
+                    items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                    items[i].isAvailable = hour['sundayOperating'];
+
+                    var newDate = lastDate.add(Duration(minutes: consultLength));
+                    lastDate = newDate;
+                  }
+                  break;
+                }
+              case 'Monday':
+                {
+                  var openTime = DateTime.parse(hour['mondayOpen']).toLocal();
+                  var closeTime = DateTime.parse(hour['mondayClose']).toLocal();
+
+                  var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                  var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                  var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                  var lastDate = openDate;
+
+                  var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                  int consultLength = int.parse(hour['consultLength'].toString());
+
+                  int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                  items = [];
+                  for (var i = 0; i < numberOfIntervals; i++) {
+                    if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                      break;
+                    }
+
+                    items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                    items[i].isAvailable = hour['mondayOperating'];
+
+                    var newDate = lastDate.add(Duration(minutes: consultLength));
+                    lastDate = newDate;
+                  }
+                  break;
+                }
+              case 'Tuesday':
+                {
+                  var openTime = DateTime.parse(hour['tuesdayOpen']).toLocal();
+                  var closeTime = DateTime.parse(hour['tuesdayClose']).toLocal();
+
+                  var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                  var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                  var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                  var lastDate = openDate;
+
+                  var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                  int consultLength = int.parse(hour['consultLength'].toString());
+
+                  int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                  items = [];
+                  for (var i = 0; i < numberOfIntervals; i++) {
+                    if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                      break;
+                    }
+
+                    items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                    items[i].isAvailable = hour['tuesdayOperating'];
+
+                    var newDate = lastDate.add(Duration(minutes: consultLength));
+                    lastDate = newDate;
+                  }
+                  break;
+                }
+              case 'Wednesday':
+                {
+                  var openTime = DateTime.parse(hour['wednesdayOpen']).toLocal();
+                  var closeTime = DateTime.parse(hour['wednesdayClose']).toLocal();
+
+                  var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                  var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                  var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                  var lastDate = openDate;
+
+                  var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                  int consultLength = int.parse(hour['consultLength'].toString());
+
+                  int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                  items = [];
+                  for (var i = 0; i < numberOfIntervals; i++) {
+                    if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                      break;
+                    }
+
+                    items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                    items[i].isAvailable = hour['wednesdayOperating'];
+
+                    var newDate = lastDate.add(Duration(minutes: consultLength));
+                    lastDate = newDate;
+                  }
+                  break;
+                }
+              case 'Thursday':
+                {
+                  var openTime = DateTime.parse(hour['thursdayOpen']).toLocal();
+                  var closeTime = DateTime.parse(hour['thursdayClose']).toLocal();
+
+                  var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                  var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                  var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                  var lastDate = openDate;
+
+                  var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                  int consultLength = int.parse(hour['consultLength'].toString());
+
+                  int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                  items = [];
+                  for (var i = 0; i < numberOfIntervals; i++) {
+                    if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                      break;
+                    }
+
+                    items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                    items[i].isAvailable = hour['thursdayOperating'];
+
+                    var newDate = lastDate.add(Duration(minutes: consultLength));
+                    lastDate = newDate;
+                  }
+                  break;
+                }
+              case 'Friday':
+                {
+                  var openTime = DateTime.parse(hour['fridayOpen']).toLocal();
+                  var closeTime = DateTime.parse(hour['fridayClose']).toLocal();
+
+                  var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                  var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                  var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                  var lastDate = openDate;
+
+                  var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                  int consultLength = int.parse(hour['consultLength'].toString());
+
+                  int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                  items = [];
+                  for (var i = 0; i < numberOfIntervals; i++) {
+                    if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                      break;
+                    }
+
+                    items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                    items[i].isAvailable = hour['fridayOperating'];
+
+                    var newDate = lastDate.add(Duration(minutes: consultLength));
+                    lastDate = newDate;
+                  }
+                  break;
+                }
+              case 'Saturday':
+                {
+                  var openTime = DateTime.parse(hour['saturdayOpen']).toLocal();
+                  var closeTime = DateTime.parse(hour['saturdayClose']).toLocal();
+
+                  var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                  var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                  var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                  var lastDate = openDate;
+
+                  var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                  int consultLength = int.parse(hour['consultLength'].toString());
+
+                  int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                  items = [];
+                  for (var i = 0; i < numberOfIntervals; i++) {
+                    if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                      break;
+                    }
+
+                    items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                    items[i].isAvailable = hour['saturdayOperating'];
+
+                    var newDate = lastDate.add(Duration(minutes: consultLength));
+                    lastDate = newDate;
+                  }
+                  break;
+                }
+            }
+          }
+        }
+      }
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    print(Modular.to.path);
     doctorId = Modular.to.path.split('/').last;
-    clinicId = Modular.to.path.split('/')[Modular.to.path.split('/').length-1];
+    clinicId = Modular.to.path.split('/')[Modular.to.path.split('/').length - 2];
     getDoctorData();
-    for (var i = 0; i < items.length; i++) {
-      if (unavailableDates.contains(items[i].time)) {
-        setState(() {
-          items[i].isAvailable = false;
-        });
-        ;
-      }
-    }
   }
 
   @override
@@ -189,11 +318,248 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
             firstDate: DateTime.now().subtract(const Duration(days: 1)),
             lastDate: DateTime.now().add(const Duration(days: 180)),
             onDateSelected: (date) => setState(() {
+              // get the day
+              var lastDate;
+
               if (date.day != initialDate.day || date.month != initialDate.month || date.year != initialDate.year) {
+                for (var hour in doctorData['hours']) {
+                  if (hour['clinicId'] == clinicId) {
+                    if (hour['doctorId'] == doctorId) {
+                      if (hour['isClinic'] == false) {
+                        String dayName = weekdays[date.weekday - 1];
+                        switch (dayName) {
+                          case 'Sunday':
+                            {
+                              var openTime = DateTime.parse(hour['sundayOpen']).toLocal();
+                              var closeTime = DateTime.parse(hour['sundayClose']).toLocal();
+
+                              var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                              var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                              var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                              var lastDate = openDate;
+
+                              var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                              int consultLength = int.parse(hour['consultLength'].toString());
+
+                              int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                              items = [];
+                              for (var i = 0; i < numberOfIntervals; i++) {
+                                if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                                  break;
+                                }
+
+                                items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                                items[i].isAvailable = hour['sundayOperating'];
+
+                                var newDate = lastDate.add(Duration(minutes: consultLength));
+                                lastDate = newDate;
+                              }
+                              break;
+                            }
+                          case 'Monday':
+                            {
+                              var openTime = DateTime.parse(hour['mondayOpen']).toLocal();
+                              var closeTime = DateTime.parse(hour['mondayClose']).toLocal();
+
+                              var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                              var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                              var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                              var lastDate = openDate;
+
+                              var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                              int consultLength = int.parse(hour['consultLength'].toString());
+
+                              int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                              items = [];
+                              for (var i = 0; i < numberOfIntervals; i++) {
+                                if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                                  break;
+                                }
+
+                                items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                                items[i].isAvailable = hour['mondayOperating'];
+
+                                var newDate = lastDate.add(Duration(minutes: consultLength));
+                                lastDate = newDate;
+                              }
+                              break;
+                            }
+                          case 'Tuesday':
+                            {
+                              var openTime = DateTime.parse(hour['tuesdayOpen']).toLocal();
+                              var closeTime = DateTime.parse(hour['tuesdayClose']).toLocal();
+
+                              var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                              var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                              var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                              var lastDate = openDate;
+
+                              var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                              int consultLength = int.parse(hour['consultLength'].toString());
+
+                              int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                              items = [];
+                              for (var i = 0; i < numberOfIntervals; i++) {
+                                if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                                  break;
+                                }
+
+                                items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                                items[i].isAvailable = hour['tuesdayOperating'];
+
+                                var newDate = lastDate.add(Duration(minutes: consultLength));
+                                lastDate = newDate;
+                              }
+                              break;
+                            }
+                          case 'Wednesday':
+                            {
+                              var openTime = DateTime.parse(hour['wednesdayOpen']).toLocal();
+                              var closeTime = DateTime.parse(hour['wednesdayClose']).toLocal();
+
+                              var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                              var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                              var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                              var lastDate = openDate;
+
+                              var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                              int consultLength = int.parse(hour['consultLength'].toString());
+
+                              int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                              items = [];
+                              for (var i = 0; i < numberOfIntervals; i++) {
+                                if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                                  break;
+                                }
+
+                                items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                                items[i].isAvailable = hour['wednesdayOperating'];
+
+                                var newDate = lastDate.add(Duration(minutes: consultLength));
+                                lastDate = newDate;
+                              }
+                              break;
+                            }
+                          case 'Thursday':
+                            {
+                              var openTime = DateTime.parse(hour['thursdayOpen']).toLocal();
+                              var closeTime = DateTime.parse(hour['thursdayClose']).toLocal();
+
+                              var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                              var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                              var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                              var lastDate = openDate;
+
+                              var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                              int consultLength = int.parse(hour['consultLength'].toString());
+
+                              int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                              items = [];
+                              for (var i = 0; i < numberOfIntervals; i++) {
+                                if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                                  break;
+                                }
+
+                                items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                                items[i].isAvailable = hour['thursdayOperating'];
+
+                                var newDate = lastDate.add(Duration(minutes: consultLength));
+                                lastDate = newDate;
+                              }
+                              break;
+                            }
+                          case 'Friday':
+                            {
+                              var openTime = DateTime.parse(hour['fridayOpen']).toLocal();
+                              var closeTime = DateTime.parse(hour['fridayClose']).toLocal();
+
+                              var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                              var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                              var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                              var lastDate = openDate;
+
+                              var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                              int consultLength = int.parse(hour['consultLength'].toString());
+
+                              int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                              items = [];
+                              for (var i = 0; i < numberOfIntervals; i++) {
+                                if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                                  break;
+                                }
+
+                                items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                                items[i].isAvailable = hour['fridayOperating'];
+
+                                var newDate = lastDate.add(Duration(minutes: consultLength));
+                                lastDate = newDate;
+                              }
+                              break;
+                            }
+                          case 'Saturday':
+                            {
+                              var openTime = DateTime.parse(hour['saturdayOpen']).toLocal();
+                              var closeTime = DateTime.parse(hour['saturdayClose']).toLocal();
+
+                              var commonDate = DateTime(2000, 1, 1); // Or you can use DateTime.now() if needed
+
+                              var openDate = DateTime(commonDate.year, commonDate.month, commonDate.day, openTime.hour, openTime.minute);
+                              var closeDate = DateTime(commonDate.year, commonDate.month, commonDate.day, closeTime.hour, closeTime.minute);
+
+                              var lastDate = openDate;
+
+                              var dateDifference = closeDate.difference(openDate).inMinutes; // positive number
+
+                              int consultLength = int.parse(hour['consultLength'].toString());
+
+                              int numberOfIntervals = (dateDifference / consultLength).floor();
+
+                              items = [];
+                              for (var i = 0; i < numberOfIntervals; i++) {
+                                if (lastDate.isAfter(closeDate) || lastDate.isAtSameMomentAs(closeDate)) {
+                                  break;
+                                }
+
+                                items.add(MedicaminaBookingCalendarSlot(DateTime(lastDate.year, lastDate.month, lastDate.day, lastDate.hour, lastDate.minute), false, true));
+                                items[i].isAvailable = hour['saturdayOperating'];
+
+                                var newDate = lastDate.add(Duration(minutes: consultLength));
+                                lastDate = newDate;
+                              }
+                              break;
+                            }
+                        }
+                      }
+                    }
+                  }
+                }
+
                 for (var i = 0; i < items.length; i++) {
-                  items[i].time = date.copyWith(hour: items[i].time.hour, minute: items[i].time.minute);
                   items[i].isSelected = false;
-                  items[i].isAvailable = true;
                   if (unavailableDates.contains(items[i].time)) {
                     items[i].isAvailable = false;
                   }
@@ -206,6 +572,7 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
                   }
                 }
               }
+
               initialDate = date;
             }),
             leftMargin: MediaQuery.of(context).size.width * 0.35,
@@ -220,6 +587,8 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
             locale: 'en_ISO',
           ),
           SizedBox(height: 12),
+          if (items.length == 0)
+            Center(child: CircularProgressIndicator()),
           Expanded(
             child: GridView.builder(
               padding: EdgeInsets.all(6),
@@ -258,7 +627,6 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
                     padding: EdgeInsets.symmetric(horizontal: 6),
                     child: OutlinedButton(
                       onPressed: () {
-                        print(Modular.to.navigateHistory.last.uri);
                         Modular.to.navigate('/dash/appointment/booking');
                       },
                       style: OutlinedButton.styleFrom(
@@ -276,7 +644,9 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 6),
                     child: OutlinedButton(
-                      onPressed: !selectedDateTime.isBefore(DateTime.now()) ? () {} : null,
+                      onPressed: !selectedDateTime.isBefore(DateTime.now()) ? () {
+                        
+                      } : null,
                       child: Text('Book'),
                     ),
                   ),

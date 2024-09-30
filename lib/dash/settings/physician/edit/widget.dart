@@ -58,6 +58,7 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
           saturdayClose = TimeOfDay.fromDateTime(DateTime.parse(widget.clinic['hours'][i]['saturdayClose']).toLocal());
           saturdayOperating = widget.clinic['hours'][i]['saturdayOperating'];
           _currentIntValue = widget.clinic['hours'][i]['consultLength'] ?? 15;
+          callToBook = widget.clinic['hours'][i]['callToBook'] ?? false;
         });
       }
     }
@@ -96,8 +97,6 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
     }
     return zero.toString();
   }
-
-  bool phoneCallOnly = false;
 
   bool sundayOperating = true;
   TimeOfDay? sundayOpen = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 9, 0));
@@ -140,6 +139,8 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
   TimeOfDay? saturdayOpenUtc;
   TimeOfDay? saturdayClose = TimeOfDay.fromDateTime(DateTime(2000, 0, 0, 17, 0));
   TimeOfDay? saturdayCloseUtc;
+
+  bool callToBook = false;
 
   @override
   Widget build(BuildContext context) {
@@ -228,7 +229,7 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
         SettingsSection(
           tiles: [
             SettingsTile(
-              title: Text('Consult length'),
+              title: Text('Consult length', overflow: TextOverflow.ellipsis),
               trailing: Row(
                 children: [
                   IconButton(
@@ -239,6 +240,7 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
                     }),
                   ),
                   NumberPicker(
+                    itemWidth: 50,
                     axis: Axis.horizontal,
                     value: _currentIntValue,
                     minValue: 5,
@@ -264,10 +266,10 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
           tiles: [
             SettingsTile.switchTile(
               title: Text('Available via phone call booking only'),
-              initialValue: phoneCallOnly,
+              initialValue: callToBook,
               onToggle: (bool value) {
                 setState(() {
-                  phoneCallOnly = value;
+                  callToBook = value;
                 });
                 if (value == true) {
                   setState(() {
@@ -298,6 +300,7 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
           tiles: [
             SettingsTile.switchTile(
               title: Text('Sunday'),
+              enabled: !callToBook,
               initialValue: sundayOperating,
               onToggle: (bool value) {
                 setState(() {
@@ -434,6 +437,7 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
             SettingsTile.switchTile(
               title: Text('Monday'),
               initialValue: mondayOperating,
+              enabled: !callToBook,
               onToggle: (bool value) {
                 setState(() {
                   mondayOperating = value;
@@ -568,6 +572,7 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
           tiles: [
             SettingsTile.switchTile(
               title: Text('Tuesday'),
+              enabled: !callToBook,
               initialValue: tuesdayOperating,
               onToggle: (value) {
                 setState(() {
@@ -703,6 +708,7 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
           tiles: [
             SettingsTile.switchTile(
               title: Text('Wednesday'),
+              enabled: !callToBook,
               initialValue: wednesdayOperating,
               onToggle: (value) {
                 setState(() {
@@ -846,6 +852,7 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
           tiles: [
             SettingsTile.switchTile(
               title: Text('Thursday'),
+              enabled: !callToBook,
               initialValue: thursdayOperating,
               onToggle: (value) {
                 setState(() {
@@ -988,6 +995,7 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
           tiles: [
             SettingsTile.switchTile(
               title: Text('Friday'),
+              enabled: !callToBook,
               initialValue: fridayOperating,
               onToggle: (value) {
                 setState(() {
@@ -1122,6 +1130,7 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
           tiles: [
             SettingsTile.switchTile(
               title: Text('Saturday'),
+              enabled: !callToBook,
               initialValue: saturdayOperating,
               onToggle: (value) {
                 setState(() {
@@ -1388,7 +1397,8 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
                                   'saturdayOpen': '${DateTime(2000, 1, 1, saturdayOpenUtc!.hour, saturdayOpenUtc!.minute).toIso8601String()}Z',
                                   'saturdayClose': '${DateTime(2000, 1, 1, saturdayCloseUtc!.hour, saturdayCloseUtc!.minute).toIso8601String()}Z',
                                   'saturdayOperating': saturdayOperating,
-                                  'consultLength': _currentIntValue
+                                  'consultLength': _currentIntValue,
+                                  'callToBook': callToBook,
                                 },
                               );
                               if (response.statusCode == 200) {

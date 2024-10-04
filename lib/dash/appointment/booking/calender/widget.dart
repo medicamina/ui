@@ -587,8 +587,7 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
             locale: 'en_ISO',
           ),
           SizedBox(height: 12),
-          if (items.length == 0)
-            Center(child: CircularProgressIndicator()),
+          if (items.length == 0) Center(child: CircularProgressIndicator()),
           Expanded(
             child: GridView.builder(
               padding: EdgeInsets.all(6),
@@ -644,9 +643,30 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 6),
                     child: OutlinedButton(
-                      onPressed: !selectedDateTime.isBefore(DateTime.now()) ? () {
-                        
-                      } : null,
+                      onPressed: () async {
+                        // print(selectedDateTime);
+                        // print(initialDate);
+                        var selectedTime = DateTime(initialDate.year, initialDate.month, initialDate.day, selectedDateTime.hour, selectedDateTime.minute, selectedDateTime.second);
+                        print(selectedTime);
+
+                        var url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/appointment/booking/$clinicId/$doctorId' : 'http://localhost:8080/dash/appointment/booking/$clinicId/$doctorId';
+                        var result = await dio.post(
+                          url,
+                          options: Options(
+                            headers: {
+                              'Content-Type': 'application/json; charset=UTF-8',
+                              'Authorization': await Modular.get<MedicaminaUserState>().getToken() as String,
+                            },
+                            validateStatus: (status) => true,
+                          ),
+                          data: {
+                            'time': selectedTime.toString()
+                          }
+                        );
+
+
+                        Modular.to.navigate('/dash/appointment/booking');
+                      },
                       child: Text('Book'),
                     ),
                   ),

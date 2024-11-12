@@ -63,5 +63,14 @@
 			<key>YourPurposeKey</key>
 			<string>medicamina requires temporary access to the device&apos;s precise location.</string>
 		</dict>
+		<key>NSHealthShareUsageDescription</key>
+		<string>We will sync your data with the Apple Health app to give you better insights</string>
+		<key>NSHealthUpdateUsageDescription</key>
+		<string>We will sync your data with the Apple Health app to give you better insights</string>
+		<key>UIBackgroundModes</key>
+		<array>
+			<string>fetch</string>
+		</array>
+
 	</dict>
 </plist>

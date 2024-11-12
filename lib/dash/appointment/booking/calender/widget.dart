@@ -580,7 +580,7 @@ class _MedicaminaDashAppointmentBookingCalendar extends State<MedicaminaDashAppo
             dayColor: Theme.of(context).colorScheme.primary,
             activeDayColor: Colors.white,
             activeBackgroundDayColor: Theme.of(context).colorScheme.primary,
-            dotsColor: Color(0xFF333A47),
+            dotColor: Color(0xFF333A47),
             selectableDayPredicate: (date) {
               return date.isAfter(DateTime.now().subtract(const Duration(days: 1)));
             },

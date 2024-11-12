@@ -23,9 +23,8 @@ dependencies:
   google_fonts: ^6.1.0
   flutter_modular: ^5.0.3
   date_time_picker:
-    git:
-      url: https://github.com/arsarsars1/date_time_picker.git
-      ref: new_version
+       git:
+         url: https://github.com/yuan-kuan/date_time_picker.git
   fl_chart: ^0.66.1
   flutter_svg: ^2.0.5
   qr_flutter: ^4.0.0
@@ -33,7 +32,7 @@ dependencies:
   graphview: ^1.2.0
   firebase_core: ^2.24.2
   universal_io: ^2.2.2
-  intl: ^0.18.1
+  intl: ^0.19.0
   calendar_timeline: ^1.1.2
   device_preview: ^1.1.0
   random_date: ^0.0.7

@@ -59,7 +59,7 @@ class MedicaminaDashSettingsBillingMobileWidget extends StatelessWidget {
                             Text('\$0',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline5
+                                    .headlineSmall
                                     ?.copyWith(fontWeight: FontWeight.w600)),
                             const SizedBox(height: 20),
                             TextButton(
@@ -93,7 +93,7 @@ Card(
                             Text('Friday',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline5
+                                    .headlineSmall
                                     ?.copyWith(fontWeight: FontWeight.w600)),
                             const SizedBox(height: 20),
                             TextButton(

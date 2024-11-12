@@ -24,7 +24,28 @@ void backgroundFetchHeadlessTask(String taskId) async {
   final health = HealthFactory();
 
   // Define the data type to fetch (steps)
-  var types = [HealthDataType.STEPS];
+  var types = [
+    HealthDataType.STEPS,
+    HealthDataType.WEIGHT,
+    HealthDataType.HEIGHT,
+    HealthDataType.BLOOD_GLUCOSE,
+    HealthDataType.BLOOD_PRESSURE_SYSTOLIC,
+    HealthDataType.BLOOD_PRESSURE_DIASTOLIC,
+    HealthDataType.HEART_RATE,
+    HealthDataType.BODY_TEMPERATURE,
+    HealthDataType.ACTIVE_ENERGY_BURNED,
+    HealthDataType.BASAL_ENERGY_BURNED,
+    HealthDataType.WATER,
+    HealthDataType.SLEEP_IN_BED,
+    HealthDataType.SLEEP_ASLEEP,
+    HealthDataType.SLEEP_AWAKE,
+    HealthDataType.SLEEP_DEEP,
+    HealthDataType.SLEEP_LIGHT,
+    HealthDataType.SLEEP_REM,
+  ];
+
+  // requesting access to the data types before reading them
+  bool requested = await health.requestAuthorization(types);
 
   // Fetch data from midnight until now
   DateTime midnight = DateTime.now();

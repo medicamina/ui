@@ -126,56 +126,56 @@ class MedicaminaDashFitnessActivityLineChart extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.only(top: 0),
                               child: Text('2am',
-                                  style: Theme.of(context).textTheme.caption),
+                                  style: Theme.of(context).textTheme.bodySmall),
                             );
                           }
                           if (value == 5) {
                             return Padding(
                               padding: const EdgeInsets.only(top: 0),
                               child: Text('5am',
-                                  style: Theme.of(context).textTheme.caption),
+                                  style: Theme.of(context).textTheme.bodySmall),
                             );
                           }
                           if (value == 8) {
                             return Padding(
                               padding: const EdgeInsets.only(top: 0),
                               child: Text('8am',
-                                  style: Theme.of(context).textTheme.caption),
+                                  style: Theme.of(context).textTheme.bodySmall),
                             );
                           }
                           if (value == 11) {
                             return Padding(
                               padding: const EdgeInsets.only(top: 0),
                               child: Text('11am',
-                                  style: Theme.of(context).textTheme.caption),
+                                  style: Theme.of(context).textTheme.bodySmall),
                             );
                           }
                           if (value == 14) {
                             return Padding(
                               padding: const EdgeInsets.only(top: 0),
                               child: Text('2pm',
-                                  style: Theme.of(context).textTheme.caption),
+                                  style: Theme.of(context).textTheme.bodySmall),
                             );
                           }
                           if (value == 17) {
                             return Padding(
                               padding: const EdgeInsets.only(top: 0),
                               child: Text('5pm',
-                                  style: Theme.of(context).textTheme.caption),
+                                  style: Theme.of(context).textTheme.bodySmall),
                             );
                           }
                           if (value == 20) {
                             return Padding(
                               padding: const EdgeInsets.only(top: 0),
                               child: Text('8pm',
-                                  style: Theme.of(context).textTheme.caption),
+                                  style: Theme.of(context).textTheme.bodySmall),
                             );
                           }
                           if (value == 23) {
                             return Padding(
                               padding: const EdgeInsets.only(top: 0),
                               child: Text('11pm',
-                                  style: Theme.of(context).textTheme.caption),
+                                  style: Theme.of(context).textTheme.bodySmall),
                             );
                           }
                           return const Text('');

@@ -201,7 +201,7 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
                               options: Options(
                                 headers: {
                                   'Content-Type': 'application/json; charset=UTF-8',
-                                  'Authorization': await Modular.get<MedicaminaUserState>().getToken(),
+                                  'authorization': await Modular.get<MedicaminaUserState>().getToken(),
                                 },
                                 validateStatus: (status) => true,
                               ),
@@ -1370,7 +1370,7 @@ class _MedicaminaDashSettingsPhysicianClinicEditWidgetState extends State<Medica
                                 options: Options(
                                   headers: {
                                     'Content-Type': 'application/json; charset=UTF-8',
-                                    'Authorization': await Modular.get<MedicaminaUserState>().getToken() as String,
+                                    'authorization': await Modular.get<MedicaminaUserState>().getToken() as String,
                                   },
                                   validateStatus: (status) => true,
                                 ),

@@ -91,7 +91,7 @@ class _MedicaminaDashSettingsClinicJoinWidgetState extends State<MedicaminaDashS
                                     options: Options(
                                       headers: {
                                         'Content-Type': 'application/json; charset=UTF-8',
-                                        'Authorization': await Modular.get<MedicaminaUserState>().getToken() as String,
+                                        'authorization': await Modular.get<MedicaminaUserState>().getToken() as String,
                                       },
                                       validateStatus: (status) => true,
                                     ),

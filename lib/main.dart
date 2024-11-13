@@ -19,11 +19,7 @@ import 'package:medicamina_ui/module.dart';
 import 'package:medicamina_ui/widget.dart';
 import 'package:medicamina_ui/firebase_options.dart';
 
-/// Background fetch task for Apple Health (iOS)
 void backgroundFetchHeadlessTask(String taskId) async {
-  final health = HealthFactory();
-
-  // Define the data type to fetch (steps)
   var types = [
     HealthDataType.STEPS,
     HealthDataType.WEIGHT,
@@ -44,25 +40,25 @@ void backgroundFetchHeadlessTask(String taskId) async {
     HealthDataType.SLEEP_REM,
   ];
 
-  // requesting access to the data types before reading them
-  bool requested = await health.requestAuthorization(types);
+  bool requested = await Health().requestAuthorization(types);
+  if (!requested) {
+    print('Authorization failed');
+  }
 
   // Fetch data from midnight until now
   DateTime midnight = DateTime.now();
   midnight = DateTime(midnight.year, midnight.month, midnight.day);
 
-  List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(
-    midnight,
-    DateTime.now(),
-    types,
+  List<HealthDataPoint> healthData = await Health().getHealthDataFromTypes(
+    types: types,
+    startTime: midnight,
+    endTime: DateTime.now(),
   );
 
-  // Process and log the fetched steps
   healthData.forEach((point) {
-    print('Background steps: ${point.value}');
+    print('Fetched data - Type: ${point.type}, Value: ${point.value}, Date: ${point.dateFrom}');
   });
 
-  // Finish the background fetch task
   BackgroundFetch.finish(taskId);
 }
 
@@ -151,14 +147,17 @@ Future<void> main() async {
   }
 
   if (Platform.isIOS) {
+    Health().configure();
+
     // Initialize Background Fetch for iOS
     BackgroundFetch.configure(
         BackgroundFetchConfig(
           minimumFetchInterval: 15, // Fetch every 15 minutes
           stopOnTerminate: false, // Continue in background even after termination
           enableHeadless: true, // Allow headless execution
+          startOnBoot: true,
         ), (String taskId) async {
-      // Handle background fetch trigger (iOS)
+      print('Hello world');
       backgroundFetchHeadlessTask(taskId);
     }, (String taskId) async {
       print("[BackgroundFetch] TASK TIMEOUT taskId: $taskId");

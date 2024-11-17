@@ -62,7 +62,7 @@ void backgroundFetchHeadlessTask(String taskId) async {
   BackgroundFetch.finish(taskId);
 }
 
-/// Callback dispatcher for WorkManager (Google Fit - Android)
+// Callback dispatcher for WorkManager (Google Fit - Android)
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     // Fetch Google Fit steps in the background
@@ -71,7 +71,7 @@ void callbackDispatcher() {
   });
 }
 
-/// Fetch Google Fit Steps (Android)
+// Fetch Google Fit Steps (Android)
 void fetchGoogleFitSteps() async {
   const _scopes = ['https://www.googleapis.com/auth/fitness.activity.read'];
 
@@ -98,7 +98,7 @@ void fetchGoogleFitSteps() async {
   }
 }
 
-/// Build the aggregate request for Google Fit (Android)
+// Build the aggregate request for Google Fit (Android)
 fitness.AggregateRequest _buildAggregateRequest() {
   // Get today's date at midnight
   DateTime midnight = DateTime.now();
@@ -118,7 +118,7 @@ fitness.AggregateRequest _buildAggregateRequest() {
   });
 }
 
-/// Main entry point of the application
+// Main entry point of the application
 Future<void> main() async {
   // Initialize Flutter and plugins
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -136,51 +136,58 @@ Future<void> main() async {
     overlays: SystemUiOverlay.values,
   );
 
-  if (Platform.isAndroid) {
-    // Initialize WorkManager for Google Fit (Android)
-    Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
-    Workmanager().registerPeriodicTask(
-      "1", // Unique task name
-      "fetchGoogleFitSteps", // Task name
-      frequency: Duration(minutes: 15), // Run every 15 minutes
-    );
+  if (!kIsWeb) {
+    if (Platform.isAndroid) {
+      // Initialize WorkManager for Google Fit (Android)
+      Workmanager().initialize(callbackDispatcher, isInDebugMode: true);
+      Workmanager().registerPeriodicTask(
+        "1", // Unique task name
+        "fetchGoogleFitSteps", // Task name
+        frequency: Duration(minutes: 15), // Run every 15 minutes
+      );
+    }
   }
 
-  if (Platform.isIOS) {
-    Health().configure();
+  if (!kIsWeb) {
+    if (Platform.isIOS) {
+      Health().configure();
 
-    // Initialize Background Fetch for iOS
-    BackgroundFetch.configure(
-        BackgroundFetchConfig(
-          minimumFetchInterval: 15, // Fetch every 15 minutes
-          stopOnTerminate: false, // Continue in background even after termination
-          enableHeadless: true, // Allow headless execution
-          startOnBoot: true,
-        ), (String taskId) async {
-      print('Hello world');
-      backgroundFetchHeadlessTask(taskId);
-    }, (String taskId) async {
-      print("[BackgroundFetch] TASK TIMEOUT taskId: $taskId");
-      BackgroundFetch.finish(taskId);
-    }).then((int status) {
-      print('[BackgroundFetch] configure success: $status');
-    }).catchError((e) {
-      print('[BackgroundFetch] configure ERROR: $e');
-    });
+      // Initialize Background Fetch for iOS
+      BackgroundFetch.configure(
+          BackgroundFetchConfig(
+            minimumFetchInterval: 15, // Fetch every 15 minutes
+            stopOnTerminate: false, // Continue in background even after termination
+            enableHeadless: true, // Allow headless execution
+            startOnBoot: true,
+          ), (String taskId) async {
+        print('Hello world');
+        backgroundFetchHeadlessTask(taskId);
+      }, (String taskId) async {
+        print("[BackgroundFetch] TASK TIMEOUT taskId: $taskId");
+        BackgroundFetch.finish(taskId);
+      }).then((int status) {
+        print('[BackgroundFetch] configure success: $status');
+      }).catchError((e) {
+        print('[BackgroundFetch] configure ERROR: $e');
+      });
 
-    // Register background fetch headless task (iOS)
-    BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
+      // Register background fetch headless task (iOS)
+      BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
+    }
   }
+
   // Run the app
   runApp(getApp());
 }
 
 Widget getApp() {
-  if (Platform.isIOS || Platform.isAndroid) {
-    return ModularApp(
-      module: MedicaminaAppModule(),
-      child: const MedicaminaAppWidget(),
-    );
+  if (!kIsWeb) {
+    if (Platform.isIOS || Platform.isAndroid) {
+      return ModularApp(
+        module: MedicaminaAppModule(),
+        child: const MedicaminaAppWidget(),
+      );
+    }
   }
   return DevicePreview(
     enabled: !kReleaseMode,

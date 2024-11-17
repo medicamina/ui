@@ -12,7 +12,7 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MedicaminaThemeState {
-  static bool _darkMode = false;
+  static late bool _darkMode;
   var changedState = Event();
 
   MedicaminaThemeState() {
@@ -20,6 +20,7 @@ class MedicaminaThemeState {
   }
 
   ThemeMode getThemeMode() {
+    print(_darkMode);
     if (_darkMode) {
       return ThemeMode.dark;
     }

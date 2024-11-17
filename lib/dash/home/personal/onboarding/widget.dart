@@ -237,7 +237,7 @@ class _MedicaminaDashPersonalOnboardingWidgetState extends State<MedicaminaDashP
             child: Column(
               children: [
                 TextFormField(
-                  initialValue: _weight.toString(),
+                  // initialValue: _weight.toString(),
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -262,7 +262,7 @@ class _MedicaminaDashPersonalOnboardingWidgetState extends State<MedicaminaDashP
                 ),
                 SizedBox(height: 6),
                 TextFormField(
-                  initialValue: _height.toString(),
+                  // initialValue: _height.toString(),
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(

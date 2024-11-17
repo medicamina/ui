@@ -160,6 +160,8 @@ class _MedicaminaAuthLoginWidget extends State<MedicaminaAuthLoginWidget> {
                                           Modular.get<MedicaminaUserState>().login(response.data['auth']);
                                           Modular.to.navigate('/dash');
                                         } else {
+                                          print(response.statusCode);
+                                          print(response.data);
                                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.data.toString())));
                                         }
                                       }

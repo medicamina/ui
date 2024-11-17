@@ -226,6 +226,8 @@ class _MedicaminaAuthRegisterWidget extends State<MedicaminaAuthRegisterWidget> 
                                           Modular.get<MedicaminaUserState>().login(response.data['auth']);
                                           Modular.to.navigate('/dash');
                                         } else {
+                                          print(response.data.toString());
+                                          print(response.statusCode);
                                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.data.toString())));
                                           if (response.statusCode == 202) {
                                             Modular.to.navigate('/auth/recover');

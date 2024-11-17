@@ -7,8 +7,7 @@ import 'package:medicamina_ui/auth/states.dart';
 import 'package:dio/dio.dart';
 
 class MedicaminaAuthLoginWidget extends StatefulWidget {
-  const MedicaminaAuthLoginWidget({Key? key, required this.doctorRoute}) : super(key: key);
-  final bool doctorRoute;
+  const MedicaminaAuthLoginWidget({Key? key}) : super(key: key);
 
   @override
   State<MedicaminaAuthLoginWidget> createState() => _MedicaminaAuthLoginWidget();

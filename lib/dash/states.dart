@@ -105,6 +105,7 @@ class MedicmainaPersonalDetails {
     if (!isEmpty()) {
       return emitter.broadcast();
     }
+
     const url = kReleaseMode ? 'https://medicamina.azurewebsites.net/dash/home/personal' : 'http://localhost:8080/dash/home/personal';
     var response = await dio.get(
       url,
@@ -118,6 +119,7 @@ class MedicmainaPersonalDetails {
         },
       ),
     );
+    print(response);
     if (response.statusCode == 200) {
       if (response.data['firstName'] == null || response.data['lastName'] == null) {
         return emitter.broadcast();

@@ -36,6 +36,9 @@ class _MedicaminaAppWidgetState extends State<MedicaminaAppWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (MedicaminaThemeState.darkMode == null) {
+      return CircularProgressIndicator();
+    }
     return CalendarControllerProvider(
       controller: EventController(),
       child: MaterialApp.router(
